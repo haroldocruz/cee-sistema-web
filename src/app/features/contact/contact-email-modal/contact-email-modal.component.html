@@ -1,0 +1,54 @@
+<div class="modal-header">
+    <h4 class="modal-title">
+        <span>E-mails</span>
+    </h4>
+    <button type="button" class="close" (click)="bsModalRef.hide()"><span>&times;</span></button>
+</div>
+
+<div class="modal-body">
+    <div class="container-fluid">
+        <form>
+            <div class="row mt-2">
+                <div class="col-md-12">
+                    Descrição:
+                    <textarea rows="1" [(ngModel)]="email.description" [ngModelOptions]="{standalone: true}" class="form-control"
+                        placeholder="Ex: Escritório; WhatsApp"></textarea>
+                </div>
+                <div class="col-md-12">
+                    E-mail:
+                    <div class="input-group mb-3">
+                        <input type="text" [(ngModel)]="email.address" [ngModelOptions]="{standalone: true}" class="form-control" />
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" (click)="insertEmail()"><i
+                                    class="fas fa-plus "></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+
+                    <div class="list-group">
+
+                        <span class="list-group-item text-center text-danger" *ngIf="emailList.length === 0">
+                            Nenhum e-mail inserido!
+                        </span>
+
+                        <span class="list-group-item sd-list-items" *ngFor="let email of emailList">
+                            <i class="fa fa-angle-double-right"></i> {{ email.address }} ({{ email.description }})
+                            <span class="sd-pointer sd-float-right">
+                                <i class="fas fa-edit" (click)="editEmail(email)"></i>
+                                &nbsp;
+                                <i class="fas fa-trash" (click)="removeEmail(email)"></i>
+                            </span>
+                        </span>
+
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="modal-footer">
+    <button class="btn btn-default" (click)="bsModalRef.hide()">Fechar</button>
+    <button class="btn btn-success" (click)="confirm()">Confirmar mudanças</button>
+</div>

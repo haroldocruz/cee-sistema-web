@@ -1,0 +1,122 @@
+<!-- userViewModal -->
+<div class="modal fade" id="userViewModal" tabindex="-1" role="dialog" aria-labelledby="userViewModalLabel"
+    *ngIf="userService.user._id">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+            <!-- <div class="modal-header">
+                <h4 class="modal-title" id="userViewModalLabel">
+                    <span>{{ userService.user.name }}</span>
+                </h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+            </div> -->
+
+            <div class="modal-body">
+                <div class="col-md-12">
+                    <!-- Widget: user widget style 1 -->
+                    <div class="card card-widget widget-user">
+                        <!-- Add the bg color to the header using any of the bg-* classes -->
+                        <div class="widget-user-header bg-info">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <h3 class="widget-user-username">
+                                {{ getFirstLastName() }}
+                            </h3>
+                            <h5 class="widget-user-desc">Técnico do CEE/TO</h5>
+                        </div>
+                        <div class="widget-user-image">
+                            <i class="fas fa-user-circle fa-6x" *ngIf="userService.user.name"></i>
+                        </div>
+                        <div class="card-footer">
+                            <div class="row">
+                                <div class="col-sm-4 border-right">
+                                    <div class="description-block">
+                                        <h5 class="description-header">(63) 98458-9691</h5>
+                                        <span class="description-text">Telefone</span>
+                                    </div>
+                                    <!-- /.description-block -->
+                                </div>
+                                <!-- /.col -->
+                                <div class="col-sm-4 border-right">
+                                    <div class="description-block">
+                                        <h5 class="description-header">msom.info@gmail.com</h5>
+                                        <span class="description-text">E-Mail</span>
+                                    </div>
+                                    <!-- /.description-block -->
+                                </div>
+                                <!-- /.col -->
+                                <div class="col-sm-4">
+                                    <div class="description-block">
+                                        <h5 class="description-header">77000-000</h5>
+                                        <span class="description-text">CEP</span>
+                                    </div>
+                                    <!-- /.description-block -->
+                                </div>
+                                <!-- /.col -->
+                            </div>
+                            <!-- /.row -->
+                        </div>
+                    </div>
+
+                    <div class="tab-pane active" id="settings">
+                        <form class="form-horizontal">
+                            <div class="form-group row">
+                                <label for="inputName" class="col col-form-label">Nome completo:</label>
+                                <div class="col-sm-9">
+                                    Haroldo Emerson Pereira Da Cruz
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="inputEmail" class="col col-form-label">Emails:</label>
+                                <div class="col-sm-9">
+                                    msom.info@gmail.com | sigilo.digital@gmail.com
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col col-form-label">Telefones:</label>
+                                <div class="col-sm-9 centered">
+                                    (63) 98458-9691 | (63) 98409-3101
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="inputExperience" class="col col-form-label">Descrição:</label>
+                                <div class="col-sm-9">
+
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="inputSkills" class="col col-form-label">Grupos</label>
+                                <div class="col-sm-9">
+
+                                </div>
+                            </div>
+                            <!-- <div class="form-group row">
+                            <div class="offset-sm-2 col-sm-10">
+                              <div class="checkbox">
+                                <label>
+                                  <input type="checkbox"> I agree to the <a href="#">terms and conditions</a>
+                                </label>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <div class="offset-sm-2 col-sm-10">
+                              <button type="submit" class="btn btn-danger">Submit</button>
+                            </div>
+                          </div> -->
+                        </form>
+                    </div>
+
+                    <!-- /.widget-user -->
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,30 @@
+<div class="container-fluid">
+  <div class="row hidden-print">
+    <div class="col-6">
+
+      <!-- * Button -->
+      <button class="btn btn-xs btn-primary" data-toggle="modal" data-target="#groupModal" (click)="edit(null)">
+        <i class="fa fa-plus"></i>
+        Criar novo
+      </button>
+
+      <br><br>
+
+      <!-- * Filter field -->
+      <div class="input-group mb-3">
+        <div class="input-group-append">
+          <div class="input-group-text">
+            <span><i class="fa fa-filter"></i></span>
+          </div>
+        </div>
+        <input id="search-box" class="form-control" type="text" [(ngModel)]="filtro" placeholder="Filtrar">
+        <input type="hidden" [value]="groupService.filtro">
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<app-group-list></app-group-list>
+
+<app-group-form-modal></app-group-form-modal>

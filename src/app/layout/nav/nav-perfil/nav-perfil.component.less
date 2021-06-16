@@ -1,0 +1,50 @@
+// VARIAVEIS
+@colorLink : cornsilk !important;
+@colorIn : #337ab7 !important;
+@colorWhite: #fff8dc !important;
+@colorOut: #FCB43E !important;
+
+.ips-bg-blue {
+    background-color: @colorIn;
+    color           : @colorWhite;
+}
+
+.ips-bg-red {
+    background-color: @colorOut;
+    color           : @colorWhite;
+}
+
+a {
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.ips-logon {
+
+    .ips-bg-blue();
+    &:hover {
+        background-color: spin(lighten(@colorIn, 25%), 8) !important;
+        color: @colorIn;
+        cursor: pointer;
+    }
+    &:focus {
+        background-color: spin(lighten(@colorIn, 25%), 8) !important;
+        color: @colorIn;
+    }
+}
+
+.ips-logout {
+
+    .ips-bg-red();
+    &:hover {
+        background-color: spin(lighten(@colorOut, 25%), 8) !important;
+        color: @colorOut;
+        cursor: pointer;
+    }
+    &:focus {
+        background-color: spin(lighten(@colorOut, 25%), 8) !important;
+        color: @colorOut;
+    }
+}
+

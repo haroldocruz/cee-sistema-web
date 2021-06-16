@@ -1,0 +1,29 @@
+<table class="table table-hover table-bordered">
+  <thead>
+    <tr>
+      <th scope="col" class="text-center">#</th>
+      <th scope="col" class="text-center">Status</th>
+      <th scope="col" class="text-center">Nome</th>
+      <th scope="col" class="text-center">Descrição</th>
+      <th scope="col" class="text-center">Ação</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- <tr *ngFor="let group of groupList; let i = index"> -->
+    <!-- <tr *ngFor="let group of groupService.groups | filter: [{field: 'name', value: groupService.filtro}] | sortBy:'asc':'status, name'; let i = index"> -->
+    <tr *ngFor="let group of groupService.groups | filter: [{field: 'name', value: groupService.filtro}] let i = index">
+      <td scope="row" class="text-center sd-wfr">{{ i + 1 }}</td>
+      <td class="text-center sd-wfr">
+        <i class="fas fa-check-circle text-green" *ngIf="group.status" title="ativo"></i>
+        <i class="fas fa-times-circle text-red" *ngIf="!group.status" title="inativo"></i>
+      </td>
+      <td>{{ group.name }}</td>
+      <td>{{ group.description }}</td>
+      <td class="text-center sd-wf">
+        <i class="fas fa-edit sd-pointer text-primary" data-toggle="modal" data-target="#groupModal" (click)="groupService.edit(group)"></i>
+        &nbsp;
+        <i class="fas fa-trash-alt sd-pointer text-danger" (click)="delete(group._id)"></i>
+      </td>
+    </tr>
+  </tbody>
+</table>

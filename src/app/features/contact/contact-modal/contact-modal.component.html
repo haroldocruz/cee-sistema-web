@@ -1,0 +1,36 @@
+<div class="row mt-2">
+    <div class="col-md-6">
+        Telefone:
+        <input type="text" [(ngModel)]="obj.number" class="form-control" />
+    </div>
+    <div class="col-md-6">
+        Descrição:
+        <input type="text" [(ngModel)]="obj.description" class="form-control" />
+    </div>
+    <button (click)="insertPhone()">Adicionar</button>
+    <div class="col-md-12">
+
+        <div class="list-group">
+
+            <span class="sd-pointer list-group-item text-center text-danger" *ngIf="objList">
+                <!-- (click)="openContactPhoneModal(user)"> -->
+                Nenhum telefone inserido!
+            </span>
+            <!-- <span class="sd-pointer list-group-item text-center text-green" *ngIf="true">
+                                Inserir outro telefone!
+                                </span> -->
+
+            <span class="list-group-item sd-list-items" *ngFor="let p of objList">
+            <!-- <span class="list-group-item sd-list-items" *ngIf="true"> -->
+                <i class="fa fa-angle-double-right"></i> {{ p.number }} ({{ p.description }})
+                <span class="sd-pointer sd-trash-float-right">
+                    <i class="fas fa-trash" (click)="removePhone(p)"></i>
+                    <!-- <i class="fas fa-trash-alt text-danger"></i> -->
+                </span>
+            </span>
+
+        </div>
+    </div>
+    <button (click)="bsModalRef.hide()">Fechar</button>
+    <button (click)="confirm()">Confirmar mudanças</button>
+</div>

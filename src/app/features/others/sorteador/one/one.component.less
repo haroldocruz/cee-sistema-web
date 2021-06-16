@@ -1,0 +1,136 @@
+.bloco-sorteio-tradicional {
+  width                         : 880px;
+  -webkit-tap-highlight-color   : rgba(0, 0, 0, 0);
+  font-family                   : "Helvetica Neue", Helvetica, Arial, sans-serif;
+  line-height                   : 1.42857143;
+  box-sizing                    : border-box;
+  // text-align                 : center;
+  font-size                     : 30px;
+  background-color              : #f4f4f2;
+  margin-bottom                 : 10px;
+  margin-top                    : 10px;
+  padding-bottom                : 15px;
+  padding-top                   : 15px;
+  color                         : #666;
+  border-radius                 : 5px;
+}
+
+.active {
+  background-color: cyan;
+  color           : black;
+}
+
+.lottie {
+  pointer-events: none;
+  width         : 100vw;
+  height        : 100vh;
+  // z-index: -1;
+  transform     : rotate(180deg);
+  display       : block;
+  position      : fixed;
+  left          : -600px;
+  top           : -200px;
+}
+
+.container-winner {
+  pointer-events : none;
+  position       : absolute;
+  display        : flex;
+  justify-content: center;
+  align-items    : center;
+  width          : 100%;
+  height         : 100vh
+}
+
+.winner-name {
+  z-index    : 999;
+  // color: white;
+  text-shadow: black 0.1em 0.1em 0.2em;
+  color      : rgb(151, 73, 17);
+  font-size  : 100pt;
+  font-family: 'chiller';
+}
+
+.background {
+  z-index : 2;
+  position: relative;
+}
+
+.background::before {
+  z-index            : 2;
+  position           : absolute;
+  width              : 100%;
+  height             : 220px;
+  top                : 0;
+  left               : 0;
+  bottom             : 0;
+  right              : 0;
+  content            : "";
+  opacity            : .2;
+  background-image   : url("/assets/logo-1257x577-alpha3.png");
+  background-size    : 500px;
+  background-position: center;
+  background-repeat  : no-repeat;
+}
+
+.btn {
+  z-index: 998;
+}
+
+.header {
+  z-index: 3;
+  text-shadow: rgb(255, 255, 255) -0.1em -0.1em 0.2em,
+    rgb(255, 255, 255) 0.1em -0.1em 0.3em,
+    rgb(255, 255, 255) 0.1em 0.1em 0.5em,
+    rgb(255, 255, 255) -0.1em 0.1em 0.4em;
+}
+
+/* Flex Container */
+.container {
+  // max-width: 1000px;
+  margin : 0 auto;
+  display: flex;
+  border : 1px solid #ccc;
+}
+
+/* Flex Item */
+.item {
+  z-index   : 1;
+  flex      : 1;
+  margin    : 5px;
+  padding   : 0 10px;
+  background: tomato;
+  text-align: center;
+  font-size : 1.5em;
+}
+
+.item:first-child {
+  padding-top: 20px;
+}
+
+.alinhamento-central {
+  // height         : 400px;
+  justify-content: center;
+  align-items    : center;
+}
+
+.alinhamento-central .item {
+  flex   : 0;
+  padding: 10px;
+}
+
+h1 {
+  text-align : center;
+  margin     : 20px 0 0 0;
+  font-size  : 1.25em;
+  font-weight: normal;
+}
+
+body {
+  font-family: monospace;
+  color      : #333;
+}
+
+.sd-list-items {
+  text-align : left;
+}

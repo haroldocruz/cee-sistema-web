@@ -1,0 +1,46 @@
+<div class="container-fluid">
+    <!-- <div class="row hidden-print">
+      <div class="col-12">
+
+          <div id="ips-list-watch" class="btn-group" role="group">
+              <a class="btn btn-default active" routerLink="dashboard">Dashboard</a>
+              <a class="btn btn-default" routerLink="maintained">Mantida</a>
+              <a class="btn btn-default" routerLink="maintainer">Mantenedora</a>
+              <a class="btn btn-default" routerLink="course">Cursos</a>
+              <a class="btn btn-default" routerLink="procurator">Procurador</a>
+              <a class="btn btn-default" routerLink="auxiliary">Auxiliares</a>
+          </div>
+      </div>
+  </div> -->
+
+    <div class="row hidden-print">
+        <div class="col-6">
+
+            <!-- * Button -->
+            <!-- <button class="btn btn-xs btn-primary" (click)="openUserFormModal(null)"> -->
+            <button class="btn btn-xs btn-primary">
+                <i class="fa fa-plus"></i>
+                Vincular novo usuário
+            </button>
+
+            <br><br>
+
+            <!-- * Filter field -->
+            <div class="input-group mb-3">
+                <div class="input-group-append">
+                    <div class="input-group-text">
+                        <span><i class="fa fa-filter"></i></span>
+                    </div>
+                </div>
+                <input id="search-box" class="form-control" type="text" placeholder="Filtrar">
+                <!-- <input id="search-box" class="form-control" type="text" [(ngModel)]="filtro" placeholder="Filtrar"> -->
+                <!-- <input type="hidden" [value]="userService.filtro"> -->
+            </div>
+
+        </div>
+    </div>
+
+    <br>
+
+    <router-outlet></router-outlet>
+</div>

@@ -1,0 +1,165 @@
+<div class="hold-transition login-page">
+    <div class="login-box">
+        <div class="login-logo">
+            <img src="/assets/logo-1257x577-alpha3.png" alt="" width="300px">
+        </div>
+        <!-- /.login-logo -->
+        <div class="card card-primary card-outline card-outline-tabs">
+            <div class="card-header p-0 border-bottom-0">
+                <ul class="nav nav-tabs nav-justified" id="custom-tabs-four-tab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="maintainer-tab" data-toggle="pill" href="#maintainer" role="tab"
+                            aria-controls="maintainer" aria-selected="true">Mantenedora</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="maintained-tab" data-toggle="pill" href="#maintained" role="tab"
+                            aria-controls="maintained" aria-selected="false">IES</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="evaluator-tab" data-toggle="pill" href="#evaluator" role="tab"
+                            aria-controls="evaluator" aria-selected="false">Avaliador</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="card-body">
+                <div class="tab-content" id="custom-tabs-four-tabContent">
+                    <div class="tab-pane fade show active" id="maintainer" role="tabpanel"
+                        aria-labelledby="maintainer-tab">
+
+                        <form method="post">
+                            <div class="input-group mb-3">
+                                <input type="username" class="form-control" placeholder="Email ou CPF"
+                                    [(ngModel)]="username" [ngModelOptions]="{standalone: true}">
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-envelope"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="input-group mb-3">
+                                <input type="password" class="form-control" placeholder="Senha" [(ngModel)]="password"
+                                    [ngModelOptions]="{standalone: true}">
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-lock"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-8">
+                                    <div class="icheck-primary">
+                                        <input type="checkbox" id="remember1" [(ngModel)]="remember" [ngModelOptions]="{standalone: true}">
+                                        <label for="remember">
+                                            &nbsp;Lembrar-me
+                                        </label>
+                                    </div>
+                                </div>
+                                <!-- /.col -->
+                                <div class="col-4">
+                                    <button type="submit" class="btn btn-primary btn-block"
+                                        (click)="submit()">Entrar</button>
+                                </div>
+                                <!-- /.col -->
+                            </div>
+                        </form>
+
+                        <p class="mb-1">
+                            <a href="">Esqueceu a senha?</a>
+                        </p>
+                    </div>
+                    <div class="tab-pane fade" id="maintained" role="tabpanel" aria-labelledby="maintained-tab">
+
+                      <form method="post">
+                        <div class="input-group mb-3">
+                            <input type="username" class="form-control" placeholder="Email ou CPF"
+                                [(ngModel)]="username" [ngModelOptions]="{standalone: true}">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-envelope"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-group mb-3">
+                            <input type="password" class="form-control" placeholder="Senha" [(ngModel)]="password"
+                                [ngModelOptions]="{standalone: true}">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-lock"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="icheck-primary">
+                                    <input type="checkbox" id="remember2" [(ngModel)]="remember" [ngModelOptions]="{standalone: true}">
+                                    <label for="remember">
+                                        &nbsp;Lembrar-me
+                                    </label>
+                                </div>
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-4">
+                                <button type="submit" class="btn btn-primary btn-block"
+                                    (click)="submit()">Entrar</button>
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                    </form>
+
+                    <p class="mb-1">
+                        <a href="">Esqueceu a senha?</a>
+                    </p>
+                    </div>
+                    <div class="tab-pane fade" id="evaluator" role="tabpanel" aria-labelledby="evaluator-tab">
+
+                      <form method="post">
+                        <div class="input-group mb-3">
+                            <input type="username" class="form-control" placeholder="Email ou CPF"
+                                [(ngModel)]="username" [ngModelOptions]="{standalone: true}">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-envelope"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-group mb-3">
+                            <input type="password" class="form-control" placeholder="Senha" [(ngModel)]="password"
+                                [ngModelOptions]="{standalone: true}">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-lock"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="icheck-primary">
+                                    <input type="checkbox" id="remember3" [(ngModel)]="remember" [ngModelOptions]="{standalone: true}">
+                                    <label for="remember">
+                                        &nbsp;Lembrar-me
+                                    </label>
+                                </div>
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-4">
+                                <button type="submit" class="btn btn-primary btn-block"
+                                    (click)="submit()">Entrar</button>
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                    </form>
+
+                    <p class="mb-1">
+                        <a href="">Esqueceu a senha?</a>
+                    </p>
+                    </div>
+                </div>
+            </div>
+            <!-- /.card -->
+        </div>
+
+        <!-- <p class="mb-0">
+          <a href="register.html" class="text-center">Regitrar</a>
+        </p> -->
+    </div>
+</div>

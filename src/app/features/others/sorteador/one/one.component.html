@@ -1,0 +1,64 @@
+<!-- <section class="container-winner">
+  <div class="winner-name" *ngIf="winner" [@inOutAnimation]>{{ winnerName }}</div>
+</section> -->
+
+<section class="alinhamento-central" [@inOutAnimation]>
+  <div class="item row">
+
+    <div class="bloco-sorteio-tradicional col-12">
+      <!-- <div class="background"></div> -->
+      <div id="form-dinamico">
+        <!-- Sortear
+        <input type="number" name="quantidade" class="campo-numero" value="1" id="quantidade" min="1" max="99999">
+        número<span id="s" style="display: none;">s</span> entre
+        <input type="number" class="campo-numero" value="1" id="de" name="de" min="0" max="99999"> e
+        <input type="number" min="1" max="99999" value="100" class="campo-numero" name="ate" id="ate"> -->
+        <span class="header">
+          <strong>CEE/TO - Conselho Estadual de Educação do Tocantins</strong>
+          <br>
+          <i class="text-danger">(Sorteio do Amigo Secreto)</i>
+        </span>
+        <p></p>
+        <div id="resultado-dinamico" class="numeros_sorteados" style="display: block;"><label
+            class="numero-sorteado">{{ participantList[stepPublic]?.name }}</label></div>
+        <button type="submit" [disabled]="isDisabled" class="btn btn-lg btn-primary" (click)="start()">SORTEAR</button>
+        &nbsp;
+        <button type="submit" [disabled]="!isDisabled" class="btn btn-lg btn-default" (click)="reset()">REINICIAR</button>
+      </div>
+
+      <br>
+      <div class="row">
+
+        <div class="col-5">
+          <span class="list-group-item sd-list-items sd-pointer sd-hover"
+            [ngClass]="{active: step === i && !winner && disable }" *ngFor="let item of participantList; let i = index">
+            <i class="fa fa-angle-double-right"></i>
+            <span class=""> {{ item.name }}</span>
+            <!-- <span class="">({{ (i+1)+'. '+item }})</span> -->
+          </span>
+        </div>
+
+        <div class="col-7">
+          <div class="list-group-item sd-list-items sd-pointer sd-hover"
+            [ngClass]="{active: step === i && !winner && disable }" *ngFor="let item of participantList; let i = index">
+            <i class="fas fa-check-circle" style="font-size: 12pt; color: green" *ngIf="item.message"></i>
+            <i class="fas fa-minus-circle" style="font-size: 12pt; color: red" *ngIf="!item.message"></i>
+            &nbsp;
+            <!-- <span style="font-size: 12pt">{{ (!item.message)? "aguardando sorteio..." : undefined }}</span> -->
+            <span class="" style="font-size: 12pt">{{ item.message?.isOk }}</span>
+            &nbsp;
+            <span class="" style="font-size: 12pt">{{ item.message?.message }}</span>
+            <!-- <span class="" style="font-size: 12pt">{{ item.secretFriend?.name }}</span> -->
+            <!-- <span class="">({{ (i+1)+'. '+item }})</span> -->
+          </div>
+        </div>
+
+      </div>
+
+      <!-- <lottie-player *ngIf="winner" [@inOutAnimation] class="lottie"
+        src="https://assets4.lottiefiles.com/packages/lf20_fnjH1K.json" background="transparent" speed="1" style="" loop
+        autoplay></lottie-player> -->
+
+    </div>
+  </div>
+</section>

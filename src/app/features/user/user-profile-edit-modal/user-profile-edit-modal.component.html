@@ -1,0 +1,58 @@
+<div class="modal-header">
+    <h4 class="modal-title">
+        <span>Modificar perfil <i class="far fa-clock text-warning"></i></span>
+    </h4>
+    <button type="button" class="close" (click)="bsModalRef.hide()"><span>&times;</span></button>
+</div>
+
+<div class="modal-body">
+    <div class="container-fluid">
+        <form>
+            <div class="row mt-2">
+                <div class="col-md-12">
+                    Descrição:
+                    <textarea rows="1" [(ngModel)]="phone.description" [ngModelOptions]="{standalone: true}"
+                        class="form-control" placeholder="Ex: Escritório; WhatsApp"></textarea>
+                </div>
+                <div class="col-md-12">
+                    Telefone:
+                    <div class="input-group mb-3">
+                        <input type="text" [(ngModel)]="phone.number" [ngModelOptions]="{standalone: true}"
+                            class="form-control" />
+                        <div class="input-group-append">
+                            <!-- <button class="btn btn-outline-secondary" type="button">Button</button> -->
+                            <button class="btn btn-primary" (click)="insertPhone()"><i
+                                    class="fas fa-plus "></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+
+                    <div class="list-group">
+
+                        <span class="list-group-item text-center text-danger" *ngIf="phoneList?.length === 0">
+                            Nenhum telefone inserido!
+                        </span>
+
+                        <span class="list-group-item sd-list-items" *ngFor="let phone of phoneList">
+                            <!-- <span class="list-group-item sd-list-items" *ngIf="true"> -->
+                            <i class="fa fa-angle-double-right"></i> {{ phone.number }} ({{ phone.description }})
+                            <span class="sd-pointer sd-float-right">
+                                <i class="fas fa-edit" (click)="editPhone(phone)"></i>
+                                &nbsp;
+                                <i class="fas fa-trash" (click)="removePhone(phone)"></i>
+                                <!-- <i class="fas fa-trash-alt text-danger"></i> -->
+                            </span>
+                        </span>
+
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="modal-footer">
+    <button class="btn btn-default" (click)="bsModalRef.hide()">Fechar</button>
+    <button class="btn btn-success" (click)="confirm()">Confirmar mudanças</button>
+</div>

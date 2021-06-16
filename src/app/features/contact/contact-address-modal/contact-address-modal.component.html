@@ -1,0 +1,94 @@
+<div class="modal-header">
+    <h4 class="modal-title">
+        <span>Endereços</span>
+    </h4>
+    <button type="button" class="close" (click)="bsModalRef.hide()"><span>&times;</span></button>
+</div>
+
+<div class="modal-body">
+    <div class="container-fluid">
+        <form>
+            <div class="row mt-2">
+                <div class="col-md-6">
+                    País:
+                    <input type="text" [(ngModel)]="address.country" [ngModelOptions]="{standalone: true}"
+                        class="form-control" />
+                </div>
+                <div class="col-md-6">
+                    Estado:
+                    <input type="text" [(ngModel)]="address.state" [ngModelOptions]="{standalone: true}"
+                        class="form-control" />
+                </div>
+                <div class="col-md-6">
+                    Cidade:
+                    <input type="text" [(ngModel)]="address.city" [ngModelOptions]="{standalone: true}"
+                        class="form-control" />
+                </div>
+                <div class="col-md-6">
+                    Bairro:
+                    <input type="text" [(ngModel)]="address.district" [ngModelOptions]="{standalone: true}"
+                        class="form-control" />
+                </div>
+                <div class="col-md-12">
+                    Logradouro:
+                    <input type="text" [(ngModel)]="address.place" [ngModelOptions]="{standalone: true}"
+                        class="form-control" />
+                </div>
+                <div class="col-md-6">
+                    Número:
+                    <input type="text" [(ngModel)]="address.number" [ngModelOptions]="{standalone: true}"
+                        class="form-control" />
+                </div>
+                <div class="col-md-6">
+                    CEP:
+                    <input type="text" [(ngModel)]="address.zipcode" [ngModelOptions]="{standalone: true}"
+                        class="form-control" />
+                </div>
+                <div class="col-md-12">
+                    Complemento:
+                    <textarea rows="2" [(ngModel)]="address.description" [ngModelOptions]="{standalone: true}"
+                        class="form-control" placeholder="Ex: Próximo ao ginásio Ayrton Senna"></textarea>
+                </div>
+                <div class="col-md-12">
+                    Descrição:
+                    <textarea rows="2" [(ngModel)]="address.description" [ngModelOptions]="{standalone: true}"
+                        class="form-control" placeholder=""></textarea>
+                </div>
+                <div class="col-md-12">
+                    <br>
+                </div>
+                <div class="col-md-12">
+                    <button class="btn btn-primary col" (click)="insertAddress()">
+                        <i class="fas fa-plus "></i> Adicionar
+                    </button>
+                </div>
+                <div class="col-md-12">
+
+                    <div class="list-group">
+
+                        <span class="list-group-item text-center text-danger"
+                            *ngIf="addressList.length === 0">
+                            Nenhum endereço inserido!
+                        </span>
+
+                        <span class="list-group-item sd-list-items" *ngFor="let address of addressList">
+                            <i class="fa fa-angle-double-right"></i> {{ addressToString(address) }}
+                            <span class="sd-pointer sd-float-right">
+                                <i class="fas fa-edit" (click)="editAddress(address)"></i>
+                                &nbsp;
+                                <i class="fas fa-trash-alt text-danger" (click)="removeAddress(address)"></i>
+                                <!-- <i class="fas fa-trash-alt text-danger"></i> -->
+                            </span>
+                        </span>
+
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="modal-footer">
+    <button class="btn btn-default" (click)="bsModalRef.hide()">Fechar</button>
+    <button class="btn btn-success" (click)="confirm()">Confirmar mudanças</button>
+</div>

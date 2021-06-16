@@ -1,0 +1,157 @@
+<!-- userModal -->
+<form [formGroup]="checkoutForm">
+    <div class="modal-header">
+        <h4 class="modal-title" id="userModalLabel">
+            <span *ngIf="!user._id">Inserir</span>
+            <span *ngIf="user._id">Alterar</span>
+        </h4>
+        <button type="button" class="close" (click)="bsModalRef.hide()"><span>&times;</span></button>
+    </div>
+
+    <div class="modal-body">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12 col-lg-8">
+                    Nome:
+                    <input type="text" [(ngModel)]="user.cpf" [ngModelOptions]="{standalone: true}" autocomplete="_"
+                        class="form-control" placeholder="Digite seu nome completo">
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    CPF:
+                    <input type="text" [(ngModel)]="user.cpf" [ngModelOptions]="{standalone: true}" pattern="[0-9]{11}"
+                        class="form-control" placeholder="">
+                </div>
+                <!-- <div class="col-md-4">
+                        Perfil:
+                        <select id="profile" [(ngModel)]="user.dataAccess.profiles" [ngModelOptions]="{standalone: true}" class="form-control">
+                            <option [ngValue]="profile" *ngFor="let profile of profileService.profiles">{{ profile.name }}</option>
+                        </select>
+                        </div> -->
+
+                <!-- <div class="col-md-4">
+                        Status:
+                        <select id="status" [(ngModel)]="user.status" [ngModelOptions]="{standalone: true}" class="form-control">
+                            <option [value]="status" *ngFor="let status of statusList">{{ status }}</option>
+                        </select>
+                        </div> -->
+                <div class="col-md-6 col-lg-4">
+                    Gênero:
+                    <select [(ngModel)]="user.gender" [ngModelOptions]="{standalone: true}" class="form-control">
+                        <option [value]="gender" *ngFor="let gender of genderList">{{ gender }}</option>
+                    </select>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    Estado civil:
+                    <select [(ngModel)]="user.maritalStatus" [ngModelOptions]="{standalone: true}" class="form-control">
+                        <option [value]="maritalStatus" *ngFor="let maritalStatus of maritalStatusList">{{ maritalStatus
+                            }}
+                        </option>
+                    </select>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    Data de nascimento:
+                    <input type="date" [(ngModel)]="user.birthDate" [ngModelOptions]="{standalone: true}"
+                        class="form-control" placeholder="">
+                </div>
+                <div class="col-md-6" *ngIf="!user._id">
+                    Senha:
+                    <input type="text" [(ngModel)]="user.dataAccess.password" [ngModelOptions]="{standalone: true}"
+                        class="form-control" placeholder="">
+                </div>
+                <div class="col-md-6" *ngIf="!user._id">
+                    Repetir senha:
+                    <input type="text" [(ngModel)]="user.dataAccess.password" [ngModelOptions]="{standalone: true}"
+                        class="form-control" placeholder="">
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-md-6">
+                    <button class="btn btn-primary col" (click)="openContactPhoneModal(user)">
+                        <i class="fas fa-edit"></i> Telefone
+                    </button>
+
+                    <div class="list-group">
+
+                        <span class="list-group-item text-center text-danger"
+                            *ngIf="user.contact?.phoneList?.length === 0">
+                            Nenhum telefone inserido!
+                        </span>
+
+                        <span class="list-group-item sd-list-items" *ngFor="let phone of user.contact.phoneList">
+                            <i class="fa fa-angle-double-right"></i> {{ phone.number }} ({{ phone.description }})
+                            <span class="sd-pointer sd-float-right">
+                                <!-- <i class="fas fa-trash" (click)="remove(p)"></i> -->
+                                <!-- <i class="fas fa-trash-alt text-danger"></i> -->
+                            </span>
+                        </span>
+
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <button class="btn btn-primary col" (click)="openContactEmailModal(user)">
+                        <i class="fas fa-edit"></i> Email
+                    </button>
+
+                    <div class="list-group">
+
+                        <span class="list-group-item text-center text-danger"
+                            *ngIf="user.contact?.emailList?.length === 0">
+                            Nenhum e-mail inserido!
+                        </span>
+
+                        <span class="list-group-item sd-list-items" *ngFor="let email of user.contact.emailList">
+                            <i class="fa fa-angle-double-right"></i>
+                            {{ email.address }} ({{ email.description }})
+                            <span class="sd-pointer sd-float-right">
+                                <!-- <i class="fas fa-trash" (click)="remove(p)"></i> -->
+                                <!-- <i class="fas fa-trash-alt text-danger"></i> -->
+                            </span>
+                        </span>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-md-12">
+
+                    <button class="btn btn-primary col" (click)="openContactAddressModal(user)">
+                        <i class="fas fa-edit"></i> Endereço
+                    </button>
+
+                    <div class="list-group">
+
+                        <span class="list-group-item text-center text-danger"
+                            *ngIf="!user.contact.addressList || user.contact?.addressList?.length === 0">
+                            Nenhum endereço inserido!
+                        </span>
+
+                        <span class="list-group-item sd-list-items" *ngFor="let a of user.contact.addressList">
+                            <i class="fa fa-angle-double-right"></i>
+                            {{ addressToString(a) }}
+                            <span class="sd-pointer sd-float-right">
+                                <!-- <i class="fas fa-trash" (click)="remove(p)"></i> -->
+                                <i class="fas fa-trash-alt text-danger"></i>
+                            </span>
+                        </span>
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    Descrição:
+                    <textarea rows="6" [(ngModel)]="user.description" [ngModelOptions]="{standalone: true}"
+                        class="form-control"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <button type="reset" class="btn btn-default" *ngIf="!user._id">Limpar</button>
+        <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">Fechar</button>
+        <input type="submit" class="btn btn-primary" value="Salvar" (click)="create()" *ngIf="!user._id">
+        <input type="submit" class="btn btn-primary" value="Atualizar" (click)="update()" *ngIf="user._id">
+    </div>
+</form>

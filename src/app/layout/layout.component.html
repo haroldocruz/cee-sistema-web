@@ -1,0 +1,22 @@
+<div id="wrapper">
+
+    <app-top></app-top>
+
+    <div class="layout-fixed">
+        <app-nav></app-nav>
+    </div>
+
+    <div class="content-wrapper">
+        <section class="content">
+            <br>
+            <router-outlet></router-outlet>
+            <br><br>
+        </section>
+    </div>
+
+    <app-footer></app-footer>
+
+</div>
+
+<app-auth-list-modal></app-auth-list-modal>
+<app-auth-profile-modal></app-auth-profile-modal>

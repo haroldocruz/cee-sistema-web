@@ -1,0 +1,81 @@
+<table class="table table-hover table-bordered">
+    <thead>
+        <tr>
+            <th scope="col" class="text-center">#</th>
+            <th scope="col" class="text-center">Status</th>
+            <th scope="col" class="text-center">Nome</th>
+            <th scope="col" class="text-center">Email</th>
+            <!-- <th scope="col" class="text-center">Grupos</th> -->
+            <th scope="col" class="text-center">Ação</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- <tr *ngFor="let user of userList; let i = index"> -->
+        <!-- <tr *ngFor="let user of userService.users | filter: [{field: 'name', value: userService.filtro}] | sortBy:'asc':'status, name'; let i = index"> -->
+        <tr *ngFor="let user of userService.users | filter: [{field: 'name', value: userService.filtro}] let i = index">
+            <td scope="row" class="text-center sd-wfr">{{ i + 1 }}</td>
+            <td class="text-center sd-wfr sd-pointer" (click)="changeStatus(user)">
+                <i class="fas fa-check-circle text-green" *ngIf="user.status" title="ativo"></i>
+                <i class="fas fa-times-circle text-red" *ngIf="!user.status" title="inativo"></i>
+            </td>
+            <td>{{ getFirstLastName(user.name) }}</td>
+            <td class="text-center sd-wfr">
+                {{ emailListToString(user.contact?.emailList) }}
+            </td>
+            <!-- <td class="text-center">
+                <button class="btn btn-info btn-xs" *ngIf="user.dataAccess?.groupList?.length === 0">
+                    <i class="fas fa-eye"></i> Visualizar
+                </button>
+                <div *ngIf="user.dataAccess?.groupList?.length > 0">
+                    <div *ngFor="let item of user.dataAccess?.groupList">
+                        <button class="btn btn-info btn-xs">{{ item.name }}</button>
+                        &nbsp;
+                    </div>
+                    <button class="btn btn-primary btn-xs"><i class="fas fa-edit"></i> Editar</button>
+                </div>
+            </td> -->
+            <td class="text-center sd-wf">
+                <i class="fas fa-address-card sd-pointer text-success" (click)="openUserProfileEditModal(user)"></i>
+                &nbsp;
+                <i class="fas fa-eye sd-pointer text-warning" (click)="openUserViewModal(user)"></i>
+                &nbsp;
+                <i class="fas fa-edit sd-pointer text-primary" (click)="openUserFormModal(user)"></i>
+                <!-- <i class="fas fa-edit sd-pointer text-primary" data-toggle="modal" data-target="#userModal"
+                    (click)="userService.edit(user)"></i> -->
+                &nbsp;
+                <i class="fas fa-trash-alt sd-pointer text-danger" (click)="delete(user._id)"></i>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<ng-template #template>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">First modal</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        This is a first modal<br />
+        <button type="button" class="btn btn-primary" (click)="openModal2(templateNested)">Open second modal</button>
+        <button type="button" class="btn btn-primary" (click)="closeModal(1)">Close self</button>
+        <button type="button" class="btn btn-primary" (click)="closeModal()">Close all modal</button>
+    </div>
+</ng-template>
+
+<ng-template #templateNested>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Second modal</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef2.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        This is nested modal.<br />
+        <button *ngIf="bsModalRef" type="button" class="btn btn-danger" (click)="closeFirstModal()">Close first
+            modal</button>
+        <button type="button" class="btn btn-danger" (click)="closeModal(2)">Close self</button>
+        <button type="button" class="btn btn-danger" (click)="closeModal()">Close all modal</button>
+    </div>
+</ng-template>
