@@ -53,6 +53,11 @@ export class ProfileService {
         return this.http.get<IProfile>(url);
     }
 
+    readFilter(filter: IProfile): Observable<IProfile[]> {
+        const url = `${this.baseUrl}/filter`;
+        return this.http.post<IProfile[]>(url, filter);
+    }
+
     update(profile: IProfile): void {
         const url = `${this.baseUrl}/${profile._id}`
         this.http.post<IProfile>(url, profile).subscribe(() => {

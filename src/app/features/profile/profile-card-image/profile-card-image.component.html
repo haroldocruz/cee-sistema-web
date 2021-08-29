@@ -6,11 +6,11 @@
             <i class="fas fa-user-circle fa-5x"></i>
         </div>
 
-        <h3 class="profile-username text-center">Haroldo Cruz</h3>
+        <h3 class="profile-username text-center">{{ ProfileService.user.name }}</h3>
 
         <p class="text-muted text-center">Engenheiro de Software <br> Software Engineer</p>
 
-        <button class="btn btn-primary btn-block" data-toggle="modal" data-target="#userModal">
+        <button class="btn btn-primary btn-block" (click)="openUserFormModal(ProfileService.user)">
             <i class="fas fa-edit"></i>&nbsp;<b>Editar dados</b>
         </button>
 

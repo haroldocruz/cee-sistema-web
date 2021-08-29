@@ -5,6 +5,9 @@ import { map } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { fromEvent, Observable } from 'rxjs';
 import { IProfile, Profile } from 'src/app/interfaces/Profile';
+import { UserService } from '../user/user.service';
+import { AuthService } from 'src/app/auth/auth.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -16,9 +19,22 @@ export class ProfileComponent implements OnInit {
   // public filterInputId = new FormControl();
   public filtro: string;
 
-  constructor(public profileService: ProfileService) { }
+  constructor(
+    private route: ActivatedRoute,
+    public profileService: ProfileService,
+    private userService: UserService
+    ) { }
 
   ngOnInit(): void {
+    
+    this.route.queryParams.subscribe((params) => {
+
+      let id: string = params['userId'] || AuthService.user._id;
+      
+      this.userService.readById(id).subscribe((data) => {
+        ProfileService.user = data;
+      });
+    });
 
     this.typeahead(document.getElementById('search-box')).subscribe(data => {
       this.profileService.filtro = data;
@@ -39,6 +55,6 @@ export class ProfileComponent implements OnInit {
   }
 
   edit(profile: IProfile | null) {
-    this.profileService.profile = (profile) ? profile : new Profile();
+    ProfileService.profile = (profile) ? profile : new Profile();
   }
 }

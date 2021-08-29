@@ -21,7 +21,7 @@ export class ProfileListComponent implements OnInit {
     }
 
     edit(profile: IProfile | null) {
-        this.profileService.profile = (profile) ? profile : new Profile();
+        ProfileService.profile = (profile) ? profile : new Profile();
     }
 
     delete(id): void {

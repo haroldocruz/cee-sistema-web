@@ -1,20 +1,31 @@
 import { ModelNameEnum } from './enumerations/ModelNameEnum';
+import { IUser } from './User';
 export interface IProfile {
     "_id"?: string;
     "status"?: boolean;
     "name": string;
+    "_userList"?: IUser[];
+    "_routeList"?: IRoute[];
     "context"?: string;
-    "roleCrud"?: IRoleCrud;
+    "scope"?: IScope;
+    "group"?: IGroup;
     "description"?: string;
 }
 
-interface IRoleCrud {
-    "_model": string;
-    "_modelName": ModelNameEnum;
-    "C": boolean;
-    "R": boolean;
-    "U": boolean;
-    "D": boolean;
+interface IRoute {
+  "_id": string;
+  "status": string;
+  "urn": string;
+  "description": string;
+}
+
+interface IScope {
+  "name": string;
+}
+
+interface IGroup {
+  "_id": string;
+  "name": string;
 }
 
 export class Profile implements IProfile {
@@ -22,6 +33,9 @@ export class Profile implements IProfile {
     status: true;
     name = "Anônimo";
     context = "Other";
+    scope = { _id: "_id", name: "Other"};
+    group = { _id: "_id", name: "Other"};
+    _routeList = []
 
     constructor() { }
 }

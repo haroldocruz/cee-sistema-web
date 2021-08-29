@@ -9,9 +9,10 @@ import { UserComponent } from './user.component';
 import { UserFormModalComponent } from './user-form-modal/user-form-modal.component';
 import { UserListComponent } from './user-list/user-list.component';
 
-import { SortByPipe } from './../../pipes/sort-by.pipe';
+// import { SortByPipe } from './../../pipes/sort-by.pipe';
 import { UserViewModalComponent } from './user-view-modal/user-view-modal.component';
 import { UserProfileEditModalComponent } from './user-profile-edit-modal/user-profile-edit-modal.component';
+import { UserPasswordFormModalComponent } from './user-password-form-modal/user-password-form-modal.component';
 
 @NgModule({
   declarations: [
@@ -20,11 +21,12 @@ import { UserProfileEditModalComponent } from './user-profile-edit-modal/user-pr
     UserFormViewComponent,
     UserListComponent,
 
-    SortByPipe,
+    // SortByPipe,
 
     UserViewModalComponent,
 
-    UserProfileEditModalComponent
+    UserProfileEditModalComponent,
+      UserPasswordFormModalComponent
   ],
   imports: [
     CommonModule,

@@ -20,17 +20,17 @@ export interface IUser {
 }
 
 export enum GenderEnum {
-    FEMININO = "Feminino",
-    MASCULINO = "Masculino",
+    FEMALE = "Feminino",
+    MALE = "Masculino",
     UNINFORMED = "Não informado",
 }
 
 export enum MaritalStatusEnum {
     UNINFORMED = "Não informado",
-    SOLTEIRO = "Solteiro(a)",
-    CASADO = "Casado(a)",
-    DIVORCIADO = "Divorciado(a)",
-    VIUVO = "Viúvo(a)",
+    SINGLE = "Solteiro(a)",
+    MARIED = "Casado(a)",
+    DIVORCED = "Divorciado(a)",
+    WIDOWER = "Viúvo(a)",
 }
 
 export interface IRg {

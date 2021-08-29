@@ -60,6 +60,10 @@ export class UserService {
         return this.http.get<IUser[]>(this.baseUrl, { headers: this.headers() });
     }
 
+    readFilter(user: IUser): Observable<IUser[]> {
+        return this.http.post<IUser[]>(this.baseUrl, user, { headers: this.headers() });
+    }
+
     readById(id: string): Observable<IUser & IStatusMessage> {
         const url = `${this.baseUrl}/${id}`;
         return this.http.get<IUser & IStatusMessage>(url, { headers: this.headers() });

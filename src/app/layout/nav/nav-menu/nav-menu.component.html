@@ -13,12 +13,18 @@
       </a>
     </li>
 
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/chat"><i class="nav-icon fas fa-comments"></i>
+        Chat/Mensagens
+      </a>
+    </li>
+
   </ul>
 
-  <app-nav-menu-cee *ngIf="AuthService.currentProfile?.context == 'cee'"></app-nav-menu-cee>
+  <app-nav-menu-cee *ngIf="AuthService.currentProfile?.context == 'cee' || AuthService.currentProfile?.context == 'system'"></app-nav-menu-cee>
   <app-nav-menu-commission *ngIf="AuthService.currentProfile?.context == 'commission'"></app-nav-menu-commission>
   <app-nav-menu-institution *ngIf="AuthService.currentProfile?.context == 'institution'"></app-nav-menu-institution>
-  <app-nav-menu-manager *ngIf="AuthService.currentProfile?.context == 'cee'"></app-nav-menu-manager>
+  <app-nav-menu-manager *ngIf="AuthService.currentProfile?.context == 'cee' || AuthService.currentProfile?.context == 'system'"></app-nav-menu-manager>
 
   <!-- <app-nav-menu-cee *ngIf="isPermitted('/cee')"></app-nav-menu-cee>
   <app-nav-menu-commission *ngIf="isPermitted('/commission')"></app-nav-menu-commission>

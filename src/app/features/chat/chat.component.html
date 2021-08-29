@@ -1,0 +1,40 @@
+<div class="row">
+    <div class="col-12">
+        <!-- USERS LIST -->
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Novas Mensagens</h3>
+
+                <div class="card-tools">
+                    <span class="badge badge-danger">{{ mockUserList.length }} Pessoas</span>
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-tool" data-card-widget="remove">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body p-0">
+                <ul class="users-list clearfix">
+                    <li *ngFor="let item of mockUserList">
+                        <img src="{{item.avatar}}" alt="User Image">
+                        <a class="users-list-name" (click)="openChatDirectModal(item)">
+                            {{ item.name }}
+                        </a>
+                        <span class="users-list-date">{{ item.dateTime }}</span>
+                    </li>
+                </ul>
+                <!-- /.users-list -->
+            </div>
+            <!-- /.card-body -->
+            <div class="card-footer text-center">
+                <a href="javascript:">Visualizar histórico de conversas</a>
+            </div>
+            <!-- /.card-footer -->
+        </div>
+        <!--/.card -->
+    </div>
+    <!-- /.col -->
+</div>

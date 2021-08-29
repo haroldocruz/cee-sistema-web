@@ -27,9 +27,17 @@
                         aria-labelledby="maintainer-tab">
 
                         <form method="post">
+
+                          <!-- ! APAGAR -->
+                            <div class="input-group mb-3">
+                              <select [(ngModel)]="mockUserSelected" (ngModelChange)="mockChangeUserSelected($event)" [ngModelOptions]="{standalone: true}" class="form-control">
+                                <option [ngValue]="mu" *ngFor="let mu of mockUserList">{{ mu.name }}</option>
+                              </select>
+                            </div>
+
                             <div class="input-group mb-3">
                                 <input type="username" class="form-control" placeholder="Email ou CPF"
-                                    [(ngModel)]="username" [ngModelOptions]="{standalone: true}">
+                                    [(ngModel)]="userdataLogin.username" [ngModelOptions]="{standalone: true}">
                                 <div class="input-group-append">
                                     <div class="input-group-text">
                                         <span class="fas fa-envelope"></span>
@@ -37,7 +45,7 @@
                                 </div>
                             </div>
                             <div class="input-group mb-3">
-                                <input type="password" class="form-control" placeholder="Senha" [(ngModel)]="password"
+                                <input type="password" class="form-control" placeholder="Senha" [(ngModel)]="userdataLogin.password"
                                     [ngModelOptions]="{standalone: true}">
                                 <div class="input-group-append">
                                     <div class="input-group-text">
@@ -72,7 +80,7 @@
                       <form method="post">
                         <div class="input-group mb-3">
                             <input type="username" class="form-control" placeholder="Email ou CPF"
-                                [(ngModel)]="username" [ngModelOptions]="{standalone: true}">
+                            [(ngModel)]="userdataLogin.username" [ngModelOptions]="{standalone: true}">
                             <div class="input-group-append">
                                 <div class="input-group-text">
                                     <span class="fas fa-envelope"></span>
@@ -80,7 +88,7 @@
                             </div>
                         </div>
                         <div class="input-group mb-3">
-                            <input type="password" class="form-control" placeholder="Senha" [(ngModel)]="password"
+                            <input type="password" class="form-control" placeholder="Senha" [(ngModel)]="userdataLogin.password"
                                 [ngModelOptions]="{standalone: true}">
                             <div class="input-group-append">
                                 <div class="input-group-text">
@@ -115,7 +123,7 @@
                       <form method="post">
                         <div class="input-group mb-3">
                             <input type="username" class="form-control" placeholder="Email ou CPF"
-                                [(ngModel)]="username" [ngModelOptions]="{standalone: true}">
+                            [(ngModel)]="userdataLogin.username" [ngModelOptions]="{standalone: true}">
                             <div class="input-group-append">
                                 <div class="input-group-text">
                                     <span class="fas fa-envelope"></span>
@@ -123,7 +131,7 @@
                             </div>
                         </div>
                         <div class="input-group mb-3">
-                            <input type="password" class="form-control" placeholder="Senha" [(ngModel)]="password"
+                            <input type="password" class="form-control" placeholder="Senha" [(ngModel)]="userdataLogin.password"
                                 [ngModelOptions]="{standalone: true}">
                             <div class="input-group-append">
                                 <div class="input-group-text">

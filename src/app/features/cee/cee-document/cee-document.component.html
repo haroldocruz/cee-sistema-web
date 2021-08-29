@@ -1,0 +1,90 @@
+<div class="row">
+    <div class="col-12 col-md-3">
+        <div class="info-box btn btn-default text-left">
+            <span class="info-box-icon bg-info elevation-1"><i class="fas fa-folder-open"></i></span>
+
+            <div class="info-box-content">
+                <span class="info-box-text">Resoluções</span>
+                <span class="info-box-number">
+                    1,025
+                    <!-- <small>%</small> -->
+                </span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+    <div class="col-12 col-md-3">
+        <div class="info-box mb-3 btn btn-default text-left">
+            <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-folder-open"></i></span>
+
+            <div class="info-box-content">
+                <span class="info-box-text">Portarias</span>
+                <span class="info-box-number">41,410</span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+
+    <!-- fix for small devices only -->
+    <!-- <div class="clearfix hidden-md-up"></div> -->
+
+    <div class="col-12 col-md-3">
+        <div class="info-box mb-3 btn btn-default text-left">
+            <span class="info-box-icon bg-success elevation-1"><i class="fas fa-folder-open"></i></span>
+
+            <div class="info-box-content">
+                <span class="info-box-text">Decretos</span>
+                <span class="info-box-number">760</span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+    <div class="col-12 col-md-3">
+        <div class="info-box mb-3  btn btn-default text-left">
+            <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-folder-open"></i></span>
+
+            <div class="info-box-content">
+                <span class="info-box-text">Pareceres</span>
+                <span class="info-box-number">2,000</span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="info-box btn btn-default text-left" *ngFor="let item of mockDocList">
+            <span class="info-box-icon bg-info elevation-1" *ngIf="item.type == 'Resolução'">
+                <i class="fas fa-folder-open"></i>
+            </span>
+            <span class="info-box-icon bg-danger elevation-1" *ngIf="item.type == 'Portaria'">
+                <i class="fas fa-folder-open"></i>
+            </span>
+
+            <div class="info-box-content">
+                <span class="info-box-text">
+                    <b>Tipo:</b> {{ item.type }}
+                    <b>Número:</b> {{ item.number }}
+                    <b>Criação:</b> {{ item.criadaEm }}
+                    <b>Publicação no DOE:</b> {{ item.publicadaEm }}
+                </span>
+                <span class="info-box-number">
+                    {{ item.ementa }}
+                    <small>Revogado pela Resolução n 123...</small>
+                </span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+</div>

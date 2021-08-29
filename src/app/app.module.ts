@@ -21,15 +21,17 @@ import { LayoutModule } from './layout/layout.module';
 import { ProfileModule } from './features/profile/profile.module';
 import { UserModule } from './features/user/user.module';
 
-import { SortByPipe } from './pipes/sort-by.pipe';
+// import { SortByPipe } from './pipes/sort-by.pipe';
 import { SorteadorModule } from './features/others/sorteador/sorteador.module';
 import { ToastrModule } from 'ngx-toastr';
+import { PipesModule } from 'w-ng5';
+import { ChatModule } from './features/chat/chat.module';
 
 /*OTHERS*/
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
 
     // SortByPipe
   ],
@@ -43,10 +45,12 @@ import { ToastrModule } from 'ngx-toastr';
 
     ModalModule.forRoot(),
     ToastrModule.forRoot({ positionClass:'toast-top-right', closeButton: true }),
+    PipesModule,
 
     /*FEATURES*/
     AuthModule,
     CeeModule,
+    ChatModule,
     ContactModule,
     GroupModule,
     HomeModule,

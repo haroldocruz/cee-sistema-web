@@ -23,7 +23,7 @@ export class ProfileFormModalComponent implements OnInit {
     }
 
     create(): void {
-        this.profileService.create(this.profileService.profile).subscribe((data) => {
+        this.profileService.create(ProfileService.profile).subscribe((data) => {
             this.notify.showSuccess(data[1], "Ok!")
             this.profileService.index();
         }, (error) => {
@@ -32,7 +32,7 @@ export class ProfileFormModalComponent implements OnInit {
     }
 
     update(): void {
-        this.profileService.update(this.profileService.profile).subscribe((data) => {
+        this.profileService.update(ProfileService.profile).subscribe((data) => {
             this.notify.showSuccess(data[1], "Ok!")
             this.profileService.index();
         }, (error) => {

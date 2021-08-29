@@ -30,6 +30,7 @@ export class UserFormModalComponent implements OnInit {
     phone: IPhone;
     email: IEmail;
     address: IAddress;
+    isDataAccess: boolean;
 
     constructor(
         private formBuilder: FormBuilder,
@@ -63,10 +64,10 @@ export class UserFormModalComponent implements OnInit {
 
     ngOnInit(): void {
 
-        this.checkoutForm = this.formBuilder.group({
-            name: this.user.name,
-            cpf: ''
-        })
+        // this.checkoutForm = this.formBuilder.group({
+        //     name: [this.user.name],
+        //     cpf: [this.user.cpf]
+        // })
 
         this.statusList = Object.values(StatusEnum)
         this.genderList = Object.values(GenderEnum)
@@ -85,6 +86,7 @@ export class UserFormModalComponent implements OnInit {
 
     update(): void {
         if (!this.userService.isConfirm()) return;
+        if (!this.isDataAccess) delete this.user.dataAccess;
 
         // const user: IUser = { "_id": this.user._id, name: "super", cpf: 123, status: true, dataAccess: {} }
         this.userService.default(this.userService.update(this.user));

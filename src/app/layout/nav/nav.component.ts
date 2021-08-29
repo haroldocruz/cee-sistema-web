@@ -1,4 +1,4 @@
-import OverlayScrollbars from 'overlayScrollbars';
+import OverlayScrollbars from 'overlayscrollbars';
 import { Component, OnInit, ElementRef } from '@angular/core';
 // import OverlayScrollbars from "overlayScrollbars/js/jquery.overlayScrollbars"
 

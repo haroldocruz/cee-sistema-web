@@ -1,69 +1,70 @@
 <!-- * SIDEBAR USER PANEL -->
 <div class="user-panel mt-3 pb-3 mb-3 text-center">
 
-    <div *ngIf="AuthService.user._id">
-        <a routerLink="/profile"><i class="fas fa-user-circle fa-3x"></i></a>
-        <!-- <img src="../../../public/img/haroldocruz.jpg" class="img-circle elevation-2" alt="User Image"> -->
-        <a class="d-block" data-toggle="modal" data-target="#authListModal">
-            {{ AuthService.user.name.match(firstName)[1]+' '+ AuthService.user.name.match(lastName)[1] }}
-        </a>
-        <a class="d-block" data-toggle="modal" data-target="#authProfileModal">[{{ AuthService.currentProfile?.name
-            }}]</a>
-        <!-- <a href="#" class="d-block">{{ AuthService.user.dataAccess.profiles[profileIndex]?.name }}</a> -->
-    </div>
+  <div *ngIf="AuthService.user._id">
+    <a routerLink="/profile"><i class="fas fa-user-circle fa-3x"></i></a>
+    <!-- <img src="../../../public/img/haroldocruz.jpg" class="img-circle elevation-2" alt="User Image"> -->
+    <a class="d-block" data-toggle="modal" data-target="#authListModal">
+      {{ AuthService.user.name.match(firstName)[1]+' '+ AuthService.user.name.match(lastName)[1] }}
+    </a>
+    <a class="d-block" data-toggle="modal" data-target="#authProfileModal">
+      [{{ AuthService.currentProfile?.name }}]
+    </a>
+    <!-- <a href="#" class="d-block">{{ AuthService.user.dataAccess.profiles[profileIndex]?.name }}</a> -->
+  </div>
 
-    <div *ngIf="!AuthService.user._id">
-        <a routerLink="/login"><i class="fas fa-user-circle fa-3x"></i></a>
-        <a class="d-block" data-toggle="modal" data-target="#authListModal">{{ AuthService.user.name }}</a>
-        <a class="d-block" data-toggle="modal" data-target="#authProfileModal">[{{ AuthService.currentProfile?.name
-            }}]</a>
-        <!-- <a href="#" class="d-block">{{ AuthService.user.dataAccess.profiles[profileIndex]?.name }}</a> -->
-    </div>
+  <div *ngIf="!AuthService.user._id">
+    <a routerLink="/login"><i class="fas fa-user-circle fa-3x"></i></a>
+    <a class="d-block" data-toggle="modal" data-target="#authListModal">{{ AuthService.user.name }}</a>
+    <a class="d-block" data-toggle="modal" data-target="#authProfileModal">
+      [{{ AuthService.currentProfile?.name }}]</a>
+    <!-- <a href="#" class="d-block">{{ AuthService.user.dataAccess.profiles[profileIndex]?.name }}</a> -->
+  </div>
 
 </div>
 
 <!-- * SIDEBAR MENU -->
 <nav class="mt-2">
-    <ul class="nav nav-pills nav-sidebar nav-legacy flex-column" data-widget="treeview" role="menu">
+  <ul class="nav nav-pills nav-sidebar nav-legacy flex-column" data-widget="treeview" role="menu">
 
-        <!-- * BUTTON LOGIN -->
-        <li class="nav-item text-center" *ngIf="!AuthService.user._id">
-            <a class="nav-link ips-logon" routerLink="/login"> <i class="nav-icon fa fa-sign-in-alt"></i> LogIn [Entrar]</a>
-            <!-- <a class="nav-link ips-logon" data-toggle="modal" data-target="#authListModal">
+    <!-- * BUTTON LOGIN -->
+    <li class="nav-item text-center" *ngIf="!AuthService.user._id">
+      <a class="nav-link ips-logon" routerLink="/login"> <i class="nav-icon fa fa-sign-in-alt"></i> LogIn [Entrar]</a>
+      <!-- <a class="nav-link ips-logon" data-toggle="modal" data-target="#authListModal">
                 <i class="nav-icon fa fa-sign-in-alt"></i>
                 LogIn [Entrar]
             </a> -->
-        </li>
+    </li>
 
-        <!-- * BUTTON LOGOUT -->
-        <li class="nav-item text-center" *ngIf="AuthService.user._id" (click)="logOut()">
-            <a class="nav-link ips-logon">
-                <i class="nav-icon fa fa-sign-out-alt"></i>
-                LogOut [Sair]
-            </a>
-        </li>
+    <!-- * BUTTON LOGOUT -->
+    <li class="nav-item text-center" *ngIf="AuthService.user._id" (click)="logOut()">
+      <a class="nav-link ips-logon">
+        <i class="nav-icon fa fa-sign-out-alt"></i>
+        LogOut [Sair]
+      </a>
+    </li>
 
-        <!-- * BUTTON PROFILE -->
-        <!-- <li class="nav-item text-center" *ngIf="AuthService.user._id"> -->
-        <li class="nav-item text-center" *ngIf="false">
-            <!-- <a class="nav-link ips-login" routerLink="/login"> <i class="nav-icon fa fa-sign-in-alt"></i> LogIn [Entrar]</a> -->
-            <a class="nav-link ips-logon" data-toggle="modal" data-target="#authProfileModal">
-                <i class="nav-icon fa fa-id-card-alt"></i>
-                Trocar perfil
-            </a>
-        </li>
+    <!-- * BUTTON PROFILE -->
+    <!-- <li class="nav-item text-center" *ngIf="AuthService.user._id"> -->
+    <li class="nav-item text-center" *ngIf="false">
+      <!-- <a class="nav-link ips-login" routerLink="/login"> <i class="nav-icon fa fa-sign-in-alt"></i> LogIn [Entrar]</a> -->
+      <a class="nav-link ips-logon" data-toggle="modal" data-target="#authProfileModal">
+        <i class="nav-icon fa fa-id-card-alt"></i>
+        Trocar perfil
+      </a>
+    </li>
 
-        <!-- * PROFILE OPTIONS -->
-        <!-- <li class="nav-item text-center" *ngIf="AuthService.currentProfile.name !== 'Anônimo'"> -->
-        <li class="nav-item text-center" *ngIf="false">
-            <a class="nav-link">
-                <select class="form-control" [(ngModel)]="AuthService.currentProfile">
-                    <!-- <option value="">Selecione um perfil</option> -->
-                    <option [ngValue]="profile" *ngFor="let profile of AuthService.user.dataAccess.groupList">
-                      {{ profile.name }}
-                    </option>
-                </select>
-            </a>
-        </li>
-    </ul>
+    <!-- * PROFILE OPTIONS -->
+    <!-- <li class="nav-item text-center" *ngIf="AuthService.currentProfile.name !== 'Anônimo'"> -->
+    <li class="nav-item text-center" *ngIf="false">
+      <a class="nav-link">
+        <select class="form-control" [(ngModel)]="AuthService.currentProfile">
+          <!-- <option value="">Selecione um perfil</option> -->
+          <option [ngValue]="profile" *ngFor="let profile of AuthService.user.dataAccess.groupList">
+            {{ profile.name }}
+          </option>
+        </select>
+      </a>
+    </li>
+  </ul>
 </nav>

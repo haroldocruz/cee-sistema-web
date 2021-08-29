@@ -17,6 +17,10 @@ import { Routes, RouterModule } from '@angular/router';
 import { LayoutComponent } from './layout/layout.component';
 import { HomeComponent } from './features/home/home.component';
 import { UserComponent } from './features/user/user.component';
+import { ProfileMainTimelineComponent } from './features/profile/profile-card-main/profile-main-timeline/profile-main-timeline.component';
+import { ProfileMainUserdataComponent } from './features/profile/profile-card-main/profile-main-userdata/profile-main-userdata.component';
+import { ProfileMainUserconfigComponent } from './features/profile/profile-card-main/profile-main-userconfig/profile-main-userconfig.component';
+import { ChatRouting } from './features/chat/chat.routing.module';
 
 const routes: Routes = [
   { path: "", redirectTo: "home", pathMatch: "full" },
@@ -35,6 +39,7 @@ const routes: Routes = [
         ]
       },
       CeeRouting,
+      ChatRouting,
       InstitutionRouting,
       // {
       //   path: "institution", component: InstitutionComponent,
@@ -63,7 +68,15 @@ const routes: Routes = [
     //   canActivate: [AuthGuard, PermissionGuard]
     },
       { path: "group", component: GroupComponent },
-      { path: "profile", component: ProfileComponent },
+      { path: "profile", redirectTo: "profile/personal", pathMatch: "full" },
+      { path: "profile", component: ProfileComponent,
+        // canActivate: [AuthGuard, PermissionGuard],
+        children: [
+          { path: "activity", component: ProfileMainTimelineComponent },
+          { path: "personal", component: ProfileMainUserdataComponent },
+          { path: "settings", component: ProfileMainUserconfigComponent }
+        ]
+     },
     ]
   }
 ];

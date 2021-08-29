@@ -1,5 +1,6 @@
 <!-- userModal -->
-<form [formGroup]="checkoutForm">
+<!-- <form [formGroup]="checkoutForm"> -->
+<form>
     <div class="modal-header">
         <h4 class="modal-title" id="userModalLabel">
             <span *ngIf="!user._id">Inserir</span>
@@ -12,8 +13,8 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12 col-lg-8">
-                    Nome:
-                    <input type="text" [(ngModel)]="user.cpf" [ngModelOptions]="{standalone: true}" autocomplete="_"
+                    Nome completo:
+                    <input type="text" [(ngModel)]="user.name" [ngModelOptions]="{standalone: true}" autocomplete="_"
                         class="form-control" placeholder="Digite seu nome completo">
                 </div>
                 <div class="col-md-6 col-lg-4">
@@ -149,6 +150,7 @@
     </div>
 
     <div class="modal-footer">
+        <input type="hidden" (ngModel)="isDataAccess = false">
         <button type="reset" class="btn btn-default" *ngIf="!user._id">Limpar</button>
         <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">Fechar</button>
         <input type="submit" class="btn btn-primary" value="Salvar" (click)="create()" *ngIf="!user._id">
