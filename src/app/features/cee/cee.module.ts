@@ -10,6 +10,9 @@ import { SortByPipe } from 'src/app/pipes/sort-by.pipe';
 import { PipesModule } from 'w-ng5';
 import { FormsModule } from '@angular/forms';
 import { CeeDocumentComponent } from './cee-document/cee-document.component';
+import { CeeDocumentViewComponent } from './cee-document/cee-document-view/cee-document-view.component';
+import { CeeDocumentListComponent } from './cee-document/cee-document-list/cee-document-list.component';
+import { CeeDocumentFilterComponent } from './cee-document/cee-document-filter/cee-document-filter.component';
 
 
 
@@ -23,7 +26,10 @@ import { CeeDocumentComponent } from './cee-document/cee-document.component';
     CeeUserComponent,
     CeeDashboardComponent,
     CeeUserViewComponent,
-    CeeDocumentComponent
+    CeeDocumentComponent,
+    CeeDocumentViewComponent,
+    CeeDocumentListComponent,
+    CeeDocumentFilterComponent
   ],
   imports: [
     CommonModule,
