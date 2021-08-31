@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { IDoc } from 'src/app/interfaces/IDoc';
 
 interface ITypeLength {
   decretoLength: number,
@@ -10,16 +9,29 @@ interface ITypeLength {
   otherLength: number,
 }
 
+export interface IDoc {
+  type: string,
+  number: number,
+  ementa?: string,
+  createdIn?: string,
+  publishedIn?: string,
+  situation?: string,
+  alter?: string,
+  changedBy?: string,
+  revoke?: string,
+  revokedBy?: string,
+}
+
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'any'
 })
 export class CeeDocumentLocalService {
 
-  filter: string;
-  search: string;
-  docList: IDoc[];
+  static filter: string;
+  static search: string;
+  static docList: IDoc[];
 
-  typeLength: ITypeLength = {
+  static typeLength: ITypeLength = {
     decretoLength: 0,
     leiLength: 0,
     parecerLength: 0,

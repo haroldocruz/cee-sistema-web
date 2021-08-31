@@ -17,7 +17,7 @@
                 </div>
             </div>
             <input id="search-box" class="form-control" type="text" [(ngModel)]="search" placeholder="Pesquisar">
-            <input type="hidden" [value]="ceeDocumentLocalService.search">
+            <input type="hidden" [value]="CeeDocumentLocalService.search">
         </div>
 
     </div>
@@ -31,7 +31,7 @@
             <div class="info-box-content">
                 <span class="info-box-text">Todos</span>
                 <span class="info-box-number">
-                    {{ ceeDocumentLocalService.docList.length }}
+                    {{ CeeDocumentLocalService.docList.length }}
                     <!-- <small>%</small> -->
                 </span>
             </div>
@@ -46,7 +46,7 @@
             <div class="info-box-content">
                 <span class="info-box-text">Resoluções</span>
                 <span class="info-box-number">
-                    {{ ceeDocumentLocalService.typeLength.resolucaoLength }}
+                    {{ CeeDocumentLocalService.typeLength.resolucaoLength }}
                     <!-- <small>%</small> -->
                 </span>
             </div>
@@ -62,7 +62,7 @@
             <div class="info-box-content">
                 <span class="info-box-text">Portarias</span>
                 <span class="info-box-number">
-                    {{ ceeDocumentLocalService.typeLength.portariaLength }}
+                    {{ CeeDocumentLocalService.typeLength.portariaLength }}
                 </span>
             </div>
             <!-- /.info-box-content -->
@@ -81,7 +81,7 @@
             <div class="info-box-content">
                 <span class="info-box-text">Decretos</span>
                 <span class="info-box-number">
-                    {{ ceeDocumentLocalService.typeLength.decretoLength }}
+                    {{ CeeDocumentLocalService.typeLength.decretoLength }}
                 </span>
             </div>
             <!-- /.info-box-content -->
@@ -96,7 +96,7 @@
             <div class="info-box-content">
                 <span class="info-box-text">Pareceres</span>
                 <span class="info-box-number">
-                    {{ ceeDocumentLocalService.typeLength.parecerLength }}
+                    {{ CeeDocumentLocalService.typeLength.parecerLength }}
                 </span>
             </div>
             <!-- /.info-box-content -->
@@ -111,7 +111,7 @@
             <div class="info-box-content">
                 <span class="info-box-text">Outros</span>
                 <span class="info-box-number">
-                    {{ ceeDocumentLocalService.typeLength.otherLength }}
+                    {{ CeeDocumentLocalService.typeLength.otherLength }}
                 </span>
             </div>
             <!-- /.info-box-content -->
