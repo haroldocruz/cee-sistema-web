@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { IChatUser } from 'src/app/interfaces/IChatUser';
-import { ProfileService } from '../../profile/profile.service';
-import { UserService } from '../../user/user.service';
-import { ChatLocalService } from '../chat-service.service';
+import { ChatLocalService } from '../chat.local.service';
 
 @Component({
   selector: 'app-chat-direct-modal',

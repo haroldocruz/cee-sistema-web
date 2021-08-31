@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AuthService } from 'src/app/auth/auth.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'any'
 })
 export class ChatLocalService {
 
