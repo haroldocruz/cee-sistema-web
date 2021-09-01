@@ -1,20 +1,21 @@
-import { IProfile, Profile } from './../../interfaces/Profile';
-import { Injectable } from '@angular/core';
+import { IProfile, Profile } from '../../interfaces/Profile';
+import { Injectable, OnDestroy } from '@angular/core';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from 'rxjs';
 import { ENV } from 'src/environments/environment';
 import { ActivatedRoute } from '@angular/router';
 import { IUser, User } from 'src/app/interfaces/User';
-import { UserService } from '../user/user.service';
+import { UserLocalService } from '../user/user.local.service';
 import { AuthService } from 'src/app/auth/auth.service';
 
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'any'
 })
-export class ProfileService {
+export class ProfileLocalService implements OnDestroy {
 
   static user: IUser;
+  static userId: string;
   static profile: IProfile;
   profiles: IProfile[];
   filtro: string;
@@ -30,25 +31,28 @@ export class ProfileService {
   constructor(
     private http: HttpClient,
     private route: ActivatedRoute,
-    private userService: UserService
+    private userService: UserLocalService
   ) {
-    ProfileService.profile = new Profile();
-    ProfileService.user = new User();
+    ProfileLocalService.profile = new Profile();
+    ProfileLocalService.user = new User();
+    ProfileLocalService.userId = undefined;
     this.index();
   }
 
   index() {
+    console.log("CHAMOU")
     this.route.queryParams.subscribe((params) => {
 
       let id: string = params['userId'] || AuthService.user._id;
       this.userService.readById(id).subscribe((data) => {
-        ProfileService.user = data;
+        ProfileLocalService.user = data;
+        ProfileLocalService.userId = data._id;
       });
     });
   }
 
   edit(profile: IProfile | null) {
-    ProfileService.profile = (profile) ? profile : new Profile();
+    ProfileLocalService.profile = (profile) ? profile : new Profile();
   }
 
   create(profile: IProfile): Observable<IProfile> {
@@ -72,6 +76,10 @@ export class ProfileService {
   delete(id: string): Observable<IProfile> {
     const url = `${this.baseUrl}/${id}`;
     return this.http.delete<IProfile>(url);
+  }
+
+  ngOnDestroy(){
+    console.log("ProfileLocalService destruído!")
   }
 
 }

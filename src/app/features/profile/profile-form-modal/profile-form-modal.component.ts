@@ -1,6 +1,6 @@
-import { UserService } from './../../user/user.service';
+import { UserLocalService } from '../../user/user.local.service';
 import { NotificationService } from './../../../services/notification.service';
-import { ProfileService } from './../profile.service';
+import { ProfileLocalService } from '../profile.local.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -14,8 +14,8 @@ export class ProfileFormModalComponent implements OnInit {
     genderList: string[];
 
     constructor(
-        public profileService: ProfileService,
-        public userService: UserService,
+        public profileLocalService: ProfileLocalService,
+        public userService: UserLocalService,
         private notify: NotificationService
     ) { }
 
@@ -23,18 +23,18 @@ export class ProfileFormModalComponent implements OnInit {
     }
 
     create(): void {
-        this.profileService.create(ProfileService.profile).subscribe((data) => {
+        this.profileLocalService.create(ProfileLocalService.profile).subscribe((data) => {
             this.notify.showSuccess(data[1], "Ok!")
-            this.profileService.index();
+            this.profileLocalService.index();
         }, (error) => {
             this.notify.showError(error.error[1], "Ops!")
         });
     }
 
     update(): void {
-        this.profileService.update(ProfileService.profile).subscribe((data) => {
+        this.profileLocalService.update(ProfileLocalService.profile).subscribe((data) => {
             this.notify.showSuccess(data[1], "Ok!")
-            this.profileService.index();
+            this.profileLocalService.index();
         }, (error) => {
             this.notify.showError(error.error[1], "Ops!")
         });
