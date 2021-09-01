@@ -4,7 +4,7 @@ import { IProfile } from 'src/app/interfaces/Profile';
 import { ProfileService } from 'src/app/services/profile.service';
 import { orderBy } from "lodash";
 import { GenderEnum } from 'src/app/interfaces/User';
-import { CeeLocalService } from '../../cee-service.service';
+import { CeeLocalService } from '../../cee.local.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ChatDirectModalComponent } from 'src/app/features/chat/chat-direct-modal/chat-direct-modal.component';
 import { IChatUser } from 'src/app/interfaces/IChatUser';
