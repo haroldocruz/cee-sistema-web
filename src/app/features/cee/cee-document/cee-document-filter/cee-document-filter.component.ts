@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { fromEvent, Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 import { DocTypeEnum } from 'src/app/interfaces/IDoc';
-import { CeeLocalService } from '../../cee-service.service';
-import { CeeDocumentLocalService } from '../cee-document-service.service';
+import { CeeDocumentLocalService } from '../cee-document.local.service';
 
 @Component({
   selector: 'app-cee-document-filter',
@@ -15,15 +14,15 @@ export class CeeDocumentFilterComponent implements OnInit {
   search: string;
   docTypeEnum: typeof DocTypeEnum;
 
-  constructor(
-    public ceeDocumentLocalService: CeeDocumentLocalService
-  ) { }
+  CeeDocumentLocalService = CeeDocumentLocalService;
+
+  constructor() { }
 
   ngOnInit(): void {
     this.docTypeEnum = DocTypeEnum;
   
     this.typeahead(document.getElementById('search-box')).subscribe(data => {
-      this.ceeDocumentLocalService.search = data;
+      CeeDocumentLocalService.search = data;
     });
   }
 
@@ -41,7 +40,7 @@ export class CeeDocumentFilterComponent implements OnInit {
   }
 
   filtering(filter: string){
-    this.ceeDocumentLocalService.filter = filter;
+    CeeDocumentLocalService.filter = filter;
   }
 
 }
