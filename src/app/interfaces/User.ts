@@ -12,7 +12,7 @@ export interface IUser {
     "gender"?: string; //enum [masculino, feminino]
     "maritalStatus"?: string; //enum [solteiro(a), casado(a), ...]
     "birthDate"?: Date;
-    "status": boolean;
+    "status"?: boolean;
     "contact"?: IContact;
     "loginInfo"?: ILoginInfo;
     "dataAccess"?: IDataAccess;

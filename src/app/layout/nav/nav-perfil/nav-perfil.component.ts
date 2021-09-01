@@ -1,7 +1,7 @@
 import { IStatusMessage } from './../../../interfaces/IStatusMessage';
 import { NotificationService } from './../../../services/notification.service';
 import { AuthService } from './../../../auth/auth.service';
-import { UserService } from './../../../features/user/user.service';
+import { UserLocalService } from '../../../features/user/user.local.service';
 import { ProfileService } from './../../../services/profile.service';
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/interfaces/User';
@@ -23,7 +23,7 @@ export class NavPerfilComponent implements OnInit {
     constructor(
         public authService: AuthService,
         public profileService: ProfileService,
-        public userService: UserService,
+        public userService: UserLocalService,
         private notify: NotificationService,
         private router: Router
     ) { }

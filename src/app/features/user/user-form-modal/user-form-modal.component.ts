@@ -6,7 +6,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { NotificationService } from './../../../services/notification.service';
 import { StatusEnum } from './../../../interfaces/Status';
 import { GenderEnum, IUser, MaritalStatusEnum } from './../../../interfaces/User';
-import { UserService } from './../user.service';
+import { UserLocalService } from '../user.local.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 
@@ -37,7 +37,7 @@ export class UserFormModalComponent implements OnInit {
         public bsModalRef: BsModalRef,
         public bsModalRef2: BsModalRef,
         private modalService: BsModalService,
-        public userService: UserService,
+        public userService: UserLocalService,
         private notify: NotificationService,
         private router: Router
     ) {

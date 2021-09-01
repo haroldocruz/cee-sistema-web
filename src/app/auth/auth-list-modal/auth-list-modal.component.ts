@@ -1,6 +1,6 @@
 import { AuthService } from './../auth.service';
 import { IUser, User } from './../../interfaces/User';
-import { UserService } from './../../features/user/user.service';
+import { UserLocalService } from '../../features/user/user.local.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -12,7 +12,7 @@ export class AuthListModalComponent implements OnInit {
 
   userList: IUser[];
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserLocalService) { }
 
   ngOnInit(): void {
     this.userService.read().subscribe((users)=>{

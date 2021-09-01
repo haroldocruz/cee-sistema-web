@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { IChatUser } from 'src/app/interfaces/IChatUser';
 import { IUser } from 'src/app/interfaces/User';
-import { ProfileService } from '../profile/profile.service';
-import { UserService } from '../user/user.service';
+import { ProfileLocalService } from '../profile/profile.local.service';
+import { UserLocalService } from '../user/user.local.service';
 import { ChatDirectModalComponent } from './chat-direct-modal/chat-direct-modal.component';
 
 @Component({
@@ -14,12 +14,12 @@ import { ChatDirectModalComponent } from './chat-direct-modal/chat-direct-modal.
 export class ChatComponent implements OnInit {
 
   bsModalRef: BsModalRef;
-  ProfileLocalService = ProfileService;
+  ProfileLocalService = ProfileLocalService;
 
   mockUserList: Array<IChatUser>;
 
   constructor(
-    private userService: UserService,
+    private userService: UserLocalService,
     private modalService: BsModalService
     ) { }
 

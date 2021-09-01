@@ -2,7 +2,7 @@ import { IStatusMessage } from './../interfaces/IStatusMessage';
 import { NotificationService } from './../services/notification.service';
 import { Router } from '@angular/router';
 import { AuthService } from './auth.service';
-import { IUserDataLogin, UserService } from './../features/user/user.service';
+import { IUserDataLogin, UserLocalService } from '../features/user/user.local.service';
 import { Component, OnInit } from '@angular/core';
 import { IUser } from '../interfaces/User';
 
@@ -25,7 +25,7 @@ export class AuthComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private notifyService: NotificationService,
-    private userService: UserService
+    private userService: UserLocalService
   ) { }
 
   ngOnInit(): void {

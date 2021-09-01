@@ -1,5 +1,5 @@
 import { AuthService } from './../../../auth/auth.service';
-import { UserService } from './../../../features/user/user.service';
+import { UserLocalService } from '../../../features/user/user.local.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -11,7 +11,7 @@ export class NavMenuComponent implements OnInit {
 
   AuthService = AuthService;
 
-  constructor(public userService: UserService) { }
+  constructor(public userService: UserLocalService) { }
 
   ngOnInit(): void {
   }

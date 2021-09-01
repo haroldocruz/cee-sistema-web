@@ -41,6 +41,7 @@ const routes: Routes = [
       CeeRouting,
       ChatRouting,
       InstitutionRouting,
+      // ProfileRouting,
       // {
       //   path: "institution", component: InstitutionComponent,
       //   // canActivate: [AuthGuard, PermissionGuard],

@@ -7,7 +7,7 @@ import { NotificationService } from './../../../services/notification.service';
 import _cloneDeep from "lodash/cloneDeep";
 
 import { IUser } from './../../../interfaces/User';
-import { UserService } from './../user.service';
+import { UserLocalService } from '../user.local.service';
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
@@ -25,7 +25,7 @@ export class UserListComponent implements OnInit {
     bsModalRef2: BsModalRef;
 
     constructor(
-        public userService: UserService,
+        public userService: UserLocalService,
         private modalService: BsModalService,
         private notify: NotificationService
     ) { }

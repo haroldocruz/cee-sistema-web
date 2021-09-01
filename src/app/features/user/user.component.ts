@@ -1,6 +1,6 @@
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { UserFormModalComponent } from './user-form-modal/user-form-modal.component';
-import { UserService } from './user.service';
+import { UserLocalService } from './user.local.service';
 import { IUser, User } from './../../interfaces/User';
 import { Component, OnInit } from '@angular/core';
 import { Observable, fromEvent } from "rxjs";
@@ -18,7 +18,7 @@ export class UserComponent implements OnInit {
     bsModalRef: BsModalRef;
 
     constructor(
-        public userService: UserService,
+        public userService: UserLocalService,
         private modalService: BsModalService,
     ) { }
 

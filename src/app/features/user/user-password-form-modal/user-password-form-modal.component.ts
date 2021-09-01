@@ -1,6 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { UserService } from '../user.service';
+import { IDataAccess, IUser, User } from 'src/app/interfaces/User';
+import { ProfileLocalService } from '../../profile/profile.local.service';
+import { UserLocalService } from '../user.local.service';
+
+interface IUserChangePassword {
+  _id: string;
+  "dataAccess.password": string;
+}
 
 @Component({
   selector: 'app-user-password-form-modal',
@@ -9,15 +16,18 @@ import { UserService } from '../user.service';
 })
 export class UserPasswordFormModalComponent implements OnInit {
 
+  userId: string;
+
   isDataAccess: boolean;
-  user
-  password: string;
-  passwordCheck: string;
+  userChangePassword: IUserChangePassword;
+  newPassword: string;
+  newPasswordCheck: string;
+  actualPassword: string;
 
   constructor(
     public bsModalRef: BsModalRef,
     private modalService: BsModalService,
-    public userService: UserService
+    public userService: UserLocalService
   ) { }
 
   ngOnInit(): void {
@@ -25,9 +35,13 @@ export class UserPasswordFormModalComponent implements OnInit {
 
   update(): void {
     if (!this.userService.isConfirm()) return;
-    if (!this.isDataAccess) delete this.user.dataAccess;
 
-    this.userService.default(this.userService.update(this.user));
+    this.userChangePassword = {
+      _id: this.userId,
+      "dataAccess.password": this.newPassword
+    };
+
+    this.userService.default(this.userService.update(this.userChangePassword));
     this.bsModalRef.hide();
   }
 

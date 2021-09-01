@@ -1,7 +1,7 @@
 import { UtilService } from './../../../services/util.service';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { IUser } from './../../../interfaces/User';
-import { UserService } from './../user.service';
+import { UserLocalService } from '../user.local.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -16,7 +16,7 @@ export class UserViewModalComponent implements OnInit {
     constructor(
         public util: UtilService,
         public bsModalRef: BsModalRef,
-        public userService: UserService
+        public userService: UserLocalService
     ) { }
 
     ngOnInit(): void {

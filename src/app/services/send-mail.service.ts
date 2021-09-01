@@ -16,7 +16,7 @@ export interface IMessageResponse {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'any'
 })
 export class SendMailService {
 

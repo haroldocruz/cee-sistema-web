@@ -1,4 +1,4 @@
-import { UserService } from './../user.service';
+import { UserLocalService } from '../user.local.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -9,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 export class UserFormViewComponent implements OnInit {
 
     constructor(
-        public userService: UserService
+        public userService: UserLocalService
     ) { }
 
     ngOnInit(): void {
