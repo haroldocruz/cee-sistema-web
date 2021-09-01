@@ -1,0 +1,53 @@
+<div class="row">
+    <div class="col-12">
+        <div class="info-box btn btn-default text-left"
+            *ngFor="let item of ceeInstitutionLocalService.institutionList | sortBy:'asc':'name' | filter:[{ field: 'type', value: ceeInstitutionLocalService.filter}] | filter: [{ field: 'name', value: ceeInstitutionLocalService.search}]">
+            
+            <span class="info-box-icon bg-gray-light elevation-1" *ngIf="item.type == InstitutionTypeEnum.PUBLIC_ADM">
+                <i class="fas fa-award"></i>
+            </span>
+            <span class="info-box-icon bg-gray-light elevation-1" *ngIf="item.type == InstitutionTypeEnum.PRIVATE_MAINTAINER">
+                <i class="fas fa-building"></i>
+            </span>
+            <span class="info-box-icon bg-success elevation-1" *ngIf="item.type == InstitutionTypeEnum.PRIVATE_MAINTAINED && item.credenciamento.situation == 'Regular'">
+                <i class="fas fa-graduation-cap"></i>
+            </span>
+            <span class="info-box-icon bg-success elevation-1" *ngIf="item.type == InstitutionTypeEnum.PRIVATE_MAINTAINED && item.credenciamento.situation == 'Irregular'">
+                <i class="fas fa-graduation-cap"></i>
+            </span>
+            <span class="info-box-icon bg-success elevation-1" *ngIf="item.type == InstitutionTypeEnum.PUBLIC_UE && item.credenciamento.situation == 'Regular'">
+                <i class="fas fa-user-graduate"></i>
+            </span>
+            <span class="info-box-icon bg-danger elevation-1" *ngIf="item.type == InstitutionTypeEnum.PUBLIC_UE && item.credenciamento.situation == 'Irregular'">
+                <i class="fas fa-user-graduate"></i>
+            </span>
+            <span class="info-box-icon bg-gray-light elevation-1" *ngIf="item.type == InstitutionTypeEnum.OTHER">
+                <i class="fas fa-book-open"></i>
+            </span>
+
+            <div class="info-box-content" *ngIf="item else noDoc">
+                <span class="info-box-text">
+                    {{ item.name }}
+                </span>
+                <span class="info-box-text small">
+                    {{ item.maintainer }}
+                </span>
+                <span class="info-box-text">
+                    <small class="text-info" *ngIf="item.credenciamento"><b>Nota:</b> {{ item.credenciamento?.concept }}</small>
+                    <small class="text-info" *ngIf="item.credenciamento"><b> | Data do último credenciamento:</b> {{ item.credenciamento?.start }}</small>
+                    <small class="text-info" *ngIf="item.credenciamento"><b> | Prazo:</b> {{ item.credenciamento?.end }}</small>
+                    <small class="text-info" *ngIf="item.credenciamento"><b> | Situacão:</b> {{ item.credenciamento?.situation }}</small>
+                </span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+</div>
+
+<ng-template #noDoc>
+    <div class="info-box-content">
+        Nenhum documento encontrado!
+    </div>
+</ng-template>

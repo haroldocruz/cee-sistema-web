@@ -13,6 +13,9 @@ import { CeeDocumentComponent } from './cee-document/cee-document.component';
 import { CeeDocumentViewComponent } from './cee-document/cee-document-view/cee-document-view.component';
 import { CeeDocumentListComponent } from './cee-document/cee-document-list/cee-document-list.component';
 import { CeeDocumentFilterComponent } from './cee-document/cee-document-filter/cee-document-filter.component';
+import { CeeInstitutionComponent } from './cee-institution/cee-institution.component';
+import { CeeInstitutionFilterComponent } from './cee-institution/cee-institution-filter/cee-institution-filter.component';
+import { CeeInstitutionListComponent } from './cee-institution/cee-institution-list/cee-institution-list.component';
 
 
 
@@ -29,7 +32,10 @@ import { CeeDocumentFilterComponent } from './cee-document/cee-document-filter/c
     CeeDocumentComponent,
     CeeDocumentViewComponent,
     CeeDocumentListComponent,
-    CeeDocumentFilterComponent
+    CeeDocumentFilterComponent,
+    CeeInstitutionComponent,
+    CeeInstitutionFilterComponent,
+    CeeInstitutionListComponent
   ],
   imports: [
     CommonModule,
