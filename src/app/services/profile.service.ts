@@ -7,7 +7,7 @@ import { ENV } from "./../../environments/environment";
 import { IProfile } from './../interfaces/Profile';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'any'
 })
 export class ProfileService {
 

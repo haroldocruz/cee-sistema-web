@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { IUser } from 'src/app/interfaces/User';
 import { UserFormModalComponent } from '../../user/user-form-modal/user-form-modal.component';
-import { UserService } from '../../user/user.service';
-import { ProfileService } from '../profile.service';
+import { UserLocalService } from '../../user/user.local.service';
+import { ProfileLocalService } from '../profile.local.service';
 
 @Component({
   selector: 'app-profile-card-image',
@@ -14,17 +14,17 @@ export class ProfileCardImageComponent implements OnInit {
 
   bsModalRef: BsModalRef;
 
-  ProfileService = ProfileService;
+  ProfileService = ProfileLocalService;
   user
 
   constructor(
-    public profileService: ProfileService,
-    private userService: UserService,
+    public profileLocalService: ProfileLocalService,
+    private userService: UserLocalService,
     private modalService: BsModalService
   ) { }
 
   ngOnInit(): void {
-    this.user = ProfileService.user
+    this.user = ProfileLocalService.user
     console.log(this.user)
   }
 

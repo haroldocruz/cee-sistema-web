@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { AuthService } from 'src/app/auth/auth.service';
+import { UserLocalService } from 'src/app/features/user/user.local.service';
 import { IAddress } from 'src/app/interfaces/Contact';
 import { IUser } from 'src/app/interfaces/User';
-import { ProfileService } from '../../profile.service';
+import { ProfileLocalService } from '../../profile.local.service';
 
 @Component({
   selector: 'app-profile-main-userdata',
@@ -11,12 +14,27 @@ import { ProfileService } from '../../profile.service';
 export class ProfileMainUserdataComponent implements OnInit {
 
   user:IUser
-  Ps = ProfileService
+  profileLocalService = ProfileLocalService;
 
-  constructor() { }
+  constructor(
+    private route: ActivatedRoute,
+    // public profileLocalService: ProfileLocalService,
+    private userService: UserLocalService
+  ) { }
 
   ngOnInit(): void {
-    this.user = ProfileService.user;
+    // this.user = ProfileLocalService.user;
+    
+    // this.route.queryParams.subscribe((params) => {
+    //   console.log(this.profileLocalService.user.name)
+
+    //   let id: string = params['userId'] || this.profileLocalService.userId || AuthService.user._id;
+      
+    //   this.userService.readById(id).subscribe((data) => {
+    //     this.profileLocalService.user = data;
+    //     this.profileLocalService.userId = data._id;
+    //   });
+    // });
   }
 
   addressToString(address: IAddress) {
