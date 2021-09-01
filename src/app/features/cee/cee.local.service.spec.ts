@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { CeeLocalService } from './cee-service.service';
+import { CeeLocalService } from './cee.local.service';
 
 describe('CeeServiceService', () => {
   let service: CeeLocalService;

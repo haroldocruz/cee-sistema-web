@@ -27,7 +27,6 @@
                                     </li>
                                     <li class="small">
                                         <span class="fa-li"><i class="fas fa-lg fa-building"></i></span>
-                                        Rua 26, quadra 119, lote 21, Jardim Aureny III
                                         {{ item.address }}
                                     </li>
                                 </ul>
@@ -43,11 +42,11 @@
                                 <i class="fas fa-ban"></i>
                                 <span> Desativar perfil</span>
                             </a>
-                            <!-- &nbsp; -->
+                            &nbsp;
                             <a class="btn btn-sm bg-teal" (click)="openChatDirectModal(item)">
                                 <i class="fas fa-comments"></i> Conversar
                             </a>
-                            <!-- &nbsp; -->
+                            &nbsp;
                             <a routerLink="/profile" [queryParams]="{userId: item.userId}"
                                 class="btn btn-sm btn-primary">
                                 <i class="far fa-eye"></i> Visualizar

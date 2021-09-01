@@ -1,7 +1,7 @@
 import { distinctUntilChanged, debounceTime, map } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { fromEvent, Observable } from 'rxjs';
-import { CeeLocalService } from '../cee-service.service';
+import { CeeLocalService } from '../cee.local.service';
 
 @Component({
     selector: 'app-cee-user',
