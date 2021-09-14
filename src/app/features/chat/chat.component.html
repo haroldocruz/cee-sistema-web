@@ -18,9 +18,9 @@
             <!-- /.card-header -->
             <div class="card-body p-0">
                 <ul class="users-list clearfix">
-                    <li *ngFor="let item of mockUserList">
-                        <img src="{{item.avatar}}" alt="User Image">
-                        <a class="users-list-name" (click)="openChatDirectModal(item)">
+                    <li class="col-md-2 col-3 sd-pointer" *ngFor="let item of mockUserList" (click)="openChatDirectModal(item)">
+                        <img src="{{item.avatar}}" alt="User Image" class="sd-pointer-elevation-3">
+                        <a class="users-list-name">
                             {{ item.name }}
                         </a>
                         <span class="users-list-date">{{ item.dateTime }}</span>
