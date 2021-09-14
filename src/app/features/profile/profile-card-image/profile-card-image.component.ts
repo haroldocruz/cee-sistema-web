@@ -15,7 +15,7 @@ export class ProfileCardImageComponent implements OnInit {
   bsModalRef: BsModalRef;
 
   ProfileService = ProfileLocalService;
-  user
+  user: IUser;
 
   constructor(
     public profileLocalService: ProfileLocalService,

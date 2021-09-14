@@ -105,7 +105,7 @@
 
             <span class="list-group-item sd-list-items" *ngFor="let a of profileLocalService.user.contact.addressList">
                 <i class="fa fa-angle-double-right"></i>
-                {{ addressToString(a) }}
+                {{ utilService.addressToString(a) }}
                 <!-- <span class="sd-pointer sd-float-right"> -->
                     <!-- <i class="fas fa-trash" (click)="remove(p)"></i> -->
                     <!-- <i class="fas fa-trash-alt text-danger"></i> -->

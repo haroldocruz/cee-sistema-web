@@ -20,6 +20,7 @@ interface IRoute {
 }
 
 interface IScope {
+  "_id": string;
   "name": string;
 }
 

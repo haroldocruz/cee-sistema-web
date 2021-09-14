@@ -2,17 +2,17 @@
     <div class="card-header p-2">
         <ul class="nav nav-pills">
             <li class="nav-item">
-                <a class="nav-link" routerLink="personal" [queryParams]="{userId: profileLocalService.userId}" routerLinkActive="active">
+                <a class="nav-link" routerLink="personal" queryParamsHandling="merge" routerLinkActive="active">
                     Dados pessoais
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" routerLink="activity" [queryParams]="{userId: profileLocalService.userId}" routerLinkActive="active">
+                <a class="nav-link" routerLink="activity" queryParamsHandling="merge" routerLinkActive="active">
                     Log de atividades
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" [routerLink]="[{ outlets: { primary: ['settings']} }]" [queryParams]="{userId: profileLocalService.userId}" routerLinkActive="active">
+                <a class="nav-link" [routerLink]="[{ outlets: { primary: ['settings']} }]" queryParamsHandling="merge" routerLinkActive="active">
                     Configurações
                 </a>
             </li>

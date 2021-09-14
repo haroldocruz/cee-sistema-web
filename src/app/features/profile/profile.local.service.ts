@@ -31,7 +31,7 @@ export class ProfileLocalService implements OnDestroy {
   constructor(
     private http: HttpClient,
     private route: ActivatedRoute,
-    private userService: UserLocalService
+    private userLocalService: UserLocalService
   ) {
     ProfileLocalService.profile = new Profile();
     ProfileLocalService.user = new User();
@@ -40,11 +40,10 @@ export class ProfileLocalService implements OnDestroy {
   }
 
   index() {
-    console.log("CHAMOU")
     this.route.queryParams.subscribe((params) => {
 
       let id: string = params['userId'] || AuthService.user._id;
-      this.userService.readById(id).subscribe((data) => {
+      this.userLocalService.readById(id).subscribe((data) => {
         ProfileLocalService.user = data;
         ProfileLocalService.userId = data._id;
       });

@@ -18,7 +18,7 @@
             <li class="list-group-item"></li>
             <li class="list-group-item">
                 <a routerLink="/user">
-                    <b>Acessos</b> <span class="float-right">1,722</span>
+                    <b>Acessos</b> <span class="float-right">{{ user.loginInfo?.accessCount || '0' }}</span>
                 </a>
             </li>
             <li class="list-group-item">
