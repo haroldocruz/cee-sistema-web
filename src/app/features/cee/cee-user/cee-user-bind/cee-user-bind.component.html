@@ -1,0 +1,42 @@
+<div class="card card-solid">
+
+    <div class="card-header pb-0">
+        <div class="row">
+            <h4>Vincular usuário</h4>
+        </div>
+    </div>
+
+    <div class="card-body pb-0">
+        <div class="row">
+            <form class="form" (ngSubmit)="getUser()">
+                <div class="input-group mb-3">
+                    <input id="search-box" class="form-control" type="text" [(ngModel)]="cpf"
+                        [ngModelOptions]="{ standalone: true }" autocomplete="_" placeholder="Buscar por CPF"
+                        mask="000.000.000-00">
+                    <div class="input-group-append sd-pointer">
+                        <div class="input-group-text sd-hover" (click)="getUser()">
+                            Buscar&nbsp;<span><i class="fas fa-search"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="row" *ngIf="!user._id">
+            <span class="list-group-item text-center text-danger">
+                Nenhum usuário localizado com este CPF {{ user.cpf }}!
+            </span>
+        </div>
+
+        <div class="row d-flex align-items-stretch" *ngIf="user._id">
+            <div class=" sd-profile-card col-12 d-flex align-items-stretch">
+                <sd-profile-card [profileCard]="profileCard" [profileCardOptions]="profileCardOpions"
+                    class="w-100"></sd-profile-card>
+            </div>
+        </div>
+    </div>
+    <!-- /.card-body -->
+    <div class="card-footer text-right">
+        <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">Fechar</button>
+    </div>
+    <!-- /.card-footer -->
+</div>
