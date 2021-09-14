@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { DocTypeEnum, IDoc } from 'src/app/interfaces/IDoc';
 
 @Component({
@@ -8,9 +9,12 @@ import { DocTypeEnum, IDoc } from 'src/app/interfaces/IDoc';
 })
 export class CeeDocumentComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private titleService: Title
+  ) { }
 
   ngOnInit(): void {
+    this.titleService.setTitle('CEE | Document')
   }
 
 }

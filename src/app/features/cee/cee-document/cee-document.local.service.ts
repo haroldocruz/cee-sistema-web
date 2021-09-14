@@ -30,6 +30,7 @@ export class CeeDocumentLocalService {
   static filter: string;
   static search: string;
   static docList: IDoc[];
+  // static docList: Observable<IDoc[]>;
 
   static typeLength: ITypeLength = {
     decretoLength: 0,
