@@ -8,6 +8,7 @@ import { CeeLocalService } from '../../cee.local.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ChatDirectModalComponent } from 'src/app/features/chat/chat-direct-modal/chat-direct-modal.component';
 import { IChatUser } from 'src/app/interfaces/IChatUser';
+import { IProfileCardOptions } from 'src/app/directives/profile-card/profile-card.component';
 
 interface IProfileCard {
   userId: string,
@@ -26,14 +27,13 @@ interface IProfileCard {
   styleUrls: ['./cee-user-view.component.less']
 })
 export class CeeUserViewComponent implements OnInit {
-  
-  public bsModalRef: BsModalRef;
 
   profileCardList: IProfileCard[];
+  profileCardOptions: IProfileCardOptions;
+
   fieldsToFilter: Array<{ field: string, value: string }>;
 
   constructor(
-    public modalService: BsModalService,
     public profileService: ProfileService,
     public ceeLocalService: CeeLocalService
   ) { }
@@ -43,7 +43,8 @@ export class CeeUserViewComponent implements OnInit {
     this.fieldsToFilter = [
       { field: 'userName', value: this.ceeLocalService.filter },
       { field: 'profileName', value: this.ceeLocalService.filter }
-    ]
+    ];
+    this.profileCardOptions = { btnChat: true, btnDisable: true, btnToView: true }
   }
 
   userIndex() {
@@ -51,13 +52,6 @@ export class CeeUserViewComponent implements OnInit {
       console.log("DATA ", data)
       this.profileCardList = this.toViewProfileToProfileCard(data);
     });
-  }
-
-  openChatDirectModal(user: IProfileCard) {
-    const user2: IChatUser = { name: user.userName, avatar: user.avatar, dateTime: "28/08/2021" }
-    const initialState = { user: user2  };
-    this.bsModalRef = this.modalService.show(ChatDirectModalComponent, { id: 1, class: 'modal-md', initialState });
-    this.bsModalRef.content.closeBtnName = 'Close';
   }
 
   toViewProfileToProfileCard(profileList: IProfile[]): IProfileCard[] {
