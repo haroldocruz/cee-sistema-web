@@ -5,6 +5,7 @@ import { IUser, User } from './../../interfaces/User';
 import { Component, OnInit } from '@angular/core';
 import { Observable, fromEvent } from "rxjs";
 import { debounceTime, distinctUntilChanged, map, filter, switchMap } from "rxjs/operators";
+import { Title } from '@angular/platform-browser';
 
 @Component({
     selector: 'app-user',
@@ -18,11 +19,13 @@ export class UserComponent implements OnInit {
     bsModalRef: BsModalRef;
 
     constructor(
+        private titleService: Title,
         public userService: UserLocalService,
         private modalService: BsModalService,
     ) { }
 
     ngOnInit(): void {
+        this.titleService.setTitle('SIGAS | User')
 
         this.typeahead(document.getElementById('search-box')).subscribe(data => {
             this.userService.filtro = data;

@@ -19,7 +19,7 @@
                 </div>
                 <div class="col-md-6 col-lg-4">
                     CPF:
-                    <input type="text" [(ngModel)]="user.cpf" [ngModelOptions]="{standalone: true}" pattern="[0-9]{11}"
+                    <input type="text" [(ngModel)]="user.cpf" [ngModelOptions]="{standalone: true}" mask="000.000.000-00" pattern="[0-9]{11}"
                         class="form-control" placeholder="">
                 </div>
                 <!-- <div class="col-md-4">
@@ -79,7 +79,7 @@
                         </span>
 
                         <span class="list-group-item sd-list-items" *ngFor="let phone of user.contact.phoneList">
-                            <i class="fa fa-angle-double-right"></i> {{ phone.number }} ({{ phone.description }})
+                            <i class="fa fa-angle-double-right"></i> {{ phone.number | mask: '+99 00 90000-0000' }} ({{ phone.description }})
                             <span class="sd-pointer sd-float-right">
                                 <!-- <i class="fas fa-trash" (click)="remove(p)"></i> -->
                                 <!-- <i class="fas fa-trash-alt text-danger"></i> -->

@@ -5,6 +5,7 @@ import { ENV } from 'src/environments/environment';
 
 export interface IUser {
     "_id"?: string;
+    "image"?: IUserImage;
     "name"?: string;
     "cpf"?: number;
     "rg"?: IRg;
@@ -33,6 +34,11 @@ export enum MaritalStatusEnum {
     WIDOWER = "Viúvo(a)",
 }
 
+export interface IUserImage {
+    avatarUrl?: string;
+    photoUrl?: string;
+}
+
 export interface IRg {
     number: number;
     expeditionDate: Date;
@@ -44,6 +50,7 @@ class Rg { }
 
 
 export interface ILoginInfo {
+    'accessCount'?: number;
     'lastDate'?: Date;
     'actualDate'?: Date;
     'ipClient'?: string;

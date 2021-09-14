@@ -13,6 +13,7 @@ import { UserListComponent } from './user-list/user-list.component';
 import { UserViewModalComponent } from './user-view-modal/user-view-modal.component';
 import { UserProfileEditModalComponent } from './user-profile-edit-modal/user-profile-edit-modal.component';
 import { UserPasswordFormModalComponent } from './user-password-form-modal/user-password-form-modal.component';
+import { NgxMaskModule } from 'ngx-mask';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,8 @@ import { UserPasswordFormModalComponent } from './user-password-form-modal/user-
     FormsModule,
 
     PipesModule,
+    
+    NgxMaskModule.forRoot(),
   ]
 })
 export class UserModule { }

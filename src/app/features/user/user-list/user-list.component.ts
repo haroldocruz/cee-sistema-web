@@ -10,6 +10,7 @@ import { IUser } from './../../../interfaces/User';
 import { UserLocalService } from '../user.local.service';
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { UtilService } from 'src/app/services/util.service';
 
 @Component({
     selector: 'app-user-list',
@@ -27,10 +28,13 @@ export class UserListComponent implements OnInit {
     constructor(
         public userService: UserLocalService,
         private modalService: BsModalService,
+        public utilService: UtilService,
         private notify: NotificationService
     ) { }
 
-    ngOnInit(): void { this.index() }
+    ngOnInit(): void {
+        this.index();
+    }
 
     index(): void {
         this.userService.index();
@@ -61,16 +65,16 @@ export class UserListComponent implements OnInit {
         return first + " " + last;
     }
 
-    emailListToString(emailList: [IEmail]): string {
-        let aux = ''
-        let result = ''
-        emailList.forEach((e, i, l) => {
+    // emailListToString(emailList: [IEmail]): string {
+    //     let aux = ''
+    //     let result = ''
+    //     emailList.forEach((e, i, l) => {
 
-            aux = `${e.address}${(e.description) ? '(' + e.description + ')' : ''}`
-            result += (result.length > 0) ? ', ' + aux : aux;
-        })
-        return result;
-    }
+    //         aux = `${e.address}${(e.description) ? ' (' + e.description + ')' : ''}`
+    //         result += (result.length > 0) ? ', ' + aux : aux;
+    //     })
+    //     return result;
+    // }
 
     openUserViewModal(user: IUser) {
         const initialState = { user };

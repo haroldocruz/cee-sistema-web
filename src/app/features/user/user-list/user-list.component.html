@@ -20,7 +20,7 @@
             </td>
             <td>{{ getFirstLastName(user.name) }}</td>
             <td class="text-center sd-wfr">
-                {{ emailListToString(user.contact?.emailList) }}
+                {{ utilService.emailListToString(user.contact?.emailList, ', ') }}
             </td>
             <!-- <td class="text-center">
                 <button class="btn btn-info btn-xs" *ngIf="user.dataAccess?.groupList?.length === 0">
