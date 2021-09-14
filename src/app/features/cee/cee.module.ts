@@ -16,6 +16,9 @@ import { CeeDocumentFilterComponent } from './cee-document/cee-document-filter/c
 import { CeeInstitutionComponent } from './cee-institution/cee-institution.component';
 import { CeeInstitutionFilterComponent } from './cee-institution/cee-institution-filter/cee-institution-filter.component';
 import { CeeInstitutionListComponent } from './cee-institution/cee-institution-list/cee-institution-list.component';
+import { CeeUserBindComponent } from './cee-user/cee-user-bind/cee-user-bind.component';
+import { NgxMaskModule } from 'ngx-mask';
+import { ProfileCardComponent } from 'src/app/directives/profile-card/profile-card.component';
 
 
 
@@ -35,14 +38,18 @@ import { CeeInstitutionListComponent } from './cee-institution/cee-institution-l
     CeeDocumentFilterComponent,
     CeeInstitutionComponent,
     CeeInstitutionFilterComponent,
-    CeeInstitutionListComponent
+    CeeInstitutionListComponent,
+    CeeUserBindComponent,
+
+    ProfileCardComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
     RouterModule,
 
-    PipesModule
+    PipesModule,
+    NgxMaskModule
   ]
 })
 export class CeeModule { }

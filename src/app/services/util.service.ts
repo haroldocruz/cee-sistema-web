@@ -1,4 +1,4 @@
-import { IEmail, IPhone } from './../interfaces/Contact';
+import { IAddress, IEmail, IPhone } from './../interfaces/Contact';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -55,5 +55,20 @@ export class UtilService {
             result += (result.length > 0) ? separator + aux : aux;
         })
         return result;
+    }
+
+    /**
+     * @description Join all the address properties in a string.
+     * @param address Object of the type IAddress
+     * @returns Return a string with all the address properties joined
+     */
+    addressToString(address: IAddress) {
+      const array = [address.zipcode, address.country, address.state, address.city, address.district, address.place, address.number]
+      let result = ''
+      array.forEach((e, i, l) => {
+        if (e)
+          result += (result.length > 0) ? ', ' + e : e;
+      })
+      return result;
     }
 }

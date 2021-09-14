@@ -26,12 +26,14 @@ import { SorteadorModule } from './features/others/sorteador/sorteador.module';
 import { ToastrModule } from 'ngx-toastr';
 import { PipesModule } from 'w-ng5';
 import { ChatModule } from './features/chat/chat.module';
+import { FilterButtonsDirective } from './directives/filter-buttons.directive';
 
 /*OTHERS*/
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    FilterButtonsDirective
 
     // SortByPipe
   ],
