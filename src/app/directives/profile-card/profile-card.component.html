@@ -1,0 +1,61 @@
+<div class="card bg-light w-100">
+    <div class="card-header text-muted border-bottom-0">
+        <!-- AEIOU - Associação Educacional Irmãos Oliveira Uchimura -->
+        {{ profileCard.group.name }}
+    </div>
+    <div class="card-body pt-0">
+        <div class="row">
+            <div class="col-7">
+                <h2 class="lead"><b>{{ profileCard.userName }}</b></h2>
+                <p class="text-muted text-sm"><b>Perfil: </b> {{ profileCard.profileName }} </p>
+                <ul class="ml-4 mb-0 fa-ul text-muted">
+                    <li class="small">
+                        <span class="fa-li"><i class="fas fa-lg fa-at"></i></span>
+                        <!-- msom.info@gmail.com -->
+                        {{ profileCard.email }}
+                    </li>
+                    <li class="small">
+                        <span class="fa-li"><i class="fas fa-lg fa-phone"></i></span>
+                        <!-- +55 63 98458-9691 -->
+                        {{ profileCard.phone }}
+                    </li>
+                    <li class="small">
+                        <span class="fa-li"><i class="fas fa-lg fa-building"></i></span>
+                        {{ profileCard.address }}
+                    </li>
+                </ul>
+            </div>
+            <div class="col-5 text-center">
+                <img src="{{profileCard.avatar}}" alt="user-avatar" class="img-circle img-fluid">
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+        <div class="text-right">
+            <span *ngIf="profileCardOptions.btnDisable">
+                <a href="#" class="btn btn-sm btn-default">
+                    <i class="fas fa-ban"></i>
+                    <span> Desativar perfil</span>
+                </a>
+            </span>
+            <span *ngIf="profileCardOptions.btnChat">
+                &nbsp;
+                <a class="btn btn-sm bg-teal" (click)="openChatDirectModal(profileCard)">
+                    <i class="fas fa-comments"></i> Conversar
+                </a>
+            </span>
+            <span *ngIf="profileCardOptions.btnToView">
+                &nbsp;
+                <a routerLink="/profile" [queryParams]="{userId: profileCard.userId}" class="btn btn-sm btn-primary">
+                    <i class="far fa-eye"></i> Visualizar
+                </a>
+            </span>
+            <span *ngIf="profileCardOptions.btnAssignProfile">
+                &nbsp;
+                <a routerLink="/profile" [queryParams]="{userId: profileCard.userId}" class="btn btn-sm btn-primary">
+                    <i class="far fa-eye"></i> Atribuir Perfil
+                </a>
+            </span>
+        </div>
+    </div>
+</div>
