@@ -23,11 +23,11 @@
                 {{ utilService.emailListToString(user.contact?.emailList, ', ') }}
             </td>
             <!-- <td class="text-center">
-                <button class="btn btn-info btn-xs" *ngIf="user.dataAccess?.groupList?.length === 0">
+                <button class="btn btn-info btn-xs" *ngIf="user.dataAccess?._profileList?.length === 0">
                     <i class="fas fa-eye"></i> Visualizar
                 </button>
-                <div *ngIf="user.dataAccess?.groupList?.length > 0">
-                    <div *ngFor="let item of user.dataAccess?.groupList">
+                <div *ngIf="user.dataAccess?._profileList?.length > 0">
+                    <div *ngFor="let item of user.dataAccess?._profileList">
                         <button class="btn btn-info btn-xs">{{ item.name }}</button>
                         &nbsp;
                     </div>

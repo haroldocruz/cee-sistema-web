@@ -18,7 +18,7 @@
           <div class="row">
             <div class="col-12">
               <span class="list-group-item sd-list-items sd-pointer sd-hover" data-dismiss="modal"
-              *ngFor="let item of AuthService.user.dataAccess?.groupList"
+              *ngFor="let item of AuthService.user.dataAccess?._profileList"
                 (click)="selectProfile(item)">
                 <i class="fa fa-angle-double-right"></i> {{ item.name }}
                 <!-- <span class="sd-float-right">({{ item.name }})</span> -->

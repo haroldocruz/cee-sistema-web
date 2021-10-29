@@ -60,7 +60,7 @@
       <a class="nav-link">
         <select class="form-control" [(ngModel)]="AuthService.currentProfile">
           <!-- <option value="">Selecione um perfil</option> -->
-          <option [ngValue]="profile" *ngFor="let profile of AuthService.user.dataAccess.groupList">
+          <option [ngValue]="profile" *ngFor="let profile of AuthService.user.dataAccess._profileList">
             {{ profile.name }}
           </option>
         </select>

@@ -6,14 +6,22 @@ import { ContactEmailModalComponent } from './contact-email-modal/contact-email-
 import { ContactPhoneModalComponent } from './contact-phone-modal/contact-phone-modal.component';
 import { ContactAddressModalComponent } from './contact-address-modal/contact-address-modal.component';
 import { ContactModalComponent } from './contact-modal/contact-modal.component';
+import { NgxMaskModule } from 'ngx-mask';
 
 
 
 @NgModule({
-  declarations: [ContactComponent, ContactEmailModalComponent, ContactPhoneModalComponent, ContactAddressModalComponent, ContactModalComponent],
+  declarations: [
+    ContactComponent, 
+    ContactEmailModalComponent, 
+    ContactPhoneModalComponent, 
+    ContactAddressModalComponent, 
+    ContactModalComponent
+  ],
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    NgxMaskModule
   ],
   exports: []
 })

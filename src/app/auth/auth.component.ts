@@ -56,7 +56,7 @@ export class AuthComponent implements OnInit {
     this.authService.login(this.userdataLogin).subscribe((data: IUser & IStatusMessage) => {
       if (data._id) {
         AuthService.user = data;
-        AuthService.currentProfile = data.loginInfo.profileLogin;
+        AuthService.currentProfile = data.loginInfo._profileLogin;
         (this.remember) ? sessionStorage.setItem("user", JSON.stringify(data)) : localStorage.setItem("user", JSON.stringify(data));
         this.redirectHandle();
       }

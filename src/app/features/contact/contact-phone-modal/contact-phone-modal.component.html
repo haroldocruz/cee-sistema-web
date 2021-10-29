@@ -17,7 +17,7 @@
                 <div class="col-md-12">
                     Telefone:
                     <div class="input-group mb-3">
-                        <input type="text" [(ngModel)]="phone.number" [ngModelOptions]="{standalone: true}" class="form-control" />
+                        <input type="text" [(ngModel)]="phone.number" [ngModelOptions]="{standalone: true}" mask="+00 (00) 00000-0000" class="form-control" />
                         <div class="input-group-append">
                             <!-- <button class="btn btn-outline-secondary" type="button">Button</button> -->
                             <button class="btn btn-primary" (click)="insertPhone()"><i
@@ -35,7 +35,7 @@
 
                         <span class="list-group-item sd-list-items" *ngFor="let phone of phoneList">
                             <!-- <span class="list-group-item sd-list-items" *ngIf="true"> -->
-                            <i class="fa fa-angle-double-right"></i> {{ phone.number }} ({{ phone.description }})
+                            <i class="fa fa-angle-double-right"></i> {{ phone.number | mask:'+00 (00) 00000-0000' }} ({{ phone.description }})
                             <span class="sd-pointer sd-float-right">
                                 <i class="fas fa-edit" (click)="editPhone(phone)"></i>
                                 &nbsp;

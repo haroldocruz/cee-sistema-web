@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { fromEvent, Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 import { InstitutionTypeEnum } from 'src/app/interfaces/enumerations/InstitutionTypeEnum';
-import { CeeInstitutionLocalService } from '../cee-institution-service.service';
+import { CeeInstitutionLocalService } from '../cee-institution.local.service';
 
 @Component({
   selector: 'app-cee-institution-filter',

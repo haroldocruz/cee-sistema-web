@@ -1,7 +1,20 @@
 
 import { Component, OnInit } from '@angular/core';
 import { InstitutionTypeEnum } from 'src/app/interfaces/enumerations/InstitutionTypeEnum';
-import { CeeInstitutionLocalService } from '../cee-institution-service.service';
+import { CeeInstitutionLocalService } from '../cee-institution.local.service';
+
+interface IInstitutionItemView {
+  type?: String;
+  name?: String;
+  sigla?: String;
+  maintainer?: String;
+  credenciamento?: {
+    concept?: number;
+    start?: String;
+    end?: String;
+    situation?: String;
+  };
+}
 
 @Component({
   selector: 'app-cee-institution-list',
@@ -12,7 +25,7 @@ export class CeeInstitutionListComponent implements OnInit {
 
   InstitutionTypeEnum: typeof InstitutionTypeEnum;
   filteredCount = { count: 0 };
-
+  institutionList: IInstitutionItemView[];
 
   constructor(
     public ceeInstitutionLocalService: CeeInstitutionLocalService
@@ -25,7 +38,10 @@ export class CeeInstitutionListComponent implements OnInit {
   }
 
   mockDocListInit() {
-    this.ceeInstitutionLocalService.institutionList = [
+    
+    this.ceeInstitutionLocalService.restart();
+
+    this.institutionList = [
       {
         type: InstitutionTypeEnum.PUBLIC_ADM,
         name: "Secretaria da Educação, Juventude e Esportes",
@@ -55,7 +71,7 @@ export class CeeInstitutionListComponent implements OnInit {
         type: InstitutionTypeEnum.PRIVATE_MAINTAINED,
         name: "Instituto Maria Mercerdes",
         maintainer: "Instituição MM",
-        credenciamento: { 
+        credenciamento: {
           start: "22/05/2019",
           end: "22/05/2021",
           situation: "Regular",
@@ -66,7 +82,7 @@ export class CeeInstitutionListComponent implements OnInit {
         type: InstitutionTypeEnum.PUBLIC_UE,
         name: "Escola Estadual Liberdade",
         maintainer: "Secretaria da Educação, Juventude e Esportes",
-        credenciamento: { 
+        credenciamento: {
           start: "22/05/2019",
           end: "22/05/2021",
           situation: "Irregular",
@@ -77,7 +93,7 @@ export class CeeInstitutionListComponent implements OnInit {
         type: InstitutionTypeEnum.PUBLIC_UE,
         name: "Escola Estadual Santa Rita de Cássia",
         maintainer: "Secretaria da Educação, Juventude e Esportes",
-        credenciamento: { 
+        credenciamento: {
           start: "22/05/2019",
           end: "22/05/2021",
           situation: "Regular",
@@ -90,7 +106,8 @@ export class CeeInstitutionListComponent implements OnInit {
       }
     ];
 
-    this.ceeInstitutionLocalService.institutionList.map((e) => {
+    this.ceeInstitutionLocalService.typeLength.institutionListLength = this.institutionList.length;
+    this.institutionList.map((e) => {
       if (e.type == this.InstitutionTypeEnum.PUBLIC_ADM) this.ceeInstitutionLocalService.typeLength.pubAdmLength += 1;
       if (e.type == this.InstitutionTypeEnum.PUBLIC_UE) this.ceeInstitutionLocalService.typeLength.pubUELength += 1;
       if (e.type == this.InstitutionTypeEnum.PRIVATE_MAINTAINED) this.ceeInstitutionLocalService.typeLength.privMaintainedLength += 1;

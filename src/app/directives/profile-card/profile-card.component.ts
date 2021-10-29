@@ -2,8 +2,10 @@ import { Component, Input, OnInit } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ChatDirectModalComponent } from 'src/app/features/chat/chat-direct-modal/chat-direct-modal.component';
 import { IChatUser } from 'src/app/interfaces/IChatUser';
+import { UtilService } from 'src/app/services/util.service';
 
 export interface IProfileCard {
+  profileId?: string,
   userId?: string,
   "group": { "name": string },
   "userName": string,
@@ -29,6 +31,7 @@ export interface IProfileCardOptions {
 export class ProfileCardComponent implements OnInit {
   
   public bsModalRef: BsModalRef;
+  public utilService: UtilService;
 
   @Input() profileCard: IProfileCard;
   @Input() profileCardOptions: IProfileCardOptions;
@@ -37,6 +40,7 @@ export class ProfileCardComponent implements OnInit {
     public modalService: BsModalService
     ) {
     this.profileCard = {
+      profileId: null,
       userId: null,
       userName: '',
       profileName: '',
@@ -55,13 +59,6 @@ export class ProfileCardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-  }
-
-  openChatDirectModal(user: IProfileCard) {
-    const user2: IChatUser = { name: user.userName, avatar: user.avatar, dateTime: "28/08/2021" }
-    const initialState = { user: user2  };
-    this.bsModalRef = this.modalService.show(ChatDirectModalComponent, { id: 1, class: 'modal-md', initialState });
-    this.bsModalRef.content.closeBtnName = 'Close';
   }
 
 }

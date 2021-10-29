@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-12">
         <div class="info-box btn btn-default text-left"
-            *ngFor="let item of ceeInstitutionLocalService.institutionList | sortBy:'asc':'name' | filter:[{ field: 'type', value: ceeInstitutionLocalService.filter}] | filter: [{ field: 'name', value: ceeInstitutionLocalService.search}]">
+            *ngFor="let item of institutionList | sortBy:'asc':'name' | filter:[{ field: 'type', value: ceeInstitutionLocalService.filter}] | filter: [{ field: 'name', value: ceeInstitutionLocalService.search}]">
             
             <span class="info-box-icon bg-gray-light elevation-1" *ngIf="item.type == InstitutionTypeEnum.PUBLIC_ADM">
                 <i class="fas fa-award"></i>

@@ -19,6 +19,7 @@ import { CeeInstitutionListComponent } from './cee-institution/cee-institution-l
 import { CeeUserBindComponent } from './cee-user/cee-user-bind/cee-user-bind.component';
 import { NgxMaskModule } from 'ngx-mask';
 import { ProfileCardComponent } from 'src/app/directives/profile-card/profile-card.component';
+import { CeeProfileBindListComponent } from './cee-profile/cee-profile-bind-list/cee-profile-bind-list.component';
 
 
 
@@ -41,7 +42,8 @@ import { ProfileCardComponent } from 'src/app/directives/profile-card/profile-ca
     CeeInstitutionListComponent,
     CeeUserBindComponent,
 
-    ProfileCardComponent
+    ProfileCardComponent,
+      CeeProfileBindListComponent
   ],
   imports: [
     CommonModule,

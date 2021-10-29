@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { IDoc } from 'src/app/interfaces/IDoc';
 
 interface ITypeLength {
+  institutionListLength: number,
   pubAdmLength: number,
   pubUELength: number,
   privMaintainedLength: number,
@@ -18,13 +19,20 @@ export class CeeInstitutionLocalService {
   search: string;
   institutionList: any[];
 
-  typeLength: ITypeLength = {
-    pubAdmLength: 0,
-    pubUELength: 0,
-    privMaintainedLength: 0,
-    privMaintainerLength: 0,
-    otherLength: 0,
+  typeLength: ITypeLength;
+
+  constructor() {
+    this.restart();
   }
 
-  constructor() { }
+  restart() {
+    this.typeLength = {
+      institutionListLength: 0,
+      pubAdmLength: 0,
+      pubUELength: 0,
+      privMaintainedLength: 0,
+      privMaintainerLength: 0,
+      otherLength: 0,
+    }
+  }
 }

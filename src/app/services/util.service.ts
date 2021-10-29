@@ -63,12 +63,25 @@ export class UtilService {
      * @returns Return a string with all the address properties joined
      */
     addressToString(address: IAddress) {
-      const array = [address.zipcode, address.country, address.state, address.city, address.district, address.place, address.number]
-      let result = ''
-      array.forEach((e, i, l) => {
-        if (e)
-          result += (result.length > 0) ? ', ' + e : e;
-      })
-      return result;
+        const array = [address.zipcode, address.country, address.state, address.city, address.district, address.place, address.number]
+        let result = ''
+        array.forEach((e, i, l) => {
+            if (e)
+                result += (result.length > 0) ? ', ' + e : e;
+        })
+        return result;
+    }
+
+    static getRandomInt(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min)) + min;
+    }
+
+    static getRandom9Digits() {
+        let min = 100000000, max = 999999999;
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min)) + min;
     }
 }

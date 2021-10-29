@@ -71,7 +71,7 @@
             <div class="form-group row">
                 <label for="inputSkills" class="col col-form-label">Grupos:</label>
                 <div class="col-sm-9">
-                    <div *ngFor="let item of item.dataAccess?.groupList">
+                    <div *ngFor="let item of item.dataAccess?._profileList">
                         <button class="btn btn-info btn-xs">{{ item.name }}</button>
                         &nbsp;
                     </div>

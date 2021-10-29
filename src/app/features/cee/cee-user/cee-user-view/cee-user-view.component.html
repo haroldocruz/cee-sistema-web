@@ -1,10 +1,36 @@
-
 <div class="card card-solid">
     <div class="card-body pb-0">
         <div class="row d-flex align-items-stretch">
-            <div class=" sd-profile-card col-12 col-md-6 col-lg-6 col-xl-6 d-flex align-items-stretch"
+            <div class=" sd-profile-card col-12 col-md-6 col-lg-6 col-xl-6"
                 *ngFor="let profileCard of profileCardList | filter: [{field: 'userName', value: ceeLocalService.filter},{field: 'profileName', value: ceeLocalService.filter}] let i = index">
-                <sd-profile-card [profileCard]="profileCard" [profileCardOptions]="profileCardOptions" class="w-100"></sd-profile-card>
+
+                <sd-profile-card [profileCard]="profileCard" [profileCardOptions]="profileCardOptions" class=" w-100">
+                </sd-profile-card>
+
+                <div class="card card-solid">
+                    <div class="card-footer col-12 text-right">
+                        <!-- <span *ngIf="profileCard.status"> -->
+                        <span>
+                            <a href="#" class="btn btn-sm btn-default">
+                                <i class="fas fa-ban"></i>
+                                <span> Desativar perfil</span>
+                            </a>
+                        </span>
+                        <span>
+                            &nbsp;
+                            <a class="btn btn-sm bg-teal" (click)="openChatDirectModal(profileCard)">
+                                <i class="fas fa-comments"></i> Conversar
+                            </a>
+                        </span>
+                        <span>
+                            &nbsp;
+                            <a routerLink="/profile" [queryParams]="{userId: profileCard.userId}"
+                                class="btn btn-sm btn-primary">
+                                <i class="far fa-eye"></i> Visualizar
+                            </a>
+                        </span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

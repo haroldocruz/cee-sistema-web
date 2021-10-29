@@ -15,7 +15,7 @@ export class AuthProfileModalComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.profileList = AuthService.user.dataAccess?.groupList;
+    this.profileList = AuthService.user.dataAccess?._profileList;
   }
 
   selectProfile(profile: IProfile){

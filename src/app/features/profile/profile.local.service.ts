@@ -12,7 +12,7 @@ import { AuthService } from 'src/app/auth/auth.service';
 @Injectable({
   providedIn: 'any'
 })
-export class ProfileLocalService implements OnDestroy {
+export class ProfileLocalService {
 
   static user: IUser;
   static userId: string;
@@ -41,8 +41,9 @@ export class ProfileLocalService implements OnDestroy {
 
   index() {
     this.route.queryParams.subscribe((params) => {
-
+      
       let id: string = params['userId'] || AuthService.user._id;
+      console.log(id) //!APAGAR
       this.userLocalService.readById(id).subscribe((data) => {
         ProfileLocalService.user = data;
         ProfileLocalService.userId = data._id;
@@ -75,10 +76,6 @@ export class ProfileLocalService implements OnDestroy {
   delete(id: string): Observable<IProfile> {
     const url = `${this.baseUrl}/${id}`;
     return this.http.delete<IProfile>(url);
-  }
-
-  ngOnDestroy(){
-    console.log("ProfileLocalService destruído!")
   }
 
 }

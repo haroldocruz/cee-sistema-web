@@ -9,7 +9,7 @@ export interface IUser {
     "name"?: string;
     "cpf"?: number;
     "rg"?: IRg;
-    "currentProfile"?: IProfile;
+    "_currentProfile"?: IProfile;
     "gender"?: string; //enum [masculino, feminino]
     "maritalStatus"?: string; //enum [solteiro(a), casado(a), ...]
     "birthDate"?: Date;
@@ -54,7 +54,7 @@ export interface ILoginInfo {
     'lastDate'?: Date;
     'actualDate'?: Date;
     'ipClient'?: string;
-    "profileLogin"?: IProfile;
+    "_profileLogin"?: IProfile;
     "token"?: string;
     "providerId"?: string;
     "providerKey"?: string;
@@ -65,8 +65,8 @@ class LoginInfo { }
 export interface IDataAccess {
     "username"?: string;
     "password"?: string;
-    "groupList"?: IProfile[];
-    "group"?: IProfile;
+    "_profileList"?: IProfile[];
+    "_profileDefault"?: IProfile;
 }
 
 export class User implements IUser {

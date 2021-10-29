@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { CeeInstitutionServiceService } from './cee-institution-service.service';
+import { CeeInstitutionLocalService } from './cee-institution.local.service';
 
 describe('CeeInstitutionServiceService', () => {
-  let service: CeeInstitutionServiceService;
+  let service: CeeInstitutionLocalService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(CeeInstitutionServiceService);
+    service = TestBed.inject(CeeInstitutionLocalService);
   });
 
   it('should be created', () => {

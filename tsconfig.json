@@ -2,6 +2,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    // "watch": false, /*<-------*/
     /*ADD-START*/
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,

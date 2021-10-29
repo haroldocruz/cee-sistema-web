@@ -32,14 +32,20 @@ export class CeeDocumentLocalService {
   static docList: IDoc[];
   // static docList: Observable<IDoc[]>;
 
-  static typeLength: ITypeLength = {
-    decretoLength: 0,
-    leiLength: 0,
-    parecerLength: 0,
-    portariaLength: 0,
-    resolucaoLength: 0,
-    otherLength: 0,
+  static typeLength: ITypeLength;
+
+  constructor() {
+    this.restart();
   }
 
-  constructor() { }
+  restart() {
+    CeeDocumentLocalService.typeLength = {
+      decretoLength: 0,
+      leiLength: 0,
+      parecerLength: 0,
+      portariaLength: 0,
+      resolucaoLength: 0,
+      otherLength: 0,
+    }
+  }
 }

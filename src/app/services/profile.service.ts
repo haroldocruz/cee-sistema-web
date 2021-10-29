@@ -5,6 +5,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { ENV } from "./../../environments/environment";
 import { IProfile } from './../interfaces/Profile';
+import { IMessageResponse } from './send-mail.service';
+import { IStatusMessage } from '../interfaces/IStatusMessage';
+
+export interface IBindingProfileUser {
+    profileId: string;
+    userId: string;
+}
 
 @Injectable({
     providedIn: 'any'
@@ -34,14 +41,19 @@ export class ProfileService {
         });
     }
 
-    edit(profile: IProfile | null){
+    edit(profile: IProfile | null) {
         this.profile = (profile) ? profile : new Profile();
-      }
+    }
 
     create(): void {
         this.http.post<IProfile>(this.baseUrl, this.profile).subscribe(() => {
             this.index();
         });
+    }
+
+    bindingProfileUser(profileUser: IBindingProfileUser): Observable<IStatusMessage> {
+        const uri = `${this.baseUrl}/binding`;
+        return this.http.post<IStatusMessage>(uri, profileUser);
     }
 
     read(): Observable<IProfile[]> {
@@ -53,7 +65,7 @@ export class ProfileService {
         return this.http.get<IProfile>(url);
     }
 
-    readFilter(filter: IProfile): Observable<IProfile[]> {
+    readFilter(filter: any): Observable<IProfile[]> {
         const url = `${this.baseUrl}/filter`;
         return this.http.post<IProfile[]>(url, filter);
     }

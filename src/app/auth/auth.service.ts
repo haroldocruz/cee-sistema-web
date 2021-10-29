@@ -27,7 +27,7 @@ export class AuthService {
 
   static init() {
     AuthService.user = (sessionStorage.getItem("user")) ? JSON.parse(<string>sessionStorage.getItem("user")) : new User();
-    AuthService.currentProfile = AuthService.user?.loginInfo?.profileLogin || new Profile();
+    AuthService.currentProfile = AuthService.user?.loginInfo?._profileLogin || new Profile();
   }
 
   headers(){

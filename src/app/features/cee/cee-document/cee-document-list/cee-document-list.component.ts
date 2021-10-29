@@ -25,7 +25,7 @@ export class CeeDocumentListComponent implements OnInit {
 
   CeeDocumentLocalService = CeeDocumentLocalService;
 
-  constructor() { }
+  constructor(private ceeDocumentLocalService: CeeDocumentLocalService) { }
 
   ngOnInit(): void {
     this.DocTypeEnum = DocTypeEnum;
@@ -33,7 +33,7 @@ export class CeeDocumentListComponent implements OnInit {
   }
 
   mockDocListInit() {
-    
+
     // this.CeeDocumentLocalService.docList = this.getDocList();
     CeeDocumentLocalService.docList = [
       {
@@ -65,6 +65,8 @@ export class CeeDocumentListComponent implements OnInit {
       }
     ];
 
+    this.ceeDocumentLocalService.restart();
+    
     CeeDocumentLocalService.docList.map((e) => {
       if (e.type == this.DocTypeEnum.DECRETO) CeeDocumentLocalService.typeLength.decretoLength += 1;
       if (e.type == this.DocTypeEnum.LEI) CeeDocumentLocalService.typeLength.leiLength += 1;
@@ -75,7 +77,7 @@ export class CeeDocumentListComponent implements OnInit {
     });
 
   }
-  
+
   // getDocList(): Observable<IDoc[]> {
   //   const fakeValues = [
   //     {
