@@ -1,4 +1,4 @@
-import { IGroup, Group } from './../../interfaces/Group';
+import { IGroup, Group } from './../interfaces/Group';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from 'rxjs';
@@ -6,7 +6,7 @@ import { ENV } from 'src/environments/environment';
 
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'any'
 })
 export class GroupService {
 

@@ -3,6 +3,7 @@ import { PermissionGuard } from 'src/app/guards/permission.guard';
 import { CeeDashboardComponent } from './cee-dashboard/cee-dashboard.component';
 import { CeeDocumentComponent } from './cee-document/cee-document.component';
 import { CeeHomeComponent } from './cee-home/cee-home.component';
+import { CeeInstitutionFormComponent } from './cee-institution/cee-institution-form/cee-institution-form.component';
 import { CeeInstitutionComponent } from './cee-institution/cee-institution.component';
 import { CeeUserViewComponent } from './cee-user/cee-user-view/cee-user-view.component';
 import { CeeUserComponent } from './cee-user/cee-user.component';
@@ -33,6 +34,11 @@ export const CeeRouting = {
       path: "dashboard", component: CeeDashboardComponent,
       // canActivate: [AuthGuard, PermissionGuard]
     },
-    { path: "institution", component: CeeInstitutionComponent },
+    { 
+      path: "institution", component: CeeInstitutionComponent,
+      children: [
+        { path: "form", component: CeeInstitutionFormComponent }
+      ]
+   },
   ]
 }

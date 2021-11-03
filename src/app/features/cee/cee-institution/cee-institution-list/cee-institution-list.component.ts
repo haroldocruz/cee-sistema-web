@@ -2,11 +2,17 @@
 import { Component, OnInit } from '@angular/core';
 import { InstitutionTypeEnum } from 'src/app/interfaces/enumerations/InstitutionTypeEnum';
 import { CeeInstitutionLocalService } from '../cee-institution.local.service';
+import { CeeInstitutionFormComponent } from '../cee-institution-form/cee-institution-form.component';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { UtilService } from 'src/app/services/util.service';
+import { AdministrativeSphereEnum } from 'src/app/interfaces/enumerations/administrativeSphereEnum';
 
 interface IInstitutionItemView {
-  type?: String;
+  _id: String;
+  institutionType?: String;
+  administrativeSphere?: String;
   name?: String;
-  sigla?: String;
+  initials?: String;
   maintainer?: String;
   credenciamento?: {
     concept?: number;
@@ -23,12 +29,15 @@ interface IInstitutionItemView {
 })
 export class CeeInstitutionListComponent implements OnInit {
 
+  public bsModalRef: BsModalRef;
+
   InstitutionTypeEnum: typeof InstitutionTypeEnum;
   filteredCount = { count: 0 };
   institutionList: IInstitutionItemView[];
 
   constructor(
-    public ceeInstitutionLocalService: CeeInstitutionLocalService
+    public ceeInstitutionLocalService: CeeInstitutionLocalService,
+    public bsModalService: BsModalService
   ) { }
 
   ngOnInit(): void {
@@ -37,38 +46,56 @@ export class CeeInstitutionListComponent implements OnInit {
 
   }
 
+  openInstitutionFormModal(group: any){
+    const initialState = { groupId: group._id, group: group };
+    this.bsModalRef = this.bsModalService.show(CeeInstitutionFormComponent, { id: UtilService.getRandom9Digits(), class: 'modal-lg', initialState });
+    this.bsModalRef.content.closeBtnName = 'Close';
+  }
+
   mockDocListInit() {
     
     this.ceeInstitutionLocalService.restart();
 
     this.institutionList = [
       {
-        type: InstitutionTypeEnum.PUBLIC_ADM,
+        _id: "1",
+        institutionType: InstitutionTypeEnum.PUBLIC_ADM,
+        administrativeSphere: AdministrativeSphereEnum.PUBLIC_E,
         name: "Secretaria da Educação, Juventude e Esportes",
-        sigla: "SEDUC/TO"
+        initials: "SEDUC/TO"
       },
       {
-        type: InstitutionTypeEnum.PUBLIC_ADM,
+        _id: "2",
+        institutionType: InstitutionTypeEnum.PUBLIC_ADM,
+        administrativeSphere: AdministrativeSphereEnum.PUBLIC_E,
         name: "Conselho Estadual de Educação",
-        sigla: "CEE/TO"
+        initials: "CEE/TO"
       },
       {
-        type: InstitutionTypeEnum.PUBLIC_ADM,
+        _id: "3",
+        institutionType: InstitutionTypeEnum.PUBLIC_ADM,
+        administrativeSphere: AdministrativeSphereEnum.PUBLIC_E,
         name: "Conselho Estadual de Alimentação Escolar",
-        sigla: "CAE/TO"
+        initials: "CAE/TO"
       },
       {
-        type: InstitutionTypeEnum.PUBLIC_ADM,
+        _id: "4",
+        institutionType: InstitutionTypeEnum.PUBLIC_ADM,
+        administrativeSphere: AdministrativeSphereEnum.PUBLIC_E,
         name: "Diretoria Regional de Ensino de Miracema",
-        sigla: "DRE/Miracema/TO"
+        initials: "DRE/Miracema/TO"
       },
       {
-        type: InstitutionTypeEnum.PRIVATE_MAINTAINER,
+        _id: "5",
+        institutionType: InstitutionTypeEnum.PRIVATE_MAINTAINER,
+        administrativeSphere: AdministrativeSphereEnum.PRIVATE,
         name: "Instituição MM",
-        sigla: "IMM"
+        initials: "IMM"
       },
       {
-        type: InstitutionTypeEnum.PRIVATE_MAINTAINED,
+        _id: "6",
+        institutionType: InstitutionTypeEnum.PRIVATE_MAINTAINED,
+        administrativeSphere: AdministrativeSphereEnum.PRIVATE,
         name: "Instituto Maria Mercerdes",
         maintainer: "Instituição MM",
         credenciamento: {
@@ -79,7 +106,9 @@ export class CeeInstitutionListComponent implements OnInit {
         }
       },
       {
-        type: InstitutionTypeEnum.PUBLIC_UE,
+        _id: "7",
+        institutionType: InstitutionTypeEnum.PUBLIC_UE,
+        administrativeSphere: AdministrativeSphereEnum.PUBLIC_E,
         name: "Escola Estadual Liberdade",
         maintainer: "Secretaria da Educação, Juventude e Esportes",
         credenciamento: {
@@ -90,7 +119,9 @@ export class CeeInstitutionListComponent implements OnInit {
         }
       },
       {
-        type: InstitutionTypeEnum.PUBLIC_UE,
+        _id: "8",
+        institutionType: InstitutionTypeEnum.PUBLIC_UE,
+        administrativeSphere: AdministrativeSphereEnum.PUBLIC_E,
         name: "Escola Estadual Santa Rita de Cássia",
         maintainer: "Secretaria da Educação, Juventude e Esportes",
         credenciamento: {
@@ -101,18 +132,20 @@ export class CeeInstitutionListComponent implements OnInit {
         }
       },
       {
-        type: InstitutionTypeEnum.OTHER,
+        _id: "9",
+        institutionType: InstitutionTypeEnum.OTHER,
+        administrativeSphere: AdministrativeSphereEnum.PRIVATE,
         name: "Fundação Bradesco"
       }
     ];
 
     this.ceeInstitutionLocalService.typeLength.institutionListLength = this.institutionList.length;
     this.institutionList.map((e) => {
-      if (e.type == this.InstitutionTypeEnum.PUBLIC_ADM) this.ceeInstitutionLocalService.typeLength.pubAdmLength += 1;
-      if (e.type == this.InstitutionTypeEnum.PUBLIC_UE) this.ceeInstitutionLocalService.typeLength.pubUELength += 1;
-      if (e.type == this.InstitutionTypeEnum.PRIVATE_MAINTAINED) this.ceeInstitutionLocalService.typeLength.privMaintainedLength += 1;
-      if (e.type == this.InstitutionTypeEnum.PRIVATE_MAINTAINER) this.ceeInstitutionLocalService.typeLength.privMaintainerLength += 1;
-      if (e.type == this.InstitutionTypeEnum.OTHER) this.ceeInstitutionLocalService.typeLength.otherLength += 1;
+      if (e.institutionType == this.InstitutionTypeEnum.PUBLIC_ADM) this.ceeInstitutionLocalService.typeLength.pubAdmLength += 1;
+      if (e.institutionType == this.InstitutionTypeEnum.PUBLIC_UE) this.ceeInstitutionLocalService.typeLength.pubUELength += 1;
+      if (e.institutionType == this.InstitutionTypeEnum.PRIVATE_MAINTAINED) this.ceeInstitutionLocalService.typeLength.privMaintainedLength += 1;
+      if (e.institutionType == this.InstitutionTypeEnum.PRIVATE_MAINTAINER) this.ceeInstitutionLocalService.typeLength.privMaintainerLength += 1;
+      if (e.institutionType == this.InstitutionTypeEnum.OTHER) this.ceeInstitutionLocalService.typeLength.otherLength += 1;
     });
 
   }

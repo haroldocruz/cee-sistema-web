@@ -1,1 +1,88 @@
-<p>cee-institution-form works!</p>
+<!-- <form [formGroup]="checkoutForm"> -->
+<form>
+    <div class="modal-header">
+        <h4 class="modal-title" id="userModalLabel">
+            <span *ngIf="!group?._id">Inserir</span>
+            <span *ngIf="group?._id">Alterar</span>
+        </h4>
+        <button type="button" class="close" (click)="bsModalRef.hide()"><span>&times;</span></button>
+    </div>
+
+    <div class="modal-body">
+        <div class="container-fluid" *ngIf="isLoading">
+            ...LOADING
+        </div>
+        <div class="container-fluid" *ngIf="!isLoading">
+            <div class="row">
+                <div class="col-md-12 col-lg-8">
+                    Razão social:
+                    <input type="text" [(ngModel)]="group.socialReason" [ngModelOptions]="{standalone: true}"
+                        autocomplete="_" class="form-control" placeholder="">
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    CNPJ:
+                    <input type="text" [(ngModel)]="group.cnpj" [ngModelOptions]="{standalone: true}"
+                        mask="00.000.000/0000-00" pattern="[0-9]{14}" class="form-control" placeholder="">
+                </div>
+                <div class="col-md-12 col-lg-8">
+                    Nome Fantasia:
+                    <input type="text" [(ngModel)]="group.name" [ngModelOptions]="{standalone: true}" autocomplete="_"
+                        class="form-control" placeholder="">
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    Sigla (quando houver):
+                    <input type="text" [(ngModel)]="group.initials" [ngModelOptions]="{standalone: true}"
+                        class="form-control" placeholder="">
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    Tipo de instituição:
+                    <select id="gType" [(ngModel)]="group.institutionType" [ngModelOptions]="{standalone: true}"
+                        class="form-control">
+                        <option [ngValue]="gtype" *ngFor="let gtype of groupTypeList">{{ gtype }}</option>
+                    </select>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    Esfera administrativa:
+                    <select id="sphere" [(ngModel)]="group.administrativeSphere" [ngModelOptions]="{standalone: true}"
+                        class="form-control">
+                        <option [ngValue]="sphere" *ngFor="let sphere of administrativeSphereList">{{ sphere }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    Descrição:
+                    <!-- <textarea rows="6" [(ngModel)]="group.description" [ngModelOptions]="{standalone: true}" -->
+                    <textarea rows="10" class="form-control">
+                        _id: ObjectId
+                        institutionType: Enum<Inst..Type>
+                        socialReason: String
+                        name: String
+                        initials: String
+                        cnpj: Number
+                        administrativeSphere: Enum<Adm..Sphere>
+                        legalPerson: LegalPerson
+                        legalAct: LegalAct[]
+                        maintainer: Group
+                        contact: Contact
+                        dre: OrganSystem
+                        evaluationResultList: Eval..Result[]
+                        courseList: Course[]
+                        memberList: User[]
+                        description: String
+                        fundaments: Fundaments
+                    </textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <!-- <input type="hidden" (ngModel)="isDataAccess = false"> -->
+        <button type="reset" class="btn btn-default" *ngIf="!group?._id">Limpar</button>
+        <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">Fechar</button>
+        <input type="submit" class="btn btn-primary" value="Salvar" (click)="create()" *ngIf="!group?._id">
+        <input type="submit" class="btn btn-primary" value="Atualizar" (click)="update()" *ngIf="group?._id">
+    </div>
+</form>

@@ -29,25 +29,29 @@ import { CeeInstitutionFormComponent } from './cee-institution/cee-institution-f
   declarations: [
 
     SortByPipe,
-    
+
     CeeHomeComponent,
     CeeComponent,
-    CeeUserComponent,
     CeeDashboardComponent,
-    CeeUserViewComponent,
+
     CeeDocumentComponent,
-    CeeDocumentViewComponent,
-    CeeDocumentListComponent,
     CeeDocumentFilterComponent,
+    CeeDocumentListComponent,
+    CeeDocumentViewComponent,
+
     CeeInstitutionComponent,
     CeeInstitutionFilterComponent,
+    CeeInstitutionFormComponent,
     CeeInstitutionListComponent,
-    CeeUserBindComponent,
+    CeeInstitutionViewComponent,
 
-    ProfileCardComponent,
-      CeeProfileBindListComponent,
-      CeeInstitutionViewComponent,
-      CeeInstitutionFormComponent
+    CeeProfileBindListComponent,
+    
+    CeeUserComponent,
+    CeeUserBindComponent,
+    CeeUserViewComponent,
+
+    ProfileCardComponent
   ],
   imports: [
     CommonModule,
