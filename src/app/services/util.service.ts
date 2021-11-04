@@ -1,12 +1,17 @@
 import { IAddress, IEmail, IPhone } from './../interfaces/Contact';
 import { Injectable } from '@angular/core';
+import { NotificationService } from './notification.service';
+import { Observable } from 'rxjs';
+import { IStatusMessage } from '../interfaces/IStatusMessage';
 
 @Injectable({
-    providedIn: 'any'
+    providedIn: 'root'
 })
 export class UtilService {
 
-    constructor() { }
+    static notifying: NotificationService;
+
+    constructor() {}
 
     /**
      * @description Get full name of the user and return a string with just first and last name together.
@@ -83,5 +88,27 @@ export class UtilService {
         min = Math.ceil(min);
         max = Math.floor(max);
         return Math.floor(Math.random() * (max - min)) + min;
+    }
+
+    static default(resp: Observable<any & IStatusMessage>) {
+
+        resp.subscribe((data) => {
+            if (data.statusCode >= 400) {
+                console.log(data)
+                UtilService.notifying.showError(data.statusMessage, `Erro ${data.statusCode}!`);
+                return;
+            }
+            UtilService.notifying.showSuccess("Ação realizada com sucesso!", "Ok!")
+        }, (error) => {
+            UtilService.notifying.showError("Não foi possível realizar esta ação!", "Erro!");
+        });
+    }
+
+    static isConfirm(question: string = "Confirmar ação?") {
+        if (!confirm(question)) {
+            UtilService.notifying.showWarning("Ação cancelada!", "Ops!");
+            return false;
+        }
+        return true;
     }
 }

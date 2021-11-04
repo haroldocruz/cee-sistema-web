@@ -10,7 +10,7 @@ interface IFundaments {
   vision: String;
   values: String;
 }
-export interface IGroup {
+export interface IInstitution {
   _id?: String;
   institutionType?: String;
   socialReason?: String;
@@ -20,7 +20,7 @@ export interface IGroup {
   administrativeSphere?: String;
   legalPerson?: ILegalPerson;
   legalAct?: ILegalAct[];
-  maintainer?: IGroup;
+  maintainer?: IInstitution;
   contact?: IContact;
   // evaluationResultList?: Eval..Result[];
   // courseList?: Course[];
@@ -29,7 +29,7 @@ export interface IGroup {
   fundaments?: IFundaments;
 }
 
-export class Group implements IGroup {
+export class Institution implements IInstitution {
 
   status = false;
   name = "";

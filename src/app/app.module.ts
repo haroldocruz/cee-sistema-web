@@ -1,17 +1,15 @@
-import { ContactModule } from './features/contact/contact.module';
 /*ANGULAR*/
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
-import { NgModule } from '@angular/core';
+import { Injector, NgModule } from '@angular/core';
+import { FormsModule } from "@angular/forms";
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
-import { ModalModule } from 'ngx-bootstrap/modal';
+import { AppRoutingModule } from './app-routing.module';
 
 /*FEATURES*/
+import { ContactModule } from './features/contact/contact.module';
 import { AuthModule } from './auth/auth.module';
 import { CeeModule } from './features/cee/cee.module';
 import { GroupModule } from './features/group/group.module';
@@ -20,15 +18,18 @@ import { InstitutionModule } from './features/institution/institution.module';
 import { LayoutModule } from './layout/layout.module';
 import { ProfileModule } from './features/profile/profile.module';
 import { UserModule } from './features/user/user.module';
-
-// import { SortByPipe } from './pipes/sort-by.pipe';
-import { SorteadorModule } from './features/others/sorteador/sorteador.module';
-import { ToastrModule } from 'ngx-toastr';
-import { PipesModule } from 'w-ng5';
 import { ChatModule } from './features/chat/chat.module';
+import { SorteadorModule } from './features/others/sorteador/sorteador.module';
+
 import { FilterButtonsDirective } from './directives/filter-buttons.directive';
+import { NotificationService } from './services/notification.service';
+import { UtilService } from './services/util.service';
+// import { SortByPipe } from './pipes/sort-by.pipe';
 
 /*OTHERS*/
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { ToastrModule } from 'ngx-toastr';
+import { PipesModule } from 'w-ng5';
 
 @NgModule({
   declarations: [
@@ -67,4 +68,11 @@ import { FilterButtonsDirective } from './directives/filter-buttons.directive';
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+
+export class AppModule {
+  constructor(
+    private notify: NotificationService
+  ){
+    UtilService.notifying = notify;
+  }
+}

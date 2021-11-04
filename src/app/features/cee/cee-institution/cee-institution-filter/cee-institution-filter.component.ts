@@ -16,8 +16,8 @@ export class CeeInstitutionFilterComponent implements OnInit {
 
   public bsModalRef: BsModalRef;
 
-  search: string;
-  institutionTypeEnum: typeof InstitutionTypeEnum;
+  public search: string;
+  public institutionTypeEnum: typeof InstitutionTypeEnum;
 
   constructor(
     private bsModalService: BsModalService,
@@ -45,8 +45,8 @@ export class CeeInstitutionFilterComponent implements OnInit {
     );
   }
   
-  openGroupFormModal(group: any){
-    const initialState = { group };
+  openGroupFormModal(institution: any){
+    const initialState = { institution };
     this.bsModalRef = this.bsModalService.show(CeeInstitutionFormComponent, { id: UtilService.getRandom9Digits(), class: 'modal-lg', initialState });
     this.bsModalRef.content.closeBtnName = 'Close';
   }

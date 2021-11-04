@@ -1,9 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal';
-import { GroupService } from 'src/app/services/group.service';
+import { InstitutionService } from 'src/app/services/institution.service';
 import { AdministrativeSphereEnum } from 'src/app/interfaces/enumerations/administrativeSphereEnum';
 import { InstitutionTypeEnum } from 'src/app/interfaces/enumerations/InstitutionTypeEnum';
-import { Group, IGroup } from 'src/app/interfaces/Group';
+import { Institution, IInstitution } from 'src/app/interfaces/Institution';
+import { UtilService } from 'src/app/services/util.service';
 
 @Component({
   selector: 'app-cee-institution-form',
@@ -11,47 +12,63 @@ import { Group, IGroup } from 'src/app/interfaces/Group';
   styleUrls: ['./cee-institution-form.component.less']
 })
 export class CeeInstitutionFormComponent implements OnInit {
-  
-  @Input() public group: IGroup;
-  @Input() public groupId: String;
+
+  @Input() public institution: IInstitution;
+  @Input() public institutionId: String;
 
   public isLoading: boolean = false;
 
-  public groupTypeList: String[];
+  public institutionTypeList: String[];
   public administrativeSphereList: String[];
 
   constructor(
     public bsModalRef: BsModalRef,
-    private groupService: GroupService
+    private institutionService: InstitutionService
   ) {
-    this.group = new Group();
+    this.institution = new Institution();
   }
 
   ngOnInit(): void {
-    this.groupTypeList = Object.values(InstitutionTypeEnum);
+    this.institutionTypeList = Object.values(InstitutionTypeEnum);
     this.administrativeSphereList = Object.values(AdministrativeSphereEnum);
 
-    this.init();
+    this.index();
   }
 
-  init(){
-    if (this.group?._id) return;
+  index() {
+    if (this.institution?._id) return;
 
-    if (!this.groupId){ this.group = new Group(); return; }
+    if (!this.institutionId) { this.institution = new Institution(); return; }
 
     //!APAGAR
-    if (this.groupId){ this.group = { _id: `${this.groupId}`, socialReason: `${this.groupId}`, name: `Escola ${this.group.name}`, initials: this.group.initials }; return; }
+    if (this.institutionId) { this.institution = { _id: `${this.institutionId}`, socialReason: `${this.institutionId}`, name: `Escola ${this.institution.name}`, initials: this.institution.initials }; return; }
 
     this.isLoading = true;
-    this.groupService.readById(this.groupId).subscribe((data) => {
-      if(data._id)
-        this.group = data;
-        
+    this.institutionService.readById(this.institutionId).subscribe((data) => {
+      if (data._id)
+        this.institution = data;
+
       this.isLoading = false;
     });
   }
 
-  create() { }
-  update() { }
+  create() {
+    if (!UtilService.isConfirm()) return;
+
+    UtilService.default(this.institutionService.create(this.institution));
+
+    if (this.bsModalRef)
+      this.bsModalRef.hide();
+  }
+
+  update() {
+
+    if (!UtilService.isConfirm()) return;
+
+    UtilService.default(this.institutionService.update(this.institution));
+
+    if (this.bsModalRef)
+      this.bsModalRef.hide();
+  }
 
 }

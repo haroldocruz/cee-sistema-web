@@ -1,27 +1,27 @@
 <div class="row">
     <div class="col-12">
         <div class="info-box btn btn-default text-left" (click)="openInstitutionFormModal(item)"
-            *ngFor="let item of institutionList | sortBy:'asc':'name' | filter:[{ field: 'type', value: ceeInstitutionLocalService.filter}] | filter: [{ field: 'name', value: ceeInstitutionLocalService.search}]">
+            *ngFor="let item of institutionList | sortBy:'asc':'name' | filter:[{ field: 'institutionType', value: ceeInstitutionLocalService.filter}] | filter: [{ field: 'name', value: ceeInstitutionLocalService.search}]">
             
-            <span class="info-box-icon bg-gray-light elevation-1" *ngIf="item.type == InstitutionTypeEnum.PUBLIC_ADM">
+            <span class="info-box-icon bg-gray-light elevation-1" *ngIf="item.institutionType == InstitutionTypeEnum.PUBLIC_ADM">
                 <i class="fas fa-award"></i>
             </span>
-            <span class="info-box-icon bg-gray-light elevation-1" *ngIf="item.type == InstitutionTypeEnum.PRIVATE_MAINTAINER">
+            <span class="info-box-icon bg-gray-light elevation-1" *ngIf="item.institutionType == InstitutionTypeEnum.PRIVATE_MAINTAINER">
                 <i class="fas fa-building"></i>
             </span>
-            <span class="info-box-icon bg-success elevation-1" *ngIf="item.type == InstitutionTypeEnum.PRIVATE_MAINTAINED && item.credenciamento.situation == 'Regular'">
+            <span class="info-box-icon bg-success elevation-1" *ngIf="item.institutionType == InstitutionTypeEnum.PRIVATE_MAINTAINED && item.credenciamento.situation == 'Regular'">
                 <i class="fas fa-graduation-cap"></i>
             </span>
-            <span class="info-box-icon bg-success elevation-1" *ngIf="item.type == InstitutionTypeEnum.PRIVATE_MAINTAINED && item.credenciamento.situation == 'Irregular'">
+            <span class="info-box-icon bg-success elevation-1" *ngIf="item.institutionType == InstitutionTypeEnum.PRIVATE_MAINTAINED && item.credenciamento.situation == 'Irregular'">
                 <i class="fas fa-graduation-cap"></i>
             </span>
-            <span class="info-box-icon bg-success elevation-1" *ngIf="item.type == InstitutionTypeEnum.PUBLIC_UE && item.credenciamento.situation == 'Regular'">
+            <span class="info-box-icon bg-success elevation-1" *ngIf="item.institutionType == InstitutionTypeEnum.PUBLIC_UE && item.credenciamento.situation == 'Regular'">
                 <i class="fas fa-user-graduate"></i>
             </span>
-            <span class="info-box-icon bg-danger elevation-1" *ngIf="item.type == InstitutionTypeEnum.PUBLIC_UE && item.credenciamento.situation == 'Irregular'">
+            <span class="info-box-icon bg-danger elevation-1" *ngIf="item.institutionType == InstitutionTypeEnum.PUBLIC_UE && item.credenciamento.situation == 'Irregular'">
                 <i class="fas fa-user-graduate"></i>
             </span>
-            <span class="info-box-icon bg-gray-light elevation-1" *ngIf="item.type == InstitutionTypeEnum.OTHER">
+            <span class="info-box-icon bg-gray-light elevation-1" *ngIf="item.institutionType == InstitutionTypeEnum.OTHER">
                 <i class="fas fa-book-open"></i>
             </span>
 

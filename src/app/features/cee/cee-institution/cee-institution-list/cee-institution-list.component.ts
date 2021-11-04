@@ -46,8 +46,8 @@ export class CeeInstitutionListComponent implements OnInit {
 
   }
 
-  openInstitutionFormModal(group: any){
-    const initialState = { groupId: group._id, group: group };
+  openInstitutionFormModal(institution: any){
+    const initialState = { institutionId: institution._id, institution: institution };
     this.bsModalRef = this.bsModalService.show(CeeInstitutionFormComponent, { id: UtilService.getRandom9Digits(), class: 'modal-lg', initialState });
     this.bsModalRef.content.closeBtnName = 'Close';
   }
