@@ -15,11 +15,11 @@ export class MaintainerService {
   static maintainer: IMaintainer;
   static maintainers: IMaintainer[];
 
-  private headers = new HttpHeaders({
-    //TODO
-    // 'Authorization': localStorage.getItem('token'),
-    // 'Content-Type': 'application/json'
-  });
+  // private headers = new HttpHeaders({
+  //   //TODO
+  //   // 'Authorization': localStorage.getItem('token'),
+  //   // 'Content-Type': 'application/json'
+  // });
 
   constructor(private http: HttpClient) {
     // if (AuthService.currentProfile.name === "Representante Legal")
@@ -49,7 +49,7 @@ export class MaintainerService {
   }
 
   read(): Observable<IMaintainer[]> {
-    return this.http.get<IMaintainer[]>(this.baseUrl, { headers: this.headers });
+    return this.http.get<IMaintainer[]>(this.baseUrl, { headers: AuthService.headers() });
   }
 
   readById(id: string): Observable<IMaintainer> {

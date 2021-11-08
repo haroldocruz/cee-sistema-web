@@ -41,42 +41,42 @@ export class UserLocalService {
         });
     }
 
-    headers() {
-        return {
-            'authorization': AuthService.user?.loginInfo?.token,
-            'Content-Type': 'application/json'
-        };
-    }
+    // headers() {
+    //     return {
+    //         'authorization': AuthService.user?.loginInfo?.token,
+    //         'Content-Type': 'application/json'
+    //     };
+    // }
 
     edit(user: IUser | null) {
         this.user = (user) ? _cloneDeep(user) : new User();
     }
 
     create(user: IUser): Observable<IUser & IStatusMessage> {
-        return this.http.post<IUser & IStatusMessage>(this.baseUrl, user, { headers: this.headers() });
+        return this.http.post<IUser & IStatusMessage>(this.baseUrl, user, { headers: AuthService.headers() });
     }
 
     read(): Observable<IUser[]> {
-        return this.http.get<IUser[]>(this.baseUrl, { headers: this.headers() });
+        return this.http.get<IUser[]>(this.baseUrl, { headers: AuthService.headers() });
     }
 
     readFilter(user: IUser): Observable<IUser[]> {
-        return this.http.post<IUser[]>(this.baseUrl, user, { headers: this.headers() });
+        return this.http.post<IUser[]>(this.baseUrl, user, { headers: AuthService.headers() });
     }
 
     readById(id: string): Observable<IUser & IStatusMessage> {
         const url = `${this.baseUrl}/${id}`;
-        return this.http.get<IUser & IStatusMessage>(url, { headers: this.headers() });
+        return this.http.get<IUser & IStatusMessage>(url, { headers: AuthService.headers() });
     }
 
     update(user: IUser): Observable<IUser & IStatusMessage> {
         const url = `${this.baseUrl}/${user._id}`
-        return this.http.put<IUser & IStatusMessage>(url, user, { headers: this.headers() });
+        return this.http.put<IUser & IStatusMessage>(url, user, { headers: AuthService.headers() });
     }
 
     delete(id: string): Observable<IUser & IStatusMessage> {
         const url = `${this.baseUrl}/${id}`;
-        return this.http.delete<IUser & IStatusMessage>(url, { headers: this.headers() });
+        return this.http.delete<IUser & IStatusMessage>(url, { headers: AuthService.headers() });
     }
 
     default(resp: Observable<IUser & IStatusMessage>) {

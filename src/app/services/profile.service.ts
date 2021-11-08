@@ -7,6 +7,7 @@ import { ENV } from "./../../environments/environment";
 import { IProfile } from './../interfaces/Profile';
 import { IMessageResponse } from './send-mail.service';
 import { IStatusMessage } from '../interfaces/IStatusMessage';
+import { AuthService } from '../auth/auth.service';
 
 export interface IBindingProfileUser {
     profileId: string;
@@ -18,10 +19,10 @@ export interface IBindingProfileUser {
 })
 export class ProfileService {
 
-    private headers = new HttpHeaders({
-        // 'Authorization': localStorage.getItem('token'),
-        // 'Content-Type': 'application/json'
-    });
+    // private headers = new HttpHeaders({
+    //     // 'Authorization': localStorage.getItem('token'),
+    //     // 'Content-Type': 'application/json'
+    // });
 
     baseUrl = `${ENV.api.url}/profile`
     profile: IProfile;
@@ -57,7 +58,7 @@ export class ProfileService {
     }
 
     read(): Observable<IProfile[]> {
-        return this.http.get<IProfile[]>(this.baseUrl, { headers: this.headers });
+        return this.http.get<IProfile[]>(this.baseUrl, { headers: AuthService.headers() });
     }
 
     readById(id: string): Observable<IProfile> {

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from 'rxjs';
 import { ENV } from 'src/environments/environment';
+import { AuthService } from 'src/app/auth/auth.service';
 
 
 @Injectable({
@@ -16,11 +17,11 @@ export class GroupService {
 
   baseUrl = `${ENV.api.url}/group`;
 
-  private headers = new HttpHeaders({
-    //TODO
-    // 'Authorization': localStorage.getItem('token'),
-    // 'Content-Type': 'application/json'
-  });
+  // private headers = new HttpHeaders({
+  //   //TODO
+  //   // 'Authorization': localStorage.getItem('token'),
+  //   // 'Content-Type': 'application/json'
+  // });
 
   constructor(private http: HttpClient) {
     this.group = new Group();
@@ -41,7 +42,7 @@ export class GroupService {
   }
 
   read(): Observable<IGroup[]> {
-    return this.http.get<IGroup[]>(this.baseUrl, { headers: this.headers });
+    return this.http.get<IGroup[]>(this.baseUrl, { headers: AuthService.headers() });
   }
 
   readById(id: String): Observable<IGroup> {

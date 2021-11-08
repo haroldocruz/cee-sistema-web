@@ -22,11 +22,11 @@ export class ProfileLocalService {
 
   baseUrl = `${ENV.api.url}/profile`;
 
-  private headers = new HttpHeaders({
-    //TODO
-    // 'Authorization': localStorage.getItem('token'),
-    // 'Content-Type': 'application/json'
-  });
+  // private headers = new HttpHeaders({
+  //   //TODO
+  //   // 'Authorization': localStorage.getItem('token'),
+  //   // 'Content-Type': 'application/json'
+  // });
 
   constructor(
     private http: HttpClient,
@@ -60,7 +60,7 @@ export class ProfileLocalService {
   }
 
   read(): Observable<IProfile[]> {
-    return this.http.get<IProfile[]>(this.baseUrl, { headers: this.headers });
+    return this.http.get<IProfile[]>(this.baseUrl, { headers: AuthService.headers() });
   }
 
   readById(id: string): Observable<IProfile> {
