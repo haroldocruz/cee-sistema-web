@@ -1,6 +1,7 @@
 import { AuthService } from './../../../auth/auth.service';
 import { UserLocalService } from '../../../features/user/user.local.service';
 import { Component, OnInit } from '@angular/core';
+import { ContextEnum } from 'src/app/interfaces/enumerations/ContextEnum';
 
 @Component({
   selector: 'app-nav-menu',
@@ -10,10 +11,13 @@ import { Component, OnInit } from '@angular/core';
 export class NavMenuComponent implements OnInit {
 
   AuthService = AuthService;
+  contextEnum
 
   constructor(public userService: UserLocalService) { }
 
   ngOnInit(): void {
+    
+  this.contextEnum = ContextEnum;
   }
 
   // isPermitted(rep: string): boolean {
