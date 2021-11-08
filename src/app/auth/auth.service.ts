@@ -26,27 +26,28 @@ export class AuthService {
   }
 
   static init() {
-    AuthService.user = (sessionStorage.getItem("user")) ? JSON.parse(<string>sessionStorage.getItem("user")) : new User();
+    const user: string = sessionStorage.getItem("user") || localStorage.getItem("user");
+    AuthService.user = (user) ? JSON.parse(user) : new User();
     AuthService.currentProfile = AuthService.user?.loginInfo?._profileLogin || new Profile();
   }
 
-  headers(){
-      return {
-        //TODO
-        'authorization': AuthService.user?.loginInfo?.token || '',
-        'Content-Type': 'application/json'
-      };
+  static headers() {
+    return new HttpHeaders({
+      //TODO
+      'authorization': AuthService.user?.loginInfo?.token || '',
+      'Content-Type': 'application/json'
+    });
   }
 
   login(userDataLogin: IUserDataLogin): Observable<any> {
     const url = `${this.baseUrl}/login`;
-    return this.http.post<IUser>(url, userDataLogin, { headers: this.headers() })
+    return this.http.post<IUser>(url, userDataLogin, { headers: AuthService.headers() })
   }
 
   logout(id: string): Observable<any> {
     // const headers = { 'authorization': AuthService.user?.loginInfo?.token }
     const url = `${this.baseUrl}/logout/${id}`;
-    return this.http.post<any>(url, {}, { headers: this.headers() })
+    return this.http.post<any>(url, {}, { headers: AuthService.headers() })
   }
 
   // logon(userDataLogin: IUserDataLogin): Observable<IUser> {
