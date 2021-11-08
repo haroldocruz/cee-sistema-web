@@ -4,12 +4,22 @@ import { InstitutionTypeEnum } from './enumerations/InstitutionTypeEnum';
 import { ILegalAct } from './LegalAct';
 import { ILegalPerson } from './LegalPerson';
 
-interface IFundaments {
+export interface IFundaments {
+  personalProfile?: String;
+  mission?: String;
+  vision?: String;
+  values?: String;
+}
+
+export class Fundaments implements IFundaments {
+
   personalProfile: String;
   mission: String;
   vision: String;
   values: String;
+  
 }
+
 export interface IInstitution {
   _id?: String;
   institutionType?: String;
@@ -19,7 +29,7 @@ export interface IInstitution {
   cnpj?: Number;
   administrativeSphere?: String;
   legalPerson?: ILegalPerson;
-  legalAct?: ILegalAct[];
+  legalActList?: ILegalAct[];
   maintainer?: IInstitution;
   contact?: IContact;
   // evaluationResultList?: Eval..Result[];
@@ -35,6 +45,7 @@ export class Institution implements IInstitution {
   name = "";
   administrativeSphere = AdministrativeSphereEnum.UNINFORMED;
   institutionType = InstitutionTypeEnum.UNINFORMED;
+  fundaments = new Fundaments();
 
   constructor() {
   }

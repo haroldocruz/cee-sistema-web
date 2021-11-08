@@ -8,7 +8,11 @@ export interface ILegalAct {
 
 export class LegalAct implements ILegalAct {
 
-  name = "";
+  name: string;
+  title: string;
+  description: string;
+  url: string;
+  type: string;
 
   constructor() {
   }

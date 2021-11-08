@@ -1,7 +1,7 @@
 import { IUser } from './User';
 
 export interface IMetadata {
-  "id": string;
+  "_id": string;
   "_model": string;
   "modelName": string;
   "_createdBy": IUser;

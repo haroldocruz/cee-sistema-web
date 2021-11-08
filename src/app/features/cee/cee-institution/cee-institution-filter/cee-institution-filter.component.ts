@@ -3,6 +3,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { fromEvent, Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 import { InstitutionTypeEnum } from 'src/app/interfaces/enumerations/InstitutionTypeEnum';
+import { EventEmitterService } from 'src/app/services/event-emitter.service';
 import { UtilService } from 'src/app/services/util.service';
 import { CeeInstitutionFormComponent } from '../cee-institution-form/cee-institution-form.component';
 import { CeeInstitutionLocalService } from '../cee-institution.local.service';
@@ -53,6 +54,10 @@ export class CeeInstitutionFilterComponent implements OnInit {
 
   filtering(filter: string){
     this.ceeInstitutionLocalService.filter = filter;
+  }
+
+  refresh(){
+    EventEmitterService.get('is-success').emit(true);
   }
 
 }

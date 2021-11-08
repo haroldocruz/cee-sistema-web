@@ -8,6 +8,7 @@ import { UtilService } from 'src/app/services/util.service';
 import { AdministrativeSphereEnum } from 'src/app/interfaces/enumerations/administrativeSphereEnum';
 import { InstitutionService } from 'src/app/services/institution.service';
 import { IInstitution } from 'src/app/interfaces/Institution';
+import { EventEmitterService } from 'src/app/services/event-emitter.service';
 
 interface IInstitutionItemView {
   _id: String;
@@ -35,7 +36,8 @@ export class CeeInstitutionListComponent implements OnInit {
 
   InstitutionTypeEnum: typeof InstitutionTypeEnum;
   filteredCount = { count: 0 };
-  institutionList: IInstitutionItemView[];
+  institutionList: IInstitution[];
+  institutionListView: IInstitutionItemView[];
 
   constructor(
     private institutionService: InstitutionService,
@@ -47,17 +49,23 @@ export class CeeInstitutionListComponent implements OnInit {
     this.InstitutionTypeEnum = InstitutionTypeEnum;
     this.index();
     // this.indexMock();
+
+    EventEmitterService.get('is-success').subscribe((isSuccess) => {
+      if (isSuccess)
+        this.index();
+    })
   }
 
   index() {
     this.institutionService.read().subscribe((data) => {
-      this.institutionList = this.modelToView(data);
-      this.countToFilter(this.institutionList)
+      this.institutionList = data;
+      this.institutionListView = this.modelToView(data);
+      this.countToFilter(this.institutionListView)
     });
   }
 
   modelToView(iList: IInstitution[]) {
-    return this.institutionList = iList.map((e) => {
+    return this.institutionListView = iList.map((e) => {
 
       let item: IInstitutionItemView = {
         _id: e._id,
@@ -97,15 +105,17 @@ export class CeeInstitutionListComponent implements OnInit {
     });
   }
 
-  openInstitutionFormModal(institution: any) {
-    const initialState = { institutionId: institution._id, institution: institution };
+  //TODO: inserir este no component *view
+  openInstitutionFormModal(institutionItem: any) {
+    const institution = this.institutionList.find((e) => { institutionItem._id === e._id });
+    const initialState = { institutionId: institutionItem._id, institution: institution };
     this.bsModalRef = this.bsModalService.show(CeeInstitutionFormComponent, { id: UtilService.getRandom9Digits(), class: 'modal-lg', initialState });
     this.bsModalRef.content.closeBtnName = 'Close';
   }
 
   indexMock() {
 
-    this.institutionList = [
+    this.institutionListView = [
       {
         _id: "1",
         institutionType: InstitutionTypeEnum.PUBLIC_ADM,
@@ -188,6 +198,6 @@ export class CeeInstitutionListComponent implements OnInit {
       }
     ];
 
-    this.countToFilter(this.institutionList);
+    this.countToFilter(this.institutionListView);
   }
 }

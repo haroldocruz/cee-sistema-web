@@ -1,15 +1,17 @@
+import { Route } from '@angular/router';
 import { AuthGuard } from 'src/app/guards/auth.guard';
 import { PermissionGuard } from 'src/app/guards/permission.guard';
 import { CeeDashboardComponent } from './cee-dashboard/cee-dashboard.component';
 import { CeeDocumentComponent } from './cee-document/cee-document.component';
 import { CeeHomeComponent } from './cee-home/cee-home.component';
 import { CeeInstitutionFormComponent } from './cee-institution/cee-institution-form/cee-institution-form.component';
+import { CeeInstitutionViewComponent } from './cee-institution/cee-institution-view/cee-institution-view.component';
 import { CeeInstitutionComponent } from './cee-institution/cee-institution.component';
 import { CeeUserViewComponent } from './cee-user/cee-user-view/cee-user-view.component';
 import { CeeUserComponent } from './cee-user/cee-user.component';
 import { CeeComponent } from './cee.component';
 
-export const CeeRouting = {
+export const CeeRouting: Route = {
   path: "cee", component: CeeComponent,
   // canActivate: [AuthGuard, PermissionGuard],
   children: [
@@ -40,5 +42,6 @@ export const CeeRouting = {
         { path: "form", component: CeeInstitutionFormComponent }
       ]
    },
+   { path: "institution/view", component: CeeInstitutionViewComponent }
   ]
 }

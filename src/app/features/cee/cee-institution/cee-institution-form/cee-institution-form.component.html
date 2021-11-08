@@ -14,48 +14,243 @@
         </div>
         <div class="container-fluid" *ngIf="!isLoading">
             <div class="row">
-                <div class="col-md-12 col-lg-8">
-                    Razão social:
-                    <input type="text" [(ngModel)]="institution.socialReason" [ngModelOptions]="{standalone: true}"
-                        autocomplete="_" class="form-control" placeholder="">
+
+
+                <div class="col-12">
+                    <div class="card card-primary card-outline card-outline-tabs">
+                        <div class="card-header p-0 border-bottom-0">
+                            <ul class="nav nav-tabs nav-fill" id="custom-tabs-four-tab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="custom-tabs-four-home-tab" data-bs-toggle="pill"
+                                        href="#custom-tabs-four-home" role="tab" aria-controls="custom-tabs-four-home"
+                                        aria-selected="true">Principal</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="custom-tabs-four-fundaments-tab" data-bs-toggle="pill"
+                                        href="#custom-tabs-four-fundaments" role="tab"
+                                        aria-controls="custom-tabs-four-fundaments" aria-selected="false">Fundamentos</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="custom-tabs-four-contact-tab" data-bs-toggle="pill"
+                                        href="#custom-tabs-four-contact" role="tab"
+                                        aria-controls="custom-tabs-four-contact" aria-selected="false">Contatos</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="custom-tabs-four-address-tab" data-bs-toggle="pill"
+                                        href="#custom-tabs-four-address" role="tab"
+                                        aria-controls="custom-tabs-four-address" aria-selected="false">Endereço</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="custom-tabs-four-legalact-tab" data-bs-toggle="pill"
+                                        href="#custom-tabs-four-legalact" role="tab"
+                                        aria-controls="custom-tabs-four-legalact" aria-selected="false">Atos Legais</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="card-body">
+                            <div class="tab-content" id="custom-tabs-four-tabContent">
+                                <div class="tab-pane fade active show" id="custom-tabs-four-home" role="tabpanel"
+                                    aria-labelledby="custom-tabs-four-home-tab">
+
+                                    <div class="row">
+                                        <div class="col-md-12 col-lg-8">
+                                            Razão social:
+                                            <input type="text" [(ngModel)]="institution.socialReason"
+                                                [ngModelOptions]="{standalone: true}" autocomplete="_"
+                                                class="form-control" placeholder="">
+                                        </div>
+                                        <div class="col-md-6 col-lg-4">
+                                            CNPJ:
+                                            <input type="text" [(ngModel)]="institution.cnpj"
+                                                [ngModelOptions]="{standalone: true}" mask="00.000.000/0000-00"
+                                                pattern="[0-9]{14}" class="form-control" placeholder="">
+                                        </div>
+                                        <div class="col-md-12 col-lg-8">
+                                            Nome Fantasia:
+                                            <input type="text" [(ngModel)]="institution.name"
+                                                [ngModelOptions]="{standalone: true}" autocomplete="_"
+                                                class="form-control" placeholder="">
+                                        </div>
+                                        <div class="col-md-6 col-lg-4">
+                                            Sigla (quando houver):
+                                            <input type="text" [(ngModel)]="institution.initials"
+                                                [ngModelOptions]="{standalone: true}" class="form-control"
+                                                placeholder="">
+                                        </div>
+                                        <div class="col-md-6 col-lg-4">
+                                            Tipo de instituição:
+                                            <select id="gType" [(ngModel)]="institution.institutionType"
+                                                [ngModelOptions]="{standalone: true}" class="form-control">
+                                                <option [ngValue]="gtype" *ngFor="let gtype of institutionTypeList">{{
+                                                    gtype }}</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6 col-lg-4">
+                                            Esfera administrativa:
+                                            <select id="sphere" [(ngModel)]="institution.administrativeSphere"
+                                                [ngModelOptions]="{standalone: true}" class="form-control">
+                                                <option [ngValue]="sphere"
+                                                    *ngFor="let sphere of administrativeSphereList">{{ sphere }}
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            Descrição:
+                                            <textarea rows="6" [(ngModel)]="institution.description"
+                                                [ngModelOptions]="{standalone: true}" class="form-control"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="custom-tabs-four-fundaments" role="tabpanel"
+                                    aria-labelledby="custom-tabs-four-fundaments-tab">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <span>Perfil pessoal:</span>
+                                            <textarea rows="6" [(ngModel)]="fundaments.personalProfile"
+                                                [ngModelOptions]="{standalone: true}" class="form-control"></textarea>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <span>Missão:</span>
+                                            <textarea rows="6" [(ngModel)]="fundaments.mission"
+                                                [ngModelOptions]="{standalone: true}" class="form-control"></textarea>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <span>Visão:</span>
+                                            <textarea rows="6" [(ngModel)]="fundaments.vision"
+                                                [ngModelOptions]="{standalone: true}" class="form-control"></textarea>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <span>Valores:</span>
+                                            <textarea rows="6" [(ngModel)]="fundaments.values"
+                                                [ngModelOptions]="{standalone: true}" class="form-control"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="custom-tabs-four-contact" role="tabpanel"
+                                    aria-labelledby="custom-tabs-four-contact-tab">
+
+                                    <div class="row mt-2">
+                                        <div class="col-md-6">
+                                            Telefone:
+                                            <input type="text" [(ngModel)]="contact.phoneList[0].number" [ngModelOptions]="{standalone: true}"
+                                                mask="(00) 0000-0000||(00) 0 0000-0000" autocomplete="_" class="form-control" />
+                                        </div>
+                                        <div class="col-md-6">
+                                            Descrição:
+                                            <input type="text" [(ngModel)]="contact.phoneList[0].description" [ngModelOptions]="{standalone: true}"
+                                            autocomplete="_" class="form-control" />
+                                        </div>
+                                        <div class="col-md-6">
+                                            E-mail:
+                                            <input type="text" [(ngModel)]="contact.emailList[0].address" [ngModelOptions]="{standalone: true}"
+                                            autocomplete="_" class="form-control" />
+                                        </div>
+                                        <div class="col-md-6">
+                                            Descrição:
+                                            <input type="text" [(ngModel)]="contact.emailList[0].description" [ngModelOptions]="{standalone: true}"
+                                                class="form-control" />
+                                        </div>
+                                        <div class="col-md-12">
+                                            <br>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="custom-tabs-four-address" role="tabpanel"
+                                    aria-labelledby="custom-tabs-four-address-tab">
+
+                                    <div class="row mt-2">
+                                        <div class="col-md-6">
+                                            País:
+                                            <input type="text" [(ngModel)]="contact.addressList[0].country" [ngModelOptions]="{standalone: true}"
+                                            autocomplete="_" class="form-control" />
+                                        </div>
+                                        <div class="col-md-6">
+                                            Estado:
+                                            <input type="text" [(ngModel)]="contact.addressList[0].state" [ngModelOptions]="{standalone: true}"
+                                            autocomplete="_" class="form-control" />
+                                        </div>
+                                        <div class="col-md-6">
+                                            Cidade:
+                                            <input type="text" [(ngModel)]="contact.addressList[0].city" [ngModelOptions]="{standalone: true}"
+                                            autocomplete="_" class="form-control" />
+                                        </div>
+                                        <div class="col-md-6">
+                                            Bairro:
+                                            <input type="text" [(ngModel)]="contact.addressList[0].district" [ngModelOptions]="{standalone: true}"
+                                            autocomplete="_" class="form-control" />
+                                        </div>
+                                        <div class="col-md-12">
+                                            Logradouro:
+                                            <input type="text" [(ngModel)]="contact.addressList[0].place" [ngModelOptions]="{standalone: true}"
+                                            autocomplete="_" class="form-control" />
+                                        </div>
+                                        <div class="col-md-6">
+                                            Número:
+                                            <input type="text" [(ngModel)]="contact.addressList[0].number" [ngModelOptions]="{standalone: true}"
+                                            autocomplete="_" class="form-control" />
+                                        </div>
+                                        <div class="col-md-6">
+                                            CEP:
+                                            <input type="text" [(ngModel)]="contact.addressList[0].zipcode" [ngModelOptions]="{standalone: true}"
+                                            autocomplete="_" mask="00.000-000" class="form-control" />
+                                        </div>
+                                        <div class="col-md-12">
+                                            Complemento:
+                                            <textarea rows="2" [(ngModel)]="contact.addressList[0].description" [ngModelOptions]="{standalone: true}"
+                                                class="form-control" placeholder="Ex: Próximo ao ginásio Ayrton Senna"></textarea>
+                                        </div>
+                                        <div class="col-md-12">
+                                            Descrição:
+                                            <textarea rows="2" [(ngModel)]="contact.addressList[0].description" [ngModelOptions]="{standalone: true}"
+                                                class="form-control" placeholder=""></textarea>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <br>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="custom-tabs-four-legalact" role="tabpanel"
+                                    aria-labelledby="custom-tabs-four-legalact-tab">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            Url (gerado automaticamente):
+                                            <input type="text" [(ngModel)]="legalActList[0].url" [ngModelOptions]="{standalone: true}" [disabled]="true"
+                                                class="form-control" />
+                                        </div>
+                                        <div class="col-md-12">
+                                            Nome:
+                                            <input type="text" [(ngModel)]="legalActList[0].name" [ngModelOptions]="{standalone: true}"
+                                            autocomplete="_" class="form-control" />
+                                        </div>
+                                        <div class="col-md-12">
+                                            Título:
+                                            <input type="text" [(ngModel)]="legalActList[0].title" [ngModelOptions]="{standalone: true}"
+                                            autocomplete="_" class="form-control" />
+                                        </div>
+                                        <div class="col-md-12">
+                                            Tipo:
+                                            <input type="text" [(ngModel)]="legalActList[0].type" [ngModelOptions]="{standalone: true}"
+                                            autocomplete="_" class="form-control" />
+                                        </div>
+                                        <div class="col-md-12">
+                                            Descrição:
+                                            <textarea rows="6" [(ngModel)]="legalActList[0].description"
+                                                [ngModelOptions]="{standalone: true}" class="form-control"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card -->
+                    </div>
                 </div>
-                <div class="col-md-6 col-lg-4">
-                    CNPJ:
-                    <input type="text" [(ngModel)]="institution.cnpj" [ngModelOptions]="{standalone: true}"
-                        mask="00.000.000/0000-00" pattern="[0-9]{14}" class="form-control" placeholder="">
-                </div>
-                <div class="col-md-12 col-lg-8">
-                    Nome Fantasia:
-                    <input type="text" [(ngModel)]="institution.name" [ngModelOptions]="{standalone: true}" autocomplete="_"
-                        class="form-control" placeholder="">
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    Sigla (quando houver):
-                    <input type="text" [(ngModel)]="institution.initials" [ngModelOptions]="{standalone: true}"
-                        class="form-control" placeholder="">
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    Tipo de instituição:
-                    <select id="gType" [(ngModel)]="institution.institutionType" [ngModelOptions]="{standalone: true}"
-                        class="form-control">
-                        <option [ngValue]="gtype" *ngFor="let gtype of institutionTypeList">{{ gtype }}</option>
-                    </select>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    Esfera administrativa:
-                    <select id="sphere" [(ngModel)]="institution.administrativeSphere" [ngModelOptions]="{standalone: true}"
-                        class="form-control">
-                        <option [ngValue]="sphere" *ngFor="let sphere of administrativeSphereList">{{ sphere }}</option>
-                    </select>
-                </div>
+
             </div>
 
-            <div class="row">
-                <div class="col-md-12">
-                    Descrição:
-                    <textarea rows="6" [(ngModel)]="institution.description" [ngModelOptions]="{standalone: true}" class="form-control"></textarea>
-                </div>
-            </div>
         </div>
     </div>
 

@@ -1,1 +1,116 @@
-<p>cee-institution-view works!</p>
+<div class="card card-widget widget-user">
+    <!-- Add the bg color to the header using any of the bg-* classes -->
+    <div class="widget-user-header bg-info">
+
+        <div class="ribbon-wrapper ribbon-lg">
+            <div class="ribbon bg-success">
+                Credenciada
+            </div>
+        </div>
+        
+        <!-- <button type="button" class="close" (click)="bsModalRef.hide()">
+                        <span>&times;</span>
+                    </button> -->
+        <h3 class="widget-user-username">
+            NOME FANTASIA DA INSTITUIÇÃO
+            <!-- {{ getFirstLastName() }} -->
+        </h3>
+        <h5 class="widget-user-desc">Razão social</h5>
+    </div>
+    <div class="widget-user-image">
+        <i class="fas fa-university fa-6x" *ngIf="true"></i>
+    </div>
+    <div class="card-footer">
+        <div class="row">
+            <div class="col-sm-4 border-right">
+                <div class="description-block">
+                    <h5 class="description-header">
+                        +55 (63) 98458-9691
+                        <!-- {{ user.contact?.phoneList[0]?.number | mask: '+99 00 90000-0000' }} -->
+                    </h5>
+                    <span class="description-text">Telefone</span>
+                </div>
+                <!-- /.description-block -->
+            </div>
+            <!-- /.col -->
+            <div class="col-sm-4 border-right">
+                <div class="description-block">
+                    <h5 class="description-header">
+                        email@mail.com
+                        <!-- {{ user.contact?.emailList[0]?.address }} -->
+                    </h5>
+                    <span class="description-text">E-Mail</span>
+                </div>
+                <!-- /.description-block -->
+            </div>
+            <!-- /.col -->
+            <div class="col-sm-4">
+                <div class="description-block">
+                    <h5 class="description-header">
+                        77.270-000
+                        <!-- {{ user.contact?.addressList[0]?.zipcode | mask: '00.000-000' }} -->
+                    </h5>
+                    <span class="description-text">CEP</span>
+                </div>
+                <!-- /.description-block -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </div>
+</div>
+
+<div class="tab-pane active" id="settings">
+    <form class="form-horizontal">
+        <div class="form-group row">
+            <label for="inputName" class="col col-form-label">Razão social:</label>
+            <div class="col-sm-9">
+                <!-- {{ user }} -->
+                {{ "Razão social" }}
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="inputName" class="col col-form-label">Nome fantasia:</label>
+            <div class="col-sm-9">
+                <!-- {{ user }} -->
+                {{ "Nome fantasia" }}
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="inputEmail" class="col col-form-label">Emails:</label>
+            <div class="col-sm-9">
+                email@mail.com
+                <!-- {{ util.emailListToString(user.contact.emailList, ' | ') }} -->
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col col-form-label">Telefones:</label>
+            <div class="col-sm-9 centered">
+                +55 (63) 98458-9691
+                <!-- {{ util.phoneListToString(user.contact.phoneList, ' | ') }} -->
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="inputExperience" class="col col-form-label">Descrição:</label>
+            <div class="col-sm-9">
+                Alguma descrição da instituição
+                <!-- {{ user.description }} -->
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="inputSkills" class="col col-form-label">Usuários vinculados:</label>
+            <div class="col-sm-9">
+                <span>Nome do Primeiro Usuário</span>
+                <br>
+                <span>Nome do Segundo Usuário</span>
+                <br>
+                <span>Nome do Terceiro Usuário</span>
+                <br>
+                <!-- <div *ngFor="let item of user.dataAccess?._profileList">
+                    <button class="btn btn-info btn-xs">{{ item.name }}</button>
+                    &nbsp;
+                </div> -->
+            </div>
+        </div>
+    </form>
+</div>
