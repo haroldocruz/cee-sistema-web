@@ -7,12 +7,18 @@
 
 <div class="modal-body">
   <div class="container-fluid">
+    <div class="ribbon-wrapper">
+      <div class="ribbon bg-primary">
+        Ribbon
+      </div>
+    </div>
     <form>
       <div class="row mt-2">
         <div class="col-md-12">
           Contexto:
           <select [(ngModel)]="context" (ngModelChange)="watchChangeProfileContext()" [ngModelOptions]="{standalone: true}" class="form-control">
-            <option [value]="c" *ngFor="let c of contextList">{{ c.sigla +" - "+ c.name }}</option>
+            <option [value]="c" *ngFor="let c of contextList">{{ c }}</option>
+            <!-- <option [value]="c" *ngFor="let c of contextList">{{ c.sigla +" - "+ c.name }}</option> -->
           </select>
         </div>
         <!-- <div class="col-md-12" *ngIf="profile">

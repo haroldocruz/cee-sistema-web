@@ -6,6 +6,8 @@ import { IPhone } from './../../../interfaces/Contact';
 import { User, IUser } from './../../../interfaces/User';
 import { Component, Input, OnInit } from '@angular/core';
 
+import { ContextEnum } from "./../../../interfaces/enumerations/ContextEnum";
+
 @Component({
   selector: 'app-user-profile-edit-modal',
   templateUrl: './user-profile-edit-modal.component.html',
@@ -37,13 +39,14 @@ export class UserProfileEditModalComponent implements OnInit {
     this.phone = {};
     this.nameList = ['Administrador', 'Gerente'];
     // this.context = {name:'asdf'};
-    this.contextList = [
-      { refPath: 'cee', sigla: 'CEE', name: 'Conselho Estadual de Educação' },
-      { refPath: 'cee', sigla: 'SEDUC', name: 'Secretaria da Educação, Juventude e Esportes' },
-      { refPath: 'cee', sigla: 'DRE', name: 'Diretoria Regional de Ensino' },
-      { refPath: 'cee', sigla: 'IE/UE', name: 'Instituição/Unidade de Ensino' },
-      { refPath: 'cee', sigla: '', name: 'Outro' }
-    ];
+    // this.contextList = [
+    //   { refPath: 'cee', sigla: 'CEE', name: 'Conselho Estadual de Educação' },
+    //   { refPath: 'cee', sigla: 'SEDUC', name: 'Secretaria da Educação, Juventude e Esportes' },
+    //   { refPath: 'cee', sigla: 'DRE', name: 'Diretoria Regional de Ensino' },
+    //   { refPath: 'cee', sigla: 'IE/UE', name: 'Instituição/Unidade de Ensino' },
+    //   { refPath: 'cee', sigla: '', name: 'Outro' }
+    // ];
+    this.contextList = Object.values(ContextEnum);
     this.profileListFiltered = [];
     this.profile = { context: "Administrador", name: "Gerente" }
   }
