@@ -57,6 +57,11 @@ export class ProfileService {
         return this.http.post<IStatusMessage>(uri, profileUser);
     }
 
+    unBindingProfileUser(profileUser: IBindingProfileUser): Observable<IStatusMessage> {
+        const uri = `${this.baseUrl}/unbinding`;
+        return this.http.post<IStatusMessage>(uri, profileUser);
+    }
+
     read(): Observable<IProfile[]> {
         return this.http.get<IProfile[]>(this.baseUrl, { headers: AuthService.headers() });
     }

@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { NotificationService } from './notification.service';
 import { Observable } from 'rxjs';
 import { IStatusMessage } from '../interfaces/IStatusMessage';
+import { EventEmitterService } from './event-emitter.service';
+import { MaskApplierService, MaskPipe } from 'ngx-mask';
 
 @Injectable({
     providedIn: 'root'
@@ -11,7 +13,13 @@ export class UtilService {
 
     static notifying: NotificationService;
 
-    constructor() {}
+    private maskPipe: MaskPipe
+
+    constructor(
+        private maskAService: MaskApplierService
+    ) {
+        this.maskPipe = new MaskPipe(maskAService)
+    }
 
     /**
      * @description Get full name of the user and return a string with just first and last name together.
@@ -47,19 +55,31 @@ export class UtilService {
 
     /**
      * @description Join a phones list in a string using a separator.
-     * @param emailList List of phones
+     * @param phoneList List of phones. The object of the list have the type/struct: { number: number, description: string }
      * @param separator Separator used to separe the phones
      * @returns String with all phones joineds
      */
     phoneListToString(phoneList: IPhone[], separator: string): string {
-        let aux = ''
         let result = ''
         phoneList.forEach((e, i, l) => {
-
-            aux = `${e.number}${(e.description) ? '(' + e.description + ')' : ''}`
+            let number = this.phoneMasked(e.number);
+            // let number = e.number
+            let aux = `${number}${(e.description) ? ' (' + e.description + ')' : ''}`
             result += (result.length > 0) ? separator + aux : aux;
         })
         return result;
+    }
+
+    phoneMasked(n: number) {
+        let xLength = (n.toString().match(/\d/g).length);
+        console.log("xLength", xLength);
+        let mask = (xLength === 13) ? '+00 (00) 0 0000-0000'
+            : (xLength === 12) ? '+00 (00) 0000-0000'
+                : (xLength === 11) ? '(00) 0 0000-0000'
+                    : (xLength === 10) ? '(00) 0000-0000'
+                        : '000000000000000';
+        let number = this.maskPipe.transform(n, mask);
+        return number;
     }
 
     /**
@@ -68,7 +88,14 @@ export class UtilService {
      * @returns Return a string with all the address properties joined
      */
     addressToString(address: IAddress) {
-        const array = [address.zipcode, address.country, address.state, address.city, address.district, address.place, address.number]
+        const array = [
+            this.maskPipe.transform(address.zipcode, "00.000-000"),
+            address.country,
+            address.state,
+            address.city,
+            address.district,
+            address.place,
+            address.number]
         let result = ''
         array.forEach((e, i, l) => {
             if (e)
@@ -98,7 +125,8 @@ export class UtilService {
                 UtilService.notifying.showError(data.statusMessage, `Erro ${data.statusCode}!`);
                 return;
             }
-            UtilService.notifying.showSuccess("Ação realizada com sucesso!", "Ok!")
+            UtilService.notifying.showSuccess("Ação realizada com sucesso!", "Ok!");
+            EventEmitterService.get('is-success').emit(true);
         }, (error) => {
             UtilService.notifying.showError("Não foi possível realizar esta ação!", "Erro!");
         });

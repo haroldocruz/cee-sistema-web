@@ -42,7 +42,6 @@ export class InstitutionService {
   }
 
   read(): Observable<IInstitution[]> {
-    console.log(localStorage.getItem('token'))
     return this.http.get<IInstitution[]>(this.baseUrl, { headers: AuthService.headers() });
   }
 
