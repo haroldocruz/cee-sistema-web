@@ -95,7 +95,7 @@ export class CeeInstitutionFormComponent implements OnInit {
     this.institution.legalActList = this.legalActList;
     
     UtilService.default(this.institutionService.create(this.institution));
-    EventEmitterService.get('is-success').emit(true);
+    // EventEmitterService.get('is-success').emit(true);
 
     if (this.bsModalRef)
       this.bsModalRef.hide();
@@ -113,7 +113,7 @@ export class CeeInstitutionFormComponent implements OnInit {
     this.institution.legalActList = this.legalActList;
 
     UtilService.default(this.institutionService.update(this.institution));
-    EventEmitterService.get('is-success').emit(true);
+    // EventEmitterService.get('is-success').emit(true);
 
     if (this.bsModalRef)
       this.bsModalRef.hide();
