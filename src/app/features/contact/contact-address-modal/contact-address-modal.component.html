@@ -37,12 +37,12 @@
                 <div class="col-md-6">
                     Número:
                     <input type="text" [(ngModel)]="address.number" [ngModelOptions]="{standalone: true}"
-                        class="form-control" />
+                        mask="000000" class="form-control" />
                 </div>
                 <div class="col-md-6">
                     CEP:
                     <input type="text" [(ngModel)]="address.zipcode" [ngModelOptions]="{standalone: true}"
-                        class="form-control" />
+                        mask="00.000-000" class="form-control" />
                 </div>
                 <div class="col-md-12">
                     Complemento:
@@ -66,8 +66,7 @@
 
                     <div class="list-group">
 
-                        <span class="list-group-item text-center text-danger"
-                            *ngIf="addressList.length === 0">
+                        <span class="list-group-item text-center text-danger" *ngIf="addressList.length === 0">
                             Nenhum endereço inserido!
                         </span>
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IAddress, IEmail, IPhone } from 'src/app/interfaces/Contact';
 import { IProfile } from 'src/app/interfaces/Profile';
-import { ProfileService } from 'src/app/services/profile.service';
+import { IBindingProfileUser, ProfileService } from 'src/app/services/profile.service';
 import { orderBy } from "lodash";
 import { GenderEnum } from 'src/app/interfaces/User';
 import { CeeLocalService } from '../../cee.local.service';
@@ -11,6 +11,7 @@ import { IChatUser } from 'src/app/interfaces/IChatUser';
 import { IProfileCardOptions } from 'src/app/directives/profile-card/profile-card.component';
 import { UtilService } from 'src/app/services/util.service';
 import { AuthService } from 'src/app/auth/auth.service';
+import { NotificationService } from 'src/app/services/notification.service';
 
 interface IProfileCard {
   profileId: string,
@@ -39,6 +40,7 @@ export class CeeUserViewComponent implements OnInit {
   fieldsToFilter: Array<{ field: string, value: string }>;
 
   constructor(
+    public notifyService: NotificationService,
     public modalService: BsModalService,
     public profileService: ProfileService,
     public ceeLocalService: CeeLocalService
@@ -66,6 +68,26 @@ export class CeeUserViewComponent implements OnInit {
     const initialState = { user: user2  };
     this.bsModalRef = this.modalService.show(ChatDirectModalComponent, { id: UtilService.getRandom9Digits(), class: 'modal-md', initialState });
     this.bsModalRef.content.closeBtnName = 'Close';
+  }
+
+  unbindingProfileUser(profileCard: IProfileCard) {
+    if (!UtilService.isConfirm(`Deseja desvincular ${profileCard.userName} do perfil de ${profileCard.profileName}?`))
+      return;
+
+    const profileUser: IBindingProfileUser = {
+      profileId: profileCard.profileId,
+      userId: profileCard.userId
+    }
+
+    this.profileService.unBindingProfileUser(profileUser).subscribe((data) => {
+
+      (data.statusCode >= 200 && data.statusCode < 300)
+        ? this.notifyService.showSuccess(data.statusMessage, 'OK')
+        : (data.statusCode >= 300 && data.statusCode < 500)
+          ? this.notifyService.showWarning(data.statusMessage, 'Algo deu errado')
+          : this.notifyService.showError(data.statusMessage, 'ERRO')
+
+    });
   }
 
   toViewProfileToProfileCard(profileList: IProfile[]): IProfileCard[] {

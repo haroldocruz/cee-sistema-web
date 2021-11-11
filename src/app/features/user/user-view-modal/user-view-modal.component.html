@@ -30,7 +30,7 @@
                 <div class="row">
                     <div class="col-sm-4 border-right">
                         <div class="description-block">
-                            <h5 class="description-header">{{ user.contact?.phoneList[0]?.number | mask: '+99 00 90000-0000' }}</h5>
+                            <h5 class="description-header">{{ util.phoneMasked(user.contact?.phoneList[0]?.number) }}</h5>
                             <span class="description-text">Telefone</span>
                         </div>
                         <!-- /.description-block -->

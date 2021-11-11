@@ -11,23 +11,23 @@
                     <div class="card-footer col-12 text-right">
                         <!-- <span *ngIf="profileCard.status"> -->
                         <span>
-                            <a href="#" class="btn btn-sm btn-default">
+                            <button href="#" class="btn btn-sm btn-default" (click)="unbindingProfileUser(profileCard)">
                                 <i class="fas fa-ban"></i>
-                                <span> Desativar perfil</span>
-                            </a>
+                                <span> Desvincular perfil</span>
+                            </button>
                         </span>
                         <span>
                             &nbsp;
-                            <a class="btn btn-sm bg-teal" (click)="openChatDirectModal(profileCard)">
+                            <button class="btn btn-sm bg-teal" (click)="openChatDirectModal(profileCard)">
                                 <i class="fas fa-comments"></i> Conversar
-                            </a>
+                            </button>
                         </span>
                         <span>
                             &nbsp;
-                            <a routerLink="/profile" [queryParams]="{userId: profileCard.userId}"
+                            <button routerLink="/profile" [queryParams]="{userId: profileCard.userId}"
                                 class="btn btn-sm btn-primary">
                                 <i class="far fa-eye"></i> Visualizar
-                            </a>
+                            </button>
                         </span>
                     </div>
                 </div>
