@@ -1,4 +1,4 @@
-export interface ILegalAct {
+export interface IEvidence {
   name?: string;
   title?: string;
   description?: string;
@@ -6,7 +6,7 @@ export interface ILegalAct {
   type?: string;
 }
 
-export class LegalAct implements ILegalAct {
+export class Evidence implements IEvidence {
 
   name: string;
   title: string;

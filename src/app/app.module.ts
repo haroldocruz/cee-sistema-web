@@ -30,10 +30,12 @@ import { UtilService } from './services/util.service';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { ToastrModule } from 'ngx-toastr';
 import { PipesModule } from 'w-ng5';
+import { EvidenceFormComponent } from "./directives/evidence-form/evidence-form.component";
 
 @NgModule({
   declarations: [
     AppComponent,
+    EvidenceFormComponent,
     FilterButtonsDirective
 
     // SortByPipe

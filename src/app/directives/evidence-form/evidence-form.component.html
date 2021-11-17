@@ -1,0 +1,77 @@
+<div class="modal-header">
+    <h4 class="modal-title">
+        <span>Evidências</span>
+    </h4>
+    <button type="button" class="close" (click)="bsModalRef.hide()"><span>&times;</span></button>
+</div>
+
+<div class="modal-body">
+    <div class="container-fluid">
+        <form>
+            <div class="row mt-2">
+                <div class="col-md-12">
+                    Url (gerado automaticamente):
+                    <input type="text" [(ngModel)]="evidence.url"
+                        [ngModelOptions]="{standalone: true}" [disabled]="true"
+                        class="form-control" />
+                </div>
+                <div class="col-md-12">
+                    Nome:
+                    <input type="text" [(ngModel)]="evidence.name"
+                        [ngModelOptions]="{standalone: true}" autocomplete="_"
+                        class="form-control" />
+                </div>
+                <div class="col-md-12">
+                    Título:
+                    <input type="text" [(ngModel)]="evidence.title"
+                        [ngModelOptions]="{standalone: true}" autocomplete="_"
+                        class="form-control" />
+                </div>
+                <div class="col-md-12">
+                    Tipo:
+                    <input type="text" [(ngModel)]="evidence.type"
+                        [ngModelOptions]="{standalone: true}" autocomplete="_"
+                        class="form-control" />
+                </div>
+                <div class="col-md-12">
+                    Descrição:
+                    <textarea rows="6" [(ngModel)]="evidence.description"
+                        [ngModelOptions]="{standalone: true}" class="form-control"></textarea>
+                </div>
+                <div class="col-md-12">
+                    <br>
+                </div>
+                <div class="col-md-12">
+                    <button class="btn btn-primary col" (click)="insertEvidence()">
+                        <i class="fas fa-plus "></i> Adicionar
+                    </button>
+                </div>
+                <div class="col-md-12">
+
+                    <div class="list-group">
+
+                        <span class="list-group-item text-center text-danger" *ngIf="evidenceList.length === 0">
+                            Nenhuma evidência inserida!
+                        </span>
+
+                        <span class="list-group-item sd-list-items" *ngFor="let evidence of evidenceList">
+                            <i class="fa fa-angle-double-right"></i> {{ evidence.title }} ({{ evidence.type }})
+                            <span class="sd-pointer sd-float-right">
+                                <i class="fas fa-edit" (click)="editEvidence(evidence)"></i>
+                                &nbsp;
+                                <i class="fas fa-trash-alt text-danger" (click)="removeEvidence(evidence)"></i>
+                                <!-- <i class="fas fa-trash-alt text-danger"></i> -->
+                            </span>
+                        </span>
+
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="modal-footer">
+    <button class="btn btn-default" (click)="bsModalRef.hide()">Fechar</button>
+    <button class="btn btn-success" (click)="confirm()">Confirmar mudanças</button>
+</div>

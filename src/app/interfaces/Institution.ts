@@ -1,7 +1,7 @@
 import { IContact } from './Contact';
 import { AdministrativeSphereEnum } from './enumerations/administrativeSphereEnum';
 import { InstitutionTypeEnum } from './enumerations/InstitutionTypeEnum';
-import { ILegalAct } from './LegalAct';
+import { IEvidence } from './Evidence';
 import { ILegalPerson } from './LegalPerson';
 
 export interface IFundaments {
@@ -29,7 +29,7 @@ export interface IInstitution {
   cnpj?: Number;
   administrativeSphere?: String;
   legalPerson?: ILegalPerson;
-  legalActList?: ILegalAct[];
+  legalActList?: IEvidence[];
   maintainer?: IInstitution;
   contact?: IContact;
   // evaluationResultList?: Eval..Result[];
