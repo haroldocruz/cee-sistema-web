@@ -1,13 +1,18 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { BsModalRef } from 'ngx-bootstrap/modal';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { InstitutionService } from 'src/app/services/institution.service';
 import { AdministrativeSphereEnum } from 'src/app/interfaces/enumerations/administrativeSphereEnum';
 import { InstitutionTypeEnum } from 'src/app/interfaces/enumerations/InstitutionTypeEnum';
 import { Institution, IInstitution, Fundaments, IFundaments } from 'src/app/interfaces/Institution';
 import { UtilService } from 'src/app/services/util.service';
 import { Address, Contact, Email, IAddress, IContact, IEmail, IPhone, Phone } from 'src/app/interfaces/Contact';
-import { ILegalAct, LegalAct } from 'src/app/interfaces/LegalAct';
+import { IEvidence } from 'src/app/interfaces/Evidence';
 import { EventEmitterService } from 'src/app/services/event-emitter.service';
+import { cloneDeep } from 'lodash';
+import { ContactPhoneModalComponent } from 'src/app/features/contact/contact-phone-modal/contact-phone-modal.component';
+import { ContactEmailModalComponent } from 'src/app/features/contact/contact-email-modal/contact-email-modal.component';
+import { ContactAddressModalComponent } from 'src/app/features/contact/contact-address-modal/contact-address-modal.component';
+import { EvidenceFormComponent } from 'src/app/directives/evidence-form/evidence-form.component';
 
 @Component({
   selector: 'app-cee-institution-form',
@@ -29,11 +34,14 @@ export class CeeInstitutionFormComponent implements OnInit {
   public phoneList: IPhone[];
   public emailList: IEmail[];
   public addressList: IAddress[];
-  public legalActList: ILegalAct[];
+  public legalActList: IEvidence[];
 
   constructor(
     public bsModalRef: BsModalRef,
-    private institutionService: InstitutionService
+    public bsModalRef2: BsModalRef,
+    private modalService: BsModalService,
+    private institutionService: InstitutionService,
+    public util: UtilService
   ) {
     this.institution = new Institution();
   }
@@ -49,10 +57,10 @@ export class CeeInstitutionFormComponent implements OnInit {
     if (this.institution?._id) {
       this.fundaments = this.institution.fundaments || new Fundaments();
       this.contact = new Contact();
-      this.contact.phoneList = this.institution.contact?.phoneList || new Array<Phone>(new Phone());
-      this.contact.emailList = this.institution.contact?.emailList || new Array<Email>(new Email());
-      this.contact.addressList = this.institution.contact?.addressList || new Array<Address>(new Address());
-      this.legalActList = this.institution.legalActList || new Array<LegalAct>(new LegalAct());
+      // this.contact.phoneList = this.institution.contact?.phoneList || new Array<Phone>(new Phone());
+      // this.contact.emailList = this.institution.contact?.emailList || new Array<Email>(new Email());
+      // this.contact.addressList = this.institution.contact?.addressList || new Array<Address>(new Address());
+      this.legalActList = this.institution.legalActList || [];
       return;
     }
 
@@ -60,10 +68,10 @@ export class CeeInstitutionFormComponent implements OnInit {
       this.institution = new Institution();
       this.fundaments = new Fundaments();
       this.contact = new Contact();
-      this.contact.phoneList.push(new Phone());
-      this.contact.emailList = new Array<Email>(new Email());
-      this.contact.addressList = new Array<Address>(new Address());
-      this.legalActList = new Array<LegalAct>(new LegalAct());
+      // this.contact.phoneList.push(new Phone());
+      // this.contact.emailList = new Array<Email>(new Email());
+      // this.contact.addressList = new Array<Address>(new Address());
+      this.legalActList = [];
       return;
     }
 
@@ -74,10 +82,10 @@ export class CeeInstitutionFormComponent implements OnInit {
         this.institution = iData;
         this.fundaments = iData.fundaments || new Fundaments();
         this.contact = new Contact();
-        this.contact.phoneList = iData.contact?.phoneList || new Array<Phone>(new Phone());
-        this.contact.emailList = iData.contact?.emailList || new Array<Email>(new Email());
-        this.contact.addressList = iData.contact?.addressList || new Array<Address>(new Address());
-        this.legalActList = iData.legalActList || new Array<LegalAct>(new LegalAct());
+        this.contact.phoneList = iData.contact?.phoneList || [];
+        this.contact.emailList = iData.contact?.emailList || [];
+        this.contact.addressList = iData.contact?.addressList || [];
+        this.legalActList = iData.legalActList || [];
       }
 
       this.isLoading = false;
@@ -93,7 +101,7 @@ export class CeeInstitutionFormComponent implements OnInit {
     this.institution.contact.emailList = this.contact.emailList;
     this.institution.contact.addressList = this.contact.addressList;
     this.institution.legalActList = this.legalActList;
-    
+
     UtilService.default(this.institutionService.create(this.institution));
     // EventEmitterService.get('is-success').emit(true);
 
@@ -104,7 +112,7 @@ export class CeeInstitutionFormComponent implements OnInit {
   update() {
 
     if (!UtilService.isConfirm()) return;
-    
+
     this.institution.fundaments = this.fundaments;
     this.institution.contact = new Contact();
     this.institution.contact.phoneList = this.contact.phoneList;
@@ -117,6 +125,40 @@ export class CeeInstitutionFormComponent implements OnInit {
 
     if (this.bsModalRef)
       this.bsModalRef.hide();
+  }
+
+  openLegalActModal(evidenceList: IEvidence[]) {
+    const initialState = { evidenceList: cloneDeep(evidenceList), evidenceListRef: evidenceList };
+    this.bsModalRef2 = this.modalService.show(EvidenceFormComponent, { id: 2, class: 'modal-md', initialState });
+    this.bsModalRef2.content.closeBtnName = 'Close';
+  }
+
+  openContactPhoneModal(contact: IContact) {
+    const initialState = { phoneList: cloneDeep(contact.phoneList), phoneListRef: contact.phoneList };
+    this.bsModalRef2 = this.modalService.show(ContactPhoneModalComponent, { id: 2, class: 'modal-md', initialState });
+    this.bsModalRef2.content.closeBtnName = 'Close';
+  }
+
+  openContactEmailModal(contact: IContact) {
+    const initialState = { emailList: cloneDeep(contact.emailList), emailListRef: contact.emailList };
+    this.bsModalRef2 = this.modalService.show(ContactEmailModalComponent, { id: 2, class: 'modal-md', initialState });
+    this.bsModalRef2.content.closeBtnName = 'Close';
+  }
+
+  openContactAddressModal(contact: IContact) {
+    const initialState = { addressList: cloneDeep(contact.addressList), addressListRef: contact.addressList };
+    this.bsModalRef2 = this.modalService.show(ContactAddressModalComponent, { id: 2, class: 'modal-md', initialState });
+    this.bsModalRef2.content.closeBtnName = 'Close';
+  }
+
+  addressToString(address: IAddress) {
+    const array = [address.zipcode, address.country, address.state, address.city, address.district, address.place, address.number]
+    let result = ''
+    array.forEach((e, i, l) => {
+      if (e)
+        result += (result.length > 0) ? ', ' + e : e;
+    })
+    return result;
   }
 
 }

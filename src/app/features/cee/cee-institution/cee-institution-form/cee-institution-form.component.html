@@ -28,7 +28,8 @@
                                 <li class="nav-item">
                                     <a class="nav-link" id="custom-tabs-four-fundaments-tab" data-bs-toggle="pill"
                                         href="#custom-tabs-four-fundaments" role="tab"
-                                        aria-controls="custom-tabs-four-fundaments" aria-selected="false">Fundamentos</a>
+                                        aria-controls="custom-tabs-four-fundaments"
+                                        aria-selected="false">Fundamentos</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" id="custom-tabs-four-contact-tab" data-bs-toggle="pill"
@@ -132,114 +133,196 @@
                                     aria-labelledby="custom-tabs-four-contact-tab">
 
                                     <div class="row mt-2">
-                                        <div class="col-md-6">
-                                            Telefone:
-                                            <input type="text" [(ngModel)]="contact.phoneList[0].number" [ngModelOptions]="{standalone: true}"
-                                                mask="(00) 0000-0000||(00) 0 0000-0000" autocomplete="_" class="form-control" />
-                                        </div>
-                                        <div class="col-md-6">
-                                            Descrição:
-                                            <input type="text" [(ngModel)]="contact.phoneList[0].description" [ngModelOptions]="{standalone: true}"
-                                            autocomplete="_" class="form-control" />
-                                        </div>
-                                        <div class="col-md-6">
-                                            E-mail:
-                                            <input type="text" [(ngModel)]="contact.emailList[0].address" [ngModelOptions]="{standalone: true}"
-                                            autocomplete="_" class="form-control" />
-                                        </div>
-                                        <div class="col-md-6">
-                                            Descrição:
-                                            <input type="text" [(ngModel)]="contact.emailList[0].description" [ngModelOptions]="{standalone: true}"
-                                                class="form-control" />
-                                        </div>
-                                        <div class="col-md-12">
-                                            <br>
+
+                                        <div class="col-12">
+                                            <button class="btn btn-info col" (click)="openContactPhoneModal(contact)">
+                                                <i class="fas fa-edit"></i> Telefone
+                                            </button>
+
+                                            <div class="list-group">
+
+                                                <span class="list-group-item text-center text-danger"
+                                                    *ngIf="contact?.phoneList?.length === 0">
+                                                    Nenhum telefone inserido!
+                                                </span>
+
+                                                <span class="list-group-item sd-list-items"
+                                                    *ngFor="let phone of contact.phoneList">
+                                                    <i class="fa fa-angle-double-right"></i>
+                                                    <span>
+                                                        {{ util.phoneMasked(phone.number) }}
+                                                    </span>
+
+                                                    <span class="sd-float-right">
+                                                        ({{ phone.description }})
+                                                    </span>
+                                                    &nbsp;
+                                                    <span class="sd-pointer sd-float-right">
+                                                        <!-- <i class="fas fa-trash" (click)="remove(p)"></i> -->
+                                                        <!-- <i class="fas fa-trash-alt text-danger"></i> -->
+                                                    </span>
+                                                </span>
+
+                                            </div>
                                         </div>
 
+                                        <div class="col-md-12">
+                                            <hr>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <button class="btn btn-info col" (click)="openContactEmailModal(contact)">
+                                                <i class="fas fa-edit"></i> Email
+                                            </button>
+
+                                            <div class="list-group">
+
+                                                <span class="list-group-item text-center text-danger"
+                                                    *ngIf="contact?.emailList?.length === 0">
+                                                    Nenhum e-mail inserido!
+                                                </span>
+
+                                                <span class="list-group-item sd-list-items"
+                                                    *ngFor="let email of contact.emailList">
+                                                    <i class="fa fa-angle-double-right"></i>
+                                                    <span>
+                                                        {{ email.address }}
+                                                    </span>
+                                                    <span class="sd-float-right">
+                                                        ({{ email.description }})
+                                                    </span>
+                                                    <span class="sd-pointer sd-float-right">
+                                                        <!-- <i class="fas fa-trash" (click)="remove(p)"></i> -->
+                                                        <!-- <i class="fas fa-trash-alt text-danger"></i> -->
+                                                    </span>
+                                                </span>
+
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
+
                                 <div class="tab-pane fade" id="custom-tabs-four-address" role="tabpanel"
                                     aria-labelledby="custom-tabs-four-address-tab">
 
                                     <div class="row mt-2">
+                                        <div class="col-md-12">
+
+                                            <button class="btn btn-info col" (click)="openContactAddressModal(contact)">
+                                                <i class="fas fa-edit"></i> Endereço
+                                            </button>
+
+                                            <div class="list-group">
+
+                                                <span class="list-group-item text-center text-danger"
+                                                    *ngIf="!contact.addressList || contact?.addressList?.length === 0">
+                                                    Nenhum endereço inserido!
+                                                </span>
+
+                                                <span class="list-group-item sd-list-items"
+                                                    *ngFor="let a of contact.addressList">
+                                                    <i class="fa fa-angle-double-right"></i>
+                                                    {{ addressToString(a) }}
+                                                    <span class="sd-pointer sd-float-right">
+                                                        <!-- <i class="fas fa-trash" (click)="remove(p)"></i> -->
+                                                        <i class="fas fa-trash-alt text-danger"></i>
+                                                    </span>
+                                                </span>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <!-- <div class="row mt-2">
                                         <div class="col-md-6">
                                             País:
-                                            <input type="text" [(ngModel)]="contact.addressList[0].country" [ngModelOptions]="{standalone: true}"
-                                            autocomplete="_" class="form-control" />
+                                            <input type="text" [(ngModel)]="contact.addressList[0].country"
+                                                [ngModelOptions]="{standalone: true}" autocomplete="_"
+                                                class="form-control" />
                                         </div>
                                         <div class="col-md-6">
                                             Estado:
-                                            <input type="text" [(ngModel)]="contact.addressList[0].state" [ngModelOptions]="{standalone: true}"
-                                            autocomplete="_" class="form-control" />
+                                            <input type="text" [(ngModel)]="contact.addressList[0].state"
+                                                [ngModelOptions]="{standalone: true}" autocomplete="_"
+                                                class="form-control" />
                                         </div>
                                         <div class="col-md-6">
                                             Cidade:
-                                            <input type="text" [(ngModel)]="contact.addressList[0].city" [ngModelOptions]="{standalone: true}"
-                                            autocomplete="_" class="form-control" />
+                                            <input type="text" [(ngModel)]="contact.addressList[0].city"
+                                                [ngModelOptions]="{standalone: true}" autocomplete="_"
+                                                class="form-control" />
                                         </div>
                                         <div class="col-md-6">
                                             Bairro:
-                                            <input type="text" [(ngModel)]="contact.addressList[0].district" [ngModelOptions]="{standalone: true}"
-                                            autocomplete="_" class="form-control" />
+                                            <input type="text" [(ngModel)]="contact.addressList[0].district"
+                                                [ngModelOptions]="{standalone: true}" autocomplete="_"
+                                                class="form-control" />
                                         </div>
                                         <div class="col-md-12">
                                             Logradouro:
-                                            <input type="text" [(ngModel)]="contact.addressList[0].place" [ngModelOptions]="{standalone: true}"
-                                            autocomplete="_" class="form-control" />
+                                            <input type="text" [(ngModel)]="contact.addressList[0].place"
+                                                [ngModelOptions]="{standalone: true}" autocomplete="_"
+                                                class="form-control" />
                                         </div>
                                         <div class="col-md-6">
                                             Número:
-                                            <input type="text" [(ngModel)]="contact.addressList[0].number" [ngModelOptions]="{standalone: true}"
-                                            autocomplete="_" class="form-control" />
+                                            <input type="text" [(ngModel)]="contact.addressList[0].number"
+                                                [ngModelOptions]="{standalone: true}" autocomplete="_"
+                                                class="form-control" />
                                         </div>
                                         <div class="col-md-6">
                                             CEP:
-                                            <input type="text" [(ngModel)]="contact.addressList[0].zipcode" [ngModelOptions]="{standalone: true}"
-                                            autocomplete="_" mask="00.000-000" class="form-control" />
+                                            <input type="text" [(ngModel)]="contact.addressList[0].zipcode"
+                                                [ngModelOptions]="{standalone: true}" autocomplete="_" mask="00.000-000"
+                                                class="form-control" />
                                         </div>
                                         <div class="col-md-12">
                                             Complemento:
-                                            <textarea rows="2" [(ngModel)]="contact.addressList[0].description" [ngModelOptions]="{standalone: true}"
-                                                class="form-control" placeholder="Ex: Próximo ao ginásio Ayrton Senna"></textarea>
+                                            <textarea rows="2" [(ngModel)]="contact.addressList[0].description"
+                                                [ngModelOptions]="{standalone: true}" class="form-control"
+                                                placeholder="Ex: Próximo ao ginásio Ayrton Senna"></textarea>
                                         </div>
                                         <div class="col-md-12">
                                             Descrição:
-                                            <textarea rows="2" [(ngModel)]="contact.addressList[0].description" [ngModelOptions]="{standalone: true}"
-                                                class="form-control" placeholder=""></textarea>
+                                            <textarea rows="2" [(ngModel)]="contact.addressList[0].description"
+                                                [ngModelOptions]="{standalone: true}" class="form-control"
+                                                placeholder=""></textarea>
                                         </div>
                                         <div class="col-md-12">
                                             <br>
                                         </div>
 
-                                    </div>
+                                    </div> -->
                                 </div>
                                 <div class="tab-pane fade" id="custom-tabs-four-legalact" role="tabpanel"
                                     aria-labelledby="custom-tabs-four-legalact-tab">
-                                    <div class="row">
+                                    <div class="row mt-2">
                                         <div class="col-md-12">
-                                            Url (gerado automaticamente):
-                                            <input type="text" [(ngModel)]="legalActList[0].url" [ngModelOptions]="{standalone: true}" [disabled]="true"
-                                                class="form-control" />
-                                        </div>
-                                        <div class="col-md-12">
-                                            Nome:
-                                            <input type="text" [(ngModel)]="legalActList[0].name" [ngModelOptions]="{standalone: true}"
-                                            autocomplete="_" class="form-control" />
-                                        </div>
-                                        <div class="col-md-12">
-                                            Título:
-                                            <input type="text" [(ngModel)]="legalActList[0].title" [ngModelOptions]="{standalone: true}"
-                                            autocomplete="_" class="form-control" />
-                                        </div>
-                                        <div class="col-md-12">
-                                            Tipo:
-                                            <input type="text" [(ngModel)]="legalActList[0].type" [ngModelOptions]="{standalone: true}"
-                                            autocomplete="_" class="form-control" />
-                                        </div>
-                                        <div class="col-md-12">
-                                            Descrição:
-                                            <textarea rows="6" [(ngModel)]="legalActList[0].description"
-                                                [ngModelOptions]="{standalone: true}" class="form-control"></textarea>
+
+                                            <button class="btn btn-info col" (click)="openLegalActModal(legalActList)">
+                                                <i class="fas fa-edit"></i> Ato Legal
+                                            </button>
+
+                                            <div class="list-group">
+
+                                                <span class="list-group-item text-center text-danger"
+                                                    *ngIf="!legalActList || legalActList?.length === 0">
+                                                    Nenhum ato legal inserido!
+                                                </span>
+
+                                                <span class="list-group-item sd-list-items"
+                                                    *ngFor="let a of legalActList">
+                                                    <i class="fa fa-angle-double-right"></i>
+                                                    {{ a.title }} ({{ a.type }})
+                                                    <span class="sd-pointer sd-float-right">
+                                                        <!-- <i class="fas fa-trash" (click)="remove(p)"></i> -->
+                                                        <i class="fas fa-trash-alt text-danger"></i>
+                                                    </span>
+                                                </span>
+
+                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
