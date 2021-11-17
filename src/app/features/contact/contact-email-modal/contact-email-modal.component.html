@@ -11,18 +11,21 @@
             <div class="row mt-2">
                 <div class="col-md-12">
                     Descrição:
-                    <textarea rows="1" [(ngModel)]="email.description" [ngModelOptions]="{standalone: true}" class="form-control"
-                        placeholder="Ex: Escritório; WhatsApp"></textarea>
+                    <textarea rows="1" [(ngModel)]="email.description" [ngModelOptions]="{standalone: true}"
+                        class="form-control" placeholder="Ex: Escritório; WhatsApp"></textarea>
                 </div>
                 <div class="col-md-12">
                     E-mail:
-                    <div class="input-group mb-3">
-                        <input type="text" [(ngModel)]="email.address" [ngModelOptions]="{standalone: true}" class="form-control" />
-                        <div class="input-group-append">
-                            <button class="btn btn-primary" (click)="insertEmail()"><i
-                                    class="fas fa-plus "></i></button>
-                        </div>
-                    </div>
+                    <input type="text" [(ngModel)]="email.address" [ngModelOptions]="{standalone: true}"
+                        class="form-control" />
+                </div>
+                <div class="col-md-12">
+                    <br>
+                </div>
+                <div class="col-md-12">
+                    <button class="btn btn-primary col" (click)="insertEmail()">
+                        <i class="fas fa-plus "></i> Adicionar
+                    </button>
                 </div>
                 <div class="col-md-12">
 

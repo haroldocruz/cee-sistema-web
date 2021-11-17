@@ -1,4 +1,4 @@
-import { cloneDeep } from 'lodash';
+import { cloneDeep, isEmpty } from 'lodash';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { IEmail } from './../../../interfaces/Contact';
 import { Component, OnInit } from '@angular/core';
@@ -23,6 +23,8 @@ export class ContactEmailModalComponent implements OnInit {
     }
 
     insertEmail(){
+        if(isEmpty(this.email)) return;
+        
         this.emailList.push(this.email);
         this.email = {};
     }

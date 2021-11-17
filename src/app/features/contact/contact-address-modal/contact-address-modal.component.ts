@@ -1,12 +1,12 @@
-import { cloneDeep } from 'lodash';
+import { cloneDeep, isEmpty } from 'lodash';
 import { BsModalRef } from 'ngx-bootstrap/modal';
-import { IAddress } from './../../../interfaces/Contact';
+import { Address, IAddress } from './../../../interfaces/Contact';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-contact-address-modal',
-  templateUrl: './contact-address-modal.component.html',
-  styleUrls: ['./contact-address-modal.component.less']
+    selector: 'app-contact-address-modal',
+    templateUrl: './contact-address-modal.component.html',
+    styleUrls: ['./contact-address-modal.component.less']
 })
 export class ContactAddressModalComponent implements OnInit {
 
@@ -27,27 +27,29 @@ export class ContactAddressModalComponent implements OnInit {
         let ats = ''
         array.forEach((e, i, l) => {
             if (e)
-            ats += (ats.length > 0) ? ', ' + e : e;
+                ats += (ats.length > 0) ? ', ' + e : e;
         })
         return ats;
     }
 
-    insertAddress(){
+    insertAddress() {
+        if (isEmpty(this.address)) return;
+        
         this.addressList.push(this.address);
         this.address = {};
     }
 
-    editAddress(address: IAddress){
+    editAddress(address: IAddress) {
         this.address = cloneDeep(address);
         this.removeAddress(address);
     }
 
-    removeAddress(address: IAddress){
+    removeAddress(address: IAddress) {
         const idx = this.addressList.indexOf(address);
         this.addressList.splice(idx, 1);
     }
 
-    confirm(){
+    confirm() {
         this.addressListRef.splice(0, this.addressListRef.length)
         this.addressListRef.push(...this.addressList);
         this.bsModalRef.hide();

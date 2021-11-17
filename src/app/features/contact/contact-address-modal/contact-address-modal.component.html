@@ -12,37 +12,37 @@
                 <div class="col-md-6">
                     País:
                     <input type="text" [(ngModel)]="address.country" [ngModelOptions]="{standalone: true}"
-                        class="form-control" />
+                        autocomplete="_" class="form-control" />
                 </div>
                 <div class="col-md-6">
                     Estado:
                     <input type="text" [(ngModel)]="address.state" [ngModelOptions]="{standalone: true}"
-                        class="form-control" />
+                        autocomplete="_" class="form-control" />
                 </div>
                 <div class="col-md-6">
                     Cidade:
-                    <input type="text" [(ngModel)]="address.city" [ngModelOptions]="{standalone: true}"
+                    <input type="text" [(ngModel)]="address.city" [ngModelOptions]="{standalone: true}" autocomplete="_"
                         class="form-control" />
                 </div>
                 <div class="col-md-6">
                     Bairro:
                     <input type="text" [(ngModel)]="address.district" [ngModelOptions]="{standalone: true}"
-                        class="form-control" />
+                        autocomplete="_" class="form-control" />
                 </div>
                 <div class="col-md-12">
                     Logradouro:
                     <input type="text" [(ngModel)]="address.place" [ngModelOptions]="{standalone: true}"
-                        class="form-control" />
+                        autocomplete="_" class="form-control" />
                 </div>
                 <div class="col-md-6">
                     Número:
-                    <input type="text" [(ngModel)]="address.number" [ngModelOptions]="{standalone: true}"
-                        mask="000000" class="form-control" />
+                    <input type="text" [(ngModel)]="address.number" [ngModelOptions]="{standalone: true}" mask="000000"
+                        class="form-control" />
                 </div>
                 <div class="col-md-6">
                     CEP:
                     <input type="text" [(ngModel)]="address.zipcode" [ngModelOptions]="{standalone: true}"
-                        mask="00.000-000" class="form-control" />
+                        mask="00.000-000" autocomplete="_" class="form-control" />
                 </div>
                 <div class="col-md-12">
                     Complemento:
