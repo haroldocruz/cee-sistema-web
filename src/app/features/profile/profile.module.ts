@@ -14,6 +14,8 @@ import { ProfileCardImageComponent } from './profile-card-image/profile-card-ima
 import { ProfileMainTimelineComponent } from './profile-card-main/profile-main-timeline/profile-main-timeline.component';
 import { ProfileMainUserdataComponent } from './profile-card-main/profile-main-userdata/profile-main-userdata.component';
 import { ProfileMainUserconfigComponent } from './profile-card-main/profile-main-userconfig/profile-main-userconfig.component';
+import { ProfilePersonalComponent } from './profile-personal/profile-personal.component';
+import { ProfileFilterComponent } from './profile-filter/profile-filter.component';
 
 @NgModule({
     declarations: [
@@ -25,7 +27,9 @@ import { ProfileMainUserconfigComponent } from './profile-card-main/profile-main
         ProfileCardImageComponent,
         ProfileMainTimelineComponent,
         ProfileMainUserdataComponent,
-        ProfileMainUserconfigComponent
+        ProfileMainUserconfigComponent,
+        ProfilePersonalComponent,
+        ProfileFilterComponent
     ],
     imports: [
         AppRoutingModule,

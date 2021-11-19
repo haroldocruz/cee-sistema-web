@@ -11,7 +11,7 @@
   <tbody>
     <!-- <tr *ngFor="let profile of profileList; let i = index"> -->
     <!-- <tr *ngFor="let profile of profileService.profiles | filter: [{field: 'name', value: profileService.filtro}] | sortBy:'asc':'status, name'; let i = index"> -->
-    <tr *ngFor="let profile of profileLocalService.profiles | filter: [{field: 'name', value: profileLocalService.filtro}] let i = index">
+    <tr *ngFor="let profile of profileList | filter: [{field: 'name', value: profileLocalService.filtro}] let i = index">
       <td scope="row" class="text-center sd-wfr">{{ i + 1 }}</td>
       <td class="text-center sd-wfr">
         <i class="fas fa-check-circle text-green" *ngIf="profile.status" title="ativo"></i>

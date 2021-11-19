@@ -46,10 +46,8 @@ export class ProfileService {
         this.profile = (profile) ? profile : new Profile();
     }
 
-    create(): void {
-        this.http.post<IProfile>(this.baseUrl, this.profile).subscribe(() => {
-            this.index();
-        });
+    create(profile: IProfile): Observable<IProfile> {
+        return this.http.post<IProfile>(this.baseUrl, profile, { headers: AuthService.headers() });
     }
 
     bindingProfileUser(profileUser: IBindingProfileUser): Observable<IStatusMessage> {
@@ -76,18 +74,20 @@ export class ProfileService {
         return this.http.post<IProfile[]>(url, filter);
     }
 
-    update(profile: IProfile): void {
+    update(profile: IProfile): Observable<IStatusMessage> {
         const url = `${this.baseUrl}/${profile._id}`
-        this.http.post<IProfile>(url, profile).subscribe(() => {
-            this.index();
-        });
+        return this.http.post<IStatusMessage>(url, profile)
+        // .subscribe(() => {
+        //     this.index();
+        // });
     }
 
-    delete(id: string): void {
+    delete(id: string): Observable<IStatusMessage> {
         const url = `${this.baseUrl}/${id}`;
-        this.http.delete<IProfile>(url).subscribe(() => {
-            this.index();
-        });
+        return this.http.delete<IStatusMessage>(url)
+        // .subscribe(() => {
+        //     this.index();
+        // });
     }
 
     // create(): Observable<IProfile>{

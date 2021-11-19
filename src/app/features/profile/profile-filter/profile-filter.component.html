@@ -1,0 +1,146 @@
+<div class="row d-print-none">
+    <div class="col-12">
+
+        <!-- * Button -->
+        <button class="btn btn-info" (click)="openGroupFormModal(null)">
+            <i class="fa fa-plus"></i>
+            &nbsp;
+            <span>Novo perfil</span>
+        </button>
+
+        &nbsp;
+
+        <!-- * Button -->
+        <button class="btn btn-info" (click)="refresh()">
+            <i class="fa fa-sync"></i>
+            &nbsp;
+            <span>Atualizar lista</span>
+        </button>
+        
+        <!-- * Button -->
+        <button class="btn btn-info" (click)="inserir()">
+            <i class="fa fa-sync"></i>
+            &nbsp;
+            <span>Inserir</span>
+        </button>
+    </div>
+
+    <br><br><br>
+
+    <div class="col-6">
+
+        <!-- * Filter field -->
+        <div class="input-group mb-3">
+            <div class="input-group-append">
+                <div class="input-group-text">
+                    <span><i class="fa fa-filter"></i></span>
+                </div>
+            </div>
+            <input id="search-box" class="form-control" type="text" placeholder="Pesquisar">
+            <!-- <input id="search-box" class="form-control" type="text" [(ngModel)]="search" placeholder="Pesquisar"> -->
+            <!-- <input type="hidden" [value]="ceeInstitutionLocalService.search"> -->
+        </div>
+
+    </div>
+</div>
+
+<div class="row  d-print-none">
+    <div class="col-6 col-sm-4 col-md-3">
+        <div class="info-box btn btn-default text-left" (click)="filtering('')">
+            <span class="info-box-icon bg-info elevation-1"><i class="fas fa-folder-open"></i></span>
+
+            <div class="info-box-content">
+                <span class="info-box-text">Todos</span>
+                <span class="info-box-number">
+                    <!-- {{ ceeInstitutionLocalService.typeLength.institutionListLength }} -->
+                    <!-- <small>%</small> -->
+                </span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+    </div>
+    
+    <div class="col-6 col-sm-4 col-md-3">
+        <div class="info-box btn btn-default text-left" (click)="filtering(institutionTypeEnum.PUBLIC_ADM)">
+            <span class="info-box-icon bg-info elevation-1"><i class="fas fa-award"></i></span>
+
+            <div class="info-box-content">
+                <span class="info-box-text">Administrativos</span>
+                <span class="info-box-number">
+                    <!-- {{ ceeInstitutionLocalService.typeLength.pubAdmLength }} -->
+                    <!-- <small>%</small> -->
+                </span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+    </div>
+
+    <div class="col-6 col-sm-4 col-md-3">
+        <div class="info-box mb-3 btn btn-default text-left"
+            (click)="filtering(institutionTypeEnum.PRIVATE_MAINTAINER)">
+            <span class="info-box-icon bg-info elevation-1"><i class="fas fa-building"></i></span>
+
+            <div class="info-box-content">
+                <span class="info-box-text">Mantenedoras</span>
+                <span class="info-box-number">
+                    <!-- {{ ceeInstitutionLocalService.typeLength.privMaintainerLength }} -->
+                </span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+
+    <div class="col-6 col-sm-4 col-md-3">
+        <div class="info-box mb-3 btn btn-default text-left"
+            (click)="filtering(institutionTypeEnum.PRIVATE_MAINTAINED)">
+            <span class="info-box-icon bg-info elevation-1"><i class="fas fa-graduation-cap"></i></span>
+
+            <div class="info-box-content">
+                <span class="info-box-text">Mantidas</span>
+                <span class="info-box-number">
+                    <!-- {{ ceeInstitutionLocalService.typeLength.privMaintainedLength }} -->
+                </span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+    </div>
+
+    <div class="col-6 col-sm-4 col-md-3">
+        <div class="info-box mb-3  btn btn-default text-left" (click)="filtering(institutionTypeEnum.PUBLIC_UE)">
+            <span class="info-box-icon bg-info elevation-1"><i class="fas fa-user-graduate"></i></span>
+
+            <div class="info-box-content">
+                <span class="info-box-text">UE's</span>
+                <span class="info-box-number">
+                    <!-- {{ ceeInstitutionLocalService.typeLength.pubUELength }} -->
+                </span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+    </div>
+
+    <!-- fix for small devices only -->
+    <!-- <div class="clearfix hidden-md-up"></div> -->
+
+    <div class="col-6 col-sm-4 col-md-3">
+        <div class="info-box mb-3  btn btn-default text-left" (click)="filtering(institutionTypeEnum.UNINFORMED)">
+            <span class="info-box-icon bg-info elevation-1"><i class="fas fa-book-open"></i></span>
+
+            <div class="info-box-content">
+                <span class="info-box-text">Outros</span>
+                <span class="info-box-number">
+                    <!-- {{ ceeInstitutionLocalService.typeLength.otherLength }} -->
+                </span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+</div>

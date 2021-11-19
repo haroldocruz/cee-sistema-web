@@ -8,6 +8,8 @@ import { ProfileLocalService } from './profile.local.service';
 import { UserLocalService } from '../user/user.local.service';
 import { AuthService } from 'src/app/auth/auth.service';
 import { ActivatedRoute } from '@angular/router';
+import { IProfile } from 'src/app/interfaces/Profile';
+import { ProfileService } from 'src/app/services/profile.service';
 
 @Component({
   selector: 'app-profile',
@@ -19,22 +21,28 @@ export class ProfileComponent implements OnInit, OnDestroy {
   // public filterInputId = new FormControl();
   // public filtro: string;
 
+  public profileList: IProfile[];
+
   constructor(
     private route: ActivatedRoute,
     public profileLocalService: ProfileLocalService,
+    private profileService: ProfileService,
     private userService: UserLocalService
     ) { }
 
   ngOnInit(): void {
+    this.profileService.read().subscribe((data)=>{
+      this.profileList = data
+    })
     
-    this.route.queryParams.subscribe((params) => {
+    // this.route.queryParams.subscribe((params) => {
 
-      let id: string = params['userId'] || AuthService.user._id;
+    //   let id: string = params['userId'] || AuthService.user._id;
       
-      this.userService.readById(id).subscribe((data) => {
-        ProfileLocalService.user = data;
-      });
-    });
+    //   this.userService.readById(id).subscribe((data) => {
+    //     ProfileLocalService.user = data;
+    //   });
+    // });
 
   //   this.typeahead(document.getElementById('search-box')).subscribe(data => {
   //     this.profileLocalService.filtro = data;

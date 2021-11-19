@@ -1,7 +1,10 @@
 import { NotificationService } from './../../../services/notification.service';
 import { ProfileLocalService } from '../profile.local.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { IProfile, Profile } from 'src/app/interfaces/Profile';
+import { EventEmitterService } from 'src/app/services/event-emitter.service';
+import { ProfileService } from 'src/app/services/profile.service';
+import { UtilService } from 'src/app/services/util.service';
 
 @Component({
     selector: 'app-profile-list',
@@ -10,14 +13,28 @@ import { IProfile, Profile } from 'src/app/interfaces/Profile';
 })
 export class ProfileListComponent implements OnInit {
 
-    constructor(public profileLocalService: ProfileLocalService, private notify: NotificationService) { }
+    @Input() profileList: IProfile[];
+
+    constructor(
+        public profileLocalService: ProfileLocalService,
+        public profileService: ProfileService,
+        private notify: NotificationService
+    ) { }
 
     ngOnInit(): void {
-        this.index()
+        this.index();
+
+        EventEmitterService.get('is-success').subscribe((isSuccess) => {
+            if (isSuccess)
+                this.index();
+        });
     }
 
     index(): void {
-        this.profileLocalService.index();
+        this.profileService.read().subscribe((data) => {
+            this.profileList = data
+            console.log("data", data.length);
+        })
     }
 
     edit(profile: IProfile | null) {
@@ -25,12 +42,7 @@ export class ProfileListComponent implements OnInit {
     }
 
     delete(id): void {
-        this.profileLocalService.delete(id).subscribe((data) => {
-            this.profileLocalService.index();
-            this.notify.showSuccess(data[1], 'Ok!');
-        }, (error) => {
-            this.notify.showError(error.error[1], 'Erro!');
-        })
+        UtilService.default(this.profileService.delete(id));
     }
 
 }
