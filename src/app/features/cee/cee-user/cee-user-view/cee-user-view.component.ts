@@ -56,7 +56,6 @@ export class CeeUserViewComponent implements OnInit {
   }
 
   userIndex() {
-    console.log(AuthService.currentProfile.context)
     this.profileService.readFilter({ name: undefined, context: AuthService.currentProfile.context }).subscribe((data) => {
 
       this.profileCardList = this.toViewProfileToProfileCard(data);
