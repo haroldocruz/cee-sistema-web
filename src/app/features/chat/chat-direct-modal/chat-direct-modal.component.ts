@@ -6,7 +6,8 @@ import { ChatLocalService } from '../chat.local.service';
 @Component({
   selector: 'app-chat-direct-modal',
   templateUrl: './chat-direct-modal.component.html',
-  styleUrls: ['./chat-direct-modal.component.less']
+  styleUrls: ['./chat-direct-modal.component.less'],
+  providers: [BsModalRef]
 })
 export class ChatDirectModalComponent implements OnInit {
 
