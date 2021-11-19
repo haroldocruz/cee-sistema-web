@@ -2,7 +2,7 @@
 <div class="user-panel mt-3 pb-3 mb-3 text-center">
 
   <div *ngIf="AuthService.user._id">
-    <a routerLink="/profile"><i class="fas fa-user-circle fa-3x"></i></a>
+    <a routerLink="/profile/personal"><i class="fas fa-user-circle fa-3x"></i></a>
     <!-- <img src="../../../public/img/haroldocruz.jpg" class="img-circle elevation-2" alt="User Image"> -->
     <a class="d-block" data-toggle="modal" data-target="#authListModal">
       {{ AuthService.user.name.match(firstName)[1]+' '+ AuthService.user.name.match(lastName)[1] }}
