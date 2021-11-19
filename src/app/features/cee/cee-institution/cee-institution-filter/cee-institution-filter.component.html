@@ -1,6 +1,5 @@
 <div class="row d-print-none">
-    <div class="col-6">
-
+    <div class="col-12">
         <!-- * Button -->
         <button class="btn btn-info" (click)="openGroupFormModal(null)">
             <i class="fa fa-plus"></i>
@@ -14,10 +13,12 @@
             &nbsp;
             <span>Atualizar lista</span>
         </button>
+    </div>
 
-        <br><br>
+    <br><br>
 
-        <!-- * Filter field -->
+    <!-- * Filter field -->
+    <div class="col-12 col-md-6">
         <div class="input-group mb-3">
             <div class="input-group-append">
                 <div class="input-group-text">
@@ -27,8 +28,8 @@
             <input id="search-box" class="form-control" type="text" [(ngModel)]="search" placeholder="Pesquisar">
             <input type="hidden" [value]="ceeInstitutionLocalService.search">
         </div>
-
     </div>
+
 </div>
 
 <div class="row  d-print-none">
@@ -64,7 +65,8 @@
     </div>
     <!-- /.col -->
     <div class="col-6 col-sm-4 col-md-3">
-        <div class="info-box mb-3 btn btn-default text-left" (click)="filtering(institutionTypeEnum.PRIVATE_MAINTAINER)">
+        <div class="info-box mb-3 btn btn-default text-left"
+            (click)="filtering(institutionTypeEnum.PRIVATE_MAINTAINER)">
             <span class="info-box-icon bg-info elevation-1"><i class="fas fa-building"></i></span>
 
             <div class="info-box-content">
@@ -83,7 +85,8 @@
     <!-- <div class="clearfix hidden-md-up"></div> -->
 
     <div class="col-6 col-sm-4 col-md-3">
-        <div class="info-box mb-3 btn btn-default text-left" (click)="filtering(institutionTypeEnum.PRIVATE_MAINTAINED)">
+        <div class="info-box mb-3 btn btn-default text-left"
+            (click)="filtering(institutionTypeEnum.PRIVATE_MAINTAINED)">
             <span class="info-box-icon bg-info elevation-1"><i class="fas fa-graduation-cap"></i></span>
 
             <div class="info-box-content">

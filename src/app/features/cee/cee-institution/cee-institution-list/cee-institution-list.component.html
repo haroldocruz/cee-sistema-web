@@ -1,9 +1,9 @@
 <div class="row">
     <div class="col-12">
-        <!-- <div class="info-box btn btn-default text-left" routerLink="view"
-            *ngFor="let item of institutionListView | sortBy:'asc':'name' | filter:[{ field: 'institutionType', value: ceeInstitutionLocalService.filter}] | filter: [{ field: 'name', value: ceeInstitutionLocalService.search}]"> -->
-        <div class="info-box btn btn-default text-left" (click)="openInstitutionFormModal(item)"
+        <div class="info-box btn btn-default text-left" routerLink="view" [queryParams]="{ institutionId: item._id }"
             *ngFor="let item of institutionListView | sortBy:'asc':'name' | filter:[{ field: 'institutionType', value: ceeInstitutionLocalService.filter}] | filter: [{ field: 'name', value: ceeInstitutionLocalService.search}]">
+        <!-- <div class="info-box btn btn-default text-left" (click)="openInstitutionFormModal(item)"
+            *ngFor="let item of institutionListView | sortBy:'asc':'name' | filter:[{ field: 'institutionType', value: ceeInstitutionLocalService.filter}] | filter: [{ field: 'name', value: ceeInstitutionLocalService.search}]"> -->
             
             <span class="info-box-icon bg-gray-light elevation-1" *ngIf="item.institutionType == InstitutionTypeEnum.PUBLIC_ADM">
                 <i class="fas fa-award"></i>

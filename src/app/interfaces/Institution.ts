@@ -5,29 +5,29 @@ import { IEvidence } from './Evidence';
 import { ILegalPerson } from './LegalPerson';
 
 export interface IFundaments {
-  personalProfile?: String;
-  mission?: String;
-  vision?: String;
-  values?: String;
+  personalProfile?: string;
+  mission?: string;
+  vision?: string;
+  values?: string;
 }
 
 export class Fundaments implements IFundaments {
 
-  personalProfile: String;
-  mission: String;
-  vision: String;
-  values: String;
+  personalProfile: string;
+  mission: string;
+  vision: string;
+  values: string;
   
 }
 
 export interface IInstitution {
-  _id?: String;
-  institutionType?: String;
-  socialReason?: String;
-  name?: String;
-  initials?: String;
-  cnpj?: Number;
-  administrativeSphere?: String;
+  _id?: string;
+  institutionType?: string;
+  socialReason?: string;
+  name?: string;
+  initials?: string;
+  cnpj?: number;
+  administrativeSphere?: string;
   legalPerson?: ILegalPerson;
   legalActList?: IEvidence[];
   maintainer?: IInstitution;
@@ -35,7 +35,7 @@ export interface IInstitution {
   // evaluationResultList?: Eval..Result[];
   // courseList?: Course[];
   // memberList?: User[];
-  description?: String;
+  description?: string;
   fundaments?: IFundaments;
 }
 

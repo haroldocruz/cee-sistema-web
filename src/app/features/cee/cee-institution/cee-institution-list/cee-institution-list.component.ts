@@ -104,8 +104,7 @@ export class CeeInstitutionListComponent implements OnInit {
         this.ceeInstitutionLocalService.typeLength.otherLength += 1;
     });
   }
-
-  //TODO: inserir este no component *view
+  
   openInstitutionFormModal(institutionItem: any) {
     const institution = this.institutionList.find((e) => { institutionItem._id === e._id });
     const initialState = { institutionId: institutionItem._id, institution: institution };

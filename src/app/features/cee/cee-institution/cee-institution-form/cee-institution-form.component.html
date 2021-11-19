@@ -5,7 +5,7 @@
             <span *ngIf="!institution?._id">Inserir</span>
             <span *ngIf="institution?._id">Alterar</span>
         </h4>
-        <button type="button" class="close" (click)="bsModalRef.hide()"><span>&times;</span></button>
+        <button type="button" class="close" *ngIf="bsModalRef" (click)="bsModalRef.hide()"><span>&times;</span></button>
     </div>
 
     <div class="modal-body">
@@ -135,9 +135,9 @@
                                     <div class="row mt-2">
 
                                         <div class="col-12">
-                                            <button class="btn btn-info col" (click)="openContactPhoneModal(contact)">
+                                            <a class="btn btn-info col" (click)="openContactPhoneModal(contact)">
                                                 <i class="fas fa-edit"></i> Telefone
-                                            </button>
+                                            </a>
 
                                             <div class="list-group">
 
@@ -171,9 +171,9 @@
                                         </div>
 
                                         <div class="col-12">
-                                            <button class="btn btn-info col" (click)="openContactEmailModal(contact)">
+                                            <a class="btn btn-info col" (click)="openContactEmailModal(contact)">
                                                 <i class="fas fa-edit"></i> Email
-                                            </button>
+                                            </a>
 
                                             <div class="list-group">
 
@@ -208,9 +208,9 @@
                                     <div class="row mt-2">
                                         <div class="col-md-12">
 
-                                            <button class="btn btn-info col" (click)="openContactAddressModal(contact)">
+                                            <a class="btn btn-info col" (click)="openContactAddressModal(contact)">
                                                 <i class="fas fa-edit"></i> Endereço
-                                            </button>
+                                            </a>
 
                                             <div class="list-group">
 
@@ -300,9 +300,9 @@
                                     <div class="row mt-2">
                                         <div class="col-md-12">
 
-                                            <button class="btn btn-info col" (click)="openLegalActModal(legalActList)">
+                                            <a class="btn btn-info col" (click)="openLegalActModal(legalActList)">
                                                 <i class="fas fa-edit"></i> Ato Legal
-                                            </button>
+                                            </a>
 
                                             <div class="list-group">
 
@@ -340,7 +340,7 @@
     <div class="modal-footer">
         <!-- <input type="hidden" (ngModel)="isDataAccess = false"> -->
         <button type="reset" class="btn btn-default" *ngIf="!institution?._id">Limpar</button>
-        <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">Fechar</button>
+        <button type="button" class="btn btn-default" *ngIf="bsModalRef" (click)="bsModalRef.hide()">Fechar</button>
         <input type="submit" class="btn btn-primary" value="Salvar" (click)="create()" *ngIf="!institution?._id">
         <input type="submit" class="btn btn-primary" value="Atualizar" (click)="update()" *ngIf="institution?._id">
     </div>

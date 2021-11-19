@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
+import { UtilService } from 'src/app/services/util.service';
 
 @Component({
   selector: 'app-cee-institution',
@@ -8,12 +9,10 @@ import { Title } from '@angular/platform-browser';
 })
 export class CeeInstitutionComponent implements OnInit {
 
-  constructor(
-    private titleService: Title
-  ) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.titleService.setTitle('CEE | Institution')
+    UtilService.Title.setTitle('CEE | Institution')
   }
 
 }

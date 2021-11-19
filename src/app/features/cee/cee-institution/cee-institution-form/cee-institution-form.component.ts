@@ -17,12 +17,15 @@ import { EvidenceFormComponent } from 'src/app/directives/evidence-form/evidence
 @Component({
   selector: 'app-cee-institution-form',
   templateUrl: './cee-institution-form.component.html',
-  styleUrls: ['./cee-institution-form.component.less']
+  styleUrls: ['./cee-institution-form.component.less'],
 })
 export class CeeInstitutionFormComponent implements OnInit {
 
   @Input() public institution: IInstitution;
   @Input() public institutionId: String;
+  
+  public bsModalRef: BsModalRef
+  public bsModalRef2: BsModalRef
 
   public isLoading: boolean = false;
 
@@ -37,8 +40,6 @@ export class CeeInstitutionFormComponent implements OnInit {
   public legalActList: IEvidence[];
 
   constructor(
-    public bsModalRef: BsModalRef,
-    public bsModalRef2: BsModalRef,
     private modalService: BsModalService,
     private institutionService: InstitutionService,
     public util: UtilService
@@ -56,7 +57,7 @@ export class CeeInstitutionFormComponent implements OnInit {
   index() {
     if (this.institution?._id) {
       this.fundaments = this.institution.fundaments || new Fundaments();
-      this.contact = new Contact();
+      this.contact = this.institution.contact || new Contact();
       // this.contact.phoneList = this.institution.contact?.phoneList || new Array<Phone>(new Phone());
       // this.contact.emailList = this.institution.contact?.emailList || new Array<Email>(new Email());
       // this.contact.addressList = this.institution.contact?.addressList || new Array<Address>(new Address());
