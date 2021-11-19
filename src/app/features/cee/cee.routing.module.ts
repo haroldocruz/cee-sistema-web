@@ -1,6 +1,8 @@
 import { Route } from '@angular/router';
 import { AuthGuard } from 'src/app/guards/auth.guard';
 import { PermissionGuard } from 'src/app/guards/permission.guard';
+import { ChatDirectModalComponent } from '../chat/chat-direct-modal/chat-direct-modal.component';
+import { ChatComponent } from '../chat/chat.component';
 import { CeeDashboardComponent } from './cee-dashboard/cee-dashboard.component';
 import { CeeDocumentComponent } from './cee-document/cee-document.component';
 import { CeeHomeComponent } from './cee-home/cee-home.component';
@@ -36,12 +38,12 @@ export const CeeRouting: Route = {
       path: "dashboard", component: CeeDashboardComponent,
       // canActivate: [AuthGuard, PermissionGuard]
     },
-    { 
-      path: "institution", component: CeeInstitutionComponent,
-      children: [
-        { path: "form", component: CeeInstitutionFormComponent }
-      ]
-   },
-   { path: "institution/view", component: CeeInstitutionViewComponent }
+    {
+      path: "institution", component: CeeInstitutionComponent
+    },
+    { path: "institution/form", component: CeeInstitutionFormComponent },
+    { path: "institution/view", component: CeeInstitutionViewComponent },
+    { path: "chat", component: ChatComponent },
+    { path: "chat/direct", component: ChatDirectModalComponent }
   ]
 }
