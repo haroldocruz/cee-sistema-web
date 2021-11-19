@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { IStatusMessage } from '../interfaces/IStatusMessage';
 import { EventEmitterService } from './event-emitter.service';
 import { MaskApplierService, MaskPipe } from 'ngx-mask';
+import { Title } from '@angular/platform-browser';
 
 @Injectable({
     providedIn: 'root'
@@ -12,6 +13,7 @@ import { MaskApplierService, MaskPipe } from 'ngx-mask';
 export class UtilService {
 
     static notifying: NotificationService;
+    static Title: Title;
 
     private maskPipe: MaskPipe
 
@@ -43,11 +45,13 @@ export class UtilService {
      * @returns String with all emails joineds
      */
     emailListToString(emailList: IEmail[], separator: string): string {
+        if (!emailList) return null;
+
         let aux = ''
         let result = ''
         emailList.forEach((e, i, l) => {
 
-            aux = `${e.address}${(e.description) ? '(' + e.description + ')' : ''}`
+            aux = `${e.address}${(e.description) ? ' (' + e.description + ')' : ''}`
             result += (result.length > 0) ? separator + aux : aux;
         })
         return result;
@@ -60,6 +64,8 @@ export class UtilService {
      * @returns String with all phones joineds
      */
     phoneListToString(phoneList: IPhone[], separator: string): string {
+        if (!phoneList) return null;
+
         let result = ''
         phoneList.forEach((e, i, l) => {
             let number = this.phoneMasked(e.number);
@@ -70,9 +76,10 @@ export class UtilService {
         return result;
     }
 
-    phoneMasked(n: number) {
+    phoneMasked(n: number): string {
+        if (!n) return null;
+
         let xLength = (n.toString().match(/\d/g).length);
-        console.log("xLength", xLength);
         let mask = (xLength === 13) ? '+00 (00) 0 0000-0000'
             : (xLength === 12) ? '+00 (00) 0000-0000'
                 : (xLength === 11) ? '(00) 0 0000-0000'
@@ -82,12 +89,18 @@ export class UtilService {
         return number;
     }
 
+    anyMasked(target: string, mask: string): string {
+        return this.maskPipe.transform(target, mask);
+    }
+
     /**
      * @description Join all the address properties in a string.
      * @param address Object of the type IAddress
      * @returns Return a string with all the address properties joined
      */
     addressToString(address: IAddress) {
+        if (!address) return null;
+
         const array = [
             this.maskPipe.transform(address.zipcode, "00.000-000"),
             address.country,
