@@ -2,7 +2,7 @@ import { UtilService } from './../../../services/util.service';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { IUser } from './../../../interfaces/User';
 import { UserLocalService } from '../user.local.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
     selector: 'app-user-view-modal',
@@ -11,7 +11,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserViewModalComponent implements OnInit {
 
-    user: IUser
+    @Input() user: IUser
 
     constructor(
         public util: UtilService,
@@ -20,26 +20,5 @@ export class UserViewModalComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-    }
-
-    getFirstLastName(fullname: string = this.user.name): string {
-        const vector = fullname.split(' ');
-        if (vector.length === 1)
-            return vector[0];
-
-        const first = vector[0];
-        const last = vector[vector.length - 1];
-        return first + " " + last;
-    }
-
-    getEmailToString(emailList: any): string {
-        let emailString = "";
-        for (let i = 0; i < emailList.length;) {
-            emailString = emailList[i]
-            if (++i < emailList.length)
-                emailString += ", "
-        }
-
-        return emailString;
     }
 }
