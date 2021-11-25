@@ -2,19 +2,19 @@
 
     <div class="card-header pb-0">
         <div class="row">
-            <h4>Vincular usuário</h4>
+            <h4>Vincular usuário:</h4>
         </div>
     </div>
 
     <div class="card-body pb-0">
         <div class="row">
-            <form class="form" (ngSubmit)="getUser()">
+            <form class="form" (ngSubmit)="findUser()">
                 <div class="input-group mb-3">
                     <input id="search-box" class="form-control" type="text" [(ngModel)]="cpf"
                         [ngModelOptions]="{ standalone: true }" autocomplete="_" placeholder="Buscar por CPF"
                         mask="000.000.000-00">
                     <div class="input-group-append sd-pointer">
-                        <div class="input-group-text sd-hover" (click)="getUser()">
+                        <div class="input-group-text sd-hover" (click)="findUser()">
                             Buscar&nbsp;<span><i class="fas fa-search"></i></span>
                         </div>
                     </div>
@@ -38,7 +38,7 @@
     <div class="card-footer text-right">
         <button type="button" class="btn btn-info" *ngIf="user._id" (click)="openProfileBindListModal()">Selecionar perfil</button>
         &nbsp;
-        <button type="button" class="btn btn-success" *ngIf="user._id && profile._id" (click)="bindingProfileUser()">Vincular</button>
+        <button type="button" class="btn btn-success" *ngIf="user._id && profile._id && institution._id" (click)="bindMember()">Vincular</button>
         &nbsp;
         <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">Fechar</button>
     </div>

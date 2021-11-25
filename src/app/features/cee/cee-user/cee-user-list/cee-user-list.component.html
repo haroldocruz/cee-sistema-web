@@ -7,11 +7,11 @@
                 <sd-profile-card [profileCard]="profileCard" [profileCardOptions]="profileCardOptions" class=" w-100">
                 </sd-profile-card>
 
-                <div class="card card-solid">
+                <div class="card card-solid d-print-none">
                     <div class="card-footer col-12 text-right">
                         <!-- <span *ngIf="profileCard.status"> -->
                         <span>
-                            <button href="#" class="btn btn-sm btn-default" (click)="unbindingProfileUser(profileCard)">
+                            <button href="#" class="btn btn-sm btn-default" (click)="unbindMember(profileCard)">
                                 <i class="fas fa-ban"></i>
                                 <span> Desvincular perfil</span>
                             </button>
@@ -24,7 +24,7 @@
                         </span>
                         <span>
                             &nbsp;
-                            <button routerLink="/profile" [queryParams]="{userId: profileCard.userId}"
+                            <button routerLink="/profile/personal" [queryParams]="{userId: profileCard.userId}"
                                 class="btn btn-sm btn-primary">
                                 <i class="far fa-eye"></i> Visualizar
                             </button>
@@ -35,7 +35,7 @@
         </div>
     </div>
     <!-- /.card-body -->
-    <div class="card-footer">
+    <div class="card-footer d-print-none">
         <nav aria-label="Contacts Page Navigation">
             <ul class="pagination justify-content-center m-0">
                 <li class="page-item active"><a class="page-link" href="#">1</a></li>

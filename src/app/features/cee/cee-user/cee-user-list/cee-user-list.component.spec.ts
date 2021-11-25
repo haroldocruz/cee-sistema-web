@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CeeUserViewComponent } from './cee-user-view.component';
+import { CeeUserListComponent as CeeUserListComponent } from './cee-user-list.component';
 
 describe('CeeUserViewComponent', () => {
-  let component: CeeUserViewComponent;
-  let fixture: ComponentFixture<CeeUserViewComponent>;
+  let component: CeeUserListComponent;
+  let fixture: ComponentFixture<CeeUserListComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CeeUserViewComponent ]
+      declarations: [ CeeUserListComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CeeUserViewComponent);
+    fixture = TestBed.createComponent(CeeUserListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
