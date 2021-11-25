@@ -1,0 +1,31 @@
+<div class="modal-content">
+
+  <!-- * header -->
+  <div class="modal-header">
+    <h4 class="modal-title" id="authProfileModalLabel">
+      <span>Selecione um perfil</span>
+    </h4>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+        aria-hidden="true">&times;</span></button>
+  </div>
+
+  <!-- * body -->
+  <div class="modal-body">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <span class="list-group-item sd-list-items sd-pointer sd-hover" data-dismiss="modal"
+            *ngFor="let item of authService.user.dataAccess?.bindList" (click)="selectProfile(item)">
+            <i class="fa fa-angle-double-right"></i>
+            {{ item.profileName }} - {{ item.institutionName }}
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- * footer -->
+  <div class="modal-footer">
+  </div>
+
+</div>

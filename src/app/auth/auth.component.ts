@@ -2,10 +2,10 @@ import { IStatusMessage } from './../interfaces/IStatusMessage';
 import { NotificationService } from './../services/notification.service';
 import { Router } from '@angular/router';
 import { AuthService } from './auth.service';
-import { IUserDataLogin, UserLocalService } from '../features/user/user.local.service';
 import { Component, OnInit } from '@angular/core';
 import { IUser } from '../interfaces/User';
 import { ContextEnum } from '../interfaces/enumerations/ContextEnum';
+import { IUserDataLogin } from '../services/user.service';
 
 @Component({
   selector: 'app-auth',
@@ -14,42 +14,21 @@ import { ContextEnum } from '../interfaces/enumerations/ContextEnum';
 })
 export class AuthComponent implements OnInit {
 
-  public mockUserList = [];
-  public mockUserSelected: { name: string } & IUserDataLogin;
+  public mockUserList: ({ mockName: string } & IUserDataLogin)[];
+  public mockUserSelected: { mockName: string } & IUserDataLogin;
 
-  public userdataLogin: { name: string } & IUserDataLogin;
-  // public username: string = "12345678909"
-  // public password: string = "12345678909"
-  public remember: boolean = false
+  public userdataLogin: IUserDataLogin;
+  public isRemember: boolean = true;
 
   constructor(
-    private authService: AuthService,
     private router: Router,
-    private notifyService: NotificationService,
-    private userService: UserLocalService
+    private authService: AuthService,
+    private notifyService: NotificationService
   ) { }
 
   ngOnInit(): void {
-    this.userdataLogin = { name: "", username: "", password: "" }
+    this.userdataLogin = { username: '', password: '' };
     this.mockUserindex();
-    // this.mockUserSelected = this.mockUserList[0]
-  }
-
-  mockUserindex() {
-    this.mockUserList = [
-      { name: "Super Usuário", username: "12345678909", password: "12345678909" },
-      { name: "Administrador", username: "01234567890", password: "01234567890" }
-    ]
-    // this.userService.read().subscribe((data) => {
-    //   console.log(">>>"+data)
-    //   this.mockUserList = data
-    // })
-  }
-
-  mockChangeUserSelected(event) {
-    this.userdataLogin = this.mockUserSelected;
-    // this.userdataLogin = event;
-    console.log(JSON.stringify(this.mockUserSelected))
   }
 
   submit() {
@@ -64,22 +43,21 @@ export class AuthComponent implements OnInit {
     });
   }
 
-  onPass(data){
-    this.notifyService.showInfo(`${data.name}`, `Seja bem vindo!`);
-    AuthService.user = data;
-    AuthService.currentProfile = data.loginInfo._profileLogin;
-    (this.remember) ? localStorage.setItem("user", JSON.stringify(data)) : sessionStorage.setItem("user", JSON.stringify(data));
+  onPass(user: IUser) {
+    this.notifyService.showInfo(`${user.name}`, `Seja bem vindo!`);
+    AuthService.user = user;
+    AuthService.currentBind = user.loginInfo.currentBind;
+    (this.isRemember) ? localStorage.setItem("user", JSON.stringify(user)) : sessionStorage.setItem("user", JSON.stringify(user));
     this.redirectHandle();
   }
 
-  onFail(data){
+  onFail(data: IStatusMessage) {
     console.log(data)
     this.notifyService.showWarning(data.statusMessage, `Ops! ${data.statusCode}`);
   }
 
   redirectHandle() {
-    console.log("AuthService.currentProfile?: "+ JSON.stringify(AuthService.currentProfile))
-    switch (AuthService.currentProfile?.context) {
+    switch (AuthService.currentBind?.context) {
       case ContextEnum.SYSTEM:
         this.router.navigate(['/cee/home']);
         break;
@@ -91,8 +69,22 @@ export class AuthComponent implements OnInit {
         break;
       default:
         this.router.navigate(['/home']);
-        AuthService.currentProfile = { name: "Registrado" };
+      // AuthService.currentBind = { profileName: "Registrado" };
     }
   }
 
+  mockUserindex() {
+    this.mockUserList = [
+      { mockName: "Super Usuário", username: "12345678909", password: "12345678909" },
+      { mockName: "Administrador", username: "01234567890", password: "01234567890" }
+    ]
+    this.mockUserSelected = this.mockUserList[1];
+    this.userdataLogin = this.mockUserSelected;
+  }
+
+  mockChangeUserSelected(event) {
+    this.userdataLogin = this.mockUserSelected;
+    // this.userdataLogin = event;
+    console.log(JSON.stringify(this.mockUserSelected))
+  }
 }

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AuthProfileModalComponent } from './auth-profile-modal.component';
+import { AuthBindListComponent } from './auth-bind-list.component';
 
 describe('AuthProfileModalComponent', () => {
-  let component: AuthProfileModalComponent;
-  let fixture: ComponentFixture<AuthProfileModalComponent>;
+  let component: AuthBindListComponent;
+  let fixture: ComponentFixture<AuthBindListComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AuthProfileModalComponent ]
+      declarations: [ AuthBindListComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AuthProfileModalComponent);
+    fixture = TestBed.createComponent(AuthBindListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -5,6 +5,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from 'rxjs';
 import { ENV } from 'src/environments/environment';
+import { IRoute } from '../interfaces/IRoute';
+import { IBindInUser } from '../interfaces/IBindInUser';
 
 interface IUserDataLogin {
   username?: string;
@@ -16,8 +18,10 @@ interface IUserDataLogin {
 })
 export class AuthService {
 
-  static currentProfile: IProfile;
+  // static currentProfile: IProfile;
   static user: IUser;
+  static currentBind: IBindInUser;
+  static routeList: IRoute[];
 
   baseUrl = `${ENV.api.url}/auth`;
 
@@ -28,7 +32,8 @@ export class AuthService {
   static init() {
     const user: string = sessionStorage.getItem("user") || localStorage.getItem("user");
     AuthService.user = (user) ? JSON.parse(user) : new User();
-    AuthService.currentProfile = AuthService.user?.loginInfo?._profileLogin || new Profile();
+    AuthService.currentBind = AuthService.user?.loginInfo?.currentBind;
+    // AuthService.currentProfile = AuthService.user?.loginInfo?._profileLogin || new Profile();
   }
 
   static headers() {
