@@ -23,17 +23,17 @@
 <div class="card card-widget widget-user">
     <div class="widget-user-header bg-info">
 
-        <div class="ribbon-wrapper ribbon-lg" *ngIf="institutionView.context === ContextEnum.MAINTAINED">
+        <div class="ribbon-wrapper ribbon-lg" *ngIf="iView.context === ContextEnum.MAINTAINED">
             <div class="ribbon text-md bg-success">
                 Credenciada
             </div>
         </div>
 
         <h3 class="widget-user-username">
-            {{ institutionView.name }}
+            {{ iView.name || 'Não informado' }}
         </h3>
         <h5 class="widget-user-desc">
-            {{ institutionView.socialReason }}
+            {{ iView.socialReason }}
         </h5>
     </div>
     <div class="widget-user-image">
@@ -44,7 +44,7 @@
             <div class="col-sm-4 border-right">
                 <div class="description-block">
                     <h5 class="description-header">
-                        {{ institutionView.phoneMain }}
+                        {{ iView.phoneMain || 'Não informado' }}
                     </h5>
                     <span class="description-text">Telefone</span>
                 </div>
@@ -54,7 +54,7 @@
             <div class="col-sm-4 border-right">
                 <div class="description-block">
                     <h5 class="description-header">
-                        {{ institutionView.emailMain }}
+                        {{ iView.emailMain || 'Não informado' }}
                     </h5>
                     <span class="description-text">E-Mail</span>
                 </div>
@@ -64,7 +64,7 @@
             <div class="col-sm-4">
                 <div class="description-block">
                     <h5 class="description-header">
-                        {{ institutionView.zipCodeAddressMain }}
+                        {{ iView.zipCodeAddressMain || 'Não informado' }}
                     </h5>
                     <span class="description-text">CEP</span>
                 </div>
@@ -76,60 +76,249 @@
     </div>
 </div>
 
-<div class="card card-widget widget-user">
-    <div class="card-body">
-        <form class="form-horizontal">
-            <div class="form-group row">
-                <label for="inputName" class="col col-form-label">Razão social:</label>
-                <div class="col-sm-9">
-                    {{ institutionView.socialReason }}
+<div class="row">
+    <div class="col-12">
+        <div class="card card-info card-outline card-outline-tabs">
+            <div class="card-header p-0 border-bottom-0">
+                <ul class="nav nav-tabs nav-fill" id="custom-tabs" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="institution-tab" data-bs-toggle="pill" href="#institution"
+                            role="tab" aria-controls="institution" aria-selected="true">
+                            Instituição
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="maintainer-tab" data-bs-toggle="pill" href="#maintainer" role="tab"
+                            aria-controls="maintainer" aria-selected="false">
+                            Mantenedora
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="contacts-tab" data-bs-toggle="pill" href="#contacts" role="tab"
+                            aria-controls="contacts" aria-selected="false">
+                            Contatos
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="address-tab" data-bs-toggle="pill" href="#address" role="tab"
+                            aria-controls="address" aria-selected="false">
+                            Endereço
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="legal-act-tab" data-bs-toggle="pill" href="#legal-act" role="tab"
+                            aria-controls="legal-act" aria-selected="false">
+                            Atos Legais
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="user-bind-tab" data-bs-toggle="pill" href="#user-bind" role="tab"
+                            aria-controls="user-bind" aria-selected="false">
+                            Usuários vinculados
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="card-body">
+                <div class="tab-content" id="custom-tabsContent">
+
+                    <!-- * institution -->
+                    <div class="tab-pane fade active show" id="institution" role="tabpanel"
+                        aria-labelledby="institution-tab">
+
+                        <div class="card card-widget widget-user" *ngIf="isLoading">
+                            <div class="card-body text-center">
+                                <i class="fas fa-spinner fa-pulse fa-5x"></i>
+                            </div>
+                        </div>
+
+                        <div class="card card-widget widget-user" *ngIf="!isLoading">
+                            <div class="card-body">
+                                
+                                <app-page-in-construction></app-page-in-construction>
+                                
+                                <div class="form-group row">
+                                    <label for="inputName" class="col col-form-label">CNPJ:</label>
+                                    <div class="col-sm-9">
+                                        <span>
+                                            {{ iView.cnpj || 'Não informado' }}
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="inputName" class="col col-form-label">Razão social:</label>
+                                    <div class="col-sm-9">
+                                        <span>
+                                            {{ iView.socialReason || 'Não informado' }}
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="inputName" class="col col-form-label">Nome fantasia:</label>
+                                    <div class="col-sm-9">
+                                        <span>
+                                            {{ iView.name || 'Não informado' }}
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="inputExperience" class="col col-form-label">Descrição:</label>
+                                    <div class="col-sm-9">
+                                        <span>
+                                            {{ iView.description || 'Não informado' }}
+                                        </span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- * maintainer -->
+                    <div class="tab-pane fade" id="maintainer" role="tabpanel" aria-labelledby="maintainer-tab">
+
+                        <div class="card card-widget widget-user" *ngIf="isLoading">
+                            <div class="card-body text-center">
+                                <i class="fas fa-spinner fa-pulse fa-5x"></i>
+                            </div>
+                        </div>
+
+                        <div class="card card-widget widget-user" *ngIf="!isLoading">
+                            <div class="card-body">
+
+                                <app-page-in-construction></app-page-in-construction>
+                                
+                                <div class="form-group row">
+                                    <label for="inputName" class="col col-form-label">CNPJ:</label>
+                                    <div class="col-sm-9">
+                                        <span>
+                                            {{ iView.cnpj || 'Não informado' }}
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="inputName" class="col col-form-label">Razão social:</label>
+                                    <div class="col-sm-9">
+                                        <span>
+                                            {{ iView.socialReason || 'Não informado' }}
+                                        </span>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group row">
+                                    <label for="inputName" class="col col-form-label">Nome fantasia:</label>
+                                    <div class="col-sm-9">
+                                        <span>
+                                            {{ iView.name || 'Não informado' }}
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="inputExperience" class="col col-form-label">Descrição:</label>
+                                    <div class="col-sm-9">
+                                        <span>
+                                            {{ iView.description || 'Não informado' }}
+                                        </span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- * contacts -->
+                    <div class="tab-pane fade" id="contacts" role="tabpanel" aria-labelledby="contacts-tab">
+
+
+                        <div class="card card-widget widget-user" *ngIf="isLoading">
+                            <div class="card-body text-center">
+                                <i class="fas fa-spinner fa-pulse fa-5x"></i>
+                            </div>
+                        </div>
+
+                        <div class="card card-widget widget-user" *ngIf="!isLoading">
+                            <div class="card-body">
+
+                                <app-page-in-construction></app-page-in-construction>
+
+                                <div class="form-group row">
+                                    <label for="inputEmail" class="col col-form-label">Emails:</label>
+                                    <div class="col-sm-9">
+                                        <span>
+                                            {{ iView.emailList || 'Não informado' }}
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col col-form-label">Telefones:</label>
+                                    <div class="col-sm-9 centered">
+                                        <span>
+                                            {{ iView.phoneList || 'Não informado' }}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- * address -->
+                    <div class="tab-pane fade" id="address" role="tabpanel" aria-labelledby="address-tab">
+
+
+                        <div class="card card-widget widget-user" *ngIf="isLoading">
+                            <div class="card-body text-center">
+                                <i class="fas fa-spinner fa-pulse fa-5x"></i>
+                            </div>
+                        </div>
+
+                        <div class="card card-widget widget-user" *ngIf="!isLoading">
+                            <div class="card-body">
+                                <app-page-in-construction></app-page-in-construction>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- * legal-act -->
+                    <div class="tab-pane fade" id="legal-act" role="tabpanel" aria-labelledby="legal-act-tab">
+
+                        <div class="card card-widget widget-user" *ngIf="isLoading">
+                            <div class="card-body text-center">
+                                <i class="fas fa-spinner fa-pulse fa-5x"></i>
+                            </div>
+                        </div>
+
+                        <div class="card card-widget widget-user" *ngIf="!isLoading">
+                            <div class="card-body">
+                                <app-page-in-construction></app-page-in-construction>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- * user-bind -->
+                    <div class="tab-pane fade" id="user-bind" role="tabpanel" aria-labelledby="user-bind-tab">
+
+                        <div class="card card-widget widget-user" *ngIf="isLoading">
+                            <div class="card-body text-center">
+                                <i class="fas fa-spinner fa-pulse fa-5x"></i>
+                            </div>
+                        </div>
+
+                        <div class="card card-widget widget-user" *ngIf="!isLoading">
+                            <div class="card-body">
+                                <app-page-in-construction></app-page-in-construction>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
-            <div class="form-group row">
-                <label for="inputName" class="col col-form-label">Nome fantasia:</label>
-                <div class="col-sm-9">
-                    {{ institutionView.name }}
-                </div>
-            </div>
-            <div class="form-group row">
-                <label for="inputEmail" class="col col-form-label">Emails:</label>
-                <div class="col-sm-9">
-                    {{ institutionView.emailList }}
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col col-form-label">Telefones:</label>
-                <div class="col-sm-9 centered">
-                    {{ institutionView.phoneList }}
-                </div>
-            </div>
-            <div class="form-group row">
-                <label for="inputExperience" class="col col-form-label">Descrição:</label>
-                <div class="col-sm-9">
-                    {{ institutionView.description }}
-                </div>
-            </div>
-            <div class="form-group row">
-                <label for="inputSkills" class="col col-form-label">Usuários vinculados:</label>
-                <div class="col-sm-9">
-                    <a [routerLink]="['/profile/personal']" [queryParams]="{userId:'6127189537da77002715b10f'}">
-                        <span>Nome do Primeiro Usuário</span>
-                    </a>
-                    <br>
-                    <a [routerLink]="['/profile/personal']" [queryParams]="{userId:'6127189537da77002715b10f'}">
-                        <span>Nome do Segundo Usuário</span>
-                    </a>
-                    <br>
-                    <a [routerLink]="['/profile/personal']" [queryParams]="{userId:'6127189537da77002715b10f'}">
-                        <span>Nome do Terceiro Usuário</span>
-                    </a>
-                    <br>
-                    <!-- <div *ngFor="let item of user.dataAccess?._profileList">
-                    <button class="btn btn-info btn-xs">{{ item.name }}</button>
-                    &nbsp;
-                </div> -->
-                </div>
-            </div>
-        </form>
+            <!-- /.card -->
+        </div>
     </div>
+
 </div>

@@ -16,6 +16,7 @@ interface IInstitutionView {
   context: string;
   socialReason: string;
   name: string;
+  cnpj: string;
   emailMain: string;
   emailList: string;
   phoneMain: string;
@@ -34,9 +35,11 @@ export class CeeInstitutionViewComponent implements OnInit {
 
   public bsModalRef: BsModalRef;
 
+  public isLoading: boolean;
+
   @Input() user: IUser;
   private institution: IInstitution;
-  public institutionView: IInstitutionView;
+  public iView: IInstitutionView;
 
   public ContextEnum = ContextEnum;
 
@@ -47,18 +50,20 @@ export class CeeInstitutionViewComponent implements OnInit {
     public userService: UserLocalService,
     public institutionService: InstitutionService,
     private modalService: BsModalService
-  ) {
-    this.index();
-  }
+  ) { }
 
   ngOnInit(): void {
 
-    UtilService.Title.setTitle('CEE | Institution | View')
+    UtilService.Title.setTitle('CEE | Institution | View');
+
+    this.isLoading = false;
+    this.index();
+
     this.toView(new Institution());
 
     EventEmitterService.get('is-success').subscribe((isSuccess) => {
-      if (isSuccess)
-        this.index();
+      if (!isSuccess) return;
+      this.index();
     })
   }
 
@@ -70,7 +75,9 @@ export class CeeInstitutionViewComponent implements OnInit {
       //TODO: refatorar
       if (!id) return;
 
+      this.isLoading = true;
       this.institutionService.readById(id).subscribe((data) => {
+        this.isLoading = false;
         if (data.statusCode) {
           //TODO: not implemented
           return;
@@ -97,20 +104,29 @@ export class CeeInstitutionViewComponent implements OnInit {
 
   private toView(i: IInstitution): void {
 
-    this.institutionView = {
+    this.iView = {
       _id: i._id,
       context: i.context,
       name: i.name,
-      phoneMain: this.util.phoneMasked(i.contact?.phoneList[0]?.number) || 'Nenhum telefone cadastrado',
-      phoneList: this.util.phoneListToString(i.contact?.phoneList, ' | ') || 'Nenhum telefone cadastrado',
-      emailMain: i.contact?.emailList[0]?.address || 'Nenhum email cadastrado',
-      emailList: this.util.emailListToString(i.contact?.emailList, ' | ') || 'Nenhum email cadastrado',
-      addressMain: this.util.addressToString(i.contact?.addressList[0]) || 'Nenhum endereço cadastrado',
-      zipCodeAddressMain: this.util.anyMasked(i.contact?.addressList[0]?.zipcode?.toString(), "00.000-000") || 'Nenhum cep cadastrado',
+      cnpj: i.cnpj?.toString(),
+      phoneMain: this.util.phoneMasked(i.contact?.phoneList[0]?.number),
+      phoneList: this.util.phoneListToString(i.contact?.phoneList, ' | '),
+      emailMain: i.contact?.emailList[0]?.address,
+      emailList: this.util.emailListToString(i.contact?.emailList, ' | '),
+      addressMain: this.util.addressToString(i.contact?.addressList[0]),
+      zipCodeAddressMain: this.util.anyMasked(i.contact?.addressList[0]?.zipcode?.toString(), "00.000-000"),
       socialReason: i.socialReason,
-
-      description: i.description || 'Não há descrição'
+      description: i.description
     }
+  }
+
+  ObterCSS(element){
+    var css = '';
+    var o = getComputedStyle(element);
+    for(var i = 0; i < o.length; i++){
+      css+=o[i] + ':' + o.getPropertyValue(o[i])+';';
+    }
+    return css;
   }
 
 }
