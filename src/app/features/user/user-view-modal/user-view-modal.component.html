@@ -30,7 +30,8 @@
                 <div class="row">
                     <div class="col-sm-4 border-right">
                         <div class="description-block">
-                            <h5 class="description-header">{{ util.phoneMasked(user.contact?.phoneList[0]?.number) }}</h5>
+                            <h5 class="description-header">{{ util.phoneMasked(user.contact?.phoneList[0]?.number) }}
+                            </h5>
                             <span class="description-text">Telefone</span>
                         </div>
                         <!-- /.description-block -->
@@ -46,7 +47,8 @@
                     <!-- /.col -->
                     <div class="col-sm-4">
                         <div class="description-block">
-                            <h5 class="description-header">{{ user.contact?.addressList[0]?.zipcode | mask: '00.000-000' }}</h5>
+                            <h5 class="description-header">{{ user.contact?.addressList[0]?.zipcode | mask: '00.000-000'
+                                }}</h5>
                             <span class="description-text">CEP</span>
                         </div>
                         <!-- /.description-block -->
@@ -84,11 +86,13 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="inputSkills" class="col col-form-label">Grupos:</label>
+                    <label for="" class="col col-form-label">Perfis:</label>
                     <div class="col-sm-9">
-                        <div *ngFor="let item of user.dataAccess?._profileList">
-                            <button class="btn btn-info btn-xs">{{ item.name }}</button>
-                            &nbsp;
+                        <div class="row">
+                            <div class="col-auto" *ngFor="let item of user.dataAccess?.bindList">
+                                <button class="btn btn-info btn-xs">{{ item.profileName }}</button>
+                                &nbsp;
+                            </div>
                         </div>
                     </div>
                 </div>

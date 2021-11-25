@@ -9,11 +9,6 @@ import { Observable } from 'rxjs';
 import { ENV } from 'src/environments/environment';
 import _cloneDeep from "lodash/cloneDeep";
 
-export interface IUserDataLogin {
-    username: string;
-    password: string;
-}
-
 @Injectable({
     providedIn: 'any'
 })

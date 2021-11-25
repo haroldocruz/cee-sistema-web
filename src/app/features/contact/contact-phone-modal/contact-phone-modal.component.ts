@@ -2,6 +2,7 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
 import { IPhone } from './../../../interfaces/Contact';
 import { Component, OnInit } from '@angular/core';
 import { cloneDeep, isEmpty } from 'lodash';
+import { UtilService } from 'src/app/services/util.service';
 
 @Component({
     selector: 'app-contact-phone-modal',
@@ -15,7 +16,8 @@ export class ContactPhoneModalComponent implements OnInit {
     phoneList: IPhone[];
 
     constructor(
-        public bsModalRef: BsModalRef
+        public bsModalRef: BsModalRef,
+        public utilService: UtilService
     ) { }
 
     ngOnInit(): void {

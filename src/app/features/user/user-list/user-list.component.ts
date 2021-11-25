@@ -11,6 +11,7 @@ import { UserLocalService } from '../user.local.service';
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { UtilService } from 'src/app/services/util.service';
+import { EventEmitterService } from 'src/app/services/event-emitter.service';
 
 @Component({
     selector: 'app-user-list',
@@ -34,18 +35,23 @@ export class UserListComponent implements OnInit {
 
     ngOnInit(): void {
         this.index();
+
+        EventEmitterService.get('is-success').subscribe((isSuccess) => {
+            if (!isSuccess) return;
+            this.index();
+        });
     }
 
     index(): void {
         this.userService.index();
     }
 
-    delete(id:string): void {
+    delete(id: string): void {
         if (this.userService.isConfirm("Quer realmente remover este usuário?"))
             this.userService.default(this.userService.delete(id));
     }
 
-    changeStatus(user:IUser) {
+    changeStatus(user: IUser) {
         if (this.userService.isConfirm("Deseja mudar o status?")) {
             const userUpd = {
                 _id: user._id,

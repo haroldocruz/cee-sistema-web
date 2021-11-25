@@ -17,7 +17,7 @@
                 <div class="col-md-12">
                     Telefone:
                     <input type="text" [(ngModel)]="phone.number" [ngModelOptions]="{standalone: true}"
-                        mask="+00 (00) 00000-0000" class="form-control" />
+                        mask="(00) 0000-0000||(00) 0 0000-0000" class="form-control" />
                 </div>
                 <div class="col-md-12">
                     <br>
@@ -37,7 +37,7 @@
 
                         <span class="list-group-item sd-list-items" *ngFor="let phone of phoneList">
                             <!-- <span class="list-group-item sd-list-items" *ngIf="true"> -->
-                            <i class="fa fa-angle-double-right"></i> {{ phone.number | mask:'+00 (00) 00000-0000' }} ({{
+                            <i class="fa fa-angle-double-right"></i> {{ utilService.phoneMasked(phone.number) }} ({{
                             phone.description }})
                             <span class="sd-pointer sd-float-right">
                                 <i class="fas fa-edit" (click)="editPhone(phone)"></i>
