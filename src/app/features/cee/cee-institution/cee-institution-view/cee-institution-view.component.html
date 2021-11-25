@@ -23,7 +23,7 @@
 <div class="card card-widget widget-user">
     <div class="widget-user-header bg-info">
 
-        <div class="ribbon-wrapper ribbon-lg">
+        <div class="ribbon-wrapper ribbon-lg" *ngIf="institutionView.context === ContextEnum.MAINTAINED">
             <div class="ribbon text-md bg-success">
                 Credenciada
             </div>

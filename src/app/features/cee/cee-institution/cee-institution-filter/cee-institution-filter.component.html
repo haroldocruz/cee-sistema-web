@@ -1,7 +1,7 @@
 <div class="row d-print-none">
     <div class="col-12">
         <!-- * Button -->
-        <button class="btn btn-info" (click)="openGroupFormModal(null)">
+        <button class="btn btn-info" (click)="openInstitutionFormModal(null)">
             <i class="fa fa-plus"></i>
             &nbsp;
             <span>Nova instituição</span>
@@ -25,8 +25,7 @@
                     <span><i class="fa fa-filter"></i></span>
                 </div>
             </div>
-            <input id="search-box" class="form-control" type="text" [(ngModel)]="search" placeholder="Pesquisar">
-            <input type="hidden" [value]="ceeInstitutionLocalService.search">
+            <input id="search-box" class="form-control" type="text" [(ngModel)]="search" (ngModelChange)="changeSearch()" placeholder="Pesquisar">
         </div>
     </div>
 
@@ -40,7 +39,7 @@
             <div class="info-box-content">
                 <span class="info-box-text">Todos</span>
                 <span class="info-box-number">
-                    {{ ceeInstitutionLocalService.typeLength.institutionListLength }}
+                    {{ typesCount.institutionCount }}
                     <!-- <small>%</small> -->
                 </span>
             </div>
@@ -49,13 +48,13 @@
         <!-- /.info-box -->
     </div>
     <div class="col-6 col-sm-4 col-md-3">
-        <div class="info-box btn btn-default text-left" (click)="filtering(institutionTypeEnum.PUBLIC_ADM)">
+        <div class="info-box btn btn-default text-left" (click)="filtering(iTypeEnum.PUBLIC_ADM)">
             <span class="info-box-icon bg-info elevation-1"><i class="fas fa-award"></i></span>
 
             <div class="info-box-content">
                 <span class="info-box-text">Administrativos</span>
                 <span class="info-box-number">
-                    {{ ceeInstitutionLocalService.typeLength.pubAdmLength }}
+                    {{ typesCount.pubAdmCount }}
                     <!-- <small>%</small> -->
                 </span>
             </div>
@@ -66,13 +65,13 @@
     <!-- /.col -->
     <div class="col-6 col-sm-4 col-md-3">
         <div class="info-box mb-3 btn btn-default text-left"
-            (click)="filtering(institutionTypeEnum.PRIVATE_MAINTAINER)">
+            (click)="filtering(iTypeEnum.PRIVATE_MAINTAINER)">
             <span class="info-box-icon bg-info elevation-1"><i class="fas fa-building"></i></span>
 
             <div class="info-box-content">
                 <span class="info-box-text">Mantenedoras</span>
                 <span class="info-box-number">
-                    {{ ceeInstitutionLocalService.typeLength.privMaintainerLength }}
+                    {{ typesCount.privMaintainerCount }}
                 </span>
             </div>
             <!-- /.info-box-content -->
@@ -86,13 +85,13 @@
 
     <div class="col-6 col-sm-4 col-md-3">
         <div class="info-box mb-3 btn btn-default text-left"
-            (click)="filtering(institutionTypeEnum.PRIVATE_MAINTAINED)">
+            (click)="filtering(iTypeEnum.PRIVATE_MAINTAINED)">
             <span class="info-box-icon bg-info elevation-1"><i class="fas fa-graduation-cap"></i></span>
 
             <div class="info-box-content">
                 <span class="info-box-text">Mantidas</span>
                 <span class="info-box-number">
-                    {{ ceeInstitutionLocalService.typeLength.privMaintainedLength }}
+                    {{ typesCount.privMaintainedCount }}
                 </span>
             </div>
             <!-- /.info-box-content -->
@@ -101,13 +100,13 @@
     </div>
     <!-- /.col -->
     <div class="col-6 col-sm-4 col-md-3">
-        <div class="info-box mb-3  btn btn-default text-left" (click)="filtering(institutionTypeEnum.PUBLIC_UE)">
+        <div class="info-box mb-3  btn btn-default text-left" (click)="filtering(iTypeEnum.PUBLIC_UE)">
             <span class="info-box-icon bg-info elevation-1"><i class="fas fa-user-graduate"></i></span>
 
             <div class="info-box-content">
                 <span class="info-box-text">UE's</span>
                 <span class="info-box-number">
-                    {{ ceeInstitutionLocalService.typeLength.pubUELength }}
+                    {{ typesCount.pubUECount }}
                 </span>
             </div>
             <!-- /.info-box-content -->
@@ -116,13 +115,13 @@
     </div>
     <!-- /.col -->
     <div class="col-6 col-sm-4 col-md-3">
-        <div class="info-box mb-3  btn btn-default text-left" (click)="filtering(institutionTypeEnum.UNINFORMED)">
+        <div class="info-box mb-3  btn btn-default text-left" (click)="filtering(iTypeEnum.UNINFORMED)">
             <span class="info-box-icon bg-info elevation-1"><i class="fas fa-book-open"></i></span>
 
             <div class="info-box-content">
                 <span class="info-box-text">Outros</span>
                 <span class="info-box-number">
-                    {{ ceeInstitutionLocalService.typeLength.otherLength }}
+                    {{ typesCount.otherCount }}
                 </span>
             </div>
             <!-- /.info-box-content -->

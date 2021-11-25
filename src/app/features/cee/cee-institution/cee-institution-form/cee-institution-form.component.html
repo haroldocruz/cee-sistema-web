@@ -54,29 +54,13 @@
                                     aria-labelledby="custom-tabs-four-home-tab">
 
                                     <div class="row">
-                                        <div class="col-md-12 col-lg-8">
-                                            Razão social:
-                                            <input type="text" [(ngModel)]="institution.socialReason"
-                                                [ngModelOptions]="{standalone: true}" autocomplete="_"
-                                                class="form-control" placeholder="">
-                                        </div>
                                         <div class="col-md-6 col-lg-4">
-                                            CNPJ:
-                                            <input type="text" [(ngModel)]="institution.cnpj"
-                                                [ngModelOptions]="{standalone: true}" mask="00.000.000/0000-00"
-                                                pattern="[0-9]{14}" class="form-control" placeholder="">
-                                        </div>
-                                        <div class="col-md-12 col-lg-8">
-                                            Nome Fantasia:
-                                            <input type="text" [(ngModel)]="institution.name"
-                                                [ngModelOptions]="{standalone: true}" autocomplete="_"
-                                                class="form-control" placeholder="">
-                                        </div>
-                                        <div class="col-md-6 col-lg-4">
-                                            Sigla (quando houver):
-                                            <input type="text" [(ngModel)]="institution.initials"
-                                                [ngModelOptions]="{standalone: true}" class="form-control"
-                                                placeholder="">
+                                            Contexto:
+                                            <select id="context" [(ngModel)]="institution.context"
+                                                [ngModelOptions]="{standalone: true}" class="form-control">
+                                                <option [ngValue]="context" *ngFor="let context of contextList">{{
+                                                    context }}</option>
+                                            </select>
                                         </div>
                                         <div class="col-md-6 col-lg-4">
                                             Tipo de instituição:
@@ -94,6 +78,30 @@
                                                     *ngFor="let sphere of administrativeSphereList">{{ sphere }}
                                                 </option>
                                             </select>
+                                        </div>
+                                        <div class="col-md-6 col-lg-4">
+                                            CNPJ:
+                                            <input type="text" [(ngModel)]="institution.cnpj"
+                                                [ngModelOptions]="{standalone: true}" mask="00.000.000/0000-00"
+                                                pattern="[0-9]{14}" class="form-control" placeholder="">
+                                        </div>
+                                        <div class="col-md-12 col-lg-8">
+                                            Razão social:
+                                            <input type="text" [(ngModel)]="institution.socialReason"
+                                                [ngModelOptions]="{standalone: true}" autocomplete="_"
+                                                class="form-control" placeholder="">
+                                        </div>
+                                        <div class="col-md-12 col-lg-8">
+                                            Nome Fantasia:
+                                            <input type="text" [(ngModel)]="institution.name"
+                                                [ngModelOptions]="{standalone: true}" autocomplete="_"
+                                                class="form-control" placeholder="">
+                                        </div>
+                                        <div class="col-md-6 col-lg-4">
+                                            Sigla (quando houver):
+                                            <input type="text" [(ngModel)]="institution.initials"
+                                                [ngModelOptions]="{standalone: true}" class="form-control"
+                                                placeholder="">
                                         </div>
                                     </div>
                                     <div class="row">

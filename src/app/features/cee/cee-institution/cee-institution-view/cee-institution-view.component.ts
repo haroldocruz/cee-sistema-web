@@ -9,9 +9,11 @@ import { IInstitution, Institution } from 'src/app/interfaces/Institution';
 import { CeeInstitutionFormComponent } from '../cee-institution-form/cee-institution-form.component';
 import { EventEmitterService } from 'src/app/services/event-emitter.service';
 import { CeeUserBindComponent } from '../../cee-user/cee-user-bind/cee-user-bind.component';
+import { ContextEnum } from 'src/app/interfaces/enumerations/ContextEnum';
 
 interface IInstitutionView {
   _id: string;
+  context: string;
   socialReason: string;
   name: string;
   emailMain: string;
@@ -36,6 +38,8 @@ export class CeeInstitutionViewComponent implements OnInit {
   private institution: IInstitution;
   public institutionView: IInstitutionView;
 
+  public ContextEnum = ContextEnum;
+
   constructor(
     public bsModalService: BsModalService,
     public util: UtilService,
@@ -48,8 +52,9 @@ export class CeeInstitutionViewComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
     UtilService.Title.setTitle('CEE | Institution | View')
-    this.institutionView = this.modelToView(new Institution());
+    this.toView(new Institution());
 
     EventEmitterService.get('is-success').subscribe((isSuccess) => {
       if (isSuccess)
@@ -62,6 +67,7 @@ export class CeeInstitutionViewComponent implements OnInit {
 
       let id: string = params['institutionId'];
 
+      //TODO: refatorar
       if (!id) return;
 
       this.institutionService.readById(id).subscribe((data) => {
@@ -71,29 +77,29 @@ export class CeeInstitutionViewComponent implements OnInit {
         }
 
         this.institution = data;
-        this.institutionView = this.modelToView(data);
+        this.toView(data);
       });
 
     });
   }
 
-  openInstitutionFormModal() {
+  public openInstitutionFormModal(): void {
     const initialState = { institutionId: this.institution._id, institution: this.institution };
     this.bsModalRef = this.bsModalService.show(CeeInstitutionFormComponent, { id: UtilService.getRandom9Digits(), class: 'modal-lg', initialState });
     this.bsModalRef.content.closeBtnName = 'Close';
   }
 
-  openBindUserInInstitutionModal() {
-  // openBindUserInInstitutionModal(user: any) {
-    // const user2: IChatUser = { name: user.userName, avatar: user.avatar, dateTime: "28/08/2021" }
-    const initialState = {   };
+  public openBindUserInInstitutionModal(): void {
+    const initialState = { institution: this.institution };
     this.bsModalRef = this.modalService.show(CeeUserBindComponent, { id: 1, class: 'modal-lg', initialState });
     this.bsModalRef.content.closeBtnName = 'Close';
   }
 
-  private modelToView(i: IInstitution): IInstitutionView {
-    return {
+  private toView(i: IInstitution): void {
+
+    this.institutionView = {
       _id: i._id,
+      context: i.context,
       name: i.name,
       phoneMain: this.util.phoneMasked(i.contact?.phoneList[0]?.number) || 'Nenhum telefone cadastrado',
       phoneList: this.util.phoneListToString(i.contact?.phoneList, ' | ') || 'Nenhum telefone cadastrado',

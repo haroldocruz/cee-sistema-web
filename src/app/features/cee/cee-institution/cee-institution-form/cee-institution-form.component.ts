@@ -13,6 +13,7 @@ import { ContactPhoneModalComponent } from 'src/app/features/contact/contact-pho
 import { ContactEmailModalComponent } from 'src/app/features/contact/contact-email-modal/contact-email-modal.component';
 import { ContactAddressModalComponent } from 'src/app/features/contact/contact-address-modal/contact-address-modal.component';
 import { EvidenceFormComponent } from 'src/app/directives/evidence-form/evidence-form.component';
+import { ContextEnum } from 'src/app/interfaces/enumerations/ContextEnum';
 
 @Component({
   selector: 'app-cee-institution-form',
@@ -22,15 +23,15 @@ import { EvidenceFormComponent } from 'src/app/directives/evidence-form/evidence
 export class CeeInstitutionFormComponent implements OnInit {
 
   @Input() public institution: IInstitution;
-  @Input() public institutionId: String;
+  @Input() public institutionId: string;
   
-  public bsModalRef: BsModalRef
-  public bsModalRef2: BsModalRef
+  public bsModalRef2: BsModalRef;
 
   public isLoading: boolean = false;
 
-  public institutionTypeList: String[];
-  public administrativeSphereList: String[];
+  public contextList: string[];
+  public institutionTypeList: string[];
+  public administrativeSphereList: string[];
 
   public fundaments: IFundaments;
   public contact: IContact;
@@ -41,6 +42,7 @@ export class CeeInstitutionFormComponent implements OnInit {
 
   constructor(
     private modalService: BsModalService,
+    public bsModalRef: BsModalRef,
     private institutionService: InstitutionService,
     public util: UtilService
   ) {
@@ -48,6 +50,7 @@ export class CeeInstitutionFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.contextList = Object.values(ContextEnum);
     this.institutionTypeList = Object.values(InstitutionTypeEnum);
     this.administrativeSphereList = Object.values(AdministrativeSphereEnum);
 

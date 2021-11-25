@@ -58,14 +58,15 @@ export class CeeInstitutionListComponent implements OnInit {
 
   index() {
     this.institutionService.read().subscribe((data) => {
-      this.institutionList = data;
-      this.institutionListView = this.modelToView(data);
-      this.countToFilter(this.institutionListView)
+      this.ceeInstitutionLocalService.institutionList = data;
+      this.toView(data);
+      EventEmitterService.get('getInstitutionList').emit(data);
     });
   }
 
-  modelToView(iList: IInstitution[]) {
-    return this.institutionListView = iList.map((e) => {
+  toView(iList: IInstitution[]): void {
+
+    this.institutionListView = iList.map((e) => {
 
       let item: IInstitutionItemView = {
         _id: e._id,
@@ -84,35 +85,35 @@ export class CeeInstitutionListComponent implements OnInit {
     });
   }
 
-  private countToFilter(iList: IInstitutionItemView[]) {
+  // private countToFilter(iList: IInstitutionItemView[]) {
 
-    this.ceeInstitutionLocalService.restart();
-    this.ceeInstitutionLocalService.typeLength.institutionListLength = iList.length;
+  //   this.ceeInstitutionLocalService.restartCount();
+  //   this.ceeInstitutionLocalService.typeLength.institutionListLength = iList.length;
 
-    iList.map((e) => {
-      if (e.institutionType == this.InstitutionTypeEnum.PUBLIC_ADM)
-        this.ceeInstitutionLocalService.typeLength.pubAdmLength += 1;
-      if (e.institutionType == this.InstitutionTypeEnum.PUBLIC_UE)
-        this.ceeInstitutionLocalService.typeLength.pubUELength += 1;
-      if (e.institutionType == this.InstitutionTypeEnum.PRIVATE_MAINTAINED)
-        this.ceeInstitutionLocalService.typeLength.privMaintainedLength += 1;
-      if (e.institutionType == this.InstitutionTypeEnum.PRIVATE_MAINTAINER)
-        this.ceeInstitutionLocalService.typeLength.privMaintainerLength += 1;
-      // if (e.institutionType == this.InstitutionTypeEnum.OTHER)
-      //   this.ceeInstitutionLocalService.typeLength.otherLength += 1;
-      if (e.institutionType == this.InstitutionTypeEnum.UNINFORMED)
-        this.ceeInstitutionLocalService.typeLength.otherLength += 1;
-    });
-  }
+  //   iList.map((e) => {
+  //     if (e.institutionType == this.InstitutionTypeEnum.PUBLIC_ADM)
+  //       this.ceeInstitutionLocalService.typeLength.pubAdmLength += 1;
+  //     if (e.institutionType == this.InstitutionTypeEnum.PUBLIC_UE)
+  //       this.ceeInstitutionLocalService.typeLength.pubUELength += 1;
+  //     if (e.institutionType == this.InstitutionTypeEnum.PRIVATE_MAINTAINED)
+  //       this.ceeInstitutionLocalService.typeLength.privMaintainedLength += 1;
+  //     if (e.institutionType == this.InstitutionTypeEnum.PRIVATE_MAINTAINER)
+  //       this.ceeInstitutionLocalService.typeLength.privMaintainerLength += 1;
+  //     // if (e.institutionType == this.InstitutionTypeEnum.OTHER)
+  //     //   this.ceeInstitutionLocalService.typeLength.otherLength += 1;
+  //     if (e.institutionType == this.InstitutionTypeEnum.UNINFORMED)
+  //       this.ceeInstitutionLocalService.typeLength.otherLength += 1;
+  //   });
+  // }
   
-  openInstitutionFormModal(institutionItem: any) {
-    const institution = this.institutionList.find((e) => { institutionItem._id === e._id });
-    const initialState = { institutionId: institutionItem._id, institution: institution };
-    this.bsModalRef = this.bsModalService.show(CeeInstitutionFormComponent, { id: UtilService.getRandom9Digits(), class: 'modal-lg', initialState });
-    this.bsModalRef.content.closeBtnName = 'Close';
-  }
+  // openInstitutionFormModal(institutionItem: any) {
+  //   const institution = this.institutionList.find((e) => { institutionItem._id === e._id });
+  //   const initialState = { institutionId: institutionItem._id, institution: institution };
+  //   this.bsModalRef = this.bsModalService.show(CeeInstitutionFormComponent, { id: UtilService.getRandom9Digits(), class: 'modal-lg', initialState });
+  //   this.bsModalRef.content.closeBtnName = 'Close';
+  // }
 
-  indexMock() {
+  mockIndex() {
 
     this.institutionListView = [
       {
@@ -197,6 +198,6 @@ export class CeeInstitutionListComponent implements OnInit {
       }
     ];
 
-    this.countToFilter(this.institutionListView);
+    // this.countToFilter(this.institutionListView);
   }
 }
