@@ -5,7 +5,7 @@ import { CeeHomeComponent } from './cee-home/cee-home.component';
 import { CeeComponent } from './cee.component';
 import { CeeUserComponent } from './cee-user/cee-user.component';
 import { CeeDashboardComponent } from './cee-dashboard/cee-dashboard.component';
-import { CeeUserViewComponent } from './cee-user/cee-user-view/cee-user-view.component';
+import { CeeUserListComponent } from './cee-user/cee-user-list/cee-user-list.component';
 import { SortByPipe } from 'src/app/pipes/sort-by.pipe';
 import { PipesModule } from 'w-ng5';
 import { FormsModule } from '@angular/forms';
@@ -49,7 +49,7 @@ import { CeeInstitutionFormComponent } from './cee-institution/cee-institution-f
     
     CeeUserComponent,
     CeeUserBindComponent,
-    CeeUserViewComponent,
+    CeeUserListComponent,
 
     ProfileCardComponent
   ],

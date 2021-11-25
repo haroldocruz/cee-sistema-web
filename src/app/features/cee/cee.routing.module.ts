@@ -9,7 +9,7 @@ import { CeeHomeComponent } from './cee-home/cee-home.component';
 import { CeeInstitutionFormComponent } from './cee-institution/cee-institution-form/cee-institution-form.component';
 import { CeeInstitutionViewComponent } from './cee-institution/cee-institution-view/cee-institution-view.component';
 import { CeeInstitutionComponent } from './cee-institution/cee-institution.component';
-import { CeeUserViewComponent } from './cee-user/cee-user-view/cee-user-view.component';
+import { CeeUserListComponent } from './cee-user/cee-user-list/cee-user-list.component';
 import { CeeUserComponent } from './cee-user/cee-user.component';
 import { CeeComponent } from './cee.component';
 
@@ -32,7 +32,7 @@ export const CeeRouting: Route = {
       // ]
     },
     {
-      path: "view", component: CeeUserViewComponent
+      path: "view", component: CeeUserListComponent
     },
     {
       path: "dashboard", component: CeeDashboardComponent,
