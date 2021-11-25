@@ -1,10 +1,23 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal';
+import { AuthService } from 'src/app/auth/auth.service';
+import { IBindInUser } from 'src/app/interfaces/IBindInUser';
+import { IInstitution } from 'src/app/interfaces/Institution';
+import { IQueryConfig } from 'src/app/interfaces/IQueryConfig';
+import { IStatusMessage } from 'src/app/interfaces/IStatusMessage';
 import { IProfile } from 'src/app/interfaces/Profile';
-import { IUser, User } from 'src/app/interfaces/User';
+import { IUser } from 'src/app/interfaces/User';
 import { EventEmitterService } from 'src/app/services/event-emitter.service';
+import { InstitutionService } from 'src/app/services/institution.service';
 import { NotificationService } from 'src/app/services/notification.service';
 import { ProfileService } from 'src/app/services/profile.service';
+
+interface ISchemaCeeProfileBindListComponent {
+  context?: string;
+  institutionId: string;
+  user: IUser;
+  profileList?: IProfile[];
+}
 
 @Component({
   selector: 'app-cee-profile-bind-list',
@@ -13,9 +26,11 @@ import { ProfileService } from 'src/app/services/profile.service';
 })
 export class CeeProfileBindListComponent implements OnInit {
 
+  @Input() context: string;
+  @Input() institutionId: string;
+  @Input() user: IUser;
+
   profileList: IProfile[];
-  currentProfile: IProfile;
-  user: IUser;
 
   constructor(
     public bsModalRef: BsModalRef,
@@ -24,27 +39,43 @@ export class CeeProfileBindListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    const filter = { context: this.currentProfile.context, group: this.currentProfile.group, scope: this.currentProfile.scope };
-    this.profileService.readFilter(filter).subscribe(async (profileList: IProfile[]) => {
+    if (!this.context) this.context = AuthService.currentBind.context;
+    if (!this.institutionId) this.institutionId = AuthService.currentBind._institution;
+    this.index();
+  }
+
+  index() {
+    // const queryConfig: IQueryConfig = {
+    //   populateList: [{ path: '', select: [] }]
+    // };
+    const profile: IProfile = { context: this.context };
+    this.profileService.readFilter(profile/*, queryConfig*/).subscribe(async (data: IProfile[] & IStatusMessage) => {
+      console.log("data", data);
       // this.profileList = profileList
-      this.profileList = await profileList.filter(this.isNotProfile, this);
+      if (data.statusMessage) {
+        //TODO: not implemented
+        return;
+      }
+
+      this.profileList = await data.filter(this.isNotProfile, this);
     });
   }
 
   isNotProfile(profile: IProfile): boolean {
-    return !profile._userList.some((user) => {
-      return (user._id === this.user._id)
+    return !this.user.dataAccess.bindList.some((bind) => {
+      return (bind._profile === profile._id && bind._institution === this.institutionId)
     });
   }
 
-  selected(item: any): void {
+  selected(profileSelected: IProfile): void {
 
     if (!this.notifyService.isConfirm("Deseja realmente usar este perfil?"))
       return;
 
-    EventEmitterService.get('cee-profile-bind-selected').emit(item);
+    EventEmitterService.get('cee-profile-bind-selected').emit(profileSelected);
 
-    this.bsModalRef.hide();
+    if (this.bsModalRef)
+      this.bsModalRef.hide();
   }
 
 }
