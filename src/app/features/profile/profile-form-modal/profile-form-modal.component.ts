@@ -1,7 +1,9 @@
-import { UserLocalService } from '../../user/user.local.service';
-import { NotificationService } from './../../../services/notification.service';
-import { ProfileLocalService } from '../profile.local.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { ContextEnum } from 'src/app/interfaces/enumerations/ContextEnum';
+import { IProfile, Profile } from 'src/app/interfaces/Profile';
+import { ProfileService } from 'src/app/services/profile.service';
+import { UtilService } from 'src/app/services/util.service';
 
 @Component({
     selector: 'app-profile-form-modal',
@@ -10,33 +12,65 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileFormModalComponent implements OnInit {
 
-    statusList: string[];
-    genderList: string[];
+    @Input() public profile: IProfile;
+    @Input() public profileId: string;
+
+    public context
+    public contextList: string[];
+    public status
+
+    public isLoading: boolean = false;
 
     constructor(
-        public profileLocalService: ProfileLocalService,
-        public userService: UserLocalService,
-        private notify: NotificationService
-    ) { }
+        public bsModalRef: BsModalRef,
+        public bsModalRef2: BsModalRef,
+        private modalService: BsModalService,
+        private profileService: ProfileService,
+        public util: UtilService
+    ) {
+        this.profile = new Profile();
+    }
 
     ngOnInit(): void {
+        this.contextList = Object.values(ContextEnum);
+        this.index();
     }
 
-    create(): void {
-        this.profileLocalService.create(ProfileLocalService.profile).subscribe((data) => {
-            this.notify.showSuccess(data[1], "Ok!")
-            this.profileLocalService.index();
-        }, (error) => {
-            this.notify.showError(error.error[1], "Ops!")
+    index() {
+        if (this.profile?._id) return;
+
+        if (!this.profileId) {
+            this.profile = new Profile();
+            return;
+        }
+
+        this.isLoading = true;
+        this.profileService.readById(this.profileId).subscribe((data) => {
+            if (data.hasOwnProperty('_id')) {
+                const iData: IProfile = data;
+                this.profile = iData;
+            }
+
+            this.isLoading = false;
         });
     }
 
-    update(): void {
-        this.profileLocalService.update(ProfileLocalService.profile).subscribe((data) => {
-            this.notify.showSuccess(data[1], "Ok!")
-            this.profileLocalService.index();
-        }, (error) => {
-            this.notify.showError(error.error[1], "Ops!")
-        });
+    create() {
+        if (!UtilService.isConfirm()) return;
+
+        UtilService.default(this.profileService.create(this.profile));
+
+        if (this.bsModalRef)
+            this.bsModalRef.hide();
+    }
+
+    update() {
+
+        if (!UtilService.isConfirm()) return;
+
+        UtilService.default(this.profileService.update(this.profile));
+
+        if (this.bsModalRef)
+            this.bsModalRef.hide();
     }
 }

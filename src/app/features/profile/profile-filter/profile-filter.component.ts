@@ -1,9 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { ContextEnum } from 'src/app/interfaces/enumerations/ContextEnum';
 import { InstitutionTypeEnum } from 'src/app/interfaces/enumerations/InstitutionTypeEnum';
 import { IProfile, Profile } from 'src/app/interfaces/Profile';
 import { EventEmitterService } from 'src/app/services/event-emitter.service';
 import { ProfileService } from 'src/app/services/profile.service';
 import { UtilService } from 'src/app/services/util.service';
+import { ProfileFormModalComponent } from '../profile-form-modal/profile-form-modal.component';
 
 @Component({
   selector: 'app-profile-filter',
@@ -12,16 +15,21 @@ import { UtilService } from 'src/app/services/util.service';
 })
 export class ProfileFilterComponent implements OnInit {
 
-  public institutionTypeEnum: typeof InstitutionTypeEnum;
-
   @Input() public profileList: IProfile[];
 
+  institutionTypeEnum: typeof InstitutionTypeEnum;
+  contextEnum: typeof ContextEnum;
+
+  bsModalRef: BsModalRef;
+
   constructor(
-    private profileService: ProfileService
+    private profileService: ProfileService,
+    private bsModalService: BsModalService
   ) { }
 
   ngOnInit(): void {
     this.institutionTypeEnum = InstitutionTypeEnum;
+    this.contextEnum = ContextEnum;
   }
 
   inserir() {
@@ -29,14 +37,19 @@ export class ProfileFilterComponent implements OnInit {
     UtilService.default(this.profileService.create(new Profile()))
   }
 
-  openGroupFormModal(institution: any) {
-    const initialState = { institution };
-    // this.bsModalRef = this.bsModalService.show(CeeInstitutionFormComponent, { id: UtilService.getRandom9Digits(), class: 'modal-lg', initialState });
-    // this.bsModalRef.content.closeBtnName = 'Close';
+  openProfileFormModal(profile: IProfile) {
+    const initialState = { profile };
+    this.bsModalRef = this.bsModalService.show(ProfileFormModalComponent, { id: UtilService.getRandom9Digits(), class: 'modal-lg', initialState });
+    this.bsModalRef.content.closeBtnName = 'Close';
   }
 
   filtering(filter: string) {
     // this.ceeInstitutionLocalService.filter = filter;
+  }
+
+  contextFilter(context: string) {
+
+    EventEmitterService.get('profile-context-filter').emit(context);
   }
 
   refresh() {

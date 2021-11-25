@@ -1,165 +1,111 @@
-<!-- userModal -->
-<div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="userModalLabel">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
+<!-- <form [formGroup]="checkoutForm"> -->
+<form>
+  <div class="modal-header">
+    <h4 class="modal-title" id="userModalLabel">
+      <span *ngIf="!profile?._id">Inserir</span>
+      <span *ngIf="profile?._id">Alterar</span>
+    </h4>
+    <button type="button" class="close" *ngIf="bsModalRef" (click)="bsModalRef.hide()"><span>&times;</span></button>
+  </div>
 
-        <div class="modal-header">
-          <h4 class="modal-title" id="userModalLabel">
-            <span *ngIf="!userService.user._id">Inserir</span>
-            <span *ngIf="userService.user._id">Alterar</span>
-          </h4>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-              aria-hidden="true">&times;</span></button>
-        </div>
+  <div class="modal-body">
+    <div class="container-fluid" *ngIf="isLoading">
+      ...LOADING
+    </div>
+    <div class="container-fluid" *ngIf="!isLoading">
+      <div class="row">
 
-        <div class="modal-body">
-          <div class="container-fluid">
-            <div class="row">
-              <div class="col-md-8">
-                Nome:
-                <input type="text" [(ngModel)]="userService.user.name" class="form-control"
-                  placeholder="Digite seu nome completo">
-              </div>
-              <!-- <div class="col-md-4">
-                Perfil:
-                <select id="profile" [(ngModel)]="userService.user.dataAccess.profiles" class="form-control">
-                  <option [ngValue]="profile" *ngFor="let profile of profileService.profiles">{{ profile.name }}</option>
-                </select>
-              </div> -->
 
-              <!-- <div class="col-md-4">
-                Status:
-                <select id="status" [(ngModel)]="userService.user.status" class="form-control">
-                  <option [value]="status" *ngFor="let status of statusList">{{ status }}</option>
-                </select>
-              </div> -->
-              <div class="col-md-4">
-                Gênero:
-                <select id="gender" [(ngModel)]="userService.user.gender" class="form-control">
-                  <option [value]="gender" *ngFor="let gender of genderList">{{ gender }}</option>
-                </select>
-              </div>
-              <div class="col-md-6">
-                Senha:
-                <input type="text" [(ngModel)]="userService.user.dataAccess.password" class="form-control" placeholder="">
-              </div>
-              <div class="col-md-6">
-                Repetir senha:
-                <input type="text" [(ngModel)]="userService.user.dataAccess.password" class="form-control" placeholder="">
-              </div>
-              <div class="col-md-6">
-                CPF:
-                <input type="text" [(ngModel)]="userService.user.cpf" class="form-control" placeholder="">
-              </div>
-              <!-- <div class="col-md-6">
-                E-mail:
-                <input type="text" [(ngModel)]="userService.user.contact.email" class="form-control" />
-              </div> -->
+        <div class="col-12">
+          <div class="card card-primary card-outline card-outline-tabs">
+            <div class="card-header p-0 border-bottom-0">
+              <ul class="nav nav-tabs nav-fill" id="custom-tabs-four-tab" role="tablist">
+                <li class="nav-item">
+                  <a class="nav-link active" id="tabs-main-tab" data-bs-toggle="pill" href="#tabs-main" role="tab"
+                    aria-controls="tabs-main" aria-selected="true">Principal</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" id="tabs-roles-tab" data-bs-toggle="pill" href="#tabs-roles" role="tab"
+                    aria-controls="tabs-roles" aria-selected="false">Regras</a>
+                </li>
+              </ul>
             </div>
-            <div class="row mt-2">
-              <!-- <div class="col-md-2">
-                DDI:
-                <input type="text" disabled [(ngModel)]="x.contact.phone[0].ddi" class="form-control" placeholder="+55">
-              </div>
-              <div class="col-md-2">
-                DDD:
-                <input type="text" disabled [(ngModel)]="x.contact.phone[0].ddd" class="form-control" placeholder="63">
-              </div>
-              <div class="col-md-8">
-                Telefone:
-                <input type="text" disabled [(ngModel)]="x.contact.phone[0].number" class="form-control">
-              </div> -->
-              <div class="col-md-12">
+            <div class="card-body">
+              <div class="tab-content" id="tabs-main-tabContent">
+                <div class="tab-pane fade active show" id="tabs-main" role="tabpanel" aria-labelledby="tabs-main-tab">
 
-                <div class="list-group">
+                  <div class="row">
+                    <div class="col-md-6 col-lg-4">
+                      Contexto:
+                      <select id="context" [(ngModel)]="profile.context" [ngModelOptions]="{standalone: true}"
+                        class="form-control">
+                        <option [ngValue]="c" *ngFor="let c of contextList">
+                          {{ c }}
+                        </option>
+                      </select>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                      Status:
+                      <select id="status" [(ngModel)]="profile.status" [ngModelOptions]="{standalone: true}"
+                        class="form-control">
+                        <option value="true">Ativo</option>
+                        <option value="false">Inativo</option>
+                      </select>
+                    </div>
+                    <div class="col-12">
+                      Nome:
+                      <input type="text" [(ngModel)]="profile.name" [ngModelOptions]="{standalone: true}"
+                        autocomplete="_" class="form-control" placeholder="">
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      Descrição:
+                      <textarea rows="6" [(ngModel)]="profile.description" [ngModelOptions]="{standalone: true}"
+                        class="form-control"></textarea>
+                    </div>
+                  </div>
+                </div>
 
-                  <span class="sd-pointer list-group-item text-center text-danger" *ngIf="true">
-                    Nenhum telefone inserido!
-                  </span>
-                  <!-- <span class="sd-pointer list-group-item text-center text-green" *ngIf="true">
-                    Inserir outro telefone!
-                  </span> -->
+                <div class="tab-pane fade" id="tabs-roles" role="tabpanel" aria-labelledby="tabs-roles-tab">
+                  <div class="row">
 
-                  <!-- <span class="list-group-item" *ngIf="false" *ngFor="let p of phoneList"> -->
-                  <span class="list-group-item sd-list-items" *ngIf="true">
-                    <i class="fa fa-angle-double-right"></i> {{ '+55 (63) 98458-9691 (celular)' }}
-                    <span class="sd-pointer sd-trash-float-right">
-                      <!-- <i class="fas fa-trash" (click)="remove(p)"></i> -->
-                      <!-- <i class="fas fa-trash-alt text-danger"></i> -->
-                    </span>
-                  </span>
+                  </div>
+                </div>
 
+                <div class="tab-pane fade" id="custom-tabs-four-contact" role="tabpanel"
+                  aria-labelledby="custom-tabs-four-contact-tab">
+                  <div class="row mt-2">
+                  </div>
+                </div>
+
+                <div class="tab-pane fade" id="custom-tabs-four-address" role="tabpanel"
+                  aria-labelledby="custom-tabs-four-address-tab">
+                  <div class="row mt-2">
+                  </div>
+
+                </div>
+                <div class="tab-pane fade" id="custom-tabs-four-legalact" role="tabpanel"
+                  aria-labelledby="custom-tabs-four-legalact-tab">
+                  <div class="row mt-2">
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="row mt-2">
-              <div class="col-md-12">
-
-                <div class="list-group">
-
-                  <span class="sd-pointer list-group-item text-center text-danger" *ngIf="true">
-                    Nenhum email inserido!
-                  </span>
-                  <!-- <span class="sd-pointer list-group-item text-center text-green" *ngIf="true">
-                    Inserir outro email!
-                  </span> -->
-
-                  <!-- <span class="list-group-item" *ngIf="false" *ngFor="let e of emailList"> -->
-                  <span class="list-group-item sd-list-items" *ngIf="true">
-                    <i class="fa fa-angle-double-right"></i> {{ 'msom.info@gmail.com (principal)' }}
-                    <span class="sd-pointer sd-trash-float-right">
-                      <!-- <i class="fas fa-trash" (click)="remove(p)"></i> -->
-                      <i class="fas fa-trash-alt text-danger"></i>
-                    </span>
-                  </span>
-
-                </div>
-
-              </div>
-            </div>
-            <div class="row mt-2">
-              <div class="col-md-12">
-
-                <div class="list-group">
-
-                  <span class="sd-pointer list-group-item text-center text-danger" *ngIf="true">
-                    Nenhum endereço inserido!
-                  </span>
-                  <!-- <span class="sd-pointer list-group-item text-center text-green" *ngIf="true">
-                    Inserir outro email!
-                  </span> -->
-
-                  <!-- <span class="list-group-item" *ngIf="false" *ngFor="let e of emailList"> -->
-                  <span class="list-group-item sd-list-items" *ngIf="true">
-                    <i class="fa fa-angle-double-right"></i> {{ '103Sul, Alameda SO 01, Qi 08, Palmas, Tocantins, 77000-000' }}
-                    <span class="sd-pointer sd-trash-float-right">
-                      <!-- <i class="fas fa-trash" (click)="remove(p)"></i> -->
-                      <i class="fas fa-trash-alt text-danger"></i>
-                    </span>
-                  </span>
-
-                </div>
-
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-12">
-                Descrição:
-                <textarea rows="6" [(ngModel)]="userService.user.description" class="form-control"></textarea>
-              </div>
-            </div>
+            <!-- /.card -->
           </div>
         </div>
 
-        <div class="modal-footer">
-          <button type="reset" class="btn btn-default" *ngIf="!userService.user._id">Limpar</button>
-          <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-          <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="create()"
-            *ngIf="!userService.user._id">Salvar</button>
-          <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="update()"
-            *ngIf="userService.user._id">Atualizar</button>
-        </div>
-
       </div>
+
     </div>
   </div>
+
+  <div class="modal-footer">
+    <!-- <input type="hidden" (ngModel)="isDataAccess = false"> -->
+    <button type="reset" class="btn btn-default" *ngIf="!profile?._id">Limpar</button>
+    <button type="button" class="btn btn-default" *ngIf="bsModalRef" (click)="bsModalRef.hide()">Fechar</button>
+    <input type="submit" class="btn btn-primary" value="Salvar" (click)="create()" *ngIf="!profile?._id">
+    <input type="submit" class="btn btn-primary" value="Atualizar" (click)="update()" *ngIf="profile?._id">
+  </div>
+</form>

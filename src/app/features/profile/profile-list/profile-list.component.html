@@ -11,16 +11,18 @@
   <tbody>
     <!-- <tr *ngFor="let profile of profileList; let i = index"> -->
     <!-- <tr *ngFor="let profile of profileService.profiles | filter: [{field: 'name', value: profileService.filtro}] | sortBy:'asc':'status, name'; let i = index"> -->
-    <tr *ngFor="let profile of profileList | filter: [{field: 'name', value: profileLocalService.filtro}] let i = index">
+    <tr *ngFor="let profile of profileList 
+    | filter: [{field: 'name', value: profileLocalService.filtro}] 
+    | filter: [{field: 'context', value: contextFilter}] let i = index">
       <td scope="row" class="text-center sd-wfr">{{ i + 1 }}</td>
-      <td class="text-center sd-wfr">
+      <td class="text-center sd-wfr sd-pointer" (click)="changeStatus(profile)">
         <i class="fas fa-check-circle text-green" *ngIf="profile.status" title="ativo"></i>
         <i class="fas fa-times-circle text-red" *ngIf="!profile.status" title="inativo"></i>
       </td>
       <td>{{ profile.name }}</td>
       <td>{{ profile.description }}</td>
       <td class="text-center sd-wf">
-        <i class="fas fa-edit sd-pointer text-primary" data-toggle="modal" data-target="#profileModal" (click)="profileLocalService.edit(profile)"></i>
+        <i class="fas fa-edit sd-pointer text-primary" (click)="openProfileFormModal(profile)"></i>
         &nbsp;
         <i class="fas fa-trash-alt sd-pointer text-danger" (click)="delete(profile._id)"></i>
       </td>
