@@ -49,7 +49,7 @@ export class NavMenuComponent implements OnInit {
       "Anônimo": [""]
     }
 
-    return profileList[AuthService.currentProfile.name].includes(rep);
+    return profileList[AuthService.currentBind.profileName].includes(rep);
 
   }
 

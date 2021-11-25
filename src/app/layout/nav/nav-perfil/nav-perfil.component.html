@@ -4,20 +4,20 @@
   <div *ngIf="AuthService.user._id">
     <a routerLink="/profile/personal"><i class="fas fa-user-circle fa-3x"></i></a>
     <!-- <img src="../../../public/img/haroldocruz.jpg" class="img-circle elevation-2" alt="User Image"> -->
-    <a class="d-block" data-toggle="modal" data-target="#authListModal">
+    <a class="d-block">
       {{ AuthService.user.name.match(firstName)[1]+' '+ AuthService.user.name.match(lastName)[1] }}
     </a>
-    <a class="d-block" data-toggle="modal" data-target="#authProfileModal">
-      [{{ AuthService.currentProfile?.name }}]
+    <a class="d-block" (click)="openAuthBindListModal()">
+      [{{ AuthService.currentBind?.profileName }}]
     </a>
     <!-- <a href="#" class="d-block">{{ AuthService.user.dataAccess.profiles[profileIndex]?.name }}</a> -->
   </div>
 
   <div *ngIf="!AuthService.user._id">
     <a routerLink="/login"><i class="fas fa-user-circle fa-3x"></i></a>
-    <a class="d-block" data-toggle="modal" data-target="#authListModal">{{ AuthService.user.name }}</a>
-    <a class="d-block" data-toggle="modal" data-target="#authProfileModal">
-      [{{ AuthService.currentProfile?.name }}]</a>
+    <a class="d-block">{{ AuthService.user.name }}</a>
+    <a class="d-block" (click)="openAuthBindListModal()">
+      [{{ AuthService.currentBind?.profileName }}]</a>
     <!-- <a href="#" class="d-block">{{ AuthService.user.dataAccess.profiles[profileIndex]?.name }}</a> -->
   </div>
 
@@ -29,11 +29,10 @@
 
     <!-- * BUTTON LOGIN -->
     <li class="nav-item text-center" *ngIf="!AuthService.user._id">
-      <a class="nav-link ips-logon" routerLink="/login"> <i class="nav-icon fa fa-sign-in-alt"></i> LogIn [Entrar]</a>
-      <!-- <a class="nav-link ips-logon" data-toggle="modal" data-target="#authListModal">
-                <i class="nav-icon fa fa-sign-in-alt"></i>
-                LogIn [Entrar]
-            </a> -->
+      <a class="nav-link ips-logon" routerLink="/login">
+        <i class="nav-icon fa fa-sign-in-alt"></i>
+        LogIn [Entrar]
+      </a>
     </li>
 
     <!-- * BUTTON LOGOUT -->
@@ -58,9 +57,9 @@
     <!-- <li class="nav-item text-center" *ngIf="AuthService.currentProfile.name !== 'Anônimo'"> -->
     <li class="nav-item text-center" *ngIf="false">
       <a class="nav-link">
-        <select class="form-control" [(ngModel)]="AuthService.currentProfile">
+        <select class="form-control" [(ngModel)]="AuthService.currentBind">
           <!-- <option value="">Selecione um perfil</option> -->
-          <option [ngValue]="profile" *ngFor="let profile of AuthService.user.dataAccess._profileList">
+          <option [ngValue]="profile" *ngFor="let profile of AuthService.user.dataAccess.bindList">
             {{ profile.name }}
           </option>
         </select>

@@ -10,7 +10,7 @@
       <a class="nav-link" routerLink="/home/atribuicoes">
         <i class="nav-icon fas fa-book-open"></i>
         O CEE/TO
-        <small class="right"><i class="far fa-clock text-success"></i></small>
+        <small class="right"><i class="far fa-clock text-info"></i></small>
       </a>
     </li>
 
@@ -23,10 +23,10 @@
 
   </ul>
 
-  <app-nav-menu-cee *ngIf="AuthService.currentProfile?.context == contextEnum.CEE || AuthService.currentProfile?.context == contextEnum.SYSTEM"></app-nav-menu-cee>
-  <app-nav-menu-commission *ngIf="AuthService.currentProfile?.context == contextEnum.COMMISSION"></app-nav-menu-commission>
-  <app-nav-menu-institution *ngIf="AuthService.currentProfile?.context == contextEnum.IE_UE"></app-nav-menu-institution>
-  <app-nav-menu-manager *ngIf="AuthService.currentProfile?.context == contextEnum.CEE || AuthService.currentProfile?.context == contextEnum.SYSTEM"></app-nav-menu-manager>
+  <app-nav-menu-cee *ngIf="AuthService.currentBind?.context == contextEnum.CEE || AuthService.currentBind?.context == contextEnum.SYSTEM"></app-nav-menu-cee>
+  <app-nav-menu-commission *ngIf="AuthService.currentBind?.context == contextEnum.COMMISSION"></app-nav-menu-commission>
+  <app-nav-menu-institution *ngIf="AuthService.currentBind?.context == contextEnum.IE_UE"></app-nav-menu-institution>
+  <app-nav-menu-manager *ngIf="AuthService.currentBind?.context == contextEnum.CEE || AuthService.currentBind?.context == contextEnum.SYSTEM"></app-nav-menu-manager>
 
   <!-- <app-nav-menu-cee *ngIf="isPermitted('/cee')"></app-nav-menu-cee>
   <app-nav-menu-commission *ngIf="isPermitted('/commission')"></app-nav-menu-commission>
