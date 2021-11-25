@@ -5,6 +5,8 @@ import { Observable } from 'rxjs';
 import { ENV } from 'src/environments/environment';
 import { AuthService } from '../auth/auth.service';
 import { IStatusMessage } from '../interfaces/IStatusMessage';
+import { IQueryConfig } from '../interfaces/IQueryConfig';
+import { IReqBindMember } from '../interfaces/IReqBindMember';
 
 
 @Injectable({
@@ -42,6 +44,16 @@ export class InstitutionService {
     return this.http.post<IInstitution & IStatusMessage>(this.baseUrl, institution, { headers: AuthService.headers() });
   }
 
+  bindMember(reqBindMember: IReqBindMember): Observable<IStatusMessage> {
+      const uri = `${this.baseUrl}/bindMember`;
+      return this.http.post<IStatusMessage>(uri, reqBindMember, { headers: AuthService.headers() });
+  }
+
+  unBindMember(reqBindMember: IReqBindMember): Observable<IStatusMessage> {
+      const uri = `${this.baseUrl}/unbindMember`;
+      return this.http.post<IStatusMessage>(uri, reqBindMember, { headers: AuthService.headers() });
+  }
+
   read(): Observable<IInstitution[]> {
     return this.http.get<IInstitution[]>(this.baseUrl, { headers: AuthService.headers() });
   }
@@ -49,6 +61,12 @@ export class InstitutionService {
   readById(id: String): Observable<IInstitution & IStatusMessage> {
     const url = `${this.baseUrl}/${id}`;
     return this.http.get<IInstitution & IStatusMessage>(url, { headers: AuthService.headers() });
+  }
+
+  readFilter(institution: IInstitution, queryConfig: IQueryConfig): Observable<IInstitution[] & IStatusMessage> {
+      const url = `${this.baseUrl}/filter`;
+      const filter = { filter: institution, queryConfig }
+      return this.http.post<IInstitution[] & IStatusMessage>(url, filter, { headers: AuthService.headers() });
   }
 
   update(institution: IInstitution): Observable<IInstitution & IStatusMessage> {

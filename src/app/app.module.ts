@@ -31,6 +31,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { ToastrModule } from 'ngx-toastr';
 import { PipesModule } from 'w-ng5';
 import { EvidenceFormComponent } from "./directives/evidence-form/evidence-form.component";
+import { NgxMaskModule } from "ngx-mask";
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { EvidenceFormComponent } from "./directives/evidence-form/evidence-form.
     ModalModule.forRoot(),
     ToastrModule.forRoot({ positionClass:'toast-top-right', closeButton: true }),
     PipesModule,
+    NgxMaskModule,
 
     /*FEATURES*/
     AuthModule,

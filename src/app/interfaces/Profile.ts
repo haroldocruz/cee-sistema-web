@@ -3,19 +3,21 @@ import { ModelNameEnum } from './enumerations/ModelNameEnum';
 import { IInstitution } from './Institution';
 import { IMetadata } from './Metadata';
 import { IUser } from './User';
+
 export interface IProfile {
   
     "_id"?: string;
     
+    "context"?: string;
     "status"?: boolean;
     "name"?: string;
-    "_routeList"?: IRoute[];
-    "_userList"?: IUser[];
-    "_institutionList"?: IInstitution[];
-    "context"?: string;
-    "scope"?: any;
-    "group"?: IGroup;
     "description"?: string;
+    
+    "_routeList"?: IRoute[];
+    // "_userList"?: IUser[];
+    // "_institutionList"?: IInstitution[];
+    // "scope"?: any;
+    // "group"?: IGroup;
 
     __metadata?: IMetadata;
 }
@@ -41,7 +43,7 @@ export class Profile implements IProfile {
 
     status: true;
     name = "Anônimo";
-    context = ContextEnum.COMMISSION;
+    context = ContextEnum.UNINFORMED;
     // scope = { _id: "_id", name: "Other"};
     group = { _id: "_id", name: "Other"};
     _routeList = [];

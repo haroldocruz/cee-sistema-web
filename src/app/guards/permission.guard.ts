@@ -30,7 +30,7 @@ export class PermissionGuard implements CanActivate {
     // if (this.routes[state.url]?.includes(AuthService.currentProfile.name))
     //   return true;
 
-    if(AuthService.currentProfile.name) return true;
+    if(AuthService.currentBind.profileName) return true;
 
     this.router.navigate(['/']);
 

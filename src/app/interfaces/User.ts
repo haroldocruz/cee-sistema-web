@@ -1,7 +1,6 @@
-import { StatusEnum } from './Status';
-import { IAddress, IContact, IPhone } from "./Contact";
-import { IProfile } from "./Profile";
+import { IAddress, IContact } from "./Contact";
 import { ENV } from 'src/environments/environment';
+import { IBindInUser } from './IBindInUser';
 
 export interface IUser {
     "_id"?: string;
@@ -9,7 +8,6 @@ export interface IUser {
     "name"?: string;
     "cpf"?: number;
     "rg"?: IRg;
-    "_currentProfile"?: IProfile;
     "gender"?: string; //enum [masculino, feminino]
     "maritalStatus"?: string; //enum [solteiro(a), casado(a), ...]
     "birthDate"?: Date;
@@ -54,7 +52,7 @@ export interface ILoginInfo {
     'lastDate'?: Date;
     'actualDate'?: Date;
     'ipClient'?: string;
-    "_profileLogin"?: IProfile;
+    "currentBind"?: IBindInUser;
     "token"?: string;
     "providerId"?: string;
     "providerKey"?: string;
@@ -65,8 +63,8 @@ class LoginInfo { }
 export interface IDataAccess {
     "username"?: string;
     "password"?: string;
-    "_profileList"?: IProfile[];
-    "_profileDefault"?: IProfile;
+    "bindDefault"?: IBindInUser;
+    "bindList"?: IBindInUser[];
 }
 
 export class User implements IUser {
@@ -78,15 +76,10 @@ export class User implements IUser {
     status = false;
     gender = GenderEnum.UNINFORMED;
     maritalStatus = MaritalStatusEnum.UNINFORMED;
-    // currentProfile = { id: 'asdf', name: 'Anônimo', status: true }
-
-    // dataAccess = {} as IDataAccess;
     dataAccess = {
         username: (new Date().getTime()).toString(),
         password: ENV.user.defaultPassword,
     };
-
-    // contact = {} as IContact;
     contact: IContact = {
         emailList: [],
         phoneList: [],

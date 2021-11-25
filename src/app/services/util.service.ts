@@ -1,11 +1,12 @@
 import { IAddress, IEmail, IPhone } from './../interfaces/Contact';
 import { Injectable } from '@angular/core';
 import { NotificationService } from './notification.service';
-import { Observable } from 'rxjs';
+import { fromEvent, Observable } from 'rxjs';
 import { IStatusMessage } from '../interfaces/IStatusMessage';
 import { EventEmitterService } from './event-emitter.service';
 import { MaskApplierService, MaskPipe } from 'ngx-mask';
 import { Title } from '@angular/platform-browser';
+import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
@@ -22,6 +23,19 @@ export class UtilService {
     ) {
         this.maskPipe = new MaskPipe(maskAService)
     }
+
+    static typeahead(elem: Element): Observable<any> {
+        // const searchBox = ;
+    
+        return fromEvent(elem, 'input').pipe(
+          map((e) => (e.target as HTMLInputElement).value),
+          // map((e: KeyboardEvent) => (e.target as HTMLInputElement).value),
+          // filter(text => text.length > 2),
+          debounceTime(600),
+          distinctUntilChanged()
+          // switchMap(() => ajax('/api/endpoint'))
+        );
+      }
 
     /**
      * @description Get full name of the user and return a string with just first and last name together.
@@ -131,18 +145,22 @@ export class UtilService {
     }
 
     static default(resp: Observable<any & IStatusMessage>) {
+        
+        let anyData: any;
 
         resp.subscribe((data) => {
             if (data.statusCode >= 400) {
-                console.log(data)
                 UtilService.notifying.showError(data.statusMessage, `Erro ${data.statusCode}!`);
                 return;
             }
             UtilService.notifying.showSuccess("Ação realizada com sucesso!", "Ok!");
             EventEmitterService.get('is-success').emit(true);
+            anyData = data;
         }, (error) => {
             UtilService.notifying.showError("Não foi possível realizar esta ação!", "Erro!");
         });
+
+        return anyData;
     }
 
     static isConfirm(question: string = "Confirmar ação?") {

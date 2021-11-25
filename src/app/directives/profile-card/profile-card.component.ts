@@ -1,15 +1,19 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ChatDirectModalComponent } from 'src/app/features/chat/chat-direct-modal/chat-direct-modal.component';
+import { ContextEnum } from 'src/app/interfaces/enumerations/ContextEnum';
 import { IChatUser } from 'src/app/interfaces/IChatUser';
 import { UtilService } from 'src/app/services/util.service';
 
 export interface IProfileCard {
-  profileId?: string,
-  userId?: string,
-  "group": { "name": string },
-  "userName": string,
-  "profileName": string,
+  status: boolean,
+  context: string,
+  profileId: string,
+  profileName: string,
+  userId: string,
+  userName: string,
+  institutionId: string,
+  institutionName: string,
   address: string,
   phone: string,
   email: string,
@@ -40,15 +44,18 @@ export class ProfileCardComponent implements OnInit {
     public modalService: BsModalService
     ) {
     this.profileCard = {
+      status: false,
+      context: ContextEnum.UNINFORMED,
       profileId: null,
+      profileName: '',
       userId: null,
       userName: '',
-      profileName: '',
+      institutionId: null,
+      institutionName: '',
       avatar: '/assets/avatar.png',
       phone: '',
       email: '',
       address: '',
-      group: { name: '' },
     }
     this.profileCardOptions = {
       btnChat: false,
