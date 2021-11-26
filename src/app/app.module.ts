@@ -32,6 +32,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { PipesModule } from 'w-ng5';
 import { EvidenceFormComponent } from "./directives/evidence-form/evidence-form.component";
 import { NgxMaskModule } from "ngx-mask";
+import { PageInConstructionComponent } from './directives/page-in-construction/page-in-construction.component';
 
 @NgModule({
   declarations: [
