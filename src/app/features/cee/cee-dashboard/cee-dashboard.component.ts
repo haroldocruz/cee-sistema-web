@@ -7,37 +7,96 @@ import { Title } from '@angular/platform-browser';
   styleUrls: ['./cee-dashboard.component.less']
 })
 export class CeeDashboardComponent implements OnInit {
-  title
-  type
-  data
-  columnNames
-  options
-  width
-  height
+
+  colorScheme
+  conselhos
+  sistemas
+
+  single: any[];
+  view: any[] = [700, 400];
+  colorScheme2
+  cardColor: string = '#232837';
+
   constructor(
     private titleService: Title
   ) { }
 
   ngOnInit(): void {
     this.titleService.setTitle('CEE | Dashboard')
+    this.mockIndex();
   }
 
-  index() {
-    this.title = 'Browser market shares at a specific website, 2014';
-    this.type = 'PieChart';
-    this.data = [
-      ['Firefox', 45.0],
-      ['IE', 26.8],
-      ['Chrome', 12.8],
-      ['Safari', 8.5],
-      ['Opera', 6.2],
-      ['Others', 0.7]
-    ];
-    this.columnNames = ['Browser', 'Percentage'];
-    this.options = {
-      pieHole: 0.4
+  mockIndex() {
+    this.colorScheme = {
+      domain: ['#5AA454', '#E44D25']
     };
-    this.width = 550;
-    this.height = 400;
+    this.colorScheme2 = {
+      name: '',
+      selectable: true,
+      group: '',
+      domain: ['#5AA454', '#E44D25', '#CFC0BB', '#d9ff51', '#33b32c', '#000000']
+    };
+
+    this.conselhos = [
+      {
+        "name": "Implantados",
+        "value": 100,
+        "extra": {
+          "code": "de"
+        }
+      },
+      {
+        "name": "Não implantados",
+        "value": 39,
+        "extra": {
+          "code": "us"
+        }
+      }
+    ]
+
+    this.sistemas = [
+      {
+        "name": "Implantados",
+        "value": 100,
+        "extra": {
+          "code": "de"
+        }
+      },
+      {
+        "name": "Não implantados",
+        "value": 39,
+        "extra": {
+          "code": "us"
+        }
+      }
+    ]
+
+    this.single = [
+      {
+        "name": "CEB",
+        "value": 46
+      },
+      {
+        "name": "CES",
+        "value": 17
+      },
+      {
+        "name": "CLN",
+        "value": 13
+      },
+      {
+        "name": "Abertos",
+        "value": 76
+      },
+      {
+        "name": "Concluídos",
+        "value": 120
+      },
+      {
+        "name": "Total",
+        "value": 196
+      }
+    ];
   }
+
 }
