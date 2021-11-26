@@ -24,7 +24,7 @@ import { CeeInstitutionViewComponent } from './cee-institution/cee-institution-v
 import { CeeInstitutionFormComponent } from './cee-institution/cee-institution-form/cee-institution-form.component';
 import { PageInConstructionComponent } from 'src/app/directives/page-in-construction/page-in-construction.component';
 
-
+import { NgxChartsModule } from "@swimlane/ngx-charts";
 
 @NgModule({
   declarations: [
@@ -61,6 +61,7 @@ import { PageInConstructionComponent } from 'src/app/directives/page-in-construc
     RouterModule,
 
     PipesModule,
+    NgxChartsModule,
     NgxMaskModule
   ]
 })
