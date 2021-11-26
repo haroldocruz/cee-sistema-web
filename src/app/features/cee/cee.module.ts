@@ -22,6 +22,7 @@ import { ProfileCardComponent } from 'src/app/directives/profile-card/profile-ca
 import { CeeProfileBindListComponent } from './cee-profile/cee-profile-bind-list/cee-profile-bind-list.component';
 import { CeeInstitutionViewComponent } from './cee-institution/cee-institution-view/cee-institution-view.component';
 import { CeeInstitutionFormComponent } from './cee-institution/cee-institution-form/cee-institution-form.component';
+import { PageInConstructionComponent } from 'src/app/directives/page-in-construction/page-in-construction.component';
 
 
 
@@ -51,6 +52,7 @@ import { CeeInstitutionFormComponent } from './cee-institution/cee-institution-f
     CeeUserBindComponent,
     CeeUserListComponent,
 
+    PageInConstructionComponent,
     ProfileCardComponent
   ],
   imports: [
