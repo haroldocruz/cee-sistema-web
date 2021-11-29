@@ -46,17 +46,22 @@ export class NavPerfilComponent implements OnInit {
 
         this.authService.logout(<string>AuthService.user._id).subscribe((data: IStatusMessage) => {
             this.clear();
+            this.redirect();
             this.notify.showSuccess(`${data.statusMessage}!`, `${data.statusCode}`);
         }, (error) => {
             this.clear();
+            this.redirect();
             this.notify.showError(`Erro não tratado!`, `Ops!`);
         });
+    }
+
+    private redirect(){
+        this.router.navigate(['/login']);
     }
 
     private clear() {
         sessionStorage.removeItem("user");
         localStorage.removeItem("user");
         AuthService.init();
-        this.router.navigate(['/']);
     }
 }
