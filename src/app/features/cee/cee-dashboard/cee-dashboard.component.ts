@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
+import { Color, ScaleType } from '@swimlane/ngx-charts'
+// import { ScaleType } from '@swimlane/ngx-charts/lib/common/types/scale-type.enum';
 
 @Component({
   selector: 'app-cee-dashboard',
@@ -8,13 +10,14 @@ import { Title } from '@angular/platform-browser';
 })
 export class CeeDashboardComponent implements OnInit {
 
-  colorScheme
+  colorScheme: Color
   conselhos
   sistemas
 
   single: any[];
+  single2: any[];
   view: any[] = [700, 400];
-  colorScheme2
+  colorScheme2: Color;
   cardColor: string = '#232837';
 
   constructor(
@@ -28,26 +31,29 @@ export class CeeDashboardComponent implements OnInit {
 
   mockIndex() {
     this.colorScheme = {
+      name: '',
+      selectable: true,
+      group: ScaleType.Linear,
       domain: ['#5AA454', '#E44D25']
     };
     this.colorScheme2 = {
       name: '',
       selectable: true,
-      group: '',
-      domain: ['#5AA454', '#E44D25', '#CFC0BB', '#d9ff51', '#33b32c', '#000000']
+      group: ScaleType.Linear,
+      domain: ['#5AA454', '#E44D25', '#CFC0BB', '#d9ff51', '#33b32c', '#5963eb']
     };
 
     this.conselhos = [
       {
         "name": "Implantados",
-        "value": 100,
+        "value": 91,
         "extra": {
           "code": "de"
         }
       },
       {
         "name": "Não implantados",
-        "value": 39,
+        "value": 48,
         "extra": {
           "code": "us"
         }
@@ -95,6 +101,33 @@ export class CeeDashboardComponent implements OnInit {
       {
         "name": "Total",
         "value": 196
+      }
+    ];
+
+    this.single2 = [
+      {
+        "name": "CEB",
+        "value": 99
+      },
+      {
+        "name": "CES",
+        "value": 41
+      },
+      {
+        "name": "CLN",
+        "value": 60
+      },
+      {
+        "name": "Abertos",
+        "value": 79
+      },
+      {
+        "name": "Concluídos",
+        "value": 262
+      },
+      {
+        "name": "Total",
+        "value": 341
       }
     ];
   }
