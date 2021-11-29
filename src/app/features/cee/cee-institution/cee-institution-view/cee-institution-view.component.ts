@@ -10,6 +10,7 @@ import { CeeInstitutionFormComponent } from '../cee-institution-form/cee-institu
 import { EventEmitterService } from 'src/app/services/event-emitter.service';
 import { CeeUserBindComponent } from '../../cee-user/cee-user-bind/cee-user-bind.component';
 import { ContextEnum } from 'src/app/interfaces/enumerations/ContextEnum';
+import { cloneDeep } from 'lodash';
 
 interface IInstitutionView {
   _id: string;
@@ -91,13 +92,13 @@ export class CeeInstitutionViewComponent implements OnInit {
   }
 
   public openInstitutionFormModal(): void {
-    const initialState = { institutionId: this.institution._id, institution: this.institution };
+    const initialState = { institutionId: this.institution._id, institution: cloneDeep(this.institution) };
     this.bsModalRef = this.bsModalService.show(CeeInstitutionFormComponent, { id: UtilService.getRandom9Digits(), class: 'modal-lg', initialState });
     this.bsModalRef.content.closeBtnName = 'Close';
   }
 
   public openBindUserInInstitutionModal(): void {
-    const initialState = { institution: this.institution };
+    const initialState = { institution: cloneDeep(this.institution) };
     this.bsModalRef = this.modalService.show(CeeUserBindComponent, { id: 1, class: 'modal-lg', initialState });
     this.bsModalRef.content.closeBtnName = 'Close';
   }

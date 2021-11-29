@@ -8,7 +8,7 @@ import { CeeLocalService } from '../../cee.local.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ChatDirectModalComponent } from 'src/app/features/chat/chat-direct-modal/chat-direct-modal.component';
 import { IChatUser } from 'src/app/interfaces/IChatUser';
-import { IProfileCard, IProfileCardOptions } from 'src/app/directives/profile-card/profile-card.component';
+import { IProfileCardTemplate, IProfileCardOptions } from 'src/app/directives/profile-card/profile-card.component';
 import { UtilService } from 'src/app/services/util.service';
 import { AuthService } from 'src/app/auth/auth.service';
 import { NotificationService } from 'src/app/services/notification.service';
@@ -29,7 +29,7 @@ export class CeeUserListComponent implements OnInit {
 
   public bsModalRef: BsModalRef
 
-  profileCardList: IProfileCard[];
+  profileCardList: IProfileCardTemplate[];
   profileCardOptions: IProfileCardOptions;
 
   fieldsToFilter: Array<{ field: string, value: string }>;
@@ -67,7 +67,7 @@ export class CeeUserListComponent implements OnInit {
     };
     const filter = { _id: AuthService.currentBind._institution };
 
-    this.institutionService.readFilter(filter, queryConfig).subscribe((data) => {
+    this.institutionService.filterAll(filter, queryConfig).subscribe((data) => {
       console.log("AuthService", AuthService.user);
 
       if (data.statusCode) { this.onFail(data); return; }
@@ -80,15 +80,15 @@ export class CeeUserListComponent implements OnInit {
     UtilService.notifying.showError(data.statusMessage, data.statusCode.toString());
   }
 
-  openChatDirectModal(user: IProfileCard) {
-    const user2: IChatUser = { name: user.userName, avatar: user.avatar, dateTime: "28/08/2021" }
+  openChatDirectModal(user: IProfileCardTemplate) {
+    const user2: IChatUser = { name: user.userName, image: user.image, dateTime: "28/08/2021" }
     const initialState = { user: user2 };
     this.bsModalRef = this.modalService.show(ChatDirectModalComponent, { id: UtilService.getRandom9Digits(), class: 'modal-md', initialState });
     this.bsModalRef.content.closeBtnName = 'Close';
   }
 
   //TODO: refactor
-  unbindMember(profileCard: IProfileCard) {
+  unbindMember(profileCard: IProfileCardTemplate) {
     if (!UtilService.isConfirm(`Deseja desvincular ${profileCard.userName} do perfil de ${profileCard.profileName}?`))
       return;
 
@@ -119,10 +119,10 @@ export class CeeUserListComponent implements OnInit {
     });
   }
 
-  toViewBindToProfileCard(institution: IInstitution): IProfileCard[] {
+  toViewBindToProfileCard(institution: IInstitution): IProfileCardTemplate[] {
 
     const memberList: IMember[] = institution.memberList;
-    let profileCardList: IProfileCard[] = [];
+    let profileCardList: IProfileCardTemplate[] = [];
 
     memberList.forEach(member => {
       const profile: IProfile & string = member._profile;
@@ -132,7 +132,7 @@ export class CeeUserListComponent implements OnInit {
       const phone: IPhone = (user.contact?.phoneList.length > 0) ? user.contact.phoneList[0] : null;
       const email: IEmail = (user.contact?.emailList.length > 0) ? user.contact.emailList[0] : null;
 
-      const profileCard: IProfileCard = {
+      const profileCard: IProfileCardTemplate = {
         status: member.status,
         context: member.context,
         profileId: profile._id,
@@ -144,7 +144,8 @@ export class CeeUserListComponent implements OnInit {
         address: this.utilService.addressToString(address),
         phone: (phone != null) ? `${phone.number}` : '',
         email: (email != null) ? `${email.address}` : '',
-        avatar: (user.gender == GenderEnum.MALE) ? "../../../../assets/avatar5.png"
+        image: user.image.photoUrl || user.image.avatarUrl ||
+          (user.gender == GenderEnum.MALE) ? "../../../../assets/avatar5.png"
           : (user.gender == GenderEnum.FEMALE) ? "../../../../assets/avatar2.png"
             : (user.gender == GenderEnum.UNINFORMED) ? "../../../../assets/avatar.png"
               : "../../../../assets/logo-1257x577-alpha3.png"

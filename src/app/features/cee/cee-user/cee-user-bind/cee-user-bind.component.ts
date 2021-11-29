@@ -1,7 +1,7 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { AuthService } from 'src/app/auth/auth.service';
-import { IProfileCard, IProfileCardOptions } from 'src/app/directives/profile-card/profile-card.component';
+import { IProfileCardTemplate, IProfileCardOptions } from 'src/app/directives/profile-card/profile-card.component';
 import { IAddress, IEmail, IPhone } from 'src/app/interfaces/Contact';
 import { IBindInUser } from 'src/app/interfaces/IBindInUser';
 import { IInstitution } from 'src/app/interfaces/Institution';
@@ -30,9 +30,10 @@ export class CeeUserBindComponent implements OnInit, OnDestroy {
   @Input() public institution: IInstitution;
   @Input() public institutionId: string;
   @Input() public institutionName: string;
+  @Input() public institutionContext: string;
 
   user: IUser;
-  profileCard: IProfileCard;
+  profileCard: IProfileCardTemplate;
   profileCardOptions: IProfileCardOptions;
   profile: IProfile;
 
@@ -51,9 +52,11 @@ export class CeeUserBindComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
 
     if (!this.institutionId)
-      this.institutionId = AuthService.currentBind._institution;
+      this.institutionId = this.institution?._id || AuthService.currentBind._institution;
     if (!this.institutionName)
-      this.institutionName = AuthService.currentBind.institutionName;
+      this.institutionName = this.institution?.name || AuthService.currentBind.institutionName;
+    if (!this.institutionContext)
+      this.institutionContext = this.institution?.context || AuthService.currentBind.context;
 
     this.cpf = '';
     this.user = new User();
@@ -66,7 +69,7 @@ export class CeeUserBindComponent implements OnInit, OnDestroy {
   openProfileBindListModal() {
     const initialState = {
       institutionId: this.institutionId,
-      context: AuthService.currentBind.context,
+      context: this.institution.context || AuthService.currentBind.context,
       user: this.user
     };
     this.bsModalRefBind = this.modalService.show(CeeProfileBindListComponent, { id: UtilService.getRandom9Digits(), class: 'modal-lg', initialState });
@@ -86,10 +89,10 @@ export class CeeUserBindComponent implements OnInit, OnDestroy {
     const reqBindMember: IReqBindMember = {
       status: this.profileCard.status,
       context: this.profileCard.context,
-      _profile: this.profile?._id || this.profileCard.profileId,
-      profileName: this.profile.name || this.profileCard.profileName,
-      _institution: <IInstitution & string>this.institution || AuthService.currentBind._institution,
-      institutionName: this.institution.name || AuthService.currentBind.institutionName,
+      _profile: this.profileCard.profileId,
+      profileName: this.profileCard.profileName,
+      _institution: this.profileCard.institutionId,
+      institutionName: this.profileCard.institutionName,
       _user: this.profileCard.userId,
       userName: this.profileCard.userName,
     }
@@ -124,16 +127,16 @@ export class CeeUserBindComponent implements OnInit, OnDestroy {
 
     let user = {};
     user['cpf'] = this.cpf;
-    this.userService.readFilter(user).subscribe((data) => {
+    this.userService.filterOne(user).subscribe((data) => {
 
       if (data.statusCode) {
-        this.profileCard = {} as IProfileCard;
-        this.user._id = null;
+        this.profileCard = null;
+        this.user = null;
         this.notifyService.showWarning(data.statusMessage, `Ops! ${data.statusCode}`);
         return;
       }
 
-      this.user = data[0];
+      this.user = data;
 
       this.toView();
 
@@ -143,29 +146,22 @@ export class CeeUserBindComponent implements OnInit, OnDestroy {
 
 
   private toView() {
-    const bindList: IBindInUser[] = this.user.dataAccess.bindList;
     const address: IAddress = (this.user.contact?.addressList.length > 0) ? this.user.contact.addressList[0] : null;
     const phone: IPhone = (this.user.contact?.phoneList.length > 0) ? this.user.contact.phoneList[0] : null;
     const email: IEmail = (this.user.contact?.emailList.length > 0) ? this.user.contact.emailList[0] : null;
     this.profileCard = {
       status: false,
-      context: '',
-      profileId: '',
-      profileName: '',
+      context: this.institutionContext,
+      profileId: this.profile._id,
+      profileName: this.profile.name,
       userId: this.user._id,
       userName: this.user.name,
       institutionId: this.institutionId,
       institutionName: this.institutionName,
       address: this.utilService.addressToString(address),
-      phone: (phone != null) ? `${phone.number}` : '',
-      email: (email != null) ? `${email.address}` : '',
-      avatar: (this.user.gender == GenderEnum.MALE)
-        ? "../../../../assets/avatar5.png"
-        : (this.user.gender == GenderEnum.FEMALE)
-          ? "../../../../assets/avatar2.png"
-          : (this.user.gender == GenderEnum.UNINFORMED)
-            ? "../../../../assets/avatar.png"
-            : "../../../../assets/logo-1257x577-alpha3.png"
+      phone: (phone != null) ? `${phone.number}` : null,
+      email: (email != null) ? `${email.address}` : null,
+      image: this.user.image.photoUrl || this.user.image.avatarUrl || UtilService.getAvatarByGender(this.user.gender)
     };
   }
 }

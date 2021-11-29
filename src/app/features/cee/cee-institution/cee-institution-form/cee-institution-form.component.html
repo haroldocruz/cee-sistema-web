@@ -1,248 +1,267 @@
 <!-- <form [formGroup]="checkoutForm"> -->
 <form>
-    <div class="modal-header">
-        <h4 class="modal-title" id="userModalLabel">
-            <span *ngIf="!institution?._id">Inserir</span>
-            <span *ngIf="institution?._id">Alterar</span>
-        </h4>
-        <button type="button" class="close" *ngIf="bsModalRef" (click)="bsModalRef.hide()"><span>&times;</span></button>
-    </div>
-
-    <div class="modal-body">
-        <div class="container-fluid" *ngIf="isLoading">
-            ...LOADING
+    <div class="card">
+        <div class="card-header">
+            <h4 class="d-none d-print-block text-center">
+                Formulário de inserção e alteração de dados da instituição
+            </h4>
+            <h4 class="card-title d-print-none" id="userModalLabel">
+                <span *ngIf="!institution?._id">Inserir</span>
+                <span *ngIf="institution?._id">Alterar</span>
+            </h4>
+            <div class="card-tools d-print-none">
+                <button type="button" class="btn btn-tool" data-card-widget="maximize">
+                    <i class="fas fa-expand"></i>
+                </button>
+                &nbsp;
+                <button type="button" class="close" (click)="bsModalRef.hide()">
+                    <span>&times;</span>
+                </button>
+            </div>
         </div>
-        <div class="container-fluid" *ngIf="!isLoading">
-            <div class="row">
+
+        <div class="card-body">
+            <div class="container-fluid" *ngIf="isLoading">
+                ...LOADING
+            </div>
+            <div class="container-fluid" *ngIf="!isLoading">
+                <div class="row">
 
 
-                <div class="col-12">
-                    <div class="card card-primary card-outline card-outline-tabs">
-                        <div class="card-header p-0 border-bottom-0">
-                            <ul class="nav nav-tabs nav-fill" id="custom-tabs-four-tab" role="tablist">
-                                <li class="nav-item">
-                                    <a class="nav-link active" id="custom-tabs-four-home-tab" data-bs-toggle="pill"
-                                        href="#custom-tabs-four-home" role="tab" aria-controls="custom-tabs-four-home"
-                                        aria-selected="true">Principal</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="custom-tabs-four-fundaments-tab" data-bs-toggle="pill"
-                                        href="#custom-tabs-four-fundaments" role="tab"
-                                        aria-controls="custom-tabs-four-fundaments"
-                                        aria-selected="false">Fundamentos</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="custom-tabs-four-contact-tab" data-bs-toggle="pill"
-                                        href="#custom-tabs-four-contact" role="tab"
-                                        aria-controls="custom-tabs-four-contact" aria-selected="false">Contatos</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="custom-tabs-four-address-tab" data-bs-toggle="pill"
-                                        href="#custom-tabs-four-address" role="tab"
-                                        aria-controls="custom-tabs-four-address" aria-selected="false">Endereço</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="custom-tabs-four-legalact-tab" data-bs-toggle="pill"
-                                        href="#custom-tabs-four-legalact" role="tab"
-                                        aria-controls="custom-tabs-four-legalact" aria-selected="false">Atos Legais</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="card-body">
-                            <div class="tab-content" id="custom-tabs-four-tabContent">
-                                <div class="tab-pane fade active show" id="custom-tabs-four-home" role="tabpanel"
-                                    aria-labelledby="custom-tabs-four-home-tab">
+                    <div class="col-12">
+                        <div class="card card-info card-outline card-outline-tabs">
+                            <div class="card-header p-0 border-bottom-0">
+                                <ul class="nav nav-tabs nav-fill" id="custom-tabs-four-tab" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" id="custom-tabs-four-home-tab" data-bs-toggle="pill"
+                                            href="#custom-tabs-four-home" role="tab"
+                                            aria-controls="custom-tabs-four-home" aria-selected="true">Principal</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="custom-tabs-four-fundaments-tab" data-bs-toggle="pill"
+                                            href="#custom-tabs-four-fundaments" role="tab"
+                                            aria-controls="custom-tabs-four-fundaments"
+                                            aria-selected="false">Fundamentos</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="custom-tabs-four-contact-tab" data-bs-toggle="pill"
+                                            href="#custom-tabs-four-contact" role="tab"
+                                            aria-controls="custom-tabs-four-contact" aria-selected="false">Contatos</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="custom-tabs-four-address-tab" data-bs-toggle="pill"
+                                            href="#custom-tabs-four-address" role="tab"
+                                            aria-controls="custom-tabs-four-address" aria-selected="false">Endereço</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="custom-tabs-four-legalact-tab" data-bs-toggle="pill"
+                                            href="#custom-tabs-four-legalact" role="tab"
+                                            aria-controls="custom-tabs-four-legalact" aria-selected="false">Atos
+                                            Legais</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="card-body">
+                                <div class="tab-content" id="custom-tabs-four-tabContent">
+                                    <div class="tab-pane fade active show" id="custom-tabs-four-home" role="tabpanel"
+                                        aria-labelledby="custom-tabs-four-home-tab">
 
-                                    <div class="row">
-                                        <div class="col-md-6 col-lg-4">
-                                            Contexto:
-                                            <select id="context" [(ngModel)]="institution.context"
-                                                [ngModelOptions]="{standalone: true}" class="form-control">
-                                                <option [ngValue]="context" *ngFor="let context of contextList">{{
-                                                    context }}</option>
-                                            </select>
+                                        <div class="row">
+                                            <div class="col-md-6 col-lg-4">
+                                                Contexto:
+                                                <select id="context" [(ngModel)]="institution.context"
+                                                    [ngModelOptions]="{standalone: true}" class="form-control">
+                                                    <option [ngValue]="context" *ngFor="let context of contextList">{{
+                                                        context }}</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-6 col-lg-4">
+                                                Tipo de instituição:
+                                                <select id="gType" [(ngModel)]="institution.institutionType"
+                                                    [ngModelOptions]="{standalone: true}" class="form-control">
+                                                    <option [ngValue]="gtype" *ngFor="let gtype of institutionTypeList">
+                                                        {{
+                                                        gtype }}</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-6 col-lg-4">
+                                                Esfera administrativa:
+                                                <select id="sphere" [(ngModel)]="institution.administrativeSphere"
+                                                    [ngModelOptions]="{standalone: true}" class="form-control">
+                                                    <option [ngValue]="sphere"
+                                                        *ngFor="let sphere of administrativeSphereList">{{ sphere }}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-6 col-lg-4">
+                                                CNPJ:
+                                                <input type="text" [(ngModel)]="institution.cnpj"
+                                                    [ngModelOptions]="{standalone: true}" mask="00.000.000/0000-00"
+                                                    pattern="[0-9]{14}" class="form-control" placeholder="">
+                                            </div>
+                                            <div class="col-md-12 col-lg-8">
+                                                Razão social:
+                                                <input type="text" [(ngModel)]="institution.socialReason"
+                                                    [ngModelOptions]="{standalone: true}" autocomplete="_"
+                                                    class="form-control" placeholder="">
+                                            </div>
+                                            <div class="col-md-12 col-lg-8">
+                                                Nome Fantasia:
+                                                <input type="text" [(ngModel)]="institution.name"
+                                                    [ngModelOptions]="{standalone: true}" autocomplete="_"
+                                                    class="form-control" placeholder="">
+                                            </div>
+                                            <div class="col-md-6 col-lg-4">
+                                                Sigla (quando houver):
+                                                <input type="text" [(ngModel)]="institution.initials"
+                                                    [ngModelOptions]="{standalone: true}" class="form-control"
+                                                    placeholder="">
+                                            </div>
                                         </div>
-                                        <div class="col-md-6 col-lg-4">
-                                            Tipo de instituição:
-                                            <select id="gType" [(ngModel)]="institution.institutionType"
-                                                [ngModelOptions]="{standalone: true}" class="form-control">
-                                                <option [ngValue]="gtype" *ngFor="let gtype of institutionTypeList">{{
-                                                    gtype }}</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-md-6 col-lg-4">
-                                            Esfera administrativa:
-                                            <select id="sphere" [(ngModel)]="institution.administrativeSphere"
-                                                [ngModelOptions]="{standalone: true}" class="form-control">
-                                                <option [ngValue]="sphere"
-                                                    *ngFor="let sphere of administrativeSphereList">{{ sphere }}
-                                                </option>
-                                            </select>
-                                        </div>
-                                        <div class="col-md-6 col-lg-4">
-                                            CNPJ:
-                                            <input type="text" [(ngModel)]="institution.cnpj"
-                                                [ngModelOptions]="{standalone: true}" mask="00.000.000/0000-00"
-                                                pattern="[0-9]{14}" class="form-control" placeholder="">
-                                        </div>
-                                        <div class="col-md-12 col-lg-8">
-                                            Razão social:
-                                            <input type="text" [(ngModel)]="institution.socialReason"
-                                                [ngModelOptions]="{standalone: true}" autocomplete="_"
-                                                class="form-control" placeholder="">
-                                        </div>
-                                        <div class="col-md-12 col-lg-8">
-                                            Nome Fantasia:
-                                            <input type="text" [(ngModel)]="institution.name"
-                                                [ngModelOptions]="{standalone: true}" autocomplete="_"
-                                                class="form-control" placeholder="">
-                                        </div>
-                                        <div class="col-md-6 col-lg-4">
-                                            Sigla (quando houver):
-                                            <input type="text" [(ngModel)]="institution.initials"
-                                                [ngModelOptions]="{standalone: true}" class="form-control"
-                                                placeholder="">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                Descrição:
+                                                <textarea rows="6" [(ngModel)]="institution.description"
+                                                    [ngModelOptions]="{standalone: true}"
+                                                    class="form-control"></textarea>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            Descrição:
-                                            <textarea rows="6" [(ngModel)]="institution.description"
-                                                [ngModelOptions]="{standalone: true}" class="form-control"></textarea>
+                                    <div class="tab-pane fade" id="custom-tabs-four-fundaments" role="tabpanel"
+                                        aria-labelledby="custom-tabs-four-fundaments-tab">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <span>Perfil pessoal:</span>
+                                                <textarea rows="6" [(ngModel)]="fundaments.personalProfile"
+                                                    [ngModelOptions]="{standalone: true}"
+                                                    class="form-control"></textarea>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <span>Missão:</span>
+                                                <textarea rows="6" [(ngModel)]="fundaments.mission"
+                                                    [ngModelOptions]="{standalone: true}"
+                                                    class="form-control"></textarea>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <span>Visão:</span>
+                                                <textarea rows="6" [(ngModel)]="fundaments.vision"
+                                                    [ngModelOptions]="{standalone: true}"
+                                                    class="form-control"></textarea>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <span>Valores:</span>
+                                                <textarea rows="6" [(ngModel)]="fundaments.values"
+                                                    [ngModelOptions]="{standalone: true}"
+                                                    class="form-control"></textarea>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="tab-pane fade" id="custom-tabs-four-fundaments" role="tabpanel"
-                                    aria-labelledby="custom-tabs-four-fundaments-tab">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <span>Perfil pessoal:</span>
-                                            <textarea rows="6" [(ngModel)]="fundaments.personalProfile"
-                                                [ngModelOptions]="{standalone: true}" class="form-control"></textarea>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <span>Missão:</span>
-                                            <textarea rows="6" [(ngModel)]="fundaments.mission"
-                                                [ngModelOptions]="{standalone: true}" class="form-control"></textarea>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <span>Visão:</span>
-                                            <textarea rows="6" [(ngModel)]="fundaments.vision"
-                                                [ngModelOptions]="{standalone: true}" class="form-control"></textarea>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <span>Valores:</span>
-                                            <textarea rows="6" [(ngModel)]="fundaments.values"
-                                                [ngModelOptions]="{standalone: true}" class="form-control"></textarea>
+                                    <div class="tab-pane fade" id="custom-tabs-four-contact" role="tabpanel"
+                                        aria-labelledby="custom-tabs-four-contact-tab">
+
+                                        <div class="row mt-2">
+
+                                            <div class="col-12">
+                                                <a class="btn btn-info col" (click)="openContactPhoneModal(contact)">
+                                                    <i class="fas fa-edit"></i> Telefone
+                                                </a>
+
+                                                <div class="list-group">
+
+                                                    <span class="list-group-item text-center text-danger"
+                                                        *ngIf="contact?.phoneList?.length === 0">
+                                                        Nenhum telefone inserido!
+                                                    </span>
+
+                                                    <span class="list-group-item sd-list-items"
+                                                        *ngFor="let phone of contact.phoneList">
+                                                        <i class="fa fa-angle-double-right"></i>
+                                                        <span>
+                                                            {{ util.phoneMasked(phone.number) }}
+                                                        </span>
+
+                                                        <span class="sd-float-right">
+                                                            ({{ phone.description }})
+                                                        </span>
+                                                        &nbsp;
+                                                        <span class="sd-pointer sd-float-right">
+                                                            <!-- <i class="fas fa-trash" (click)="remove(p)"></i> -->
+                                                            <!-- <i class="fas fa-trash-alt text-danger"></i> -->
+                                                        </span>
+                                                    </span>
+
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12">
+                                                <hr>
+                                            </div>
+
+                                            <div class="col-12">
+                                                <a class="btn btn-info col" (click)="openContactEmailModal(contact)">
+                                                    <i class="fas fa-edit"></i> Email
+                                                </a>
+
+                                                <div class="list-group">
+
+                                                    <span class="list-group-item text-center text-danger"
+                                                        *ngIf="contact?.emailList?.length === 0">
+                                                        Nenhum e-mail inserido!
+                                                    </span>
+
+                                                    <span class="list-group-item sd-list-items"
+                                                        *ngFor="let email of contact.emailList">
+                                                        <i class="fa fa-angle-double-right"></i>
+                                                        <span>
+                                                            {{ email.address }}
+                                                        </span>
+                                                        <span class="sd-float-right">
+                                                            ({{ email.description }})
+                                                        </span>
+                                                        <span class="sd-pointer sd-float-right">
+                                                            <!-- <i class="fas fa-trash" (click)="remove(p)"></i> -->
+                                                            <!-- <i class="fas fa-trash-alt text-danger"></i> -->
+                                                        </span>
+                                                    </span>
+
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="tab-pane fade" id="custom-tabs-four-contact" role="tabpanel"
-                                    aria-labelledby="custom-tabs-four-contact-tab">
 
-                                    <div class="row mt-2">
+                                    <div class="tab-pane fade" id="custom-tabs-four-address" role="tabpanel"
+                                        aria-labelledby="custom-tabs-four-address-tab">
 
-                                        <div class="col-12">
-                                            <a class="btn btn-info col" (click)="openContactPhoneModal(contact)">
-                                                <i class="fas fa-edit"></i> Telefone
-                                            </a>
+                                        <div class="row mt-2">
+                                            <div class="col-md-12">
 
-                                            <div class="list-group">
+                                                <a class="btn btn-info col" (click)="openContactAddressModal(contact)">
+                                                    <i class="fas fa-edit"></i> Endereço
+                                                </a>
 
-                                                <span class="list-group-item text-center text-danger"
-                                                    *ngIf="contact?.phoneList?.length === 0">
-                                                    Nenhum telefone inserido!
-                                                </span>
+                                                <div class="list-group">
 
-                                                <span class="list-group-item sd-list-items"
-                                                    *ngFor="let phone of contact.phoneList">
-                                                    <i class="fa fa-angle-double-right"></i>
-                                                    <span>
-                                                        {{ util.phoneMasked(phone.number) }}
+                                                    <span class="list-group-item text-center text-danger"
+                                                        *ngIf="!contact.addressList || contact?.addressList?.length === 0">
+                                                        Nenhum endereço inserido!
                                                     </span>
 
-                                                    <span class="sd-float-right">
-                                                        ({{ phone.description }})
+                                                    <span class="list-group-item sd-list-items"
+                                                        *ngFor="let a of contact.addressList">
+                                                        <i class="fa fa-angle-double-right"></i>
+                                                        {{ addressToString(a) }}
+                                                        <span class="sd-pointer sd-float-right">
+                                                            <!-- <i class="fas fa-trash" (click)="remove(p)"></i> -->
+                                                            <i class="fas fa-trash-alt text-danger"></i>
+                                                        </span>
                                                     </span>
-                                                    &nbsp;
-                                                    <span class="sd-pointer sd-float-right">
-                                                        <!-- <i class="fas fa-trash" (click)="remove(p)"></i> -->
-                                                        <!-- <i class="fas fa-trash-alt text-danger"></i> -->
-                                                    </span>
-                                                </span>
+
+                                                </div>
 
                                             </div>
                                         </div>
 
-                                        <div class="col-md-12">
-                                            <hr>
-                                        </div>
-
-                                        <div class="col-12">
-                                            <a class="btn btn-info col" (click)="openContactEmailModal(contact)">
-                                                <i class="fas fa-edit"></i> Email
-                                            </a>
-
-                                            <div class="list-group">
-
-                                                <span class="list-group-item text-center text-danger"
-                                                    *ngIf="contact?.emailList?.length === 0">
-                                                    Nenhum e-mail inserido!
-                                                </span>
-
-                                                <span class="list-group-item sd-list-items"
-                                                    *ngFor="let email of contact.emailList">
-                                                    <i class="fa fa-angle-double-right"></i>
-                                                    <span>
-                                                        {{ email.address }}
-                                                    </span>
-                                                    <span class="sd-float-right">
-                                                        ({{ email.description }})
-                                                    </span>
-                                                    <span class="sd-pointer sd-float-right">
-                                                        <!-- <i class="fas fa-trash" (click)="remove(p)"></i> -->
-                                                        <!-- <i class="fas fa-trash-alt text-danger"></i> -->
-                                                    </span>
-                                                </span>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="tab-pane fade" id="custom-tabs-four-address" role="tabpanel"
-                                    aria-labelledby="custom-tabs-four-address-tab">
-
-                                    <div class="row mt-2">
-                                        <div class="col-md-12">
-
-                                            <a class="btn btn-info col" (click)="openContactAddressModal(contact)">
-                                                <i class="fas fa-edit"></i> Endereço
-                                            </a>
-
-                                            <div class="list-group">
-
-                                                <span class="list-group-item text-center text-danger"
-                                                    *ngIf="!contact.addressList || contact?.addressList?.length === 0">
-                                                    Nenhum endereço inserido!
-                                                </span>
-
-                                                <span class="list-group-item sd-list-items"
-                                                    *ngFor="let a of contact.addressList">
-                                                    <i class="fa fa-angle-double-right"></i>
-                                                    {{ addressToString(a) }}
-                                                    <span class="sd-pointer sd-float-right">
-                                                        <!-- <i class="fas fa-trash" (click)="remove(p)"></i> -->
-                                                        <i class="fas fa-trash-alt text-danger"></i>
-                                                    </span>
-                                                </span>
-
-                                            </div>
-
-                                        </div>
-                                    </div>
-
-                                    <!-- <div class="row mt-2">
+                                        <!-- <div class="row mt-2">
                                         <div class="col-md-6">
                                             País:
                                             <input type="text" [(ngModel)]="contact.addressList[0].country"
@@ -302,54 +321,55 @@
                                         </div>
 
                                     </div> -->
-                                </div>
-                                <div class="tab-pane fade" id="custom-tabs-four-legalact" role="tabpanel"
-                                    aria-labelledby="custom-tabs-four-legalact-tab">
-                                    <div class="row mt-2">
-                                        <div class="col-md-12">
+                                    </div>
+                                    <div class="tab-pane fade" id="custom-tabs-four-legalact" role="tabpanel"
+                                        aria-labelledby="custom-tabs-four-legalact-tab">
+                                        <div class="row mt-2">
+                                            <div class="col-md-12">
 
-                                            <a class="btn btn-info col" (click)="openLegalActModal(legalActList)">
-                                                <i class="fas fa-edit"></i> Ato Legal
-                                            </a>
+                                                <a class="btn btn-info col" (click)="openLegalActModal(legalActList)">
+                                                    <i class="fas fa-edit"></i> Ato Legal
+                                                </a>
 
-                                            <div class="list-group">
+                                                <div class="list-group">
 
-                                                <span class="list-group-item text-center text-danger"
-                                                    *ngIf="!legalActList || legalActList?.length === 0">
-                                                    Nenhum ato legal inserido!
-                                                </span>
-
-                                                <span class="list-group-item sd-list-items"
-                                                    *ngFor="let a of legalActList">
-                                                    <i class="fa fa-angle-double-right"></i>
-                                                    {{ a.title }} ({{ a.type }})
-                                                    <span class="sd-pointer sd-float-right">
-                                                        <!-- <i class="fas fa-trash" (click)="remove(p)"></i> -->
-                                                        <i class="fas fa-trash-alt text-danger"></i>
+                                                    <span class="list-group-item text-center text-danger"
+                                                        *ngIf="!legalActList || legalActList?.length === 0">
+                                                        Nenhum ato legal inserido!
                                                     </span>
-                                                </span>
+
+                                                    <span class="list-group-item sd-list-items"
+                                                        *ngFor="let a of legalActList">
+                                                        <i class="fa fa-angle-double-right"></i>
+                                                        {{ a.title }} ({{ a.type }})
+                                                        <span class="sd-pointer sd-float-right">
+                                                            <!-- <i class="fas fa-trash" (click)="remove(p)"></i> -->
+                                                            <i class="fas fa-trash-alt text-danger"></i>
+                                                        </span>
+                                                    </span>
+
+                                                </div>
 
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            <!-- /.card -->
                         </div>
-                        <!-- /.card -->
                     </div>
+
                 </div>
 
             </div>
-
         </div>
-    </div>
 
-    <div class="modal-footer">
-        <!-- <input type="hidden" (ngModel)="isDataAccess = false"> -->
-        <button type="reset" class="btn btn-default" *ngIf="!institution?._id">Limpar</button>
-        <button type="button" class="btn btn-default" *ngIf="bsModalRef" (click)="bsModalRef.hide()">Fechar</button>
-        <input type="submit" class="btn btn-primary" value="Salvar" (click)="create()" *ngIf="!institution?._id">
-        <input type="submit" class="btn btn-primary" value="Atualizar" (click)="update()" *ngIf="institution?._id">
+        <div class="card-footer d-print-none">
+            <!-- <input type="hidden" (ngModel)="isDataAccess = false"> -->
+            <button type="reset" class="btn btn-default" *ngIf="!institution?._id">Limpar</button>
+            <button type="button" class="btn btn-default" *ngIf="bsModalRef" (click)="bsModalRef.hide()">Fechar</button>
+            <input type="submit" class="btn btn-primary" value="Salvar" (click)="create()" *ngIf="!institution?._id">
+            <input type="submit" class="btn btn-primary" value="Atualizar" (click)="update()" *ngIf="institution?._id">
+        </div>
     </div>
 </form>
