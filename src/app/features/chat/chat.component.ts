@@ -32,92 +32,92 @@ export class ChatComponent implements OnInit {
     this.mockUserList = [
       {
         name: "Robson Vila Nova",
-        avatar: "../../../assets/avatar4.png",
+        image: "../../../assets/avatar4.png",
         dateTime: "Hoje"
       },
       {
         name: "Joana D'arc Alves",
-        avatar: "../../../assets/avatar2.png",
+        image: "../../../assets/avatar2.png",
         dateTime: "27/08/2021"
       },
       {
         name: "Haroldo Emerson",
-        avatar: "../../../assets/avatar5.png",
+        image: "../../../assets/avatar5.png",
         dateTime: "27/08/2021"
       },
       {
         name: "Robson Vila Nova",
-        avatar: "../../../assets/avatar4.png",
+        image: "../../../assets/avatar4.png",
         dateTime: "Hoje"
       },
       {
         name: "Joana D'arc Alves",
-        avatar: "../../../assets/avatar2.png",
+        image: "../../../assets/avatar2.png",
         dateTime: "27/08/2021"
       },
       {
         name: "Haroldo Emerson",
-        avatar: "../../../assets/avatar5.png",
+        image: "../../../assets/avatar5.png",
         dateTime: "27/08/2021"
       },
       {
         name: "Robson Vila Nova",
-        avatar: "../../../assets/avatar4.png",
+        image: "../../../assets/avatar4.png",
         dateTime: "Hoje"
       },
       {
         name: "Joana D'arc Alves",
-        avatar: "../../../assets/avatar2.png",
+        image: "../../../assets/avatar2.png",
         dateTime: "27/08/2021"
       },
       {
         name: "Haroldo Emerson",
-        avatar: "../../../assets/avatar5.png",
+        image: "../../../assets/avatar5.png",
         dateTime: "27/08/2021"
       },
       {
         name: "Robson Vila Nova",
-        avatar: "../../../assets/avatar4.png",
+        image: "../../../assets/avatar4.png",
         dateTime: "Hoje"
       },
       {
         name: "Joana D'arc Alves",
-        avatar: "../../../assets/avatar2.png",
+        image: "../../../assets/avatar2.png",
         dateTime: "27/08/2021"
       },
       {
         name: "Haroldo Emerson",
-        avatar: "../../../assets/avatar5.png",
+        image: "../../../assets/avatar5.png",
         dateTime: "27/08/2021"
       },
       {
         name: "Robson Vila Nova",
-        avatar: "../../../assets/avatar4.png",
+        image: "../../../assets/avatar4.png",
         dateTime: "Hoje"
       },
       {
         name: "Joana D'arc Alves",
-        avatar: "../../../assets/avatar2.png",
+        image: "../../../assets/avatar2.png",
         dateTime: "27/08/2021"
       },
       {
         name: "Haroldo Emerson",
-        avatar: "../../../assets/avatar5.png",
+        image: "../../../assets/avatar5.png",
         dateTime: "27/08/2021"
       },
       {
         name: "Robson Vila Nova",
-        avatar: "../../../assets/avatar4.png",
+        image: "../../../assets/avatar4.png",
         dateTime: "Hoje"
       },
       {
         name: "Joana D'arc Alves",
-        avatar: "../../../assets/avatar2.png",
+        image: "../../../assets/avatar2.png",
         dateTime: "27/08/2021"
       },
       {
         name: "Haroldo Emerson",
-        avatar: "../../../assets/avatar5.png",
+        image: "../../../assets/avatar5.png",
         dateTime: "27/08/2021"
       },
     ]

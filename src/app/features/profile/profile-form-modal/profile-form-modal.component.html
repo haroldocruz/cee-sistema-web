@@ -1,14 +1,24 @@
 <!-- <form [formGroup]="checkoutForm"> -->
 <form>
-  <div class="modal-header">
-    <h4 class="modal-title" id="userModalLabel">
+  <div class="card-header">
+    <h4 class="card-title" id="userModalLabel">
       <span *ngIf="!profile?._id">Inserir</span>
       <span *ngIf="profile?._id">Alterar</span>
     </h4>
-    <button type="button" class="close" *ngIf="bsModalRef" (click)="bsModalRef.hide()"><span>&times;</span></button>
+
+    <div class="card-tools">
+      <button type="button" class="btn btn-tool" data-card-widget="maximize">
+        <i class="fas fa-expand"></i>
+      </button>
+      &nbsp;
+      <button type="button" class="close" (click)="bsModalRef.hide()">
+        <span>&times;</span>
+      </button>
+    </div>
+
   </div>
 
-  <div class="modal-body">
+  <div class="card-body">
     <div class="container-fluid" *ngIf="isLoading">
       ...LOADING
     </div>
