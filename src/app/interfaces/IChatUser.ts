@@ -1,6 +1,6 @@
 
 export interface IChatUser {
     name: string;
-    avatar: string;
+    image: string;
     dateTime: string
 }

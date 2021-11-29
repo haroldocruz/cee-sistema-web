@@ -63,8 +63,14 @@ export class InstitutionService {
     return this.http.get<IInstitution & IStatusMessage>(url, { headers: AuthService.headers() });
   }
 
-  readFilter(institution: IInstitution, queryConfig: IQueryConfig): Observable<IInstitution[] & IStatusMessage> {
-      const url = `${this.baseUrl}/filter`;
+  filterOne(institution: IInstitution, queryConfig: IQueryConfig): Observable<IInstitution & IStatusMessage> {
+      const url = `${this.baseUrl}/filterOne`;
+      const filter = { filter: institution, queryConfig }
+      return this.http.post<IInstitution & IStatusMessage>(url, filter, { headers: AuthService.headers() });
+  }
+
+  filterAll(institution: IInstitution, queryConfig: IQueryConfig): Observable<IInstitution[] & IStatusMessage> {
+      const url = `${this.baseUrl}/filterAll`;
       const filter = { filter: institution, queryConfig }
       return this.http.post<IInstitution[] & IStatusMessage>(url, filter, { headers: AuthService.headers() });
   }

@@ -61,14 +61,19 @@ export class UserService {
         return this.http.get<IUser[]>(this.baseUrl, { headers: AuthService.headers() });
     }
 
-    readFilter(user: IUser): Observable<IUser[] & IStatusMessage> {
-        const url = `${this.baseUrl}/filter`;
-        return this.http.post<IUser[] & IStatusMessage>(url, user, { headers: AuthService.headers() });
-    }
-
     readById(id: string): Observable<IUser & IStatusMessage> {
         const url = `${this.baseUrl}/${id}`;
         return this.http.get<IUser & IStatusMessage>(url, { headers: AuthService.headers() });
+    }
+
+    filterOne(user: IUser): Observable<IUser & IStatusMessage> {
+        const url = `${this.baseUrl}/filterOne`;
+        return this.http.post<IUser & IStatusMessage>(url, user, { headers: AuthService.headers() });
+    }
+
+    filterAll(user: IUser): Observable<IUser[] & IStatusMessage> {
+        const url = `${this.baseUrl}/filterAll`;
+        return this.http.post<IUser[] & IStatusMessage>(url, user, { headers: AuthService.headers() });
     }
 
     update(user: IUser): Observable<IUser & IStatusMessage> {

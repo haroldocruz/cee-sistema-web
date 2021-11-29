@@ -1,11 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { ChatDirectModalComponent } from 'src/app/features/chat/chat-direct-modal/chat-direct-modal.component';
 import { ContextEnum } from 'src/app/interfaces/enumerations/ContextEnum';
-import { IChatUser } from 'src/app/interfaces/IChatUser';
 import { UtilService } from 'src/app/services/util.service';
 
-export interface IProfileCard {
+export interface IProfileCardTemplate {
   status: boolean,
   context: string,
   profileId: string,
@@ -17,7 +15,7 @@ export interface IProfileCard {
   address: string,
   phone: string,
   email: string,
-  avatar: string
+  image: string
 }
 
 export interface IProfileCardOptions {
@@ -37,7 +35,7 @@ export class ProfileCardComponent implements OnInit {
   public bsModalRef: BsModalRef;
   public utilService: UtilService;
 
-  @Input() profileCard: IProfileCard;
+  @Input() profileCard: IProfileCardTemplate;
   @Input() profileCardOptions: IProfileCardOptions;
 
   constructor(
@@ -52,7 +50,7 @@ export class ProfileCardComponent implements OnInit {
       userName: '',
       institutionId: null,
       institutionName: '',
-      avatar: '/assets/avatar.png',
+      image: '/assets/avatar.png',
       phone: '',
       email: '',
       address: '',

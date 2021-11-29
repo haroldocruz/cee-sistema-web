@@ -7,6 +7,7 @@ import { EventEmitterService } from './event-emitter.service';
 import { MaskApplierService, MaskPipe } from 'ngx-mask';
 import { Title } from '@angular/platform-browser';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
+import { GenderEnum } from '../interfaces/User';
 
 @Injectable({
     providedIn: 'root'
@@ -26,16 +27,16 @@ export class UtilService {
 
     static typeahead(elem: Element): Observable<any> {
         // const searchBox = ;
-    
+
         return fromEvent(elem, 'input').pipe(
-          map((e) => (e.target as HTMLInputElement).value),
-          // map((e: KeyboardEvent) => (e.target as HTMLInputElement).value),
-          // filter(text => text.length > 2),
-          debounceTime(600),
-          distinctUntilChanged()
-          // switchMap(() => ajax('/api/endpoint'))
+            map((e) => (e.target as HTMLInputElement).value),
+            // map((e: KeyboardEvent) => (e.target as HTMLInputElement).value),
+            // filter(text => text.length > 2),
+            debounceTime(600),
+            distinctUntilChanged()
+            // switchMap(() => ajax('/api/endpoint'))
         );
-      }
+    }
 
     /**
      * @description Get full name of the user and return a string with just first and last name together.
@@ -50,6 +51,16 @@ export class UtilService {
         const first = vector[0];
         const last = vector[vector.length - 1];
         return first + " " + last;
+    }
+
+    public static getAvatarByGender(gender: string): string {
+        return (gender == GenderEnum.MALE)
+            ? "../../../../assets/avatar5.png"
+            : (gender == GenderEnum.FEMALE)
+                ? "../../../../assets/avatar2.png"
+                : (gender == GenderEnum.UNINFORMED)
+                    ? "../../../../assets/avatar.png"
+                    : "../../../../assets/logo-1257x577-alpha3.png"
     }
 
     /**
@@ -145,7 +156,7 @@ export class UtilService {
     }
 
     static default(resp: Observable<any & IStatusMessage>) {
-        
+
         let anyData: any;
 
         resp.subscribe((data) => {
