@@ -1,0 +1,39 @@
+<div class="card card-solid">
+
+    <div class="card-header pb-0">
+        <div class="row">
+            <h4>Atos:</h4>
+        </div>
+    </div>
+
+    <div class="card-body pb-0">
+        <div class="row">
+            <div class="col-12">
+                <div class="info-box btn btn-default text-left"
+                    *ngFor="let item of actList">
+
+                    <div class="info-box-content" (click)="selected(item)">
+                        <span class="info-box-text">
+                            {{ item.name || 'Todos os atos' }}
+                        </span>
+                        <span class="info-box-text small">
+                            {{ item.type }}
+                        </span>
+                        <!-- <span class="info-box-text">
+                    <small class="text-info" *ngIf="item.credenciamento"><b>Nota:</b> {{ item.credenciamento?.concept }}</small>
+                    <small class="text-info" *ngIf="item.credenciamento"><b> | Data do último credenciamento:</b> {{ item.credenciamento?.start }}</small>
+                    <small class="text-info" *ngIf="item.credenciamento"><b> | Prazo:</b> {{ item.credenciamento?.end }}</small>
+                    <small class="text-info" *ngIf="item.credenciamento"><b> | Situacão:</b> {{ item.credenciamento?.situation }}</small>
+                </span> -->
+                    </div>
+                    <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+            </div>
+            <!-- /.col -->
+        </div>
+    </div>
+    <div class="card-footer text-right">
+        <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">Fechar</button>
+    </div>
+</div>

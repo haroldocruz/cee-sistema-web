@@ -1,0 +1,52 @@
+<div class="card card-solid">
+
+    <div class="card-header pb-0">
+        <div class="row">
+            <h4>Vincular usuário:</h4>
+        </div>
+    </div>
+
+    <div class="card-body pb-0">
+        <div class="row">
+            <form class="form" (ngSubmit)="findInstitution()">
+                <div class="input-group mb-3">
+                    <input id="search-box" class="form-control" type="text" [(ngModel)]="cnpj"
+                        [ngModelOptions]="{ standalone: true }" autocomplete="_" placeholder="Buscar por CNPJ"
+                        mask="00.000.000/0000-00">
+                    <div class="input-group-append sd-pointer">
+                        <div class="input-group-text sd-hover" (click)="findInstitution()">
+                            Buscar&nbsp;<span><i class="fas fa-search"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="row" *ngIf="!toViewObject.institution?._id">
+            <span class="list-group-item text-center text-danger">
+                Nenhuma instituição localizada!
+            </span>
+        </div>
+
+        <div class="row d-flex align-items-stretch" *ngIf="toViewObject.institution?._id">
+            <div class=" sd-profile-card col-12 d-flex align-items-stretch">
+
+                <div class="info-box btn btn-default text-left">
+                    <div class="info-box-content" (click)="selectInstitution()">
+                        <span class="info-box-text">
+                            {{ toViewObject.institution?.name }}
+                        </span>
+                        <span class="info-box-text small">
+                            {{ toViewObject.institution?.city }}
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    
+    <div class="card-footer text-right">
+        <button type="button" class="btn btn-default" *ngIf="bsModalRef" (click)="bsModalRef.hide()">Fechar</button>
+    </div>
+
+</div>

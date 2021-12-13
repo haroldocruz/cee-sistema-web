@@ -11,6 +11,7 @@ const api = {
     // url: "api.cee.sigilo.digital"
     // url: "https://cee-sistema-api-service-hxwfjtgxqq-uc.a.run.app"
     // url: "http://192.168.137.1:3000"
+    // url: "http://10.2.0.90:3000"
     url: "http://localhost:3000"
 }
 

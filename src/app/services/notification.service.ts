@@ -8,7 +8,7 @@ export class NotificationService {
 
     constructor(private toastr: ToastrService) { }
 
-    showSuccess(message: string, title: string) {
+    showSuccess(message: string = "Ação realizada com sucesso", title: string = "OK") {
         this.toastr.success(message, title);
     }
 
