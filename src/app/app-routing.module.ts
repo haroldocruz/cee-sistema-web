@@ -15,16 +15,12 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { LayoutComponent } from './layout/layout.component';
 import { HomeComponent } from './features/home/home.component';
-import { UserComponent } from './features/user/user.component';
 import { ChatRouting } from './features/chat/chat.routing.module';
-import { ProfileRouting } from './features/profile/profile.routing.module';
 
 const routes: Routes = [
   { path: "", redirectTo: "home", pathMatch: "full" },
-  //   { path: "", redirectTo: "/login", pathMatch: "full" },
-  SorteadorRouting,
-  { path: "sorteador", component: SorteadorComponent },
-  { path: "login", component: AuthComponent },
+  { path: "auth", loadChildren: () => import("./auth/auth.module").then(m => m.AuthModule) },
+  // { path: "login", component: AuthComponent },
   {
     path: "", component: LayoutComponent, children: [
       { path: "home", redirectTo: "/home/boas-vindas", pathMatch: "full" },
@@ -35,14 +31,14 @@ const routes: Routes = [
           { path: "atribuicoes", component: HomeAssignmentComponent }
         ]
       },
+      { path: "document", loadChildren: () => import("./features/document/document.module").then(m => m.DocumentModule) },
+      { path: "process", loadChildren: () => import("./features/process/process.module").then(m => m.ProcessModule) },
+      { path: "profile", loadChildren: () => import("./features/profile/profile.module").then(m => m.ProfileModule) },
+      { path: "user", loadChildren: () => import("./features/user/user.module").then(m => m.UserModule) },
+      { path: "sorteador", loadChildren: () => import("./features/others/sorteador/sorteador.module").then(m => m.SorteadorModule) },
       CeeRouting,
       ChatRouting,
       InstitutionRouting,
-      ...ProfileRouting,
-      {
-        path: "user", component: UserComponent,
-        //   canActivate: [AuthGuard, PermissionGuard]
-      },
       { path: "group", component: GroupComponent },
     ]
   }
