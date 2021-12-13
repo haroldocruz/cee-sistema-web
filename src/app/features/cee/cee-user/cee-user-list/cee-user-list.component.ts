@@ -144,11 +144,7 @@ export class CeeUserListComponent implements OnInit {
         address: this.utilService.addressToString(address),
         phone: (phone != null) ? `${phone.number}` : '',
         email: (email != null) ? `${email.address}` : '',
-        image: user.image.photoUrl || user.image.avatarUrl ||
-          (user.gender == GenderEnum.MALE) ? "../../../../assets/avatar5.png"
-          : (user.gender == GenderEnum.FEMALE) ? "../../../../assets/avatar2.png"
-            : (user.gender == GenderEnum.UNINFORMED) ? "../../../../assets/avatar.png"
-              : "../../../../assets/logo-1257x577-alpha3.png"
+        image: user.image?.photoUrl || user.image?.avatarUrl || UtilService.getAvatarByGender(user.gender)
       }
       profileCardList.push(profileCard);
     });

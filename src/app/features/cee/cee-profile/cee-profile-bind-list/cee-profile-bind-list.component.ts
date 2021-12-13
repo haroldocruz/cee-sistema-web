@@ -1,5 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/auth.service';
 import { IBindInUser } from 'src/app/interfaces/IBindInUser';
 import { IInstitution } from 'src/app/interfaces/Institution';
@@ -11,6 +13,7 @@ import { EventEmitterService } from 'src/app/services/event-emitter.service';
 import { InstitutionService } from 'src/app/services/institution.service';
 import { NotificationService } from 'src/app/services/notification.service';
 import { ProfileService } from 'src/app/services/profile.service';
+import { UtilService } from 'src/app/services/util.service';
 
 interface ISchemaCeeProfileBindListComponent {
   context?: string;
@@ -24,19 +27,25 @@ interface ISchemaCeeProfileBindListComponent {
   templateUrl: './cee-profile-bind-list.component.html',
   styleUrls: ['./cee-profile-bind-list.component.less']
 })
-export class CeeProfileBindListComponent implements OnInit {
+export class CeeProfileBindListComponent implements OnInit, OnDestroy {
 
   @Input() context: string;
   @Input() institutionId: string;
   @Input() user: IUser;
 
   profileList: IProfile[];
+  subDestroy$ = new Subject();
 
   constructor(
     public bsModalRef: BsModalRef,
     private profileService: ProfileService,
     private notifyService: NotificationService
   ) { }
+
+  ngOnDestroy(): void {
+    this.subDestroy$.next();
+    this.subDestroy$.complete();
+  }
 
   ngOnInit(): void {
     if (!this.context) this.context = AuthService.currentBind.context;
@@ -49,11 +58,13 @@ export class CeeProfileBindListComponent implements OnInit {
     //   populateList: [{ path: '', select: [] }]
     // };
     const profile: IProfile = { context: this.context };
-    this.profileService.readFilter(profile/*, queryConfig*/).subscribe(async (data: IProfile[] & IStatusMessage) => {
+    this.profileService.readFilter(profile/*, queryConfig*/)
+    .pipe(takeUntil(this.subDestroy$))
+    .subscribe(async (data: IProfile[] & IStatusMessage) => {
       console.log("data", data);
       // this.profileList = profileList
       if (data.statusMessage) {
-        //TODO: not implemented
+        UtilService.notifying.showError(data.statusMessage, `${data.statusCode}`)
         return;
       }
 
@@ -72,7 +83,7 @@ export class CeeProfileBindListComponent implements OnInit {
     if (!this.notifyService.isConfirm("Deseja realmente usar este perfil?"))
       return;
 
-    EventEmitterService.get('cee-profile-bind-selected').emit(profileSelected);
+    EventEmitterService.get('CeeProfileBindListComponent.selected').emit(profileSelected);
 
     if (this.bsModalRef)
       this.bsModalRef.hide();

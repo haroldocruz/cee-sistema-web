@@ -31,8 +31,6 @@ export class CeeUserComponent implements OnInit {
   }
 
   openBindUserInInstitutionModal() {
-  // openBindUserInInstitutionModal(user: any) {
-    // const user2: IChatUser = { name: user.userName, avatar: user.avatar, dateTime: "28/08/2021" }
     const initialState = { };
     this.bsModalRef = this.modalService.show(CeeUserBindComponent, { id: 1, class: 'modal-lg', initialState });
     this.bsModalRef.content.closeBtnName = 'Close';

@@ -27,7 +27,7 @@
             </span>
         </div>
 
-        <div class="row d-flex align-items-stretch" *ngIf="user._id">
+        <div class="row d-flex align-items-stretch" *ngIf="user?._id">
             <div class=" sd-profile-card col-12 d-flex align-items-stretch">
                 <sd-profile-card [profileCard]="profileCard" [profileCardOptions]="profileCardOptions"
                     class="w-100"></sd-profile-card>
@@ -36,9 +36,9 @@
     </div>
     <!-- /.card-body -->
     <div class="card-footer text-right">
-        <button type="button" class="btn btn-info" *ngIf="user._id" (click)="openProfileBindListModal()">Selecionar perfil</button>
+        <button type="button" class="btn btn-info" *ngIf="user?._id" (click)="openProfileBindListModal()">Selecionar perfil</button>
         &nbsp;
-        <button type="button" class="btn btn-success" *ngIf="user._id && profile._id && institution._id" (click)="bindMember()">Vincular</button>
+        <button type="button" class="btn btn-success" *ngIf="profileCard?.userId && profileCard?.profileId && profileCard?.institutionId" (click)="bindMember()">Vincular</button>
         &nbsp;
         <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">Fechar</button>
     </div>

@@ -1,18 +1,20 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { AuthService } from 'src/app/auth/auth.service';
 import { IProfileCardTemplate, IProfileCardOptions } from 'src/app/directives/profile-card/profile-card.component';
 import { IAddress, IEmail, IPhone } from 'src/app/interfaces/Contact';
-import { IBindInUser } from 'src/app/interfaces/IBindInUser';
 import { IInstitution } from 'src/app/interfaces/Institution';
 import { IReqBindMember } from 'src/app/interfaces/IReqBindMember';
 import { IProfile, Profile } from 'src/app/interfaces/Profile';
-import { GenderEnum, IUser, User } from 'src/app/interfaces/User';
+import { IUser, User } from 'src/app/interfaces/User';
 import { EventEmitterService } from 'src/app/services/event-emitter.service';
 import { InstitutionService } from 'src/app/services/institution.service';
 import { NotificationService } from 'src/app/services/notification.service';
 import { UserService } from 'src/app/services/user.service';
 import { UtilService } from 'src/app/services/util.service';
+import { IQueryConfig } from 'src/app/interfaces/IQueryConfig';
 import { CeeProfileBindListComponent } from '../../cee-profile/cee-profile-bind-list/cee-profile-bind-list.component';
 
 interface ISchemaCeeUserBindComponent {
@@ -26,6 +28,7 @@ interface ISchemaCeeUserBindComponent {
 })
 export class CeeUserBindComponent implements OnInit, OnDestroy {
 
+  private subDestroy$ = new Subject();
 
   @Input() public institution: IInstitution;
   @Input() public institutionId: string;
@@ -47,7 +50,14 @@ export class CeeUserBindComponent implements OnInit, OnDestroy {
     private institutionService: InstitutionService,
     public utilService: UtilService,
     private notifyService: NotificationService
-  ) { }
+  ) {
+    this.user = new User();
+   }
+
+  ngOnDestroy() {
+    this.subDestroy$.next();
+    this.subDestroy$.complete();
+  }
 
   ngOnInit(): void {
 
@@ -66,16 +76,22 @@ export class CeeUserBindComponent implements OnInit, OnDestroy {
     }
   }
 
+  private index(){
+
+  }
+
   openProfileBindListModal() {
     const initialState = {
       institutionId: this.institutionId,
-      context: this.institution.context || AuthService.currentBind.context,
+      context: this.institution?.context || AuthService.currentBind.context,
       user: this.user
     };
     this.bsModalRefBind = this.modalService.show(CeeProfileBindListComponent, { id: UtilService.getRandom9Digits(), class: 'modal-lg', initialState });
     this.bsModalRefBind.content.closeBtnName = 'Close';
 
-    EventEmitterService.get('cee-profile-bind-selected').subscribe((profile: IProfile) => {
+    EventEmitterService.get('CeeProfileBindListComponent.selected')
+    .pipe(takeUntil(this.subDestroy$))
+    .subscribe((profile: IProfile) => {
       this.profile = profile;
       this.profileCard.profileId = profile._id;
       this.profileCard.profileName = profile.name;
@@ -83,7 +99,7 @@ export class CeeUserBindComponent implements OnInit, OnDestroy {
   }
 
   bindMember() {
-    if (!this.notifyService.isConfirm(`Deseja vincular este usuário ao perfil de ${this.profile.name} em ${this.institution.name}?`))
+    if (!this.notifyService.isConfirm(`Deseja vincular este usuário ao perfil de ${this.profileCard.profileName} em ${this.profileCard.institutionName}?`))
       return;
 
     const reqBindMember: IReqBindMember = {
@@ -97,7 +113,9 @@ export class CeeUserBindComponent implements OnInit, OnDestroy {
       userName: this.profileCard.userName,
     }
 
-    this.institutionService.bindMember(reqBindMember).subscribe((data) => {
+    this.institutionService.bindMember(reqBindMember)
+    .pipe(takeUntil(this.subDestroy$))
+    .subscribe((data) => {
 
       if (data.statusCode >= 200 && data.statusCode < 300) {
         this.notifyService.showSuccess(data.statusMessage, 'OK')
@@ -115,23 +133,25 @@ export class CeeUserBindComponent implements OnInit, OnDestroy {
     this.bsModalRef.hide();
   }
 
-  ngOnDestroy() {
-    EventEmitterService.get('cee-user-bind').emit(this.profile);
-  }
-
   findUser() {
     if (this.cpf === '') {
       this.notifyService.showWarning(`Por favor, insira um CPF válido!`, `Status 400`);
       return;
     }
 
+    const queryConfig: IQueryConfig = {
+      populateList: []
+    }
+
     let user = {};
     user['cpf'] = this.cpf;
-    this.userService.filterOne(user).subscribe((data) => {
+    this.userService.filterOne(user, queryConfig)
+    .pipe(takeUntil(this.subDestroy$))
+    .subscribe((data) => {
 
       if (data.statusCode) {
         this.profileCard = null;
-        this.user = null;
+        this.user = new User();
         this.notifyService.showWarning(data.statusMessage, `Ops! ${data.statusCode}`);
         return;
       }
@@ -161,7 +181,7 @@ export class CeeUserBindComponent implements OnInit, OnDestroy {
       address: this.utilService.addressToString(address),
       phone: (phone != null) ? `${phone.number}` : null,
       email: (email != null) ? `${email.address}` : null,
-      image: this.user.image.photoUrl || this.user.image.avatarUrl || UtilService.getAvatarByGender(this.user.gender)
+      image: this.user.image?.photoUrl || this.user.image?.avatarUrl || UtilService.getAvatarByGender(this.user.gender)
     };
   }
 }

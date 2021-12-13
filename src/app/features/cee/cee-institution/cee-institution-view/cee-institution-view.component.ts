@@ -1,5 +1,5 @@
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { AfterContentChecked, Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { IUser } from 'src/app/interfaces/User';
 import { UtilService } from 'src/app/services/util.service';
 import { UserLocalService } from 'src/app/features/user/user.local.service';
@@ -11,6 +11,7 @@ import { EventEmitterService } from 'src/app/services/event-emitter.service';
 import { CeeUserBindComponent } from '../../cee-user/cee-user-bind/cee-user-bind.component';
 import { ContextEnum } from 'src/app/interfaces/enumerations/ContextEnum';
 import { cloneDeep } from 'lodash';
+import { ProcessFormComponent } from 'src/app/features/process/process-form/process-form.component';
 
 interface IInstitutionView {
   _id: string;
@@ -94,6 +95,14 @@ export class CeeInstitutionViewComponent implements OnInit {
   public openInstitutionFormModal(): void {
     const initialState = { institutionId: this.institution._id, institution: cloneDeep(this.institution) };
     this.bsModalRef = this.bsModalService.show(CeeInstitutionFormComponent, { id: UtilService.getRandom9Digits(), class: 'modal-lg', initialState });
+    this.bsModalRef.content.closeBtnName = 'Close';
+  }
+
+  public openProcessFormModal(): void {
+    const iList = [];
+    iList.push(this.institution);
+    const initialState = { interestedList: iList };
+    this.bsModalRef = this.bsModalService.show(ProcessFormComponent, { id: UtilService.getRandom9Digits(), class: 'modal-lg', initialState });
     this.bsModalRef.content.closeBtnName = 'Close';
   }
 

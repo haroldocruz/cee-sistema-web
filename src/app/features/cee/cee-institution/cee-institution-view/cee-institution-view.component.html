@@ -1,19 +1,26 @@
 <div class="row d-print-none">
-    <div class="col-6">
+    <div class="col-12">
 
-        <!-- * Button -->
-        <button class="btn btn-info" (click)="openInstitutionFormModal()">
-            <i class="fa fa-edit"></i>
+            <!-- * Button -->
+            <button class="col col-md-auto btn btn-info" (click)="openInstitutionFormModal()">
+                <i class="fa fa-edit"></i>
+                &nbsp;
+                <span>Editar</span>
+            </button>
             &nbsp;
-            <span>Editar</span>
-        </button>
-        &nbsp;
-        <!-- * Button -->
-        <button class="btn btn-info" (click)="openBindUserInInstitutionModal()">
-            <i class="fas fa-link"></i>
+            <!-- * Button -->
+            <button class="col col-md-auto btn btn-info" (click)="openBindUserInInstitutionModal()">
+                <i class="fas fa-link"></i>
+                &nbsp;
+                <span>Vincular usuário</span>
+            </button>
             &nbsp;
-            <span>Vincular usuário</span>
-        </button>
+            <!-- * Button -->
+            <button class="col col-md-auto btn btn-info" style="min-width: 200px;" (click)="openProcessFormModal()">
+                <i class="fab fa-buffer"></i>
+                &nbsp;
+                <span>Iniciar um processo</span>
+            </button>
 
     </div>
 </div>
@@ -134,14 +141,14 @@
 
                         <div class="card card-widget widget-user" *ngIf="!isLoading">
                             <div class="card-body">
-                                
-                                <app-page-in-construction></app-page-in-construction>
-                                
+
+                                <sd-page-in-construction></sd-page-in-construction>
+
                                 <div class="form-group row">
                                     <label for="inputName" class="col col-form-label">CNPJ:</label>
                                     <div class="col-sm-9">
                                         <span>
-                                            {{ iView.cnpj || 'Não informado' }}
+                                            {{ iView.cnpj | mask: '00.000.000/0000-00' || 'Não informado' }}
                                         </span>
                                     </div>
                                 </div>
@@ -189,13 +196,13 @@
                         <div class="card card-widget widget-user" *ngIf="!isLoading">
                             <div class="card-body">
 
-                                <app-page-in-construction></app-page-in-construction>
-                                
+                                <sd-page-in-construction></sd-page-in-construction>
+
                                 <div class="form-group row">
                                     <label for="inputName" class="col col-form-label">CNPJ:</label>
                                     <div class="col-sm-9">
                                         <span>
-                                            {{ iView.cnpj || 'Não informado' }}
+                                            {{ iView.cnpj | mask: '00.000.000/0000-00' || 'Não informado' }}
                                         </span>
                                     </div>
                                 </div>
@@ -208,7 +215,7 @@
                                         </span>
                                     </div>
                                 </div>
-                                
+
                                 <div class="form-group row">
                                     <label for="inputName" class="col col-form-label">Nome fantasia:</label>
                                     <div class="col-sm-9">
@@ -244,7 +251,7 @@
                         <div class="card card-widget widget-user" *ngIf="!isLoading">
                             <div class="card-body">
 
-                                <app-page-in-construction></app-page-in-construction>
+                                <sd-page-in-construction></sd-page-in-construction>
 
                                 <div class="form-group row">
                                     <label for="inputEmail" class="col col-form-label">Emails:</label>
@@ -278,7 +285,7 @@
 
                         <div class="card card-widget widget-user" *ngIf="!isLoading">
                             <div class="card-body">
-                                <app-page-in-construction></app-page-in-construction>
+                                <sd-page-in-construction></sd-page-in-construction>
                             </div>
                         </div>
                     </div>
@@ -294,7 +301,7 @@
 
                         <div class="card card-widget widget-user" *ngIf="!isLoading">
                             <div class="card-body">
-                                <app-page-in-construction></app-page-in-construction>
+                                <sd-page-in-construction></sd-page-in-construction>
                             </div>
                         </div>
                     </div>
@@ -310,7 +317,7 @@
 
                         <div class="card card-widget widget-user" *ngIf="!isLoading">
                             <div class="card-body">
-                                <app-page-in-construction></app-page-in-construction>
+                                <sd-page-in-construction></sd-page-in-construction>
                             </div>
                         </div>
                     </div>
