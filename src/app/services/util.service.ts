@@ -155,11 +155,28 @@ export class UtilService {
         return Math.floor(Math.random() * (max - min)) + min;
     }
 
+    static countdownTimer(duration, display) {
+        let timer = duration, minutes, seconds;
+        setInterval(function () {
+            minutes = parseInt(''+timer / 60, 10);
+            seconds = parseInt(''+timer % 60, 10);
+    
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+    
+            display.textContent = minutes + ":" + seconds;
+    
+            if (--timer < 0) {
+                timer = duration;
+            }
+        }, 1000);
+    }
+
     static default(resp: Observable<any & IStatusMessage>) {
 
         let anyData: any;
 
-        resp.subscribe((data) => {
+        const sub = resp.subscribe((data) => {
             if (data.statusCode >= 400) {
                 UtilService.notifying.showError(data.statusMessage, `Erro ${data.statusCode}!`);
                 return;
@@ -167,8 +184,10 @@ export class UtilService {
             UtilService.notifying.showSuccess("Ação realizada com sucesso!", "Ok!");
             EventEmitterService.get('is-success').emit(true);
             anyData = data;
+            sub.unsubscribe();
         }, (error) => {
             UtilService.notifying.showError("Não foi possível realizar esta ação!", "Erro!");
+            sub.unsubscribe();
         });
 
         return anyData;

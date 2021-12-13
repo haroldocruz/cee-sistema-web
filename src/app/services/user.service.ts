@@ -9,6 +9,7 @@ import { IUser, User } from '../interfaces/User';
 import { NotificationService } from './notification.service';
 import { AuthService } from '../auth/auth.service';
 import { IStatusMessage } from '../interfaces/IStatusMessage';
+import { IQueryConfig } from '../interfaces/IQueryConfig';
 
 export interface IUserDataLogin {
     username: string;
@@ -20,45 +21,19 @@ export interface IUserDataLogin {
 })
 export class UserService {
 
-    currentProfile: IProfile;
-    user: IUser;
-    users: IUser[];
-    filtro: string;
-
     baseUrl = `${ENV.api.url}/user`;
 
     constructor(
         private http: HttpClient,
         private notify: NotificationService
-    ) {
-        this.user = new User();
-    }
-
-    index() {
-        this.read().subscribe((data) => {
-            this.users = data;
-        }, (error) => {
-            this.notify.showError(error.error.message, "Erro!");
-        });
-    }
-
-    // headers() {
-    //     return {
-    //         'authorization': AuthService.user?.loginInfo?.token,
-    //         'Content-Type': 'application/json'
-    //     };
-    // }
-
-    edit(user: IUser | null) {
-        this.user = (user) ? _cloneDeep(user) : new User();
-    }
+    ) {    }
 
     create(user: IUser): Observable<IUser & IStatusMessage> {
         return this.http.post<IUser & IStatusMessage>(this.baseUrl, user, { headers: AuthService.headers() });
     }
 
-    read(): Observable<IUser[]> {
-        return this.http.get<IUser[]>(this.baseUrl, { headers: AuthService.headers() });
+    read(): Observable<IUser[] & IStatusMessage> {
+        return this.http.get<IUser[] & IStatusMessage>(this.baseUrl, { headers: AuthService.headers() });
     }
 
     readById(id: string): Observable<IUser & IStatusMessage> {
@@ -66,14 +41,16 @@ export class UserService {
         return this.http.get<IUser & IStatusMessage>(url, { headers: AuthService.headers() });
     }
 
-    filterOne(user: IUser): Observable<IUser & IStatusMessage> {
+    filterOne(user: IUser, queryConfig: IQueryConfig): Observable<IUser & IStatusMessage> {
         const url = `${this.baseUrl}/filterOne`;
-        return this.http.post<IUser & IStatusMessage>(url, user, { headers: AuthService.headers() });
+        const filter = { filter: user, queryConfig }
+        return this.http.post<IUser & IStatusMessage>(url, filter, { headers: AuthService.headers() });
     }
 
-    filterAll(user: IUser): Observable<IUser[] & IStatusMessage> {
+    filterAll(user: IUser, queryConfig: IQueryConfig): Observable<IUser[] & IStatusMessage> {
         const url = `${this.baseUrl}/filterAll`;
-        return this.http.post<IUser[] & IStatusMessage>(url, user, { headers: AuthService.headers() });
+        const filter = { filter: user, queryConfig }
+        return this.http.post<IUser[] & IStatusMessage>(url, filter, { headers: AuthService.headers() });
     }
 
     update(user: IUser): Observable<IUser & IStatusMessage> {
@@ -84,29 +61,6 @@ export class UserService {
     delete(id: string): Observable<IUser & IStatusMessage> {
         const url = `${this.baseUrl}/${id}`;
         return this.http.delete<IUser & IStatusMessage>(url, { headers: AuthService.headers() });
-    }
-
-    default(resp: Observable<IUser & IStatusMessage>) {
-
-        resp.subscribe((data) => {
-            if (data.statusCode >= 400) {
-                console.log(data)
-                this.notify.showError(data.statusMessage, `Erro ${data.statusCode}!`);
-                return;
-            }
-            this.notify.showSuccess("Ação realizada com sucesso!", "Ok!")
-            this.index();
-        }, (error) => {
-            this.notify.showError("Não foi possível realizar esta ação!", "Erro!");
-        });
-    }
-
-    isConfirm(question: string = "Confirmar ação?") {
-        if (!confirm(question)) {
-            this.notify.showWarning("Ação cancelada!", "Ops!");
-            return false;
-        }
-        return true;
     }
 
 }
