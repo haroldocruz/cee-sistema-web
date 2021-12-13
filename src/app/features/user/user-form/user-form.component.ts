@@ -1,31 +1,33 @@
-import { ContactAddressModalComponent } from './../../contact/contact-address-modal/contact-address-modal.component';
-import { ContactEmailModalComponent } from './../../contact/contact-email-modal/contact-email-modal.component';
-import { ContactPhoneModalComponent } from './../../contact/contact-phone-modal/contact-phone-modal.component';
-import { IPhone, IEmail, IAddress } from './../../../interfaces/Contact';
+import { ContactAddressModalComponent } from '../../contact/contact-address-modal/contact-address-modal.component';
+import { ContactEmailModalComponent } from '../../contact/contact-email-modal/contact-email-modal.component';
+import { ContactPhoneModalComponent } from '../../contact/contact-phone-modal/contact-phone-modal.component';
+import { IPhone, IEmail, IAddress } from '../../../interfaces/Contact';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { NotificationService } from './../../../services/notification.service';
-import { StatusEnum } from './../../../interfaces/Status';
-import { GenderEnum, IUser, MaritalStatusEnum } from './../../../interfaces/User';
-import { UserLocalService } from '../user.local.service';
+import { NotificationService } from '../../../services/notification.service';
+import { StatusEnum } from '../../../interfaces/Status';
+import { GenderEnum, IUser, MaritalStatusEnum } from '../../../interfaces/User';
 import { Component, Input, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 
-import { cloneDeep, concat } from "lodash";
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { cloneDeep } from "lodash";
+import { FormBuilder } from '@angular/forms';
+import { UtilService } from 'src/app/services/util.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
-    selector: 'app-user-form-modal',
-    templateUrl: './user-form-modal.component.html',
-    styleUrls: ['./user-form-modal.component.less']
+    selector: 'app-user-form',
+    templateUrl: './user-form.component.html',
+    styleUrls: ['./user-form.component.less']
 })
-export class UserFormModalComponent implements OnInit {
+export class UserFormComponent implements OnInit {
 
+    @Input() user: IUser;
+    
     checkoutForm;
 
     statusList: string[];
     genderList: string[];
     maritalStatusList: string[];
-    @Input() user: IUser;
 
     phone: IPhone;
     email: IEmail;
@@ -33,34 +35,16 @@ export class UserFormModalComponent implements OnInit {
     isDataAccess: boolean;
 
     constructor(
-        private formBuilder: FormBuilder,
         public bsModalRef: BsModalRef,
         public bsModalRef2: BsModalRef,
-        private modalService: BsModalService,
-        public userService: UserLocalService,
-        private notify: NotificationService,
-        private router: Router
+        private bsModalService: BsModalService,
+        public utilService: UtilService,
+        public userService: UserService
     ) {
         // this.reloadComponent()
     }
 
     onSubmit(){}
-
-    reloadComponent() {
-        // override the route reuse strategy
-        this.router.routeReuseStrategy.shouldReuseRoute = function () {
-            return false;
-        }
-
-        this.router.events.subscribe((evt) => {
-            if (evt instanceof NavigationEnd) {
-                // trick the Router into believing it's last link wasn't previously loaded
-                this.router.navigated = false;
-                // if you need to scroll back to top, here is the right place
-                window.scrollTo(0, 0);
-            }
-        });
-    }
 
     ngOnInit(): void {
 
@@ -78,36 +62,36 @@ export class UserFormModalComponent implements OnInit {
     }
 
     create(): void {
-        if (!this.userService.isConfirm()) return;
+        if (!UtilService.isConfirm()) return;
 
-        this.userService.default(this.userService.create(this.user));
+        UtilService.default(this.userService.create(this.user));
         this.bsModalRef.hide();
     }
 
     update(): void {
-        if (!this.userService.isConfirm()) return;
+        if (!UtilService.isConfirm()) return;
         if (!this.isDataAccess) delete this.user.dataAccess;
 
         // const user: IUser = { "_id": this.user._id, name: "super", cpf: 123, status: true, dataAccess: {} }
-        this.userService.default(this.userService.update(this.user));
+        UtilService.default(this.userService.update(this.user));
         this.bsModalRef.hide();
     }
 
     openContactPhoneModal(user: IUser) {
         const initialState = { phoneList: cloneDeep(user.contact.phoneList), phoneListRef: user.contact.phoneList };
-        this.bsModalRef2 = this.modalService.show(ContactPhoneModalComponent, { id: 2, class: 'modal-md', initialState });
+        this.bsModalRef2 = this.bsModalService.show(ContactPhoneModalComponent, { id: 2, class: 'modal-md', initialState });
         this.bsModalRef2.content.closeBtnName = 'Close';
     }
 
     openContactEmailModal(user: IUser) {
         const initialState = { emailList: cloneDeep(user.contact.emailList), emailListRef: user.contact.emailList };
-        this.bsModalRef2 = this.modalService.show(ContactEmailModalComponent, { id: 2, class: 'modal-md', initialState });
+        this.bsModalRef2 = this.bsModalService.show(ContactEmailModalComponent, { id: 2, class: 'modal-md', initialState });
         this.bsModalRef2.content.closeBtnName = 'Close';
     }
 
     openContactAddressModal(user: IUser) {
         const initialState = { addressList: cloneDeep(user.contact.addressList), addressListRef: user.contact.addressList };
-        this.bsModalRef2 = this.modalService.show(ContactAddressModalComponent, { id: 2, class: 'modal-md', initialState });
+        this.bsModalRef2 = this.bsModalService.show(ContactAddressModalComponent, { id: 2, class: 'modal-md', initialState });
         this.bsModalRef2.content.closeBtnName = 'Close';
     }
 

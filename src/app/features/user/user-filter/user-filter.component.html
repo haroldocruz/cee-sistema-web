@@ -1,0 +1,25 @@
+<div class="container-fluid">
+    <div class="row hidden-print">
+      <div class="col-6">
+  
+        <!-- * Button -->
+        <button class="btn btn-md btn-info" (click)="openUserFormModal(null)">
+          <i class="fa fa-plus"></i>
+          Criar novo
+        </button>
+  
+        <br><br>
+  
+        <!-- * Filter field -->
+        <div class="input-group mb-3">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span><i class="fa fa-filter"></i></span>
+            </div>
+          </div>
+          <input #inputSearch class="form-control" type="text" (change)="changeSearch(inputSearch.value)" placeholder="Filtrar">
+        </div>
+  
+      </div>
+    </div>
+  </div>

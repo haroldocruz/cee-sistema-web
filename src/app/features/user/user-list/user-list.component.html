@@ -12,13 +12,13 @@
     <tbody>
         <!-- <tr *ngFor="let user of userList; let i = index"> -->
         <!-- <tr *ngFor="let user of userService.users | filter: [{field: 'name', value: userService.filtro}] | sortBy:'asc':'status, name'; let i = index"> -->
-        <tr *ngFor="let user of userService.users | filter: [{field: 'name', value: userService.filtro}] let i = index">
+        <tr *ngFor="let user of userList | filter: [{field: 'name', value: filtro}] let i = index">
             <td scope="row" class="text-center sd-wfr">{{ i + 1 }}</td>
             <td class="text-center sd-wfr sd-pointer" (click)="changeStatus(user)">
                 <i class="fas fa-check-circle text-green" *ngIf="user.status" title="ativo"></i>
                 <i class="fas fa-times-circle text-red" *ngIf="!user.status" title="inativo"></i>
             </td>
-            <td>{{ getFirstLastName(user.name) }}</td>
+            <td>{{ user.name }}</td>
             <td class="text-center sd-wfr">
                 {{ utilService.emailListToString(user.contact?.emailList, ', ') }}
             </td>

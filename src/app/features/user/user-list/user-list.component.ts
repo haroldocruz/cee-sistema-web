@@ -1,111 +1,120 @@
 import { UserProfileEditModalComponent } from './../user-profile-edit-modal/user-profile-edit-modal.component';
-import { IEmail } from './../../../interfaces/Contact';
 import { UserViewModalComponent } from './../user-view-modal/user-view-modal.component';
-import { UserFormModalComponent } from './../user-form-modal/user-form-modal.component';
+import { UserFormComponent } from '../user-form/user-form.component';
 
 import { NotificationService } from './../../../services/notification.service';
 import _cloneDeep from "lodash/cloneDeep";
 
 import { IUser } from './../../../interfaces/User';
-import { UserLocalService } from '../user.local.service';
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnDestroy, OnInit, TemplateRef } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { UtilService } from 'src/app/services/util.service';
 import { EventEmitterService } from 'src/app/services/event-emitter.service';
+import { UserService } from 'src/app/services/user.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
     selector: 'app-user-list',
     templateUrl: './user-list.component.html',
     styleUrls: ['./user-list.component.less']
 })
-export class UserListComponent implements OnInit {
-
-    // userList: IUser[]
-    // filtro: string;
+export class UserListComponent implements OnInit, OnDestroy {
 
     bsModalRef: BsModalRef;
     bsModalRef2: BsModalRef;
 
+    private componentDestroyed$: Subject<boolean> = new Subject();
+
+    public isLoading: boolean;
+    userList: IUser[];
+    filtro: string;
+
+
     constructor(
-        public userService: UserLocalService,
-        private modalService: BsModalService,
-        public utilService: UtilService,
-        private notify: NotificationService
+        public userService: UserService,
+        private bsModalService: BsModalService,
+        public utilService: UtilService
     ) { }
 
-    ngOnInit(): void {
-        this.index();
+    ngOnDestroy(): void {
+        this.componentDestroyed$.next(true);
+        this.componentDestroyed$.complete();
+    }
 
-        EventEmitterService.get('is-success').subscribe((isSuccess) => {
-            if (!isSuccess) return;
-            this.index();
-        });
+    ngOnInit(): void {
+        this.userList = [];
+        this.isLoading = true;
+        this.index();
+        this.isLoading = false;
+
+        EventEmitterService.get('is-success')
+            .pipe(takeUntil(this.componentDestroyed$))
+            .subscribe((isSuccess) => {
+                if (!isSuccess) return;
+                this.index();
+            });
     }
 
     index(): void {
-        this.userService.index();
+        this.userService.read()
+        .pipe(takeUntil(this.componentDestroyed$))
+        .subscribe((data) => {
+            console.log("data", data);
+
+            if (data.statusMessage) {
+                UtilService.notifying.showError(data.statusMessage, `${data.statusCode}`);
+                return;
+            }
+            this.toView(data);
+        });
+    }
+
+    public toView(userList: IUser[]) {
+        this.userList = userList;
     }
 
     delete(id: string): void {
-        if (this.userService.isConfirm("Quer realmente remover este usuário?"))
-            this.userService.default(this.userService.delete(id));
+        if (UtilService.isConfirm("Quer realmente remover este usuário?")) {
+            UtilService.default(this.userService.delete(id));
+            EventEmitterService.get('is-success').emit(true);
+        }
     }
 
     changeStatus(user: IUser) {
-        if (this.userService.isConfirm("Deseja mudar o status?")) {
+        if (UtilService.isConfirm("Deseja mudar o status?")) {
             const userUpd = {
                 _id: user._id,
                 status: !user.status
             }
-            this.userService.default(this.userService.update(userUpd))
+            UtilService.default(this.userService.update(userUpd))
         }
     }
 
-    getFirstLastName(fullname: string = this.userService.user?.name): string {
-        const vector = fullname.split(' ');
-        if (vector.length === 1)
-            return vector[0];
-
-        const first = vector[0];
-        const last = vector[vector.length - 1];
-        return first + " " + last;
-    }
-
-    // emailListToString(emailList: [IEmail]): string {
-    //     let aux = ''
-    //     let result = ''
-    //     emailList.forEach((e, i, l) => {
-
-    //         aux = `${e.address}${(e.description) ? ' (' + e.description + ')' : ''}`
-    //         result += (result.length > 0) ? ', ' + aux : aux;
-    //     })
-    //     return result;
-    // }
-
     openUserViewModal(user: IUser) {
         const initialState = { user };
-        this.bsModalRef = this.modalService.show(UserViewModalComponent, { id: 1, class: 'modal-lg', initialState });
+        this.bsModalRef = this.bsModalService.show(UserViewModalComponent, { id: 1, class: 'modal-lg', initialState });
         // this.bsModalRef.content.closeBtnName = 'Close';
     }
 
     openUserProfileEditModal(user: IUser) {
         const initialState = { user };
-        this.bsModalRef = this.modalService.show(UserProfileEditModalComponent, { id: 1, class: 'modal-lg', initialState });
+        this.bsModalRef = this.bsModalService.show(UserProfileEditModalComponent, { id: 1, class: 'modal-lg', initialState });
         // this.bsModalRef.content.closeBtnName = 'Close';
     }
 
     openUserFormModal(user: IUser) {
         const initialState = { user };
-        this.bsModalRef = this.modalService.show(UserFormModalComponent, { id: 1, class: 'modal-lg', initialState });
+        this.bsModalRef = this.bsModalService.show(UserFormComponent, { id: 1, class: 'modal-lg', initialState });
         // this.bsModalRef.content.closeBtnName = 'Close';
     }
 
     openModal(template: TemplateRef<any>) {
-        this.bsModalRef = this.modalService.show(template, { id: 1, class: 'modal-lg' });
+        this.bsModalRef = this.bsModalService.show(template, { id: 1, class: 'modal-lg' });
     }
 
     openModal2(template: TemplateRef<any>) {
-        this.bsModalRef2 = this.modalService.show(template, { id: 2, class: 'second' });
+        this.bsModalRef2 = this.bsModalService.show(template, { id: 2, class: 'second' });
     }
     closeFirstModal() {
         if (!this.bsModalRef) {
@@ -116,7 +125,7 @@ export class UserListComponent implements OnInit {
         this.bsModalRef = null;
     }
     closeModal(modalId?: number) {
-        this.modalService.hide(modalId);
+        this.bsModalService.hide(modalId);
     }
 
 }

@@ -1,42 +1,43 @@
-import { UserFormViewComponent } from './user-form-view/user-form-view.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { NgxMaskModule } from 'ngx-mask';
 import { PipesModule } from 'w-ng5';
-
-import { UserComponent } from './user.component';
-import { UserFormModalComponent } from './user-form-modal/user-form-modal.component';
-import { UserListComponent } from './user-list/user-list.component';
-
 // import { SortByPipe } from './../../pipes/sort-by.pipe';
+
+import { UserRoutingModule } from './user.routing.module';
+import { UserComponent } from './user.component';
+import { UserFormComponent } from './user-form/user-form.component';
+import { UserListComponent } from './user-list/user-list.component';
 import { UserViewModalComponent } from './user-view-modal/user-view-modal.component';
 import { UserProfileEditModalComponent } from './user-profile-edit-modal/user-profile-edit-modal.component';
 import { UserPasswordFormModalComponent } from './user-password-form-modal/user-password-form-modal.component';
-import { NgxMaskModule } from 'ngx-mask';
+import { UserFilterComponent } from './user-filter/user-filter.component';
 
 @NgModule({
   declarations: [
-    UserComponent,
-    UserFormModalComponent,
-    UserFormViewComponent,
-    UserListComponent,
-
     // SortByPipe,
+
+    UserComponent,
+    UserFilterComponent,
+    UserFormComponent,
+    UserListComponent,
 
     UserViewModalComponent,
 
     UserProfileEditModalComponent,
-      UserPasswordFormModalComponent
+    UserPasswordFormModalComponent
   ],
   imports: [
     CommonModule,
-    ReactiveFormsModule,
     FormsModule,
+    ReactiveFormsModule,
+    UserRoutingModule,
 
     PipesModule,
-    
-    NgxMaskModule.forRoot(),
+
+    NgxMaskModule.forChild(),
   ]
 })
 export class UserModule { }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { NotificationService } from 'src/app/services/notification.service';
-import { UserLocalService } from '../user.local.service';
+import { BsModalRef } from 'ngx-bootstrap/modal';
+import { UserService } from 'src/app/services/user.service';
+import { UtilService } from 'src/app/services/util.service';
 
 interface IUserChangePassword {
   _id: string;
@@ -25,8 +25,7 @@ export class UserPasswordFormModalComponent implements OnInit {
 
   constructor(
     public bsModalRef: BsModalRef,
-    public userService: UserLocalService,
-    private notifyService: NotificationService
+    private userService: UserService
   ) { }
 
   ngOnInit(): void {
@@ -34,19 +33,20 @@ export class UserPasswordFormModalComponent implements OnInit {
 
   update(): void {
     if (this.newPassword !== this.newPasswordCheck) {
-      this.notifyService.showWarning('Senhas não conferem', 'Ops!');
+      UtilService.notifying.showWarning('Senhas não conferem', 'Ops!');
       return;
     }
 
-    if (!this.userService.isConfirm()) return;
+    if (!UtilService.isConfirm()) return;
 
     this.userChangePassword = {
       _id: this.userId,
       "dataAccess.password": this.newPassword
     };
 
-    this.userService.default(this.userService.update(this.userChangePassword));
-    this.bsModalRef.hide();
+    UtilService.default(this.userService.update(this.userChangePassword));
+    if (this.bsModalRef)
+      this.bsModalRef.hide();
   }
 
 }

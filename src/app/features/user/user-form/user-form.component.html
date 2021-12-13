@@ -90,8 +90,8 @@
                             </span>
 
                             <span class="list-group-item sd-list-items" *ngFor="let phone of user.contact.phoneList">
-                                <i class="fa fa-angle-double-right"></i> {{ phone.number | mask: '+99 00 90000-0000' }}
-                                ({{ phone.description }})
+                                <i class="fa fa-angle-double-right"></i>
+                                {{ utilService.phoneMasked(phone.number) }} ({{ (phone.description) ? '('+phone.description+')' : '' }})
                                 <span class="sd-pointer sd-float-right">
                                     <!-- <i class="fas fa-trash" (click)="remove(p)"></i> -->
                                     <!-- <i class="fas fa-trash-alt text-danger"></i> -->
