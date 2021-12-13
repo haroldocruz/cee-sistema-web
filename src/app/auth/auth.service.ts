@@ -21,6 +21,7 @@ export class AuthService {
   // static currentProfile: IProfile;
   static user: IUser;
   static currentBind: IBindInUser;
+  static leftTimer: number; //TODO: implementar no backend
   static routeList: IRoute[];
 
   baseUrl = `${ENV.api.url}/auth`;
@@ -46,6 +47,12 @@ export class AuthService {
 
   login(userDataLogin: IUserDataLogin): Observable<any> {
     const url = `${this.baseUrl}/login`;
+    return this.http.post<IUser>(url, userDataLogin, { headers: AuthService.headers() })
+  }
+
+  //TODO: implementar no backend
+  revalidate(userDataLogin: IUserDataLogin): Observable<any> {
+    const url = `${this.baseUrl}/revalidate`;
     return this.http.post<IUser>(url, userDataLogin, { headers: AuthService.headers() })
   }
 

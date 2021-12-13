@@ -2,24 +2,23 @@ import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthComponent } from './auth.component';
-import { AuthListModalComponent } from './auth-list-modal/auth-list-modal.component';
 import { AuthBindListComponent } from './auth-bind-list/auth-bind-list.component';
+import { AuthRoutingModule } from './auth-routing.module';
 
 
 
 @NgModule({
   declarations: [
     AuthComponent,
-    AuthListModalComponent,
     AuthBindListComponent
   ],
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    AuthRoutingModule
   ],
   exports: [
     AuthComponent,
-    AuthListModalComponent,
     AuthBindListComponent
   ]
 })
