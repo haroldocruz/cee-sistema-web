@@ -1,21 +1,25 @@
 import { ProfileLocalService } from '../profile.local.service';
-import { Component, Input, OnInit } from '@angular/core';
-import { IProfile, Profile } from 'src/app/interfaces/Profile';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { IProfile } from 'src/app/interfaces/Profile';
 import { EventEmitterService } from 'src/app/services/event-emitter.service';
 import { ProfileService } from 'src/app/services/profile.service';
 import { UtilService } from 'src/app/services/util.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ProfileFormModalComponent } from '../profile-form-modal/profile-form-modal.component';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Component({
     selector: 'app-profile-list',
     templateUrl: './profile-list.component.html',
     styleUrls: ['./profile-list.component.less']
 })
-export class ProfileListComponent implements OnInit {
+export class ProfileListComponent implements OnInit, OnDestroy {
 
     @Input() profileList: IProfile[];
     @Input() filter: IProfile;
+
+    private subDestroy$ = new Subject();
 
     public contextFilter: string;
 
@@ -27,31 +31,41 @@ export class ProfileListComponent implements OnInit {
         private bsModalService: BsModalService
     ) { }
 
+    ngOnDestroy(): void {
+        this.subDestroy$.next();
+        this.subDestroy$.complete();
+    }
+
     ngOnInit(): void {
         if (!this.filter) this.filter = {};
 
-        this.index(this.filter);
+        this.index();
 
-        EventEmitterService.get('is-success').subscribe((isSuccess) => {
+        EventEmitterService.get('is-success')
+        .pipe(takeUntil(this.subDestroy$))
+        .subscribe((isSuccess) => {
             if (!isSuccess) return;
-            this.index(this.filter);
+            this.index();
         });
 
-        EventEmitterService.get('profile-context-filter').subscribe((context) => {
-            this.contextFilter = context
-            console.log("context", context);
+        EventEmitterService.get('ProfileFilterComponent.context')
+        .pipe(takeUntil(this.subDestroy$))
+        .subscribe((context) => {
+            this.contextFilter = context;
         });
     }
 
-    index(filter): void {
-        this.profileService.readFilter(filter).subscribe((data) => {
+    index(): void {
+        this.profileService.read().subscribe((data) => {
             this.profileList = data;
         });
     }
 
-    edit(profile: IProfile | null) {
-        ProfileLocalService.profile = (profile) ? profile : new Profile();
-    }
+    // index(filter): void {
+    //     this.profileService.readFilter(filter).subscribe((data) => {
+    //         this.profileList = data;
+    //     });
+    // }
 
     openProfileFormModal(profile: IProfile) {
         const initialState = { profile };

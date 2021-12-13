@@ -1,13 +1,13 @@
 <div class="row">
     <div class="col-md-12 col-lg-8">
         Nome completo:
-        <input type="text" [(ngModel)]="profileLocalService.user.name" [ngModelOptions]="{standalone: true}" [disabled]="true"
-            autocomplete="_" class="form-control" placeholder="Digite seu nome completo">
+        <input type="text" [(ngModel)]="profileLocalService.user.name" [ngModelOptions]="{standalone: true}"
+            [disabled]="true" autocomplete="_" class="form-control" placeholder="Digite seu nome completo">
     </div>
     <div class="col-md-6 col-lg-4">
         CPF:
-        <input type="text" [(ngModel)]="profileLocalService.user.cpf" [ngModelOptions]="{standalone: true}" [disabled]="true"
-            pattern="[0-9]{11}" class="form-control" placeholder="">
+        <input type="text" [(ngModel)]="profileLocalService.user.cpf" [ngModelOptions]="{standalone: true}"
+            [disabled]="true" class="form-control" mask="000.000.000-00" placeholder="">
     </div>
     <!-- <div class="col-md-4">
                             Perfil:
@@ -24,28 +24,29 @@
                             </div> -->
     <div class="col-md-6 col-lg-4">
         Gênero:
-        <input type="text" [(ngModel)]="profileLocalService.user.gender" [ngModelOptions]="{standalone: true}" [disabled]="true"
-            [disabled]="true" class="form-control" placeholder="">
+        <input type="text" [(ngModel)]="profileLocalService.user.gender" [ngModelOptions]="{standalone: true}"
+            [disabled]="true" [disabled]="true" class="form-control" placeholder="">
     </div>
     <div class="col-md-6 col-lg-4">
         Estado civil:
-        <input type="text" [(ngModel)]="profileLocalService.user.maritalStatus" [ngModelOptions]="{standalone: true}" [disabled]="true"
-            class="form-control" placeholder="">
+        <input type="text" [(ngModel)]="profileLocalService.user.maritalStatus" [ngModelOptions]="{standalone: true}"
+            [disabled]="true" class="form-control" placeholder="">
     </div>
     <div class="col-md-6 col-lg-4">
         Data de nascimento:
-        <input type="text" [ngModel]="profileLocalService.user.birthDate | date:'dd/MM/yyyy'" (ngModelChange)="profileLocalService.user.birthDate=$event"
-            [disabled]="true" class="form-control" placeholder="">
+        <input type="text" [ngModel]="profileLocalService.user.birthDate | date:'dd/MM/yyyy'"
+            (ngModelChange)="profileLocalService.user.birthDate=$event" [disabled]="true" class="form-control"
+            placeholder="">
     </div>
     <div class="col-md-6" *ngIf="!profileLocalService.user._id">
         Senha:
-        <input type="text" [(ngModel)]="profileLocalService.user.dataAccess.password" [ngModelOptions]="{standalone: true}"
-            [disabled]="true" class="form-control" placeholder="">
+        <input type="text" [(ngModel)]="profileLocalService.user.dataAccess.password"
+            [ngModelOptions]="{standalone: true}" [disabled]="true" class="form-control" placeholder="">
     </div>
     <div class="col-md-6" *ngIf="!profileLocalService.user._id">
         Repetir senha:
-        <input type="text" [(ngModel)]="profileLocalService.user.dataAccess.password" [ngModelOptions]="{standalone: true}"
-            [disabled]="true" class="form-control" placeholder="">
+        <input type="text" [(ngModel)]="profileLocalService.user.dataAccess.password"
+            [ngModelOptions]="{standalone: true}" [disabled]="true" class="form-control" placeholder="">
     </div>
 </div>
 <div class="row mt-2">
@@ -55,12 +56,15 @@
 
         <div class="list-group">
 
-            <span class="list-group-item text-center text-danger" *ngIf="profileLocalService.user.contact?.phoneList?.length === 0">
+            <span class="list-group-item text-center text-danger"
+                *ngIf="profileLocalService.user.contact?.phoneList?.length === 0">
                 Nenhum telefone inserido!
             </span>
 
-            <span class="list-group-item sd-list-items" *ngFor="let phone of profileLocalService.user.contact.phoneList">
-                <i class="fa fa-angle-double-right"></i> {{ phone.number }} {{ (phone.description) ? '(' + phone.description + ')' : '' }}
+            <span class="list-group-item sd-list-items"
+                *ngFor="let phone of profileLocalService.user.contact.phoneList">
+                <i class="fa fa-angle-double-right"></i> {{ utilService.phoneMasked(phone.number) }} {{
+                (phone.description) ? '(' + phone.description + ')' : '' }}
                 <span class="sd-pointer sd-float-right">
                     <!-- <i class="fas fa-trash" (click)="remove(p)"></i> -->
                     <!-- <i class="fas fa-trash-alt text-danger"></i> -->
@@ -75,11 +79,13 @@
 
         <div class="list-group">
 
-            <span class="list-group-item text-center text-danger" *ngIf="profileLocalService.user.contact?.emailList?.length === 0">
+            <span class="list-group-item text-center text-danger"
+                *ngIf="profileLocalService.user.contact?.emailList?.length === 0">
                 Nenhum e-mail inserido!
             </span>
 
-            <span class="list-group-item sd-list-items" *ngFor="let email of profileLocalService.user.contact.emailList">
+            <span class="list-group-item sd-list-items"
+                *ngFor="let email of profileLocalService.user.contact.emailList">
                 <i class="fa fa-angle-double-right"></i>
                 {{ email.address }} {{ (email.description) ? '(' + email.description + ')' : '' }}
                 <span class="sd-pointer sd-float-right">
@@ -107,8 +113,8 @@
                 <i class="fa fa-angle-double-right"></i>
                 {{ utilService.addressToString(a) }}
                 <!-- <span class="sd-pointer sd-float-right"> -->
-                    <!-- <i class="fas fa-trash" (click)="remove(p)"></i> -->
-                    <!-- <i class="fas fa-trash-alt text-danger"></i> -->
+                <!-- <i class="fas fa-trash" (click)="remove(p)"></i> -->
+                <!-- <i class="fas fa-trash-alt text-danger"></i> -->
                 <!-- </span> -->
             </span>
 
@@ -119,7 +125,7 @@
 <div class="row">
     <div class="col-md-12">
         Descrição:
-        <textarea rows="6" [(ngModel)]="profileLocalService.user.description" [ngModelOptions]="{standalone: true}" [disabled]="true"
-            class="form-control"></textarea>
+        <textarea rows="6" [(ngModel)]="profileLocalService.user.description" [ngModelOptions]="{standalone: true}"
+            [disabled]="true" class="form-control"></textarea>
     </div>
 </div>

@@ -17,6 +17,8 @@ export class ProfileFilterComponent implements OnInit {
 
   @Input() public profileList: IProfile[];
 
+  searchTimeout;
+
   institutionTypeEnum: typeof InstitutionTypeEnum;
   contextEnum: typeof ContextEnum;
 
@@ -47,9 +49,15 @@ export class ProfileFilterComponent implements OnInit {
     // this.ceeInstitutionLocalService.filter = filter;
   }
 
-  contextFilter(context: string) {
+  changeSearch(search: string): void {
+    clearTimeout(this.searchTimeout);
+    this.searchTimeout = setTimeout(() => {
+      EventEmitterService.get('ProfileFilterComponent.search').emit(search);
+    }, 600);
+  }
 
-    EventEmitterService.get('profile-context-filter').emit(context);
+  contextFilter(context: string) {
+    EventEmitterService.get('ProfileFilterComponent.context').emit(context);
   }
 
   refresh() {

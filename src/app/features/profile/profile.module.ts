@@ -1,4 +1,3 @@
-import { AppRoutingModule } from './../../app-routing.module';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -16,6 +15,8 @@ import { ProfileMainUserdataComponent } from './profile-card-main/profile-main-u
 import { ProfileMainUserconfigComponent } from './profile-card-main/profile-main-userconfig/profile-main-userconfig.component';
 import { ProfilePersonalComponent } from './profile-personal/profile-personal.component';
 import { ProfileFilterComponent } from './profile-filter/profile-filter.component';
+import { NgxMaskModule } from 'ngx-mask';
+import { ProfileRoutingModule } from './profile.routing.module';
 
 @NgModule({
     declarations: [
@@ -32,11 +33,12 @@ import { ProfileFilterComponent } from './profile-filter/profile-filter.componen
         ProfileFilterComponent
     ],
     imports: [
-        AppRoutingModule,
         CommonModule,
         FormsModule,
+        ProfileRoutingModule,
 
         PipesModule,
+        NgxMaskModule
     ]
 })
 export class ProfileModule { }
