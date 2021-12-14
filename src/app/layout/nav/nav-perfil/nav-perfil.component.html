@@ -14,7 +14,7 @@
   </div>
 
   <div *ngIf="!AuthService.user._id">
-    <a routerLink="/login"><i class="fas fa-user-circle fa-3x"></i></a>
+    <a routerLink="/auth/login"><i class="fas fa-user-circle fa-3x"></i></a>
     <a class="d-block">{{ AuthService.user.name }}</a>
     <a class="d-block" (click)="openAuthBindListModal()">
       [{{ AuthService.currentBind?.profileName }}]</a>
@@ -29,7 +29,7 @@
 
     <!-- * BUTTON LOGIN -->
     <li class="nav-item text-center" *ngIf="!AuthService.user._id">
-      <a class="nav-link ips-logon" routerLink="/login">
+      <a class="nav-link ips-logon" routerLink="/auth/login">
         <i class="nav-icon fa fa-sign-in-alt"></i>
         LogIn [Entrar]
       </a>
@@ -46,7 +46,7 @@
     <!-- * BUTTON PROFILE -->
     <!-- <li class="nav-item text-center" *ngIf="AuthService.user._id"> -->
     <li class="nav-item text-center" *ngIf="false">
-      <!-- <a class="nav-link ips-login" routerLink="/login"> <i class="nav-icon fa fa-sign-in-alt"></i> LogIn [Entrar]</a> -->
+      <!-- <a class="nav-link ips-login" routerLink="/auth/login"> <i class="nav-icon fa fa-sign-in-alt"></i> LogIn [Entrar]</a> -->
       <a class="nav-link ips-logon" data-toggle="modal" data-target="#authProfileModal">
         <i class="nav-icon fa fa-id-card-alt"></i>
         Trocar perfil

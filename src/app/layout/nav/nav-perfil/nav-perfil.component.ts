@@ -56,7 +56,7 @@ export class NavPerfilComponent implements OnInit {
     }
 
     private redirect(){
-        this.router.navigate(['/login']);
+        this.router.navigate(['/auth/login']);
     }
 
     private clear() {
