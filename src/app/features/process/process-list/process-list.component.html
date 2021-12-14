@@ -1,0 +1,44 @@
+<div class="row">
+    <div class="col-12">
+        <div class="info-box btn btn-default text-left" routerLink="view" [queryParams]="{ processId: item._id }"
+            *ngFor="let item of toViewProcessList 
+            | filter:[{ field: 'institutionName', value: filter}]
+            | filter:[{ field: 'regionalName', value: filterRegional?.name}]
+            | filter:[{ field: 'actName', value: filterAct?.name}]">
+        <!-- <div class="info-box btn btn-default text-left" routerLink="view" [queryParams]="{ processId: item._id }"
+            *ngFor="let item of toViewProcessList | sortBy:'asc':'name' | filter:[{ field: 'institutionType', value: processLocalService.filter}] | filter: [{ field: 'name', value: processLocalService.search}]"> -->
+
+            <div class="info-box-content" *ngIf="item else noDoc">
+                <span class="info-box-text">
+                    <small class="text-info">
+                        <b>Ato:</b> {{ item.actName || 'Não informado' }}
+                    </small>
+                    <small class="text-info">
+                        <b> | Data de autuação:</b> {{ item.sgdAutuationDate || '--/--/----' }}
+                    </small>
+                    <small class="text-info">
+                        <b> | Número SGD:</b> {{ item.sgdNumber || '-' }}
+                    </small>
+                    <small class="text-info">
+                        <b> | Tempo de vida:</b> {{ item.lifeTime || '-' }}
+                    </small>
+                </span>
+                <span class="info-box-text">
+                    {{ item.institutionName }}
+                </span>
+                <span class="info-box-text small" *ngIf="item.courseName">
+                    <b>Curso:</b> {{ item.courseName}}
+                </span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+</div>
+
+<ng-template #noDoc>
+    <div class="info-box-content">
+        Nenhum documento encontrado!
+    </div>
+</ng-template>

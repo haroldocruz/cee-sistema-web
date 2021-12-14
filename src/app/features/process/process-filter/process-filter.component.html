@@ -1,0 +1,71 @@
+<div class="row d-print-none">
+    <div class="col-12">
+        <!-- * Button -->
+        <button class="btn btn-info" (click)="openProcessFormModal()">
+            <i class="fa fa-plus"></i>
+            &nbsp;
+            <span>Iniciar um processo</span>
+        </button>
+        &nbsp;
+        <!-- * Button -->
+        <button class="btn btn-info" (click)="refresh()">
+            <i class="fa fa-sync"></i>
+            &nbsp;
+            <span>Atualizar lista</span>
+        </button>
+    </div>
+
+    <br><br>
+
+    <!-- * Filter field -->
+    <div class="col-12 col-md-6">
+        <div class="input-group mb-3">
+            <div class="input-group-append">
+                <div class="input-group-text">
+                    <span><i class="fa fa-filter"></i></span>
+                </div>
+            </div>
+            <input id="search-box" class="form-control" type="search" [(ngModel)]="search" autocomplete="_"
+                (ngModelChange)="changeSearch()" placeholder="Pesquisar">
+        </div>
+    </div>
+
+</div>
+
+<div class="row d-print-none">
+
+    <span class="col-12 text-bold">Filtrar por:</span>
+
+    <div class="col-6 col-sm-4 col-md-3" (click)="openActListModal()">
+        <div class="info-box btn btn-default text-left">
+            <span class="info-box-icon bg-info elevation-1"><i class="fas fa-filter"></i></span>
+
+            <div class="info-box-content">
+                <span class="info-box-text">Ato</span>
+                <span class="info-box-number">
+                    <small>{{ act?.name || 'Todos os atos' }}</small>
+                </span>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="col-6 col-sm-4 col-md-3">
+        <div class="info-box btn btn-default text-left" (click)="openRegionalListModal()">
+            <span class="info-box-icon bg-info elevation-1"><i class="fas fa-filter"></i></span>
+
+            <div class="info-box-content">
+                <span class="info-box-text">Regional</span>
+                <span class="info-box-number">
+                    <small>{{ regional?.name || 'Todas as regionais' }}</small>
+                    <span class="float-right">
+                        <img height="15px" *ngIf="!regional?.name" src="{{ regional?.flag }}" alt="">
+                        <img height="10px" *ngIf="regional?.name" src="{{ regional?.flag }}" alt="">
+                    </span>
+                </span>
+            </div>
+            
+        </div>
+    </div>
+
+</div>

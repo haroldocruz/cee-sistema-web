@@ -1,0 +1,161 @@
+<!-- <form [formGroup]="checkoutForm"> -->
+<form>
+    <div class="card">
+        <div class="card-header">
+            <h4 class="d-none d-print-block text-center">
+                Formulário de inserção e alteração de dados de um processo
+            </h4>
+            <h4 class="card-title d-print-none" id="userModalLabel">
+                <span *ngIf="!process?._id">Inserir</span>
+                <span *ngIf="process?._id">Alterar</span>
+            </h4>
+            <div class="card-tools d-print-none">
+                <button type="button" class="btn btn-tool" data-card-widget="maximize">
+                    <i class="fas fa-expand"></i>
+                </button>
+                &nbsp;
+                <button type="button" class="close" (click)="bsModalRef.hide()">
+                    <span>&times;</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="card-body" *ngIf="isLoading">
+            <sd-is-loading></sd-is-loading>
+        </div>
+
+        <div class="card-body" *ngIf="!isLoading">
+            <div class="row">
+
+                <div class="col-12">
+                    <div class="card card-info card-outline card-outline-tabs">
+                        <div class="card-header p-0 border-bottom-0">
+                            <ul class="nav nav-tabs nav-fill" id="custom-tabs-four-tab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="custom-tabs-interested-tab" data-bs-toggle="pill"
+                                        href="#custom-tabs-interested" role="tab" aria-controls="custom-tabs-interested"
+                                        aria-selected="false">Interessados</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="custom-tabs-main-tab" data-bs-toggle="pill"
+                                        href="#custom-tabs-main" role="tab" aria-controls="custom-tabs-main"
+                                        aria-selected="true">Principal</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="custom-tabs-sgd-tab" data-bs-toggle="pill"
+                                        href="#custom-tabs-sgd" role="tab" aria-controls="custom-tabs-sgd"
+                                        aria-selected="false">Dados do SGD</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="card-body">
+                            <div class="tab-content" id="custom-tabs-four-tabContent">
+
+                                <div class="tab-pane fade active show" id="custom-tabs-interested" role="tabpanel"
+                                    aria-labelledby="custom-tabs-interested-tab">
+                                    <div class="row">
+
+                                        <div class="col-12 text-right">
+                                            <button class="btn btn-info" (click)="openSelectInstitutionModal()">
+                                                <i class="fas fa-plus"></i>
+                                                Adicionar interessado
+                                            </button>
+                                        </div>
+                                        <br><br>
+                                        <div class="col-12">
+
+                                            <sd-page-in-construction></sd-page-in-construction>
+
+                                            <span class="list-group-item sd-list-items"
+                                                *ngFor="let i of interestedList; let idx = index">
+
+                                                <span class="">
+                                                    <i class="fa fa-angle-double-right"></i>
+                                                    {{ i.name }}
+                                                </span>
+                                                <span class="sd-pointer sd-float-right">
+                                                    <i class="fas fa-trash-alt text-danger"
+                                                        (click)="removeInterested(idx)"></i>
+                                                </span>
+                                            </span>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="tab-pane fade" id="custom-tabs-main" role="tabpanel"
+                                    aria-labelledby="custom-tabs-main-tab">
+                                    <div class="row">
+
+                                        <div class="col-md-8 col-lg-6">
+                                            Ato:
+                                            <select class="form-control" [(ngModel)]="process.act"
+                                                [ngModelOptions]="{standalone: true}">
+                                                <option [ngValue]="act" *ngFor="let act of actList">
+                                                    {{ act.name }}
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-8 col-lg-6">
+                                            DREJE:
+                                            <select class="form-control" [(ngModel)]="process._dreje"
+                                                [ngModelOptions]="{standalone: true}">
+                                                <option [ngValue]="dreje" *ngFor="let dreje of drejeList">
+                                                    {{ dreje.name }}
+                                                </option>
+                                            </select>
+                                        </div>
+
+                                    </div>
+                                    <div class="row">
+
+                                        <div class="col-md-12">
+                                            Descrição:
+                                            <textarea rows="6" class="form-control" [(ngModel)]="process.description"
+                                                [ngModelOptions]="{standalone: true}"></textarea>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="tab-pane fade" id="custom-tabs-sgd" role="tabpanel"
+                                    aria-labelledby="custom-tabs-sgd-tab">
+                                    <div class="row">
+
+                                        <div class="col-md-6 col-lg-4">
+                                            SGD - Número:
+                                            <input type="text" class="form-control" autocomplete="_"
+                                                placeholder="****/*****/******" [(ngModel)]="process.sgd.number"
+                                                [ngModelOptions]="{standalone: true}" mask="0000 / 00000 / 000000">
+                                        </div>
+
+                                        <div class="col-md-6 col-lg-4">
+                                            SGD - Data de autuação:
+                                            <input type="text" class="form-control" autocomplete="_"
+                                                placeholder="**/**/****" mask="00/00/0000"
+                                                [(ngModel)]="process.sgd.autuationDate"
+                                                [ngModelOptions]="{standalone: true}">
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="modal-footer d-print-none" *ngIf="!isLoading">
+            <button type="reset" class="btn btn-default" *ngIf="!process?._id">Limpar</button>
+            <button type="button" class="btn btn-default" *ngIf="bsModalRef" (click)="bsModalRef.hide()">Fechar</button>
+            <input type="submit" class="btn btn-primary" value="Salvar" (click)="create()" *ngIf="!process?._id">
+            <input type="submit" class="btn btn-primary" value="Atualizar" (click)="update()" *ngIf="process?._id">
+        </div>
+    </div>
+</form>
