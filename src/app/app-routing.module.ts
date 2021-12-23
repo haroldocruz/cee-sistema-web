@@ -31,6 +31,7 @@ const routes: Routes = [
           { path: "atribuicoes", component: HomeAssignmentComponent }
         ]
       },
+      { path: "account", loadChildren: () => import("./features/account/account.module").then(m => m.AccountModule) },
       { path: "document", loadChildren: () => import("./features/document/document.module").then(m => m.DocumentModule) },
       { path: "process", loadChildren: () => import("./features/process/process.module").then(m => m.ProcessModule) },
       { path: "profile", loadChildren: () => import("./features/profile/profile.module").then(m => m.ProfileModule) },

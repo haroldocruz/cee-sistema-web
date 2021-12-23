@@ -29,6 +29,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { NgxMaskModule } from "ngx-mask";
 import { RegionalListComponent } from './directives/regional-list/regional-list.component';
 import { ActListComponent } from './directives/act-list/act-list.component';
+import { Interceptor } from "./app.interceptor";
 
 @NgModule({
   declarations: [
@@ -46,6 +47,8 @@ import { ActListComponent } from './directives/act-list/act-list.component';
     FormsModule,
     HttpClientModule,
     AppRoutingModule,
+
+    Interceptor,
 
     ModalModule.forRoot(),
     ToastrModule.forRoot({ positionClass:'toast-top-right', closeButton: true }),
