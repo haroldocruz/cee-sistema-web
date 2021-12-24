@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProcessViewComponent implements OnInit {
 
+  timestamp = new Date().getTime()
+
   constructor() { }
 
   ngOnInit(): void {
