@@ -46,11 +46,21 @@ export class InstitutionService {
 
   bindMember(reqBindMember: IReqBindMember): Observable<IStatusMessage> {
       const uri = `${this.baseUrl}/bindMember`;
+
+      reqBindMember._user = reqBindMember._user._id ? reqBindMember._user._id: reqBindMember._user;
+      reqBindMember._institution = reqBindMember._institution._id ? reqBindMember._institution._id: reqBindMember._institution;
+      reqBindMember._profile = reqBindMember._profile._id ? reqBindMember._profile._id: reqBindMember._profile;
+      
       return this.http.post<IStatusMessage>(uri, reqBindMember, { headers: AuthService.headers() });
   }
 
-  unBindMember(reqBindMember: IReqBindMember): Observable<IStatusMessage> {
+  unbindMember(reqBindMember: IReqBindMember): Observable<IStatusMessage> {
       const uri = `${this.baseUrl}/unbindMember`;
+
+      reqBindMember._user = reqBindMember._user._id ? reqBindMember._user._id: reqBindMember._user;
+      reqBindMember._institution = reqBindMember._institution._id ? reqBindMember._institution._id: reqBindMember._institution;
+      reqBindMember._profile = reqBindMember._profile._id ? reqBindMember._profile._id: reqBindMember._profile;
+
       return this.http.post<IStatusMessage>(uri, reqBindMember, { headers: AuthService.headers() });
   }
 
