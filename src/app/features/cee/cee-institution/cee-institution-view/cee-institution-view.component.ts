@@ -1,5 +1,5 @@
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { IUser } from 'src/app/interfaces/User';
 import { UtilService } from 'src/app/services/util.service';
 import { UserLocalService } from 'src/app/features/user/user.local.service';
@@ -12,6 +12,13 @@ import { CeeUserBindComponent } from '../../cee-user/cee-user-bind/cee-user-bind
 import { ContextEnum } from 'src/app/interfaces/enumerations/ContextEnum';
 import { cloneDeep } from 'lodash';
 import { ProcessFormComponent } from 'src/app/features/process/process-form/process-form.component';
+import { IAddress } from 'src/app/interfaces/Contact';
+import { IEvidence } from 'src/app/interfaces/Evidence';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { UserService } from 'src/app/services/user.service';
+import { IQueryConfig } from 'src/app/interfaces/IQueryConfig';
+import { IBindInInstitution } from 'src/app/interfaces/IBindInInstitution';
 
 interface IInstitutionView {
   _id: string;
@@ -20,11 +27,14 @@ interface IInstitutionView {
   name: string;
   cnpj: string;
   emailMain: string;
-  emailList: string;
+  emails: string;
   phoneMain: string;
-  phoneList: string;
+  phones: string;
+  addressList: IAddress[];
   addressMain: string;
   zipCodeAddressMain: string;
+  legalActList: IEvidence[];
+  userBindList: IBindInInstitution[];
   description: string;
 }
 
@@ -33,7 +43,9 @@ interface IInstitutionView {
   templateUrl: './cee-institution-view.component.html',
   styleUrls: ['./cee-institution-view.component.less']
 })
-export class CeeInstitutionViewComponent implements OnInit {
+export class CeeInstitutionViewComponent implements OnInit, OnDestroy {
+
+  private subDestroy$: Subject<boolean> = new Subject();
 
   public bsModalRef: BsModalRef;
 
@@ -49,10 +61,15 @@ export class CeeInstitutionViewComponent implements OnInit {
     public bsModalService: BsModalService,
     public util: UtilService,
     private route: ActivatedRoute,
-    public userService: UserLocalService,
+    public userService: UserService,
     public institutionService: InstitutionService,
     private modalService: BsModalService
   ) { }
+
+  ngOnDestroy(): void {
+    this.subDestroy$.next();
+    this.subDestroy$.complete();
+  }
 
   ngOnInit(): void {
 
@@ -78,18 +95,26 @@ export class CeeInstitutionViewComponent implements OnInit {
       if (!id) return;
 
       this.isLoading = true;
-      this.institutionService.readById(id).subscribe((data) => {
-        this.isLoading = false;
-        if (data.statusCode) {
-          //TODO: not implemented
-          return;
-        }
+      this.institutionService.readById(id)
+        .pipe(takeUntil(this.subDestroy$))
+        .subscribe((data) => {
+          this.isLoading = false;
+          if (data.statusCode) {
+            //TODO: not implemented
+            return;
+          }
 
-        this.institution = data;
-        this.toView(data);
-      });
+          this.institution = data;
+          this.toView(data);
+        });
 
     });
+  }
+
+  public getUserList() {
+    let queryConfig: IQueryConfig = { populateList: [] }
+    let user:IUser = { dataAccess: {} }
+      this.userService.filterAll(user, queryConfig)
   }
 
   public openInstitutionFormModal(): void {
@@ -120,21 +145,24 @@ export class CeeInstitutionViewComponent implements OnInit {
       name: i.name,
       cnpj: i.cnpj?.toString(),
       phoneMain: this.util.phoneMasked(i.contact?.phoneList[0]?.number),
-      phoneList: this.util.phoneListToString(i.contact?.phoneList, ' | '),
+      phones: this.util.phoneListToString(i.contact?.phoneList, ' | '),
       emailMain: i.contact?.emailList[0]?.address,
-      emailList: this.util.emailListToString(i.contact?.emailList, ' | '),
+      emails: this.util.emailListToString(i.contact?.emailList, ' | '),
+      addressList: i.contact?.addressList,
       addressMain: this.util.addressToString(i.contact?.addressList[0]),
       zipCodeAddressMain: this.util.anyMasked(i.contact?.addressList[0]?.zipcode?.toString(), "00.000-000"),
       socialReason: i.socialReason,
+      legalActList: i.legalActList,
+      userBindList: i.memberList,
       description: i.description
     }
   }
 
-  ObterCSS(element){
+  ObterCSS(element) {
     var css = '';
     var o = getComputedStyle(element);
-    for(var i = 0; i < o.length; i++){
-      css+=o[i] + ':' + o.getPropertyValue(o[i])+';';
+    for (var i = 0; i < o.length; i++) {
+      css += o[i] + ':' + o.getPropertyValue(o[i]) + ';';
     }
     return css;
   }

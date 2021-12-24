@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { IAddress, IEmail, IPhone } from 'src/app/interfaces/Contact';
 import { IProfile } from 'src/app/interfaces/Profile';
-import { IBindingProfileUser, ProfileService } from 'src/app/services/profile.service';
 import { orderBy } from "lodash";
-import { GenderEnum, IUser } from 'src/app/interfaces/User';
+import { IUser } from 'src/app/interfaces/User';
 import { CeeLocalService } from '../../cee.local.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ChatDirectModalComponent } from 'src/app/features/chat/chat-direct-modal/chat-direct-modal.component';
@@ -15,7 +14,6 @@ import { NotificationService } from 'src/app/services/notification.service';
 import { InstitutionService } from 'src/app/services/institution.service';
 import { IStatusMessage } from 'src/app/interfaces/IStatusMessage';
 import { IInstitution, IMember } from 'src/app/interfaces/Institution';
-import { IBindInInstitution } from 'src/app/interfaces/IBindInInstitution';
 import { IQueryConfig } from 'src/app/interfaces/IQueryConfig';
 import { IReqBindMember } from 'src/app/interfaces/IReqBindMember';
 import { EventEmitterService } from 'src/app/services/event-emitter.service';
@@ -36,7 +34,6 @@ export class CeeUserListComponent implements OnInit {
 
   constructor(
     private modalService: BsModalService,
-    private profileService: ProfileService,
     private institutionService: InstitutionService,
     public ceeLocalService: CeeLocalService,
     private utilService: UtilService,
@@ -103,7 +100,7 @@ export class CeeUserListComponent implements OnInit {
       userName: profileCard.userName,
     }
 
-    this.institutionService.unBindMember(reqBindMember).subscribe((data) => {
+    this.institutionService.unbindMember(reqBindMember).subscribe((data) => {
 
       if (data.statusCode >= 200 && data.statusCode < 300) {
         this.notifyService.showSuccess(data.statusMessage, 'OK');

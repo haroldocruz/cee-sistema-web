@@ -10,7 +10,7 @@
         <div class="row">
             <form class="form" (ngSubmit)="findUser()">
                 <div class="input-group mb-3">
-                    <input id="search-box" class="form-control" type="text" [(ngModel)]="cpf"
+                    <input id="search-box" class="form-control" type="search" [(ngModel)]="cpf"
                         [ngModelOptions]="{ standalone: true }" autocomplete="_" placeholder="Buscar por CPF"
                         mask="000.000.000-00">
                     <div class="input-group-append sd-pointer">

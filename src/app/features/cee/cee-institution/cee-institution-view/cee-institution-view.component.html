@@ -1,26 +1,26 @@
 <div class="row d-print-none">
     <div class="col-12">
 
-            <!-- * Button -->
-            <button class="col col-md-auto btn btn-info" (click)="openInstitutionFormModal()">
-                <i class="fa fa-edit"></i>
-                &nbsp;
-                <span>Editar</span>
-            </button>
+        <!-- * Button -->
+        <button class="col col-md-auto btn btn-info" (click)="openInstitutionFormModal()">
+            <i class="fa fa-edit"></i>
             &nbsp;
-            <!-- * Button -->
-            <button class="col col-md-auto btn btn-info" (click)="openBindUserInInstitutionModal()">
-                <i class="fas fa-link"></i>
-                &nbsp;
-                <span>Vincular usuário</span>
-            </button>
+            <span>Editar</span>
+        </button>
+        &nbsp;
+        <!-- * Button -->
+        <button class="col col-md-auto btn btn-info" (click)="openBindUserInInstitutionModal()">
+            <i class="fas fa-link"></i>
             &nbsp;
-            <!-- * Button -->
-            <button class="col col-md-auto btn btn-info" style="min-width: 200px;" (click)="openProcessFormModal()">
-                <i class="fab fa-buffer"></i>
-                &nbsp;
-                <span>Iniciar um processo</span>
-            </button>
+            <span>Vincular usuário</span>
+        </button>
+        &nbsp;
+        <!-- * Button -->
+        <button class="col col-md-auto btn btn-info" style="min-width: 200px;" (click)="openProcessFormModal()">
+            <i class="fab fa-buffer"></i>
+            &nbsp;
+            <span>Iniciar um processo</span>
+        </button>
 
     </div>
 </div>
@@ -133,16 +133,10 @@
                     <div class="tab-pane fade active show" id="institution" role="tabpanel"
                         aria-labelledby="institution-tab">
 
-                        <div class="card card-widget widget-user" *ngIf="isLoading">
-                            <div class="card-body text-center">
-                                <i class="fas fa-spinner fa-pulse fa-5x"></i>
-                            </div>
-                        </div>
+                        <sd-is-loading *ngIf="isLoading"></sd-is-loading>
 
                         <div class="card card-widget widget-user" *ngIf="!isLoading">
                             <div class="card-body">
-
-                                <sd-page-in-construction></sd-page-in-construction>
 
                                 <div class="form-group row">
                                     <label for="inputName" class="col col-form-label">CNPJ:</label>
@@ -251,13 +245,11 @@
                         <div class="card card-widget widget-user" *ngIf="!isLoading">
                             <div class="card-body">
 
-                                <sd-page-in-construction></sd-page-in-construction>
-
                                 <div class="form-group row">
                                     <label for="inputEmail" class="col col-form-label">Emails:</label>
                                     <div class="col-sm-9">
                                         <span>
-                                            {{ iView.emailList || 'Não informado' }}
+                                            {{ iView.emails || 'Não informado' }}
                                         </span>
                                     </div>
                                 </div>
@@ -265,7 +257,7 @@
                                     <label class="col col-form-label">Telefones:</label>
                                     <div class="col-sm-9 centered">
                                         <span>
-                                            {{ iView.phoneList || 'Não informado' }}
+                                            {{ iView.phones || 'Não informado' }}
                                         </span>
                                     </div>
                                 </div>
@@ -285,7 +277,26 @@
 
                         <div class="card card-widget widget-user" *ngIf="!isLoading">
                             <div class="card-body">
-                                <sd-page-in-construction></sd-page-in-construction>
+
+                                <div class="list-group">
+
+                                    <span class="list-group-item text-center text-danger"
+                                        *ngIf="iView.addressList?.length === 0">
+                                        Nenhum endereço inserido!
+                                    </span>
+
+                                    <span class="list-group-item sd-list-items" *ngFor="let a of iView.addressList">
+                                        <i class="fa fa-angle-double-right"></i>
+                                        <span>
+                                            {{ util.addressToString(a) }}
+                                        </span>
+                                        <span class="small text-danger">
+                                            (Sede)
+                                        </span>
+                                    </span>
+
+                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -301,7 +312,27 @@
 
                         <div class="card card-widget widget-user" *ngIf="!isLoading">
                             <div class="card-body">
-                                <sd-page-in-construction></sd-page-in-construction>
+
+                                <div class="list-group">
+
+                                    <span class="list-group-item text-center text-danger"
+                                        *ngIf="iView.legalActList?.length === 0">
+                                        Nenhum documento inserido!
+                                    </span>
+
+                                    <span class="list-group-item sd-list-items"
+                                        *ngFor="let legal of iView.legalActList">
+                                        <i class="fa fa-angle-double-right"></i>
+                                        <span>
+                                            {{ legal.title }}
+                                        </span>
+                                        <span class="small text-success">
+                                            (Validado)
+                                        </span>
+                                    </span>
+
+                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -317,7 +348,28 @@
 
                         <div class="card card-widget widget-user" *ngIf="!isLoading">
                             <div class="card-body">
-                                <sd-page-in-construction></sd-page-in-construction>
+
+                                <div class="list-group">
+
+                                    <span class="list-group-item text-center text-danger"
+                                        *ngIf="iView.userBindList?.length === 0">
+                                        Nenhum usuário vinculado!
+                                    </span>
+
+                                    <a routerLink="/account/personal" [queryParams]="{userId:b._user._id}"
+                                        class="list-group-item sd-list-items" *ngFor="let b of iView.userBindList">
+                                        <i class="fas fa-check-circle text-success" *ngIf="b.status"></i>
+                                        <i class="fas fa-times-circle text-danger" *ngIf="!b.status"></i>
+                                        <span>
+                                            {{ b._user.name }}
+                                        </span>
+                                        <span class="small">
+                                            ({{ b.profileName }})
+                                        </span>
+                                    </a>
+
+                                </div>
+
                             </div>
                         </div>
                     </div>
