@@ -37,8 +37,6 @@ import { Interceptor } from "./app.interceptor";
     FilterButtonsDirective,
     RegionalListComponent,
     ActListComponent
-
-    // SortByPipe
   ],
   imports: [
     /*ANGULAR*/

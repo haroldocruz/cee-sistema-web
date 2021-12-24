@@ -9,6 +9,8 @@ import { SelectDrejeComponent } from '../directives/select-dreje/select-dreje.co
 import { SelectInstitutionComponent } from '../directives/select-institution/select-institution.component';
 import { EvidenceFormComponent } from '../directives/evidence-form/evidence-form.component';
 import { SortByPipe } from '../pipes/sort-by.pipe';
+import { StampComponent } from '../directives/stamp/stamp.component';
+import { RibbonComponent } from '../directives/ribbon/ribbon.component';
 
 
 
@@ -20,8 +22,10 @@ import { SortByPipe } from '../pipes/sort-by.pipe';
     IsLoadingComponent,
     PageInConstructionComponent,
     ProfileCardComponent,
+    RibbonComponent,
     SelectDrejeComponent,
-    SelectInstitutionComponent
+    SelectInstitutionComponent,
+    StampComponent
   ],
   imports: [
     CommonModule,
@@ -35,8 +39,10 @@ import { SortByPipe } from '../pipes/sort-by.pipe';
     IsLoadingComponent,
     PageInConstructionComponent,
     ProfileCardComponent,
+    RibbonComponent,
     SelectDrejeComponent,
-    SelectInstitutionComponent
+    SelectInstitutionComponent,
+    StampComponent
   ]
 })
 export class UtilModule { }

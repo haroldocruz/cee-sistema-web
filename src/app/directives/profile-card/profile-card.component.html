@@ -4,6 +4,9 @@
         {{ profileCard.institutionName }}
     </div>
     <div class="card-body pt-0">
+        
+        <sd-stamp [text]="'Perfil Não Habilitado'" *ngIf="!profileCard.status"></sd-stamp>
+
         <div class="row">
             <div class="col-7">
                 <h2 class="lead"><b>{{ profileCard.userName }}</b></h2>
@@ -11,12 +14,10 @@
                 <ul class="ml-4 mb-0 fa-ul text-muted">
                     <li class="small">
                         <span class="fa-li"><i class="fas fa-lg fa-at"></i></span>
-                        <!-- msom.info@gmail.com -->
                         {{ profileCard.email }}
                     </li>
                     <li class="small">
                         <span class="fa-li"><i class="fas fa-lg fa-phone"></i></span>
-                        <!-- +55 63 98458-9691 -->
                         {{ profileCard.phone | mask:'+00 (00) 90000-0000' }}
                     </li>
                     <li class="small">
