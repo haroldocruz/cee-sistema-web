@@ -1,5 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
 
+export interface IRibbonComponentTemplate {
+  text?: string;
+  textLength?: 'xs' | 'sm' | 'md' | 'lg';
+  length?: 'lg' | 'xl';
+  color?: string;
+}
+
 @Component({
   selector: 'sd-ribbon',
   templateUrl: './ribbon.component.html',
@@ -7,10 +14,12 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class RibbonComponent implements OnInit {
 
-  @Input() text: string = 'Prototype';
-  @Input() textLength: 'xs' | 'sm' | 'md' | 'lg' = 'sm';
-  @Input() length: 'lg' | 'xl' = 'lg';
-  @Input() color: string = 'warning';
+  @Input() ribbon: IRibbonComponentTemplate = {
+    text: 'Prototype',
+    textLength: 'sm',
+    length: 'lg',
+    color: 'warning',
+  }
 
   constructor() { }
 

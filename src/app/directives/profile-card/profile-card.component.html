@@ -1,8 +1,9 @@
 <div class="card bg-light w-100">
+
     <div class="card-header text-muted border-bottom-0">
-        <!-- AEIOU - Associação Educacional Irmãos Oliveira Uchimura -->
         {{ profileCard.institutionName }}
     </div>
+    
     <div class="card-body pt-0">
         
         <sd-stamp [text]="'Perfil Não Habilitado'" *ngIf="!profileCard.status"></sd-stamp>
