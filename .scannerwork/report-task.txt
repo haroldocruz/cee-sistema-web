@@ -1,0 +1,6 @@
+projectKey=haroldo_teste
+serverUrl=http://localhost:9090
+serverVersion=9.2.4.50792
+dashboardUrl=http://localhost:9090/dashboard?id=haroldo_teste
+ceTaskId=AX4i2CXKrNXFKcfcATJt
+ceTaskUrl=http://localhost:9090/api/ce/task?id=AX4i2CXKrNXFKcfcATJt

@@ -111,9 +111,18 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/admin-lte/plugins/fontawesome-free/css/all.min.css",
+              "node_modules/admin-lte/dist/css/adminlte.min.css",
+              "node_modules/overlayscrollbars/css/OverlayScrollbars.css",
+              "node_modules/ngx-toastr/toastr.css",
               "src/styles.less"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/jquery/dist/jquery.js",
+              "node_modules/bootstrap/dist/js/bootstrap.min.js",
+              "node_modules/admin-lte/dist/js/adminlte.min.js"
+            ]
           }
         }
       }

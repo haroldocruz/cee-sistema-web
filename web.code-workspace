@@ -18,5 +18,10 @@
                 "webRoot": "${workspaceFolder}"
             }
         ]
+    },
+    "extensions": {
+        "recommendations": [
+            "johnpapa.angular2"
+        ]
     }
 }
