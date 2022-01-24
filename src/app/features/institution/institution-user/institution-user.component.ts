@@ -70,7 +70,7 @@ export class InstitutionUserComponent implements OnInit {
                 address: "Endereço principal do usuário",
                 phone: "Telefone principal",
                 email: "E-mail principal",
-                image: "../../../../assets/avatar.png"
+                image: "../../../../assets/avatar1.png"
             },
             {
                 "group": { "name": "Nome da mantida vinculada" },

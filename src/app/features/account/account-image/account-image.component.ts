@@ -1,5 +1,6 @@
 import { AfterContentChecked, Component, OnInit } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { IUploadComponentOptions, UploadComponent } from 'src/app/directives/upload/upload.component';
 import { IUser } from 'src/app/interfaces/User';
 import { UserFormComponent } from '../../user/user-form/user-form.component';
 import { AccountLocalService } from '../account.local.service';
@@ -9,7 +10,7 @@ import { AccountLocalService } from '../account.local.service';
   templateUrl: './account-image.component.html',
   styleUrls: ['./account-image.component.less']
 })
-export class AccountImageComponent implements OnInit, AfterContentChecked {
+export class AccountImageComponent implements OnInit {
 
   bsModalRef: BsModalRef;
 
@@ -24,15 +25,25 @@ export class AccountImageComponent implements OnInit, AfterContentChecked {
   ngOnInit(): void {
   }
 
-  ngAfterContentChecked(){
-    this.user = AccountLocalService.user
-  }
-
+  // ngAfterContentChecked() {
+  //   this.user = AccountLocalService.user
+  // }
 
   openUserFormModal(user: IUser) {
     const initialState = { user };
     this.bsModalRef = this.bsModalService.show(UserFormComponent, { id: 1, class: 'modal-lg', initialState });
     this.bsModalRef.content.closeBtnName = 'Close';
+  }
+
+  openUploadImageModal() {
+    const uploadComponentOptions: IUploadComponentOptions = {
+      isAvatar: true,
+      isFile: true,
+      accept: ['image/*'],
+      isMultiple: false
+    };
+    const initialState = { options: uploadComponentOptions, user: this.user };
+    this.bsModalRef = this.bsModalService.show(UploadComponent, { id: 1, class: 'modal-lg', initialState });
   }
 
 }

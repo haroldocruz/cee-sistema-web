@@ -50,7 +50,7 @@ export class ProfileCardComponent implements OnInit {
       userName: '',
       institutionId: null,
       institutionName: '',
-      image: '/assets/avatar.png',
+      image: '/assets/avatar1.png',
       phone: '',
       email: '',
       address: '',

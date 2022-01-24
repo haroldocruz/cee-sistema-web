@@ -10,6 +10,7 @@ import { AccountMainPersonalComponent } from './account-main/account-main-person
 import { AccountMainActivityComponent } from './account-main/account-main-activity/account-main-activity.component';
 import { AccountMainSettingsComponent } from './account-main/account-main-settings/account-main-settings.component';
 import { FormsModule } from '@angular/forms';
+import { UtilModule } from 'src/app/util/util.module';
 
 
 @NgModule({
@@ -25,7 +26,9 @@ import { FormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     FormsModule,
-    AccountRoutingModule
+    AccountRoutingModule,
+
+    UtilModule
   ]
 })
 export class AccountModule { }

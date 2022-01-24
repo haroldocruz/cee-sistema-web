@@ -2,8 +2,12 @@
 <div class="user-panel mt-3 pb-3 mb-3 text-center">
 
   <div *ngIf="AuthService.user._id">
-    <a routerLink="/account/personal"><i class="fas fa-user-circle fa-3x"></i></a>
-    <!-- <img src="../../../public/img/haroldocruz.jpg" class="img-circle elevation-2" alt="User Image"> -->
+    <a routerLink="/account/personal">
+      <i class="fas fa-user-circle fa-3x" *ngIf="!AuthService.user?.image?.path"></i>
+      <img  *ngIf="AuthService.user?.image?.path"
+        [src]="'http://localhost:3000/uploads/'+ (AuthService.user?.image?.path)"
+        class="img-circle elevation-2" alt="User Image">
+    </a>
     <a class="d-block">
       {{ AuthService.user.name.match(firstName)[1]+' '+ AuthService.user.name.match(lastName)[1] }}
     </a>

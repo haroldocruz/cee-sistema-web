@@ -7,7 +7,7 @@ import _cloneDeep from "lodash/cloneDeep";
 import { IProfile } from '../interfaces/Profile';
 import { IUser, User } from '../interfaces/User';
 import { NotificationService } from './notification.service';
-import { AuthService } from '../auth/auth.service';
+import { AuthService, IHttpHeadersOptions } from '../auth/auth.service';
 import { IStatusMessage } from '../interfaces/IStatusMessage';
 import { IQueryConfig } from '../interfaces/IQueryConfig';
 
@@ -26,7 +26,7 @@ export class UserService {
     constructor(
         private http: HttpClient,
         private notify: NotificationService
-    ) {    }
+    ) { }
 
     create(user: IUser): Observable<IUser & IStatusMessage> {
         return this.http.post<IUser & IStatusMessage>(this.baseUrl, user, { headers: AuthService.headers() });
@@ -51,6 +51,12 @@ export class UserService {
         const url = `${this.baseUrl}/filterAll`;
         const filter = { filter: user, queryConfig }
         return this.http.post<IUser[] & IStatusMessage>(url, filter, { headers: AuthService.headers() });
+    }
+
+    uploadImage(user: IUser, data: FormData) {
+        // const headers: IHttpHeadersOptions = { "Content-Type": 'multipart/form-data' }
+        const url = `${this.baseUrl}/image/${user._id}`
+        return this.http.post(url, data);
     }
 
     update(user: IUser): Observable<IUser & IStatusMessage> {

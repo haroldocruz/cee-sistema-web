@@ -33,8 +33,7 @@ export enum MaritalStatusEnum {
 }
 
 export interface IUserImage {
-    avatarUrl?: string;
-    photoUrl?: string;
+    path?: string;
 }
 
 export interface IRg {
