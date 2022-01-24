@@ -1,13 +1,15 @@
-import { IAddress, IEmail, IPhone } from './../interfaces/Contact';
 import { Injectable } from '@angular/core';
-import { NotificationService } from './notification.service';
-import { fromEvent, Observable } from 'rxjs';
-import { IStatusMessage } from '../interfaces/IStatusMessage';
-import { EventEmitterService } from './event-emitter.service';
-import { MaskApplierService, MaskPipe } from 'ngx-mask';
 import { Title } from '@angular/platform-browser';
+import { fromEvent, Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
+
+import { MaskApplierService, MaskPipe } from 'ngx-mask';
+
+import { EventEmitterService } from './event-emitter.service';
+import { IAddress, IEmail, IPhone } from './../interfaces/Contact';
+import { IStatusMessage } from '../interfaces/IStatusMessage';
 import { GenderEnum } from '../interfaces/User';
+import { NotificationService } from './notification.service';
 
 @Injectable({
     providedIn: 'root'
@@ -59,7 +61,7 @@ export class UtilService {
             : (gender == GenderEnum.FEMALE)
                 ? "../../../../assets/avatar2.png"
                 : (gender == GenderEnum.UNINFORMED)
-                    ? "../../../../assets/avatar.png"
+                    ? "../../../../assets/avatar1.png"
                     : "../../../../assets/logo-1257x577-alpha3.png"
     }
 

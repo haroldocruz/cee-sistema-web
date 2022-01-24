@@ -40,7 +40,6 @@ export class AccountLocalService implements OnDestroy {
     this.route.queryParams.pipe(takeUntil(this.subDestroy$)).subscribe((params) => {
 
       let id: string = params['userId'] || AuthService.user._id;
-      console.log(" AuthService.user",  AuthService.user);
 
       this.userService.readById(id).pipe(takeUntil(this.subDestroy$)).subscribe((data) => {
         //TODO: refactor

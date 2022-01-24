@@ -1,7 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+
+import { NgxDropzoneModule } from 'ngx-dropzone';
 import { NgxMaskModule } from 'ngx-mask';
+
 import { IsLoadingComponent } from '../directives/is-loading/is-loading.component';
 import { PageInConstructionComponent } from '../directives/page-in-construction/page-in-construction.component';
 import { ProfileCardComponent } from '../directives/profile-card/profile-card.component';
@@ -11,6 +14,7 @@ import { EvidenceFormComponent } from '../directives/evidence-form/evidence-form
 import { SortByPipe } from '../pipes/sort-by.pipe';
 import { StampComponent } from '../directives/stamp/stamp.component';
 import { RibbonComponent } from '../directives/ribbon/ribbon.component';
+import { UploadComponent } from '../directives/upload/upload.component';
 
 
 
@@ -25,11 +29,13 @@ import { RibbonComponent } from '../directives/ribbon/ribbon.component';
     RibbonComponent,
     SelectDrejeComponent,
     SelectInstitutionComponent,
-    StampComponent
+    StampComponent,
+    UploadComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
+    NgxDropzoneModule,
     NgxMaskModule
   ],
   exports: [
@@ -42,7 +48,8 @@ import { RibbonComponent } from '../directives/ribbon/ribbon.component';
     RibbonComponent,
     SelectDrejeComponent,
     SelectInstitutionComponent,
-    StampComponent
+    StampComponent,
+    UploadComponent
   ]
 })
 export class UtilModule { }

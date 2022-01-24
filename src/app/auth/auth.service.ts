@@ -13,6 +13,11 @@ interface IUserDataLogin {
   password: string;
 }
 
+export interface IHttpHeadersOptions {
+  'authorization'?: string;
+  'Content-Type'?: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -40,10 +45,21 @@ export class AuthService {
   static headers() {
     return new HttpHeaders({
       //TODO
+      // 'Accept': 'application/json',
+      // 'Access-Control-Allow-Origin': '*',
+      // 'Content-Type': 'multipart/form-data',
       'authorization': AuthService.user?.loginInfo?.token || '',
       'Content-Type': 'application/json'
     });
   }
+
+  // static headers(headers?: IHttpHeadersOptions) {
+  //   return new HttpHeaders({
+  //     //TODO
+  //     'authorization': headers?.authorization || AuthService.user?.loginInfo?.token || '',
+  //     'Content-Type': headers?.['Content-Type'] || 'application/json'
+  //   });
+  // }
 
   login(userDataLogin: IUserDataLogin): Observable<any> {
     const url = `${this.baseUrl}/login`;

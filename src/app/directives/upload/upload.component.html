@@ -1,0 +1,70 @@
+<div class="card">
+
+	<div class="card-header">
+		<h4 class="d-none d-print-block text-center">
+			Formulário de upload imagem do usuário
+		</h4>
+		<h4 class="card-title d-print-none" id="userModalLabel">
+			<span *ngIf="true">Upload de imagem</span>
+		</h4>
+		<div class="card-tools d-print-none">
+			<button type="button" class="btn btn-tool" data-card-widget="maximize">
+				<i class="fas fa-expand"></i>
+			</button>
+			&nbsp;
+			<button type="button" class="close" *ngIf="bsModalRef" (click)="bsModalRef.hide()">
+				<span>&times;</span>
+			</button>
+		</div>
+	</div>
+
+	<div class="card-body">
+
+		<div *ngIf="options.isAvatar">
+			<div class="text-center">
+				<h5>Selecione um avatar que melhor represente você:</h5>
+			</div>
+			<div class="sd-avatar">
+				<img class="sd-avatar-size" [src]="avatar" alt="" *ngFor="let avatar of avatarList">
+			</div>
+		</div>
+
+		<div id="avatar-image" class="text-center" *ngIf="options.isAvatar && options.isFile">
+			<h5>ou</h5>
+		</div>
+
+		<div id="file" *ngIf="options.isFile">
+			<div class="custom-dropzone sd-avatar" ngx-dropzone [accept]="'image/*'" [multiple]="options.isMultiple"
+				(change)="onSelect($event)">
+
+				<ngx-dropzone-label>
+					<div>
+						<h2 *ngIf="!options.isMultiple">Arraste uma imagem ou clique aqui!</h2>
+						<h2 *ngIf="options.isMultiple">Arraste uma ou mais imagens ou clique aqui!</h2>
+					</div>
+				</ngx-dropzone-label>
+
+				<div class="text-center" *ngIf="!options.isMultiple && file">
+					<ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" [(ngModel)]="file" [file]="file" ngDefaultControl>
+						<ngx-dropzone-label>{{ file?.name }} ({{ file?.type }})</ngx-dropzone-label>
+					</ngx-dropzone-image-preview>
+				</div>
+
+				<div *ngIf="options.isMultiple">
+					<ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of fileList" [file]="f"
+						[removable]="true" (removed)="onRemove(f)" ngDefaultControl>
+						<ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+					</ngx-dropzone-image-preview>
+				</div>
+
+			</div>
+		</div>
+
+	</div>
+
+	<div class="modal-footer">
+		<button type="button" class="btn btn-default" (click)="onClean()">Limpar</button>
+		<button type="button" class="btn btn-default" *ngIf="bsModalRef" (click)="bsModalRef.hide()">Fechar</button>
+		<input type="submit" class="btn btn-primary" value="Salvar" (click)="upload()" *ngIf="file || fileList.length > 0">
+	</div>
+</div>

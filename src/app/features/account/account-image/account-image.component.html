@@ -1,11 +1,15 @@
 <div class="card card-primary card-outline">
     <div class="card-body box-profile">
-        <div class="text-center">
+        <div class="text-center" (click)="openUploadImageModal()">
             <!-- <img class="profile-user-img img-fluid img-circle" src="./../../../assets/unitins.png"
                                 alt="User profile picture"> -->
-            <i class="fas fa-user-circle fa-5x"></i>
+            <img class="profile-user-img img-fluid img-circle" *ngIf="accountLocalService.user?.image"
+                [src]="'http://localhost:3000/uploads/'+ (accountLocalService.user?.image?.path)"
+                alt="User profile picture">
+            <i class="fas fa-user-circle fa-5x" *ngIf="!accountLocalService.user?.image"></i>
+            <!-- <i class="fas fa-user-circle fa-5x"></i> -->
         </div>
-
+        
         <h3 class="profile-username text-center">{{ accountLocalService.user?.name }}</h3>
 
         <p class="text-muted text-center">Engenheiro de Software <br> Software Engineer</p>
@@ -18,7 +22,7 @@
             <li class="list-group-item"></li>
             <li class="list-group-item">
                 <a routerLink="/user">
-                    <b>Acessos</b> <span class="float-right">{{ user?.loginInfo?.accessCount || '0' }}</span>
+                    <b>Acessos</b> <span class="float-right">{{ accountLocalService.user?.loginInfo?.accessCount || '0' }}</span>
                 </a>
             </li>
             <li class="list-group-item">
