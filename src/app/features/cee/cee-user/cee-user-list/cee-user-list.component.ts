@@ -58,7 +58,7 @@ export class CeeUserListComponent implements OnInit {
   index() {
     const queryConfig: IQueryConfig = {
       populateList: [
-        { path: 'memberList._user', select: ['name', 'contact', 'gender'] },
+        { path: 'memberList._user', select: ['name', 'contact', 'gender', 'image'] },
         { path: 'memberList._profile', select: ['name'] }
       ]
     };
@@ -141,7 +141,7 @@ export class CeeUserListComponent implements OnInit {
         address: this.utilService.addressToString(address),
         phone: (phone != null) ? `${phone.number}` : '',
         email: (email != null) ? `${email.address}` : '',
-        image: user.image?.path || UtilService.getAvatarByGender(user.gender)
+        image: 'http://localhost:3000/uploads/' + user.image?.path || UtilService.getAvatarByGender(user.gender)
       }
       profileCardList.push(profileCard);
     });
