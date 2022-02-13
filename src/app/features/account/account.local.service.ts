@@ -1,11 +1,12 @@
 import { IProfile, Profile } from '../../interfaces/Profile';
-import { Injectable, OnDestroy } from '@angular/core';
+import { AfterContentChecked, Injectable, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IUser, User } from 'src/app/interfaces/User';
 import { AuthService } from 'src/app/auth/auth.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { UserService } from 'src/app/services/user.service';
+import { EventEmitterService } from 'src/app/services/event-emitter.service';
 
 
 @Injectable({
@@ -29,6 +30,10 @@ export class AccountLocalService implements OnDestroy {
     AccountLocalService.user = new User();
     AccountLocalService.userId = undefined;
     this.index();
+    
+    EventEmitterService.get('is-success').pipe(takeUntil(this.subDestroy$)).subscribe(()=>{
+      this.index();
+    })
   }
 
   ngOnDestroy(): void {
@@ -45,6 +50,7 @@ export class AccountLocalService implements OnDestroy {
         //TODO: refactor
         AccountLocalService.user = data;
         AccountLocalService.userId = data._id;
+        EventEmitterService.get('AccountLocalService.user').emit();
       });
     });
   }

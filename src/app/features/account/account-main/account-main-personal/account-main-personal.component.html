@@ -1,53 +1,53 @@
 <div class="row">
     <div class="col-md-12 col-lg-8">
         Nome completo:
-        <input type="text" [(ngModel)]="accountLocalService.user.name" [ngModelOptions]="{standalone: true}"
+        <input type="text" [(ngModel)]="account.name" [ngModelOptions]="{standalone: true}"
             [disabled]="true" autocomplete="_" class="form-control" placeholder="Digite seu nome completo">
     </div>
     <div class="col-md-6 col-lg-4">
         CPF:
-        <input type="text" [(ngModel)]="accountLocalService.user.cpf" [ngModelOptions]="{standalone: true}"
+        <input type="text" [(ngModel)]="account.cpf" [ngModelOptions]="{standalone: true}"
             [disabled]="true" class="form-control" mask="000.000.000-00" placeholder="">
     </div>
     <!-- <div class="col-md-4">
                             Perfil:
-                            <select id="profile" [(ngModel)]="accountLocalService.user.dataAccess.profiles" [ngModelOptions]="{standalone: true}" [disabled]="true" class="form-control">
+                            <select id="profile" [(ngModel)]="account.profiles" [ngModelOptions]="{standalone: true}" [disabled]="true" class="form-control">
                                 <option [ngValue]="profile" *ngFor="let profile of profileService.profiles">{{ profile.name }}</option>
                             </select>
                             </div> -->
 
     <!-- <div class="col-md-4">
                             Status:
-                            <select id="status" [(ngModel)]="accountLocalService.user.status" [ngModelOptions]="{standalone: true}" [disabled]="true" class="form-control">
+                            <select id="status" [(ngModel)]="account.status" [ngModelOptions]="{standalone: true}" [disabled]="true" class="form-control">
                                 <option [value]="status" *ngFor="let status of statusList">{{ status }}</option>
                             </select>
                             </div> -->
     <div class="col-md-6 col-lg-4">
         Gênero:
-        <input type="text" [(ngModel)]="accountLocalService.user.gender" [ngModelOptions]="{standalone: true}"
+        <input type="text" [(ngModel)]="account.gender" [ngModelOptions]="{standalone: true}"
             [disabled]="true" [disabled]="true" class="form-control" placeholder="">
     </div>
     <div class="col-md-6 col-lg-4">
         Estado civil:
-        <input type="text" [(ngModel)]="accountLocalService.user.maritalStatus" [ngModelOptions]="{standalone: true}"
+        <input type="text" [(ngModel)]="account.maritalStatus" [ngModelOptions]="{standalone: true}"
             [disabled]="true" class="form-control" placeholder="">
     </div>
     <div class="col-md-6 col-lg-4">
         Data de nascimento:
-        <input type="text" [ngModel]="accountLocalService.user.birthDate | date:'dd/MM/yyyy'"
-            (ngModelChange)="accountLocalService.user.birthDate=$event" [disabled]="true" class="form-control"
+        <input type="text" [ngModel]="account.birthDate | date:'dd/MM/yyyy'"
+            (ngModelChange)="account.birthDate=$event" [disabled]="true" class="form-control"
             placeholder="">
     </div>
-    <div class="col-md-6" *ngIf="!accountLocalService.user._id">
+    <!-- <div class="col-md-6" *ngIf="!account._id">
         Senha:
-        <input type="text" [(ngModel)]="accountLocalService.user.dataAccess.password"
+        <input type="text" [(ngModel)]="account.password"
             [ngModelOptions]="{standalone: true}" [disabled]="true" class="form-control" placeholder="">
     </div>
-    <div class="col-md-6" *ngIf="!accountLocalService.user._id">
+    <div class="col-md-6" *ngIf="!account._id">
         Repetir senha:
-        <input type="text" [(ngModel)]="accountLocalService.user.dataAccess.password"
+        <input type="text" [(ngModel)]="account.password"
             [ngModelOptions]="{standalone: true}" [disabled]="true" class="form-control" placeholder="">
-    </div>
+    </div> -->
 </div>
 <div class="row mt-2">
     <div class="col-md-6">
@@ -57,12 +57,12 @@
         <div class="list-group">
 
             <span class="list-group-item text-center text-danger"
-                *ngIf="accountLocalService.user.contact?.phoneList?.length === 0">
+                *ngIf="account?.phoneList?.length === 0">
                 Nenhum telefone inserido!
             </span>
 
             <span class="list-group-item sd-list-items"
-                *ngFor="let phone of accountLocalService.user.contact.phoneList">
+                *ngFor="let phone of account?.phoneList">
                 <i class="fa fa-angle-double-right"></i> {{ utilService.phoneMasked(phone.number) }} {{
                 (phone.description) ? '(' + phone.description + ')' : '' }}
                 <span class="sd-pointer sd-float-right">
@@ -80,12 +80,12 @@
         <div class="list-group">
 
             <span class="list-group-item text-center text-danger"
-                *ngIf="accountLocalService.user.contact?.emailList?.length === 0">
+                *ngIf="account?.emailList?.length === 0">
                 Nenhum e-mail inserido!
             </span>
 
             <span class="list-group-item sd-list-items"
-                *ngFor="let email of accountLocalService.user.contact.emailList">
+                *ngFor="let email of account?.emailList">
                 <i class="fa fa-angle-double-right"></i>
                 {{ email.address }} {{ (email.description) ? '(' + email.description + ')' : '' }}
                 <span class="sd-pointer sd-float-right">
@@ -105,11 +105,11 @@
         <div class="list-group">
 
             <span class="list-group-item text-center text-danger"
-                *ngIf="!accountLocalService.user.contact.addressList || accountLocalService.user.contact?.addressList?.length === 0">
+                *ngIf="!account?.addressList || account?.addressList?.length === 0">
                 Nenhum endereço inserido!
             </span>
 
-            <span class="list-group-item sd-list-items" *ngFor="let a of accountLocalService.user.contact.addressList">
+            <span class="list-group-item sd-list-items" *ngFor="let a of account?.addressList">
                 <i class="fa fa-angle-double-right"></i>
                 {{ utilService.addressToString(a) }}
                 <!-- <span class="sd-pointer sd-float-right"> -->
@@ -125,7 +125,7 @@
 <div class="row">
     <div class="col-md-12">
         Descrição:
-        <textarea rows="6" [(ngModel)]="accountLocalService.user.description" [ngModelOptions]="{standalone: true}"
+        <textarea rows="6" [(ngModel)]="account.description" [ngModelOptions]="{standalone: true}"
             [disabled]="true" class="form-control"></textarea>
     </div>
 </div>
