@@ -7,6 +7,7 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
 import { UtilService } from 'src/app/services/util.service';
 import { UserService } from 'src/app/services/user.service';
 import { IUser } from 'src/app/interfaces/User';
+import { EventEmitterService } from 'src/app/services/event-emitter.service';
 
 export interface IUploadComponentOptions {
   isAvatar: boolean;
@@ -74,7 +75,10 @@ export class UploadComponent implements OnInit, OnDestroy {
     .pipe(takeUntil(this.subDestroy$))
     .subscribe((data)=>{
       UtilService.notifying.showSuccess()
+      EventEmitterService.get('is-success').emit();
     });
+
+    this.bsModalRef.hide();
   }
 
   public onClean() {
