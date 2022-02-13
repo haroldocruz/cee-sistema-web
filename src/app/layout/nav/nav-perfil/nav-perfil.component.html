@@ -6,7 +6,7 @@
       <i class="fas fa-user-circle fa-3x" *ngIf="!AuthService.user?.image?.path"></i>
       <img  *ngIf="AuthService.user?.image?.path"
         [src]="'http://localhost:3000/uploads/'+ (AuthService.user?.image?.path)"
-        class="img-circle elevation-2" alt="User Image">
+        class="img-circle elevation-2 sd-pointer sd-image" alt="User Image">
     </a>
     <a class="d-block">
       {{ AuthService.user.name.match(firstName)[1]+' '+ AuthService.user.name.match(lastName)[1] }}
