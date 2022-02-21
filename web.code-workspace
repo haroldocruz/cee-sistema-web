@@ -23,6 +23,7 @@
         "recommendations": [
             "johnpapa.angular2",
             "angular.ng-template",
+            "tomasvergara.vscode-fontawesome-gallery",
             "donjayamanne.githistory",
             "huizhou.githd",
             "mhutchie.git-graph",
@@ -34,7 +35,7 @@
             "pkief.material-icon-theme",
             "steoates.autoimport",
             "wix.vscode-import-cost",
-            "ms-vscode-remote.remote-wsl"
+            "ms-vscode-remote.remote-wsl",
         ]
     }
 }

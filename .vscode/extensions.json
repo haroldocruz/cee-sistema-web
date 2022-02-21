@@ -13,6 +13,7 @@
         "esbenp.prettier-vscode",
         "steoates.autoimport",
         "wix.vscode-import-cost",
-        "ms-vscode-remote.remote-wsl"
+        "ms-vscode-remote.remote-wsl",
+        "tomasvergara.vscode-fontawesome-gallery"
     ]
 }
