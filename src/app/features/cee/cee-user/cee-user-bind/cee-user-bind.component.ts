@@ -181,7 +181,7 @@ export class CeeUserBindComponent implements OnInit, OnDestroy {
       address: this.utilService.addressToString(address),
       phone: (phone != null) ? `${phone.number}` : null,
       email: (email != null) ? `${email.address}` : null,
-      image: 'http://localhost:3000/uploads/' + this.user.image?.path || UtilService.getAvatarByGender(this.user.gender)
+      image: (this.user.image?.path) ? 'http://localhost:3000/uploads/' + this.user.image?.path : UtilService.getAvatarByGender(this.user.gender)
     };
   }
 }
