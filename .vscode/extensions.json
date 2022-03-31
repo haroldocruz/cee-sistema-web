@@ -14,6 +14,9 @@
         "steoates.autoimport",
         "wix.vscode-import-cost",
         "ms-vscode-remote.remote-wsl",
-        "tomasvergara.vscode-fontawesome-gallery"
+        "tomasvergara.vscode-fontawesome-gallery",
+        "hediet.vscode-drawio",
+        "purocean.drawio-preview",
+        "tomwhite007.rename-angular-component"
     ]
 }

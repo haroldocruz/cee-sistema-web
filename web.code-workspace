@@ -5,7 +5,9 @@
         }
     ],
     "settings": {
-        "js/ts.implicitProjectConfig.experimentalDecorators": true
+        "js/ts.implicitProjectConfig.experimentalDecorators": true,
+        "workbench.list.openMode": "doubleClick",
+        "editor.mouseWheelZoom": true
     },
     "launch": {
         "version": "0.2.0",
@@ -36,6 +38,9 @@
             "steoates.autoimport",
             "wix.vscode-import-cost",
             "ms-vscode-remote.remote-wsl",
+            "hediet.vscode-drawio",
+            "purocean.drawio-preview",
+            "tomwhite007.rename-angular-component"
         ]
     }
 }
