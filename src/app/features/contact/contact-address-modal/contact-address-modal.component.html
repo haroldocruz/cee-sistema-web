@@ -71,7 +71,7 @@
                         </span>
 
                         <span class="list-group-item sd-list-items" *ngFor="let address of addressList">
-                            <i class="fa fa-angle-double-right"></i> {{ addressToString(address) }}
+                            <i class="fa fa-angle-double-right"></i> {{ addressToString(address) }} ({{ address.description }})
                             <span class="sd-pointer sd-float-right">
                                 <i class="fas fa-edit" (click)="editAddress(address)"></i>
                                 &nbsp;

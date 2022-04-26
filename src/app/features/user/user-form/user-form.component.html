@@ -31,6 +31,11 @@
                         <input type="text" [(ngModel)]="user.cpf" [ngModelOptions]="{standalone: true}"
                             mask="000.000.000-00" pattern="[0-9]{11}" class="form-control" placeholder="">
                     </div>
+                    <div class="col-md-12 col-lg-8">
+                        Como você deseja ser chamado:
+                        <input type="text" [(ngModel)]="user.socialName" [ngModelOptions]="{standalone: true}"
+                            autocomplete="_" class="form-control" placeholder="Como você deseja ser chamado?">
+                    </div>
                     <!-- <div class="col-md-4">
                         Perfil:
                         <select id="profile" [(ngModel)]="user.dataAccess.profiles" [ngModelOptions]="{standalone: true}" class="form-control">

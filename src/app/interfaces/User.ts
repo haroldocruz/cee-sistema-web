@@ -6,6 +6,7 @@ export interface IUser {
     "_id"?: string;
     "image"?: IUserImage;
     "name"?: string;
+    "socialName"?: string;
     "cpf"?: number;
     "rg"?: IRg;
     "gender"?: string; //enum [masculino, feminino]
@@ -69,6 +70,7 @@ export interface IDataAccess {
 export class User implements IUser {
 
     name: string = "Visitante";
+    socialName: string = "Visitante";
     cpf: number;
     description: string;
 

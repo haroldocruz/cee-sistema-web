@@ -13,40 +13,24 @@ export interface IProfile {
     "name"?: string;
     "description"?: string;
     
-    "_routeList"?: IRoute[];
-    // "_userList"?: IUser[];
-    // "_institutionList"?: IInstitution[];
-    // "scope"?: any;
-    // "group"?: IGroup;
+    "_roleList"?: IRole[];
 
     __metadata?: IMetadata;
 }
 
-interface IRoute {
+export interface IRole {
   "_id": string;
-  "status": string;
+  "status": boolean;
   "urn": string;
   "description": string;
 }
 
-interface IScope {
-  "_id": string;
-  "name": string;
-}
-
-interface IGroup {
-  "_id": string;
-  "name": string;
-}
-
 export class Profile implements IProfile {
 
-    status: true;
-    name = "Anônimo";
-    context = ContextEnum.UNINFORMED;
-    // scope = { _id: "_id", name: "Other"};
-    group = { _id: "_id", name: "Other"};
-    _routeList = [];
+    status: IProfile['status'] = false;
+    name: IProfile['name'] = "";
+    context: IProfile['context'] = ContextEnum.UNINFORMED;
+    _roleList: IProfile['_roleList'] = [];
 
     constructor() { }
 }
