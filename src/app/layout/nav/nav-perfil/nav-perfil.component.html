@@ -9,7 +9,7 @@
         class="img-circle elevation-2 sd-pointer sd-image" alt="User Image">
     </a>
     <a class="d-block">
-      {{ AuthService.user.name.match(firstName)[1]+' '+ AuthService.user.name.match(lastName)[1] }}
+      {{ AuthService.user.socialName }}
     </a>
     <a class="d-block" (click)="openAuthBindListModal()">
       [{{ AuthService.currentBind?.profileName }}]
