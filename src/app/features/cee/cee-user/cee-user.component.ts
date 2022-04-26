@@ -5,6 +5,7 @@ import { CeeLocalService } from '../cee.local.service';
 import { Title } from '@angular/platform-browser';
 import { CeeUserBindComponent } from './cee-user-bind/cee-user-bind.component';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { EventEmitterService } from 'src/app/services/event-emitter.service';
 
 @Component({
   selector: 'app-cee-user',
@@ -34,6 +35,10 @@ export class CeeUserComponent implements OnInit {
     const initialState = { };
     this.bsModalRef = this.modalService.show(CeeUserBindComponent, { id: 1, class: 'modal-lg', initialState });
     this.bsModalRef.content.closeBtnName = 'Close';
+  }
+
+  refresh() {
+    EventEmitterService.get('is-success').emit(true);
   }
 
   typeahead(elem: Element): Observable<any> {

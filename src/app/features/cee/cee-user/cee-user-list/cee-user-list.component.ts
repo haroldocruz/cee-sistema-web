@@ -17,6 +17,9 @@ import { IInstitution, IMember } from 'src/app/interfaces/Institution';
 import { IQueryConfig } from 'src/app/interfaces/IQueryConfig';
 import { IReqBindMember } from 'src/app/interfaces/IReqBindMember';
 import { EventEmitterService } from 'src/app/services/event-emitter.service';
+import { ENV } from 'src/environments/environment';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-cee-user-list',
@@ -25,7 +28,11 @@ import { EventEmitterService } from 'src/app/services/event-emitter.service';
 })
 export class CeeUserListComponent implements OnInit {
 
-  public bsModalRef: BsModalRef
+  private subDestroy$: Subject<boolean> = new Subject();
+  
+  private baseUrl = `${ENV.api.url}`;
+
+  public bsModalRef: BsModalRef;
 
   profileCardList: IProfileCardTemplate[];
   profileCardOptions: IProfileCardOptions;
@@ -40,10 +47,15 @@ export class CeeUserListComponent implements OnInit {
     private notifyService: NotificationService,
   ) { }
 
+  ngOnDestroy(): void {
+    this.subDestroy$.next();
+    this.subDestroy$.complete();
+  }
+
   ngOnInit(): void {
     this.index();
 
-    EventEmitterService.get('is-success').subscribe((isSuccess) => {
+    EventEmitterService.get('is-success').pipe(takeUntil(this.subDestroy$)).subscribe((isSuccess) => {
       if (isSuccess)
         this.index();
     });
@@ -64,7 +76,7 @@ export class CeeUserListComponent implements OnInit {
     };
     const filter = { _id: AuthService.currentBind._institution };
 
-    this.institutionService.filterAll(filter, queryConfig).subscribe((data) => {
+    this.institutionService.filterAll(filter, queryConfig).pipe(takeUntil(this.subDestroy$)).subscribe((data) => {
       console.log("AuthService", AuthService.user);
 
       if (data.statusCode) { this.onFail(data); return; }
@@ -74,7 +86,7 @@ export class CeeUserListComponent implements OnInit {
   }
 
   onFail(data: IStatusMessage) {
-    UtilService.notifying.showError(data.statusMessage, data.statusCode.toString());
+    UtilService.notifying.showError("data.statusMessage", data.statusCode.toString());
   }
 
   openChatDirectModal(user: IProfileCardTemplate) {
@@ -100,7 +112,7 @@ export class CeeUserListComponent implements OnInit {
       userName: profileCard.userName,
     }
 
-    this.institutionService.unbindMember(reqBindMember).subscribe((data) => {
+    this.institutionService.unbindMember(reqBindMember).pipe(takeUntil(this.subDestroy$)).subscribe((data) => {
 
       if (data.statusCode >= 200 && data.statusCode < 300) {
         this.notifyService.showSuccess(data.statusMessage, 'OK');
@@ -141,7 +153,7 @@ export class CeeUserListComponent implements OnInit {
         address: this.utilService.addressToString(address),
         phone: (phone != null) ? `${phone.number}` : '',
         email: (email != null) ? `${email.address}` : '',
-        image: 'http://localhost:3000/uploads/' + user.image?.path || UtilService.getAvatarByGender(user.gender)
+        image: `${this.baseUrl}/uploads/${user.image?.path}` || UtilService.getAvatarByGender(user.gender)
       }
       profileCardList.push(profileCard);
     });
