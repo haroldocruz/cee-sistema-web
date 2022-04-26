@@ -1,0 +1,13 @@
+version: '3.7'
+
+services:
+    nginx-cee-sistema: 
+        container_name: nginx-cee-sistema
+        image: nginx-cee-sistema
+        build: 
+            context: ../../
+            dockerfile: ./.docker/prod/nginx-prod.dockerfile
+        ports:
+            - 8085:80
+
+# docker-compose -f "./docker/prod/docker-compose-prod.yml" up -d --build
