@@ -34,7 +34,7 @@ export class ProcessListComponent implements OnInit {
 
   public toViewProcessList: toViewProcessList[];
 
-  public filter: string;
+  public search: string;
   public filterAct: IAct;
   public filterRegional: IRegional;
 
@@ -52,7 +52,7 @@ export class ProcessListComponent implements OnInit {
       this.filterRegional = selected;
     });
     EventEmitterService.get('ProcessFilterComponent.filter').subscribe((selected) => {
-      this.filter = selected;
+      this.search = selected;
     });
   }
 

@@ -2,7 +2,7 @@
     <div class="col-12">
         <div class="info-box btn btn-default text-left" routerLink="view" [queryParams]="{ processId: item._id }"
             *ngFor="let item of toViewProcessList 
-            | filter:[{ field: 'institutionName', value: filter}]
+            | filter:[{ field: 'institutionName', value: search}]
             | filter:[{ field: 'regionalName', value: filterRegional?.name}]
             | filter:[{ field: 'actName', value: filterAct?.name}]">
         <!-- <div class="info-box btn btn-default text-left" routerLink="view" [queryParams]="{ processId: item._id }"
