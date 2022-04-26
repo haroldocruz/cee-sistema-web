@@ -1,121 +1,140 @@
 <!-- <form [formGroup]="checkoutForm"> -->
 <form>
-  <div class="card-header">
-    <h4 class="card-title" id="userModalLabel">
-      <span *ngIf="!profile?._id">Inserir</span>
-      <span *ngIf="profile?._id">Alterar</span>
-    </h4>
+  <div class="card">
+    <div class="card-header">
+      <h4 class="card-title" id="userModalLabel">
+        <span *ngIf="!profile?._id">Inserir</span>
+        <span *ngIf="profile?._id">Alterar</span>
+      </h4>
 
-    <div class="card-tools">
-      <button type="button" class="btn btn-tool" data-card-widget="maximize">
-        <i class="fas fa-expand"></i>
-      </button>
-      &nbsp;
-      <button type="button" class="close" (click)="bsModalRef.hide()">
-        <span>&times;</span>
-      </button>
-    </div>
-
-  </div>
-
-  <div class="card-body">
-    <div class="container-fluid" *ngIf="isLoading">
-      ...LOADING
-    </div>
-    <div class="container-fluid" *ngIf="!isLoading">
-      <div class="row">
-
-
-        <div class="col-12">
-          <div class="card card-primary card-outline card-outline-tabs">
-            <div class="card-header p-0 border-bottom-0">
-              <ul class="nav nav-tabs nav-fill" id="custom-tabs-four-tab" role="tablist">
-                <li class="nav-item">
-                  <a class="nav-link active" id="tabs-main-tab" data-bs-toggle="pill" href="#tabs-main" role="tab"
-                    aria-controls="tabs-main" aria-selected="true">Principal</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" id="tabs-roles-tab" data-bs-toggle="pill" href="#tabs-roles" role="tab"
-                    aria-controls="tabs-roles" aria-selected="false">Regras</a>
-                </li>
-              </ul>
-            </div>
-            <div class="card-body">
-              <div class="tab-content" id="tabs-main-tabContent">
-                <div class="tab-pane fade active show" id="tabs-main" role="tabpanel" aria-labelledby="tabs-main-tab">
-
-                  <div class="row">
-                    <div class="col-md-6 col-lg-4">
-                      Contexto:
-                      <select id="context" [(ngModel)]="profile.context" [ngModelOptions]="{standalone: true}"
-                        class="form-control">
-                        <option [ngValue]="c" *ngFor="let c of contextList">
-                          {{ c }}
-                        </option>
-                      </select>
-                    </div>
-                    <div class="col-md-6 col-lg-4">
-                      Status:
-                      <select id="status" [(ngModel)]="profile.status" [ngModelOptions]="{standalone: true}"
-                        class="form-control">
-                        <option value="true">Ativo</option>
-                        <option value="false">Inativo</option>
-                      </select>
-                    </div>
-                    <div class="col-12">
-                      Nome:
-                      <input type="text" [(ngModel)]="profile.name" [ngModelOptions]="{standalone: true}"
-                        autocomplete="_" class="form-control" placeholder="">
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-12">
-                      Descrição:
-                      <textarea rows="6" [(ngModel)]="profile.description" [ngModelOptions]="{standalone: true}"
-                        class="form-control"></textarea>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="tab-pane fade" id="tabs-roles" role="tabpanel" aria-labelledby="tabs-roles-tab">
-                  <div class="row">
-
-                  </div>
-                </div>
-
-                <div class="tab-pane fade" id="custom-tabs-four-contact" role="tabpanel"
-                  aria-labelledby="custom-tabs-four-contact-tab">
-                  <div class="row mt-2">
-                  </div>
-                </div>
-
-                <div class="tab-pane fade" id="custom-tabs-four-address" role="tabpanel"
-                  aria-labelledby="custom-tabs-four-address-tab">
-                  <div class="row mt-2">
-                  </div>
-
-                </div>
-                <div class="tab-pane fade" id="custom-tabs-four-legalact" role="tabpanel"
-                  aria-labelledby="custom-tabs-four-legalact-tab">
-                  <div class="row mt-2">
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- /.card -->
-          </div>
-        </div>
-
+      <div class="card-tools">
+        <button type="button" class="btn btn-tool" data-card-widget="maximize">
+          <i class="fas fa-expand"></i>
+        </button>
+        &nbsp;
+        <!-- <button type="button" class="close" (click)="bsModalRef.hide()">
+          <span>&times;</span>
+        </button> -->
       </div>
 
     </div>
-  </div>
 
-  <div class="modal-footer">
-    <!-- <input type="hidden" (ngModel)="isDataAccess = false"> -->
-    <button type="reset" class="btn btn-default" *ngIf="!profile?._id">Limpar</button>
-    <button type="button" class="btn btn-default" *ngIf="bsModalRef" (click)="bsModalRef.hide()">Fechar</button>
-    <input type="submit" class="btn btn-primary" value="Salvar" (click)="create()" *ngIf="!profile?._id">
-    <input type="submit" class="btn btn-primary" value="Atualizar" (click)="update()" *ngIf="profile?._id">
+    <div class="card-body">
+      <div class="container-fluid" *ngIf="isLoading">
+        ...LOADING
+      </div>
+      <div class="container-fluid" *ngIf="!isLoading">
+        <div class="row">
+
+
+          <div class="col-12">
+            <div class="card card-primary card-outline card-outline-tabs">
+              <div class="card-header p-0 border-bottom-0">
+                <ul class="nav nav-tabs nav-fill" id="custom-tabs-four-tab" role="tablist">
+                  <li class="nav-item">
+                    <a class="nav-link active" id="tabs-main-tab" data-bs-toggle="pill" href="#tabs-main" role="tab"
+                      aria-controls="tabs-main" aria-selected="true">Principal</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" id="tabs-roles-tab" data-bs-toggle="pill" href="#tabs-roles" role="tab"
+                      aria-controls="tabs-roles" aria-selected="false">Regras</a>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="card-body">
+                <div class="tab-content" id="tabs-main-tabContent">
+                  <div class="tab-pane fade active show" id="tabs-main" role="tabpanel" aria-labelledby="tabs-main-tab">
+
+                    <div class="row">
+                      <div class="col-md-6 col-lg-4">
+                        Contexto:
+                        <select id="context" [(ngModel)]="profile.context" [ngModelOptions]="{standalone: true}"
+                          class="form-control">
+                          <option [ngValue]="c" *ngFor="let c of contextList">
+                            {{ c }}
+                          </option>
+                        </select>
+                      </div>
+                      <div class="col-md-6 col-lg-4">
+                        Status:
+                        <select id="status" [(ngModel)]="profile.status" [ngModelOptions]="{standalone: true}"
+                          class="form-control">
+                          <option value="true">Ativo</option>
+                          <option value="false">Inativo</option>
+                        </select>
+                      </div>
+                      <div class="col-12">
+                        Nome:
+                        <input type="text" [(ngModel)]="profile.name" [ngModelOptions]="{standalone: true}"
+                          autocomplete="_" class="form-control" placeholder="">
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
+                        Descrição:
+                        <textarea rows="6" [(ngModel)]="profile.description" [ngModelOptions]="{standalone: true}"
+                          class="form-control"></textarea>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="tab-pane fade" id="tabs-roles" role="tabpanel" aria-labelledby="tabs-roles-tab">
+                    <div class="row">
+
+                      <ul class="list-group">
+
+                        <li class="list-group-item text-center">
+                          <span class="text-bold">(1) CONTEXTO: (2) ROTA: (3) TAREFA</span>
+                        </li>
+
+                        <li class="list-seperator"></li>
+
+                        <li class="list-group-item list-group-item-action list-group-item-{{ r.__class }}"
+                        *ngFor="let i = index; let r of roleList" (click)="toggleStatus(r)">
+                          <span class="text-bold sd-pointer">{{ r.description }}</span>
+                          <i *ngIf="r.__flag" class="fas fa-check-circle text-{{ r.__class }} float-right"></i>
+                          <i *ngIf="!r.__flag" class="fas fa-times-circle text-{{ r.__class }} float-right"></i>
+                        </li>
+
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div class="tab-pane fade" id="custom-tabs-four-contact" role="tabpanel"
+                    aria-labelledby="custom-tabs-four-contact-tab">
+                    <div class="row mt-2">
+                    </div>
+                  </div>
+
+                  <div class="tab-pane fade" id="custom-tabs-four-address" role="tabpanel"
+                    aria-labelledby="custom-tabs-four-address-tab">
+                    <div class="row mt-2">
+                    </div>
+
+                  </div>
+                  <div class="tab-pane fade" id="custom-tabs-four-legalact" role="tabpanel"
+                    aria-labelledby="custom-tabs-four-legalact-tab">
+                    <div class="row mt-2">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- /.card -->
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <!-- <input type="hidden" (ngModel)="isDataAccess = false"> -->
+      <button type="reset" class="btn btn-default" *ngIf="!profile?._id">Limpar</button>
+      <!-- <button type="button" class="btn btn-default" *ngIf="bsModalRef" (click)="bsModalRef.hide()">Fechar</button> -->
+      <input type="submit" class="btn btn-primary" value="Salvar" (click)="create()" *ngIf="!profile?._id">
+      <input type="submit" class="btn btn-primary" value="Atualizar" (click)="update()" *ngIf="profile?._id">
+    </div>
   </div>
 </form>
