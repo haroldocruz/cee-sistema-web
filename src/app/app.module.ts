@@ -30,13 +30,16 @@ import { NgxMaskModule } from "ngx-mask";
 import { RegionalListComponent } from './directives/regional-list/regional-list.component';
 import { ActListComponent } from './directives/act-list/act-list.component';
 import { Interceptor } from "./app.interceptor";
+import { CourseModule } from "./features/course/course.module";
+import { AnyEnumComponent } from "./directives/any-enum/any-enum.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     FilterButtonsDirective,
     RegionalListComponent,
-    ActListComponent
+    ActListComponent,
+    AnyEnumComponent
   ],
   imports: [
     /*ANGULAR*/
@@ -57,6 +60,7 @@ import { Interceptor } from "./app.interceptor";
     CeeModule,
     ChatModule,
     ContactModule,
+    // CourseModule,
     GroupModule,
     HomeModule,
     InstitutionModule,

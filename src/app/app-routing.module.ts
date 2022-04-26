@@ -36,6 +36,7 @@ const routes: Routes = [
       { path: "process", loadChildren: () => import("./features/process/process.module").then(m => m.ProcessModule), canActivate: [ AuthGuard ] },
       { path: "profile", loadChildren: () => import("./features/profile/profile.module").then(m => m.ProfileModule), canActivate: [ AuthGuard ] },
       { path: "user", loadChildren: () => import("./features/user/user.module").then(m => m.UserModule), canActivate: [ AuthGuard ] },
+      { path: "course", loadChildren: () => import("./features/course/course.module").then(m => m.CourseModule), canActivate: [ AuthGuard ] },
       { path: "sorteador", loadChildren: () => import("./features/others/sorteador/sorteador.module").then(m => m.SorteadorModule) },
       CeeRouting,
       ChatRouting,
