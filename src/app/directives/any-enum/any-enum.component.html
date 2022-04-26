@@ -1,0 +1,46 @@
+<div class="card card-solid">
+
+    <div class="card-header pb-0">
+        <div class="row">
+            <h4>{{ title }}:</h4>
+        </div>
+    </div>
+
+    <div class="card-body pb-0">
+        <div class="row">
+            <div class="col-12">
+
+                <div class="info-box btn btn-default text-left">
+
+                    <div class="info-box-content" (click)="selected('')">
+                        <span class="info-box-text">
+                            {{ 'Todos' }}
+                        </span>
+                        <span class="info-box-text small">
+                            {{ "Todos" }}
+                        </span>
+                    </div>
+                </div>
+
+                <div class="info-box btn btn-default text-left"
+                    *ngFor="let item of anyEnum">
+
+                    <div class="info-box-content" (click)="selected(item)">
+                        <span class="info-box-text">
+                            {{ item || 'Todos' }}
+                        </span>
+                        <span class="info-box-text small">
+                            {{ item }}
+                        </span>
+                    </div>
+                </div>
+                <!-- /.info-box -->
+
+            </div>
+            <!-- /.col -->
+        </div>
+    </div>
+    <div class="card-footer text-right">
+        <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">Fechar</button>
+    </div>
+</div>
