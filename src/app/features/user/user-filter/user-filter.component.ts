@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { IUser, User } from 'src/app/interfaces/User';
 import { EventEmitterService } from 'src/app/services/event-emitter.service';
@@ -16,6 +16,7 @@ export class UserFilterComponent implements OnInit {
   public filtro: string;
   bsModalRef: BsModalRef;
 
+  search;
   searchTimeout;
 
   constructor(
@@ -32,10 +33,10 @@ export class UserFilterComponent implements OnInit {
     // this.bsModalRef.content.closeBtnName = 'Close';
   }
 
-  changeSearch(search: string): void {
+  changeSearch(): void {
     clearTimeout(this.searchTimeout);
     this.searchTimeout = setTimeout(() => {
-      EventEmitterService.get('UserFilterComponent.search').emit(search);
+      EventEmitterService.get('UserFilterComponent.search').emit(this.search);
     }, 600);
   }
 
