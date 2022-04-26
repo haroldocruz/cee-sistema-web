@@ -1,4 +1,5 @@
 import { Route } from '@angular/router';
+import { AuthGuard } from 'src/app/guards/auth.guard';
 import { ChatDirectModalComponent } from '../chat/chat-direct-modal/chat-direct-modal.component';
 import { ChatComponent } from '../chat/chat.component';
 import { CeeDashboardComponent } from './cee-dashboard/cee-dashboard.component';
@@ -17,14 +18,16 @@ export const CeeRouting: Route = {
       path: "home", component: CeeHomeComponent,
       // canActivate: [AuthGuard, PermissionGuard]
     },
-    { path: "document", loadChildren: () => import("./../document/document.module").then(m => m.DocumentModule) },
-    { path: "process", loadChildren: () => import("./../process/process.module").then(m => m.ProcessModule) },
-    // {
+    { path: "document", canActivate: [ AuthGuard ], loadChildren: () => import("./../document/document.module").then(m => m.DocumentModule) },
+    { path: "instrument", canActivate: [ AuthGuard ], loadChildren: () => import("./instrument/instrument.module").then(m => m.InstrumentModule) },
+    { path: "process", canActivate: [ AuthGuard ], loadChildren: () => import("./../process/process.module").then(m => m.ProcessModule) },
+    // {import { AuthGuard } from '../../guards/auth.guard';
+
     //   path: "document", component: CeeDocumentComponent,
     //   // canActivate: [AuthGuard, PermissionGuard]
     // },
     {
-      path: "user", component: CeeUserComponent,
+      path: "user", canActivate: [ AuthGuard ], component: CeeUserComponent,
       // canActivate: [AuthGuard, PermissionGuard],
       // children: [
       // ]

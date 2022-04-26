@@ -7,6 +7,8 @@ import { Observable } from 'rxjs';
 import { ENV } from 'src/environments/environment';
 import { IRoute } from '../interfaces/IRoute';
 import { IBindInUser } from '../interfaces/IBindInUser';
+import { IQueryConfig } from 'src/app/interfaces/IQueryConfig';
+import { IStatusMessage } from 'src/app/interfaces/IStatusMessage';
 
 interface IUserDataLogin {
   username?: string;
@@ -86,11 +88,17 @@ export class AuthService {
   //   return //TODO implement
   // }
 
-  profile(id: string): void {
-    const url = `${this.baseUrl}/${id}`;
-    this.http.get<IUser>(url).subscribe((user) => {
-      AuthService.user = user;
-    });
-  }
+  // profile(id: string): void {
+  //   const url = `${this.baseUrl}/${id}`;
+  //   this.http.get<IUser>(url).subscribe((user) => {
+  //     AuthService.user = user;
+  //   });
+  // }
+  
+  profile(id: string, queryConfig: IQueryConfig): Observable<IProfile & IStatusMessage> {
+    const url = `${this.baseUrl}`;
+    const filter = { filter: { _id: id }, queryConfig }
+    return this.http.post<IProfile & IStatusMessage>(url, filter, { headers: AuthService.headers() });
+}
 
 }

@@ -3,6 +3,13 @@ import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
+interface IRole {
+  _id: string;
+  status: boolean;
+  urn: string;
+  description: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -18,6 +25,21 @@ export class PermissionGuard implements CanActivate {
     "/institution/procurator": ["Auxiliar"],
     "/institution/course": ["Auxiliar"]
   }
+
+  private roles: IRole[] = [
+    {
+        _id: "1",
+        status: true,
+        urn: "GET/contact",
+        description: "N/A: Contatos: Acessar Rota"
+    },
+    {
+        _id: "2",
+        status: false,
+        urn: "GET/account/personal",
+        description: "N/A: Conta: Acessar Rota"
+    },
+  ]
 
   constructor(
     private router: Router

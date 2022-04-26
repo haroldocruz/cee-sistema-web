@@ -31,11 +31,11 @@ const routes: Routes = [
           { path: "atribuicoes", component: HomeAssignmentComponent }
         ]
       },
-      { path: "account", loadChildren: () => import("./features/account/account.module").then(m => m.AccountModule) },
-      { path: "document", loadChildren: () => import("./features/document/document.module").then(m => m.DocumentModule) },
-      { path: "process", loadChildren: () => import("./features/process/process.module").then(m => m.ProcessModule) },
-      { path: "profile", loadChildren: () => import("./features/profile/profile.module").then(m => m.ProfileModule) },
-      { path: "user", loadChildren: () => import("./features/user/user.module").then(m => m.UserModule) },
+      { path: "account", loadChildren: () => import("./features/account/account.module").then(m => m.AccountModule), canActivate: [ AuthGuard ] },
+      { path: "document", loadChildren: () => import("./features/document/document.module").then(m => m.DocumentModule), canActivate: [ AuthGuard ] },
+      { path: "process", loadChildren: () => import("./features/process/process.module").then(m => m.ProcessModule), canActivate: [ AuthGuard ] },
+      { path: "profile", loadChildren: () => import("./features/profile/profile.module").then(m => m.ProfileModule), canActivate: [ AuthGuard ] },
+      { path: "user", loadChildren: () => import("./features/user/user.module").then(m => m.UserModule), canActivate: [ AuthGuard ] },
       { path: "sorteador", loadChildren: () => import("./features/others/sorteador/sorteador.module").then(m => m.SorteadorModule) },
       CeeRouting,
       ChatRouting,

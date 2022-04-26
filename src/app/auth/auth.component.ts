@@ -1,3 +1,4 @@
+import { UserService } from 'src/app/services/user.service';
 import { IStatusMessage } from './../interfaces/IStatusMessage';
 import { NotificationService } from './../services/notification.service';
 import { Router } from '@angular/router';
@@ -6,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
 import { IUser } from '../interfaces/User';
 import { ContextEnum } from '../interfaces/enumerations/ContextEnum';
 import { IUserDataLogin } from '../services/user.service';
+import { IBindInUser } from 'src/app/interfaces/IBindInUser';
+import { IQueryConfig } from 'src/app/interfaces/IQueryConfig';
+import { IProfile } from 'src/app/interfaces/Profile';
 
 @Component({
   selector: 'app-auth',
@@ -21,6 +25,7 @@ export class AuthComponent implements OnInit {
   public isRemember: boolean = true;
 
   constructor(
+    private mockUserService: UserService,
     private router: Router,
     private authService: AuthService,
     private notifyService: NotificationService
@@ -28,7 +33,7 @@ export class AuthComponent implements OnInit {
 
   ngOnInit(): void {
     this.userdataLogin = { username: '', password: '' };
-    this.mockUserindex();
+    this.mockUserIndex()
   }
 
   submit() {
@@ -49,11 +54,25 @@ export class AuthComponent implements OnInit {
     AuthService.currentBind = user.loginInfo.currentBind;
     (this.isRemember) ? localStorage.setItem("user", JSON.stringify(user)) : sessionStorage.setItem("user", JSON.stringify(user));
     this.redirectHandle();
+
+    this.getProfileDetails(AuthService.currentBind);
   }
 
   onFail(data: IStatusMessage) {
     console.log(data)
     this.notifyService.showWarning(data.statusMessage, `Ops! ${data.statusCode}`);
+  }
+
+  getProfileDetails(currentBind: IBindInUser){
+    const queryConfig: IQueryConfig = { populateList: [{path: "_roleList", select: []}]};
+    
+    this.authService.profile(currentBind._profile, queryConfig).subscribe(observer => {
+      if(observer.statusCode)
+        //TODO: implemnetar se o servidor não retornar o perfil
+        return;
+
+      AuthService.currentBind._profile = <IProfile & string> <unknown> observer;
+    })
   }
 
   redirectHandle() {
@@ -73,7 +92,15 @@ export class AuthComponent implements OnInit {
     }
   }
 
-  mockUserindex() {
+  mockUserIndex() {
+    // this.mockUserService.read().subscribe((data: IUser[]) => {
+      
+    //   data.map((e)=>{
+    //     console.log("e", e);
+
+    //     this.mockUserList.push({ mockName: e.socialName, password: e.dataAccess.password, username: e.cpf+'' });
+    //   })
+    // })
     this.mockUserList = [
       { mockName: "Super Usuário", username: "12345678909", password: "12345678909" },
       { mockName: "Administrador", username: "01234567890", password: "01234567890" }
