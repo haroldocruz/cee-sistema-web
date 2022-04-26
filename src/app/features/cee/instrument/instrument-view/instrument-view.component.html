@@ -1,0 +1,46 @@
+<h3><i class="fab fa-buffer"></i> {{ instrumentTemplate.title }}</h3>
+
+<div class="row">
+    <div class="col-12">
+        <blockquote class="quote-info" *ngIf="instrumentTemplate.description">
+            Descrição: {{ instrumentTemplate.description}}
+        </blockquote>
+    </div>
+</div>
+
+<div class="row">
+
+    <div class="col-12" *ngFor="let idx = index; let dimension of instrumentTemplate._dimensionList | sortBy:'asc':'orderCode'">
+<br><br>
+        <h5><i class="fab fa-buffer"></i> Dimensão {{ dimension?.orderCode }}: {{ dimension?.title }}</h5>
+
+        <div class="accordion" id="id-{{ dimension._id }}">
+            <div style="padding: 10px;" class="accordion-item card-info card-outline"
+            *ngFor="let i = index; let indicator of dimension._indicatorList
+                | sortBy: 'asc':'_dimension.orderCode'
+                | filter:[{ field: 'title', value: filter}]">
+
+                <div class="accordion-header sd-pointer" id="{{ indicator._id }}">
+                    <div class="info-box-text" data-bs-toggle="collapse" attr.data-bs-target="#id-{{ indicator._id }}"
+                        aria-expanded="false" attr.aria-controls="id-{{ indicator._id }}">
+                        <span>
+                            {{ dimension?.orderCode +'.'+ indicator.orderCode +' - '+ indicator.title }}
+                        </span>
+                        <br>
+                        <span class="small">
+                            <i>{{ indicator.description }}</i>
+                        </span>
+                    </div>
+                </div>
+                <div id="id-{{ indicator._id }}" class="accordion-collapse collapse" attr.aria-labelledby="{{ indicator._id }}"
+                    attr.data-bs-parent="#id-{{ dimension._id }}">
+                    <hr>
+                    <div class="accordion-body">
+                        <span class="list-group-item" *ngFor="let i2 = index; let c of indicator._criteryList">
+                            {{ (i2+1) +' - '+ c.title }}
+                        </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

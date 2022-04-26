@@ -1,0 +1,19 @@
+<div class="row">
+    <div class="col-12">
+        <div class="info-box btn btn-default text-left" (click)="openDimensionFormModal(item)"
+            *ngFor="let item of toViewDimensionList 
+            | sortBy: 'asc':'title'
+            | filter:[{ field: 'title', value: filter}]">
+
+            <div class="info-box-content">
+                <span class="info-box-text">
+                    {{ item.title }}
+                </span>
+                <span class="info-box-text small">
+                    <i>{{ item.description }}</i>
+                </span>
+            </div>
+
+        </div>
+    </div>
+</div>
