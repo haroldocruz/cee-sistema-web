@@ -21,6 +21,13 @@
             &nbsp;
             <span>Iniciar um processo</span>
         </button>
+        &nbsp;
+        <!-- * Button -->
+        <button class="col col-md-auto btn btn-info" style="min-width: 200px;" (click)="openProcessFormModal()">
+            <i class="fab fa-buffer"></i>
+            &nbsp;
+            <span>Visualizar Cursos</span>
+        </button>
 
     </div>
 </div>
@@ -71,9 +78,9 @@
             <div class="col-sm-4">
                 <div class="description-block">
                     <h5 class="description-header">
-                        {{ iView.zipCodeAddressMain || 'Não informado' }}
+                        {{ iView.cnpj | mask:"00.000.000/0000-00" }}
                     </h5>
-                    <span class="description-text">CEP</span>
+                    <span class="description-text">CNPJ</span>
                 </div>
                 <!-- /.description-block -->
             </div>
@@ -291,7 +298,7 @@
                                             {{ util.addressToString(a) }}
                                         </span>
                                         <span class="small text-danger">
-                                            (Sede)
+                                            ({{ a.description }})
                                         </span>
                                     </span>
 
