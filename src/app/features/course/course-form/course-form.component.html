@@ -1,1 +1,21 @@
-<p>course-form works!</p>
+
+<form>
+    <div class="card">
+        <div class="card-header">
+            
+            <h4 class="d-none d-print-block text-center">
+                Formulário de inserção e alteração de dados do curso
+            </h4>
+
+            <h4 class="card-title d-print-none" id="userModalLabel">
+                <span *ngIf="!course?._id">Inserir</span>
+                <span *ngIf="course?._id">Alterar</span>
+            </h4>
+
+        </div>
+        <div class="card-body">
+            <label>Nome:</label>
+            <input type="text" class="form-control">
+        </div>
+    </div>
+</form>

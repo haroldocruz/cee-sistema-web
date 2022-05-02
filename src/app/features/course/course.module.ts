@@ -7,6 +7,7 @@ import { CourseComponent } from './course.component';
 import { CourseFilterComponent } from './course-filter/course-filter.component';
 import { CourseRoutingModule } from './course-routing.module';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -21,6 +22,7 @@ import { FormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     FormsModule,
+    RouterModule,
     CourseRoutingModule
   ]
 })
