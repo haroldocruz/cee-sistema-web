@@ -17,6 +17,8 @@
         "tomasvergara.vscode-fontawesome-gallery",
         "hediet.vscode-drawio",
         "purocean.drawio-preview",
-        "tomwhite007.rename-angular-component"
+        "tomwhite007.rename-angular-component",
+        "aaron-bond.better-comments",
+        "Janne252.fontawesome-autocomplete"
     ]
 }
