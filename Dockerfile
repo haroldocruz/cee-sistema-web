@@ -1,4 +1,4 @@
-FROM node:lts as node-build
+FROM node:14 as node-build
 LABEL author="Haroldo Cruz"
 WORKDIR /app
 COPY package.json package-lock.json ./
