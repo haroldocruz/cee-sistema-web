@@ -1,28 +1,25 @@
 import { GroupComponent } from './features/group/group.component';
-import { PermissionGuard } from './guards/permission.guard';
-import { AuthGuard } from './guards/auth.guard';
-import { AuthComponent } from './auth/auth.component';
-import { HomeWelcomeComponent } from './features/home/home-welcome/home-welcome.component';
 import { HomeAssignmentComponent } from './features/home/home-assignment/home-assignment.component';
-import { SorteadorComponent } from './features/others/sorteador/sorteador.component';
+import { HomeWelcomeComponent } from './features/home/home-welcome/home-welcome.component';
+import { AuthGuard } from './guards/auth.guard';
 
-import { InstitutionRouting } from './features/institution/institution.routing.module';
 import { CeeRouting } from './features/cee/cee.routing.module';
-import { SorteadorRouting } from './features/others/sorteador/sorteador-routing.module';
+import { InstitutionRouting } from './features/institution/institution.routing.module';
 
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
-import { LayoutComponent } from './layout/layout.component';
-import { HomeComponent } from './features/home/home.component';
 import { ChatRouting } from './features/chat/chat.routing.module';
+import { HomeComponent } from './features/home/home.component';
+import { LayoutFullComponent } from './layout/layout-full/layout-full.component';
+import { LayoutTopFooterComponent } from './layout/layout-top-footer/layout-top-footer.component';
 
 const routes: Routes = [
     { path: "", redirectTo: "home", pathMatch: "full" },
     { path: "auth", loadChildren: () => import("./auth/auth.module").then(m => m.AuthModule) },
     // { path: "login", component: AuthComponent },
     {
-        path: "", component: LayoutComponent, children: [
+        path: "", component: LayoutFullComponent, children: [
             { path: "home", redirectTo: "/home/boas-vindas", pathMatch: "full" },
             {
                 path: "home", component: HomeComponent,
@@ -42,8 +39,12 @@ const routes: Routes = [
             ChatRouting,
             InstitutionRouting,
             { path: "group", component: GroupComponent },
+        ]
+    }, {
+        path: "", component: LayoutFullComponent, children: [
             { path: "avaliadores", loadChildren: () => import("./features/others/baesb/baesb.module").then(m => m.BaesbModule) }
         ]
+
     }
 ];
 
