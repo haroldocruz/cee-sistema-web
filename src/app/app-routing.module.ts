@@ -18,38 +18,39 @@ import { HomeComponent } from './features/home/home.component';
 import { ChatRouting } from './features/chat/chat.routing.module';
 
 const routes: Routes = [
-  { path: "", redirectTo: "home", pathMatch: "full" },
-  { path: "auth", loadChildren: () => import("./auth/auth.module").then(m => m.AuthModule) },
-  // { path: "login", component: AuthComponent },
-  {
-    path: "", component: LayoutComponent, children: [
-      { path: "home", redirectTo: "/home/boas-vindas", pathMatch: "full" },
-      {
-        path: "home", component: HomeComponent,
-        children: [
-          { path: "boas-vindas", component: HomeWelcomeComponent },
-          { path: "atribuicoes", component: HomeAssignmentComponent }
+    { path: "", redirectTo: "home", pathMatch: "full" },
+    { path: "auth", loadChildren: () => import("./auth/auth.module").then(m => m.AuthModule) },
+    // { path: "login", component: AuthComponent },
+    {
+        path: "", component: LayoutComponent, children: [
+            { path: "home", redirectTo: "/home/boas-vindas", pathMatch: "full" },
+            {
+                path: "home", component: HomeComponent,
+                children: [
+                    { path: "boas-vindas", component: HomeWelcomeComponent },
+                    { path: "atribuicoes", component: HomeAssignmentComponent }
+                ]
+            },
+            { path: "account", loadChildren: () => import("./features/account/account.module").then(m => m.AccountModule), canActivate: [AuthGuard] },
+            { path: "document", loadChildren: () => import("./features/document/document.module").then(m => m.DocumentModule), canActivate: [AuthGuard] },
+            { path: "process", loadChildren: () => import("./features/process/process.module").then(m => m.ProcessModule), canActivate: [AuthGuard] },
+            { path: "profile", loadChildren: () => import("./features/profile/profile.module").then(m => m.ProfileModule), canActivate: [AuthGuard] },
+            { path: "user", loadChildren: () => import("./features/user/user.module").then(m => m.UserModule), canActivate: [AuthGuard] },
+            { path: "course", loadChildren: () => import("./features/course/course.module").then(m => m.CourseModule), canActivate: [AuthGuard] },
+            { path: "sorteador", loadChildren: () => import("./features/others/sorteador/sorteador.module").then(m => m.SorteadorModule) },
+            CeeRouting,
+            ChatRouting,
+            InstitutionRouting,
+            { path: "group", component: GroupComponent },
+            { path: "avaliadores", loadChildren: () => import("./features/others/baesb/baesb.module").then(m => m.BaesbModule) }
         ]
-      },
-      { path: "account", loadChildren: () => import("./features/account/account.module").then(m => m.AccountModule), canActivate: [ AuthGuard ] },
-      { path: "document", loadChildren: () => import("./features/document/document.module").then(m => m.DocumentModule), canActivate: [ AuthGuard ] },
-      { path: "process", loadChildren: () => import("./features/process/process.module").then(m => m.ProcessModule), canActivate: [ AuthGuard ] },
-      { path: "profile", loadChildren: () => import("./features/profile/profile.module").then(m => m.ProfileModule), canActivate: [ AuthGuard ] },
-      { path: "user", loadChildren: () => import("./features/user/user.module").then(m => m.UserModule), canActivate: [ AuthGuard ] },
-      { path: "course", loadChildren: () => import("./features/course/course.module").then(m => m.CourseModule), canActivate: [ AuthGuard ] },
-      { path: "sorteador", loadChildren: () => import("./features/others/sorteador/sorteador.module").then(m => m.SorteadorModule) },
-      CeeRouting,
-      ChatRouting,
-      InstitutionRouting,
-      { path: "group", component: GroupComponent },
-    ]
-  }
+    }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes,
-    // { onSameUrlNavigation: 'reload' }
-  )],
-  exports: [RouterModule]
+    imports: [RouterModule.forRoot(routes,
+        // { onSameUrlNavigation: 'reload' }
+    )],
+    exports: [RouterModule]
 })
 export class AppRoutingModule { }

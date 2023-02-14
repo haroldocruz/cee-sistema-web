@@ -42,7 +42,9 @@
             "purocean.drawio-preview",
             "tomwhite007.rename-angular-component",
             "aaron-bond.better-comments",
-            "Janne252.fontawesome-autocomplete"
+            "janne252.fontawesome-autocomplete",
+            "napthedevhcj.console-flash",
+            "johnpapa.vscode-peacock"
         ]
     }
 }

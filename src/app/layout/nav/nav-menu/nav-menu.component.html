@@ -1,34 +1,44 @@
 <!-- * Sidebar Menu -->
 <nav class="mt-2">
 
-  <ul class="nav nav-pills nav-sidebar nav-legacy flex-column" data-widget="treeview" role="menu">
+    <ul class="nav nav-pills nav-sidebar nav-legacy flex-column" data-widget="treeview" role="menu">
 
-    <li class="nav-item sd-bb">&nbsp;</li>
-    <!-- <li class="nav-item text-white text-center text-monospace">ANÔNIMO</li> -->
+        <li class="nav-item sd-bb">&nbsp;</li>
+        <!-- <li class="nav-item text-white text-center text-monospace">ANÔNIMO</li> -->
 
-    <li class="nav-item">
-      <a class="nav-link" routerLink="/home/atribuicoes">
-        <i class="nav-icon fas fa-book-open"></i>
-        O CEE/TO
-        <small class="right"><i class="far fa-clock text-info"></i></small>
-      </a>
-    </li>
+        <li class="nav-item">
+            <a class="nav-link" routerLink="/home/atribuicoes">
+                <i class="nav-icon fas fa-book-open"></i>
+                O CEE/TO
+                <!-- <small class="right"><i class="far fa-clock text-info"></i></small> -->
+            </a>
+        </li>
 
-    <!-- <li class="nav-item">
+        <li class="nav-item">
+            <a class="nav-link" routerLink="/avaliadores/inscricao">
+                <i class="nav-icon fas fa-book-open"></i>
+                Inscrição BAES/BAEB
+            </a>
+        </li>
+
+        <!-- <li class="nav-item">
       <a class="nav-link" routerLink="/chat"><i class="nav-icon fas fa-comments"></i>
         Chat/Mensagens
         <small class="right"><i class="far fa-clock text-warning"></i></small>
       </a>
     </li> -->
 
-  </ul>
+    </ul>
 
-  <app-nav-menu-cee *ngIf="AuthService.currentBind?.context == contextEnum.CEE || AuthService.currentBind?.context == contextEnum.SYSTEM"></app-nav-menu-cee>
-  <app-nav-menu-commission *ngIf="AuthService.currentBind?.context == contextEnum.COMMISSION"></app-nav-menu-commission>
-  <app-nav-menu-institution *ngIf="AuthService.currentBind?.context == contextEnum.IE_UE"></app-nav-menu-institution>
-  <app-nav-menu-manager *ngIf="AuthService.currentBind?.context == contextEnum.CEE || AuthService.currentBind?.context == contextEnum.SYSTEM"></app-nav-menu-manager>
+    <app-nav-menu-cee
+        *ngIf="AuthService.currentBind?.context == contextEnum.CEE || AuthService.currentBind?.context == contextEnum.SYSTEM"></app-nav-menu-cee>
+    <app-nav-menu-commission
+        *ngIf="AuthService.currentBind?.context == contextEnum.COMMISSION"></app-nav-menu-commission>
+    <app-nav-menu-institution *ngIf="AuthService.currentBind?.context == contextEnum.IE_UE"></app-nav-menu-institution>
+    <app-nav-menu-manager
+        *ngIf="AuthService.currentBind?.context == contextEnum.CEE || AuthService.currentBind?.context == contextEnum.SYSTEM"></app-nav-menu-manager>
 
-  <!-- <app-nav-menu-cee *ngIf="isPermitted('/cee')"></app-nav-menu-cee>
+    <!-- <app-nav-menu-cee *ngIf="isPermitted('/cee')"></app-nav-menu-cee>
   <app-nav-menu-commission *ngIf="isPermitted('/commission')"></app-nav-menu-commission>
   <app-nav-menu-institution *ngIf="isPermitted('/institution')"></app-nav-menu-institution>
   <app-nav-menu-manager *ngIf="isPermitted('/manager')"></app-nav-menu-manager> -->
