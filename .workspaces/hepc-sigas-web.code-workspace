@@ -1,10 +1,56 @@
 {
-	"folders": [
-		{
-			"path": ".."
-		}
+    "folders": [
+        {
+            "path": ".."
+        }
     ],
     "settings": {
-        "js/ts.implicitProjectConfig.experimentalDecorators": true
+        "js/ts.implicitProjectConfig.experimentalDecorators": true,
+        "workbench.colorCustomizations": {
+            "activityBar.activeBackground": "#ff6433",
+            "activityBar.background": "#ff6433",
+            "activityBar.foreground": "#15202b",
+            "activityBar.inactiveForeground": "#15202b99",
+            "activityBarBadge.background": "#00ff3d",
+            "activityBarBadge.foreground": "#15202b",
+            "commandCenter.border": "#e7e7e799",
+            "sash.hoverBorder": "#ff6433",
+            "statusBar.background": "#ff3d00",
+            "statusBar.foreground": "#e7e7e7",
+            "statusBarItem.hoverBackground": "#ff6433",
+            "statusBarItem.remoteBackground": "#ff3d00",
+            "statusBarItem.remoteForeground": "#e7e7e7",
+            "titleBar.activeBackground": "#ff3d00",
+            "titleBar.activeForeground": "#e7e7e7",
+            "titleBar.inactiveBackground": "#ff3d0099",
+            "titleBar.inactiveForeground": "#e7e7e799"
+        },
+        "peacock.remoteColor": "#ff3d00"
+    },
+    "extensions": {
+        "recommendations": [
+            "johnpapa.angular2",
+            "hirse.vscode-ungit",
+            "donjayamanne.githistory",
+            "mhutchie.git-graph",
+            "angular.ng-template",
+            "wraith13.bracket-lens",
+            "dbaeumer.vscode-eslint",
+            "huizhou.githd",
+            "pkief.material-icon-theme",
+            "esbenp.prettier-vscode",
+            "steoates.autoimport",
+            "wix.vscode-import-cost",
+            "ms-vscode-remote.remote-wsl",
+            "tomasvergara.vscode-fontawesome-gallery",
+            "hediet.vscode-drawio",
+            "purocean.drawio-preview",
+            "tomwhite007.rename-angular-component",
+            "aaron-bond.better-comments",
+            "janne252.fontawesome-autocomplete",
+            "napthedevhcj.console-flash",
+            "johnpapa.vscode-peacock",
+            "adpyke.codesnap"
+        ]
     }
 }

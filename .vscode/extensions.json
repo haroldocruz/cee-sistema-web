@@ -4,7 +4,6 @@
         "hirse.vscode-ungit",
         "donjayamanne.githistory",
         "mhutchie.git-graph",
-        "coenraads.bracket-pair-colorizer",
         "angular.ng-template",
         "wraith13.bracket-lens",
         "dbaeumer.vscode-eslint",
@@ -21,6 +20,7 @@
         "aaron-bond.better-comments",
         "janne252.fontawesome-autocomplete",
         "napthedevhcj.console-flash",
-        "johnpapa.vscode-peacock"
+        "johnpapa.vscode-peacock",
+        "adpyke.codesnap"
     ]
 }
