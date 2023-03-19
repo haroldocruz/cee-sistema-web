@@ -32,6 +32,7 @@ import { ActListComponent } from './directives/act-list/act-list.component';
 import { Interceptor } from "./app.interceptor";
 import { CourseModule } from "./features/course/course.module";
 import { AnyEnumComponent } from "./directives/any-enum/any-enum.component";
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -70,7 +71,8 @@ import { AnyEnumComponent } from "./directives/any-enum/any-enum.component";
     // UserModule,
 
     /*OTHERS*/
-    SorteadorModule
+    SorteadorModule,
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
