@@ -15,6 +15,7 @@ import { SortByPipe } from '../shared/pipes/sort-by.pipe';
 import { StampComponent } from '../shared/directives/stamp/stamp.component';
 import { RibbonComponent } from '../shared/directives/ribbon/ribbon.component';
 import { UploadComponent } from '../shared/directives/upload/upload.component';
+import { PageTitleComponent } from '../shared/directives/page-title/page-title.component';
 
 
 
@@ -25,6 +26,7 @@ import { UploadComponent } from '../shared/directives/upload/upload.component';
         EvidenceFormComponent,
         IsLoadingComponent,
         PageInConstructionComponent,
+        PageTitleComponent,
         ProfileCardComponent,
         RibbonComponent,
         SelectDrejeComponent,
@@ -44,6 +46,7 @@ import { UploadComponent } from '../shared/directives/upload/upload.component';
         EvidenceFormComponent,
         IsLoadingComponent,
         PageInConstructionComponent,
+        PageTitleComponent,
         ProfileCardComponent,
         RibbonComponent,
         SelectDrejeComponent,
