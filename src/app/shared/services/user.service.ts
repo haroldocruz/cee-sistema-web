@@ -4,12 +4,12 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from 'rxjs';
 import { ENV } from 'src/environments/environment';
 import _cloneDeep from "lodash/cloneDeep";
-import { IProfile } from '../interfaces/Profile';
-import { IUser, User } from '../interfaces/User';
+import { IProfile } from '../../interfaces/Profile';
+import { IUser, User } from '../../interfaces/User';
 import { NotificationService } from './notification.service';
-import { AuthService, IHttpHeadersOptions } from '../auth/auth.service';
-import { IStatusMessage } from '../interfaces/IStatusMessage';
-import { IQueryConfig } from '../interfaces/IQueryConfig';
+import { AuthService, IHttpHeadersOptions } from '../../auth/auth.service';
+import { IStatusMessage } from '../../interfaces/IStatusMessage';
+import { IQueryConfig } from '../../interfaces/IQueryConfig';
 
 export interface IUserDataLogin {
     username: string;

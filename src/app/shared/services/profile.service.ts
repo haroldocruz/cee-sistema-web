@@ -3,12 +3,12 @@ import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-import { ENV } from "./../../environments/environment";
-import { IProfile } from './../interfaces/Profile';
+import { ENV } from "../../../environments/environment";
+import { IProfile } from '../../interfaces/Profile';
 import { IMessageResponse } from './send-mail.service';
-import { IStatusMessage } from '../interfaces/IStatusMessage';
-import { AuthService } from '../auth/auth.service';
-import { IReqBindMember } from '../interfaces/IReqBindMember';
+import { IStatusMessage } from '../../interfaces/IStatusMessage';
+import { AuthService } from '../../auth/auth.service';
+import { IReqBindMember } from '../../interfaces/IReqBindMember';
 
 export interface IBindingProfileUser {
     profileId: string;

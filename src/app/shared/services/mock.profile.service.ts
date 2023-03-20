@@ -3,8 +3,8 @@ import { Observable, of } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-import { ENV } from "./../../environments/environment";
-import { IProfile } from './../interfaces/Profile';
+import { ENV } from "../../../environments/environment";
+import { IProfile } from '../../interfaces/Profile';
 
 @Injectable({
     providedIn: 'any'

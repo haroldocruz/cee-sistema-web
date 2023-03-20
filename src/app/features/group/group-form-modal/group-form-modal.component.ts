@@ -1,4 +1,4 @@
-import { NotificationService } from './../../../services/notification.service';
+import { NotificationService } from '../../../shared/services/notification.service';
 import { GroupService } from './../group.service';
 import { Component, OnInit } from '@angular/core';
 

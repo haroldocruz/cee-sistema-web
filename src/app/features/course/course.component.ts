@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { UtilService } from 'src/app/services/util.service';
+import { UtilService } from 'src/app/shared/services/util.service';
 
 @Component({
-  selector: 'app-course',
-  templateUrl: './course.component.html',
-  styleUrls: ['./course.component.less']
+    selector: 'app-course',
+    templateUrl: './course.component.html',
+    styleUrls: ['./course.component.less']
 })
 export class CourseComponent implements OnInit {
 
-  constructor() { }
+    constructor() { }
 
-  ngOnInit(): void {
-    UtilService.Title.setTitle('CEE | Course');
-  }
+    ngOnInit(): void {
+        UtilService.Title.setTitle('CEE | Course');
+    }
 
 }

@@ -1,9 +1,9 @@
 import { ProfileLocalService } from '../profile.local.service';
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { IProfile } from 'src/app/interfaces/Profile';
-import { EventEmitterService } from 'src/app/services/event-emitter.service';
-import { ProfileService } from 'src/app/services/profile.service';
-import { UtilService } from 'src/app/services/util.service';
+import { EventEmitterService } from 'src/app/shared/services/event-emitter.service';
+import { ProfileService } from 'src/app/shared/services/profile.service';
+import { UtilService } from 'src/app/shared/services/util.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ProfileFormModalComponent } from '../profile-form-modal/profile-form-modal.component';
 import { takeUntil } from 'rxjs/operators';
@@ -42,17 +42,17 @@ export class ProfileListComponent implements OnInit, OnDestroy {
         this.index();
 
         EventEmitterService.get('is-success')
-        .pipe(takeUntil(this.subDestroy$))
-        .subscribe((isSuccess) => {
-            if (!isSuccess) return;
-            this.index();
-        });
+            .pipe(takeUntil(this.subDestroy$))
+            .subscribe((isSuccess) => {
+                if (!isSuccess) return;
+                this.index();
+            });
 
         EventEmitterService.get('ProfileFilterComponent.context')
-        .pipe(takeUntil(this.subDestroy$))
-        .subscribe((context) => {
-            this.contextFilter = context;
-        });
+            .pipe(takeUntil(this.subDestroy$))
+            .subscribe((context) => {
+                this.contextFilter = context;
+            });
     }
 
     index(): void {

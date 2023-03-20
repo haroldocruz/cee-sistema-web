@@ -1,13 +1,13 @@
 import { IStatusMessage } from './../../../interfaces/IStatusMessage';
-import { NotificationService } from './../../../services/notification.service';
+import { NotificationService } from '../../../shared/services/notification.service';
 import { AuthService } from './../../../auth/auth.service';
 import { UserLocalService } from '../../../features/user/user.local.service';
-import { ProfileService } from './../../../services/profile.service';
+import { ProfileService } from '../../../shared/services/profile.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { AuthBindListComponent } from 'src/app/auth/auth-bind-list/auth-bind-list.component';
-import { UtilService } from 'src/app/services/util.service';
+import { UtilService } from 'src/app/shared/services/util.service';
 
 @Component({
     selector: 'app-nav-perfil',
@@ -37,12 +37,12 @@ export class NavPerfilComponent implements OnInit {
     }
 
     openAuthBindListModal() {
-      const initialState = {};
-      this.bsModalRef = this.bsModalService.show(AuthBindListComponent, { id: UtilService.getRandom9Digits(), class: 'modal-lg', initialState });
+        const initialState = {};
+        this.bsModalRef = this.bsModalService.show(AuthBindListComponent, { id: UtilService.getRandom9Digits(), class: 'modal-lg', initialState });
     }
 
     logOut(): void {
-        if(!UtilService.isConfirm("Deseja realmente sair?")) return;
+        if (!UtilService.isConfirm("Deseja realmente sair?")) return;
 
         this.authService.logout(<string>AuthService.user._id).subscribe((data: IStatusMessage) => {
             this.clear();
@@ -55,7 +55,7 @@ export class NavPerfilComponent implements OnInit {
         });
     }
 
-    private redirect(){
+    private redirect() {
         this.router.navigate(['/auth/login']);
     }
 

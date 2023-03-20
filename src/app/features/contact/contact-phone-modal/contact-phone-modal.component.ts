@@ -2,7 +2,7 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
 import { IPhone } from './../../../interfaces/Contact';
 import { Component, OnInit } from '@angular/core';
 import { cloneDeep, isEmpty } from 'lodash';
-import { UtilService } from 'src/app/services/util.service';
+import { UtilService } from 'src/app/shared/services/util.service';
 
 @Component({
     selector: 'app-contact-phone-modal',
@@ -24,24 +24,24 @@ export class ContactPhoneModalComponent implements OnInit {
         this.phone = {}
     }
 
-    insertPhone(){
-        if(isEmpty(this.phone)) return;
-        
+    insertPhone() {
+        if (isEmpty(this.phone)) return;
+
         this.phoneList.push(this.phone);
         this.phone = {};
     }
 
-    editPhone(phone: IPhone){
+    editPhone(phone: IPhone) {
         this.phone = cloneDeep(phone);
         this.removePhone(phone);
     }
 
-    removePhone(phone: IPhone){
+    removePhone(phone: IPhone) {
         const idx = this.phoneList.indexOf(phone);
         this.phoneList.splice(idx, 1);
     }
 
-    confirm(){
+    confirm() {
         this.phoneListRef.splice(0, this.phoneListRef.length)
         this.phoneListRef.push(...this.phoneList);
         this.bsModalRef.hide();

@@ -2,8 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ContextEnum } from 'src/app/interfaces/enumerations/ContextEnum';
 import { IProfile, Profile } from 'src/app/interfaces/Profile';
-import { ProfileService } from 'src/app/services/profile.service';
-import { UtilService } from 'src/app/services/util.service';
+import { ProfileService } from 'src/app/shared/services/profile.service';
+import { UtilService } from 'src/app/shared/services/util.service';
 
 interface IRole {
     _id: string;

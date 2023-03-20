@@ -2,15 +2,15 @@ import { UserProfileEditModalComponent } from './../user-profile-edit-modal/user
 import { UserViewModalComponent } from './../user-view-modal/user-view-modal.component';
 import { UserFormComponent } from '../user-form/user-form.component';
 
-import { NotificationService } from './../../../services/notification.service';
+import { NotificationService } from '../../../shared/services/notification.service';
 import _cloneDeep from 'lodash/cloneDeep';
 
 import { IUser } from './../../../interfaces/User';
 import { Component, OnDestroy, OnInit, TemplateRef } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { UtilService } from 'src/app/services/util.service';
-import { EventEmitterService } from 'src/app/services/event-emitter.service';
-import { UserService } from 'src/app/services/user.service';
+import { UtilService } from 'src/app/shared/services/util.service';
+import { EventEmitterService } from 'src/app/shared/services/event-emitter.service';
+import { UserService } from 'src/app/shared/services/user.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
@@ -33,7 +33,7 @@ export class UserListComponent implements OnInit, OnDestroy {
         public userService: UserService,
         private bsModalService: BsModalService,
         public utilService: UtilService
-    ) {}
+    ) { }
 
     ngOnDestroy(): void {
         this.componentDestroyed$.next(true);

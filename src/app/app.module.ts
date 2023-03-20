@@ -19,71 +19,71 @@ import { LayoutModule } from './layout/layout.module';
 import { ChatModule } from './features/chat/chat.module';
 import { SorteadorModule } from './features/others/sorteador/sorteador.module';
 
-import { FilterButtonsDirective } from './directives/filter-buttons.directive';
-import { NotificationService } from './services/notification.service';
-import { UtilService } from './services/util.service';
+import { FilterButtonsDirective } from './shared/directives/filter-buttons.directive';
+import { NotificationService } from './shared/services/notification.service';
+import { UtilService } from './shared/services/util.service';
 
 /*OTHERS*/
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxMaskModule } from "ngx-mask";
-import { RegionalListComponent } from './directives/regional-list/regional-list.component';
-import { ActListComponent } from './directives/act-list/act-list.component';
+import { RegionalListComponent } from './shared/directives/regional-list/regional-list.component';
+import { ActListComponent } from './shared/directives/act-list/act-list.component';
 import { Interceptor } from "./app.interceptor";
 import { CourseModule } from "./features/course/course.module";
-import { AnyEnumComponent } from "./directives/any-enum/any-enum.component";
+import { AnyEnumComponent } from "./shared/directives/any-enum/any-enum.component";
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    FilterButtonsDirective,
-    RegionalListComponent,
-    ActListComponent,
-    AnyEnumComponent
-  ],
-  imports: [
-    /*ANGULAR*/
-    BrowserModule,
-    BrowserAnimationsModule,
-    FormsModule,
-    HttpClientModule,
-    AppRoutingModule,
+    declarations: [
+        AppComponent,
+        FilterButtonsDirective,
+        RegionalListComponent,
+        ActListComponent,
+        AnyEnumComponent,
+    ],
+    imports: [
+        /*ANGULAR*/
+        BrowserModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        HttpClientModule,
+        AppRoutingModule,
 
-    Interceptor,
+        Interceptor,
 
-    ModalModule.forRoot(),
-    ToastrModule.forRoot({ positionClass:'toast-top-right', closeButton: true }),
-    NgxMaskModule.forRoot(),
+        ModalModule.forRoot(),
+        ToastrModule.forRoot({ positionClass: 'toast-top-right', closeButton: true }),
+        NgxMaskModule.forRoot(),
 
-    /*FEATURES*/
-    AuthModule,
-    CeeModule,
-    ChatModule,
-    ContactModule,
-    // CourseModule,
-    GroupModule,
-    HomeModule,
-    InstitutionModule,
-    LayoutModule,
-    // ProcessModule,
-    // ProfileModule,
-    // UserModule,
+        /*FEATURES*/
+        AuthModule,
+        CeeModule,
+        ChatModule,
+        ContactModule,
+        // CourseModule,
+        GroupModule,
+        HomeModule,
+        InstitutionModule,
+        LayoutModule,
+        // ProcessModule,
+        // ProfileModule,
+        // UserModule,
 
-    /*OTHERS*/
-    SorteadorModule,
-    FontAwesomeModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+        /*OTHERS*/
+        SorteadorModule,
+        FontAwesomeModule
+    ],
+    providers: [],
+    bootstrap: [AppComponent]
 })
 
 export class AppModule {
-  constructor(
-    private notify: NotificationService,
-    private title: Title
-  ){
-    UtilService.notifying = notify;
-    UtilService.Title = title;
-  }
+    constructor(
+        private notify: NotificationService,
+        private title: Title
+    ) {
+        UtilService.notifying = notify;
+        UtilService.Title = title;
+    }
 }

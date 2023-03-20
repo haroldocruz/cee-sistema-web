@@ -6,9 +6,9 @@ import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 import { MaskApplierService, MaskPipe } from 'ngx-mask';
 
 import { EventEmitterService } from './event-emitter.service';
-import { IAddress, IEmail, IPhone } from './../interfaces/Contact';
-import { IStatusMessage } from '../interfaces/IStatusMessage';
-import { GenderEnum } from '../interfaces/User';
+import { IAddress, IEmail, IPhone } from '../../interfaces/Contact';
+import { IStatusMessage } from '../../interfaces/IStatusMessage';
+import { GenderEnum } from '../../interfaces/User';
 import { NotificationService } from './notification.service';
 
 @Injectable({
@@ -160,14 +160,14 @@ export class UtilService {
     static countdownTimer(duration, display) {
         let timer = duration, minutes, seconds;
         setInterval(function () {
-            minutes = parseInt(''+timer / 60, 10);
-            seconds = parseInt(''+timer % 60, 10);
-    
+            minutes = parseInt('' + timer / 60, 10);
+            seconds = parseInt('' + timer % 60, 10);
+
             minutes = minutes < 10 ? "0" + minutes : minutes;
             seconds = seconds < 10 ? "0" + seconds : seconds;
-    
+
             display.textContent = minutes + ":" + seconds;
-    
+
             if (--timer < 0) {
                 timer = duration;
             }

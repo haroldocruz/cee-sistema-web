@@ -1,4 +1,4 @@
-import { UtilService } from './../../../services/util.service';
+import { UtilService } from '../../../shared/services/util.service';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { IUser } from './../../../interfaces/User';
 import { UserLocalService } from '../user.local.service';

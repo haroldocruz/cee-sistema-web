@@ -35,6 +35,7 @@ const routes: Routes = [
             { path: "user", loadChildren: () => import("./features/user/user.module").then(m => m.UserModule), canActivate: [AuthGuard] },
             { path: "course", loadChildren: () => import("./features/course/course.module").then(m => m.CourseModule), canActivate: [AuthGuard] },
             { path: "sorteador", loadChildren: () => import("./features/others/sorteador/sorteador.module").then(m => m.SorteadorModule) },
+            { path: "avaliadores", loadChildren: () => import("./features/avaliador/avaliador.module").then(m => m.AvaliadorModule) },
             CeeRouting,
             ChatRouting,
             InstitutionRouting,

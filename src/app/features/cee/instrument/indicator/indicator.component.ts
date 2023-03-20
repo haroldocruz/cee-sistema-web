@@ -1,20 +1,20 @@
-import { UtilService } from 'src/app/services/util.service';
+import { UtilService } from 'src/app/shared/services/util.service';
 import { Component, OnInit } from '@angular/core';
 import { IIndicator } from 'src/app/interfaces/Indicator';
 
 @Component({
-  selector: 'app-indicator',
-  templateUrl: './indicator.component.html',
-  styleUrls: ['./indicator.component.less']
+    selector: 'app-indicator',
+    templateUrl: './indicator.component.html',
+    styleUrls: ['./indicator.component.less']
 })
 export class IndicatorComponent implements OnInit {
 
-  public indicatorList: IIndicator[];
+    public indicatorList: IIndicator[];
 
-  constructor() { }
+    constructor() { }
 
-  ngOnInit(): void {
-    UtilService.Title.setTitle('CEE | Indicator');
-  }
+    ngOnInit(): void {
+        UtilService.Title.setTitle('CEE | Indicator');
+    }
 
 }

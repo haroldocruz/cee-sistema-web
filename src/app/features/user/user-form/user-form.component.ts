@@ -3,7 +3,7 @@ import { ContactEmailModalComponent } from '../../contact/contact-email-modal/co
 import { ContactPhoneModalComponent } from '../../contact/contact-phone-modal/contact-phone-modal.component';
 import { IPhone, IEmail, IAddress } from '../../../interfaces/Contact';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { NotificationService } from '../../../services/notification.service';
+import { NotificationService } from '../../../shared/services/notification.service';
 import { StatusEnum } from '../../../interfaces/Status';
 import { GenderEnum, IUser, MaritalStatusEnum } from '../../../interfaces/User';
 import { Component, Input, OnInit } from '@angular/core';
@@ -11,8 +11,8 @@ import { Router, NavigationEnd } from '@angular/router';
 
 import { cloneDeep } from "lodash";
 import { FormBuilder } from '@angular/forms';
-import { UtilService } from 'src/app/services/util.service';
-import { UserService } from 'src/app/services/user.service';
+import { UtilService } from 'src/app/shared/services/util.service';
+import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
     selector: 'app-user-form',
@@ -22,7 +22,7 @@ import { UserService } from 'src/app/services/user.service';
 export class UserFormComponent implements OnInit {
 
     @Input() user: IUser;
-    
+
     checkoutForm;
 
     statusList: string[];
@@ -44,7 +44,7 @@ export class UserFormComponent implements OnInit {
         // this.reloadComponent()
     }
 
-    onSubmit(){}
+    onSubmit() { }
 
     ngOnInit(): void {
 
@@ -100,7 +100,7 @@ export class UserFormComponent implements OnInit {
         let result = ''
         array.forEach((e, i, l) => {
             if (e)
-            result += (result.length > 0) ? ', ' + e : e;
+                result += (result.length > 0) ? ', ' + e : e;
         })
         return result;
     }

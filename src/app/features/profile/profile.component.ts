@@ -9,64 +9,64 @@ import { UserLocalService } from '../user/user.local.service';
 import { AuthService } from 'src/app/auth/auth.service';
 import { ActivatedRoute } from '@angular/router';
 import { IProfile } from 'src/app/interfaces/Profile';
-import { ProfileService } from 'src/app/services/profile.service';
+import { ProfileService } from 'src/app/shared/services/profile.service';
 
 @Component({
-  selector: 'app-profile',
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.less']
+    selector: 'app-profile',
+    templateUrl: './profile.component.html',
+    styleUrls: ['./profile.component.less']
 })
 export class ProfileComponent implements OnInit, OnDestroy {
 
-  // public filterInputId = new FormControl();
-  // public filtro: string;
+    // public filterInputId = new FormControl();
+    // public filtro: string;
 
-  public profileList: IProfile[];
+    public profileList: IProfile[];
 
-  constructor(
-    private route: ActivatedRoute,
-    public profileLocalService: ProfileLocalService,
-    private profileService: ProfileService,
-    private userService: UserLocalService
+    constructor(
+        private route: ActivatedRoute,
+        public profileLocalService: ProfileLocalService,
+        private profileService: ProfileService,
+        private userService: UserLocalService
     ) { }
 
-  ngOnInit(): void {
-    this.profileService.read().subscribe((data)=>{
-      this.profileList = data
-    })
-    
-    // this.route.queryParams.subscribe((params) => {
+    ngOnInit(): void {
+        this.profileService.read().subscribe((data) => {
+            this.profileList = data
+        })
 
-    //   let id: string = params['userId'] || AuthService.user._id;
-      
-    //   this.userService.readById(id).subscribe((data) => {
-    //     ProfileLocalService.user = data;
-    //   });
-    // });
+        // this.route.queryParams.subscribe((params) => {
 
-  //   this.typeahead(document.getElementById('search-box')).subscribe(data => {
-  //     this.profileLocalService.filtro = data;
-  //   });
-  // }
+        //   let id: string = params['userId'] || AuthService.user._id;
 
-  // typeahead(elem: Element): Observable<any>{
-  //   // const searchBox = ;
+        //   this.userService.readById(id).subscribe((data) => {
+        //     ProfileLocalService.user = data;
+        //   });
+        // });
 
-  //   return fromEvent(elem, 'input').pipe(
-  //     map((e) => (e.target as HTMLInputElement).value),
-  //     // map((e: KeyboardEvent) => (e.target as HTMLInputElement).value),
-  //     // filter(text => text.length > 2),
-  //     debounceTime(600),
-  //     distinctUntilChanged()
-  //     // switchMap(() => ajax('/api/endpoint'))
-  //   );
-  // }
+        //   this.typeahead(document.getElementById('search-box')).subscribe(data => {
+        //     this.profileLocalService.filtro = data;
+        //   });
+        // }
 
-  // edit(profile: IProfile | null) {
-  //   ProfileLocalService.profile = (profile) ? profile : new Profile();
-  }
+        // typeahead(elem: Element): Observable<any>{
+        //   // const searchBox = ;
 
-  ngOnDestroy(){
-    console.log("ProfileComponent destruído!");
-  }
+        //   return fromEvent(elem, 'input').pipe(
+        //     map((e) => (e.target as HTMLInputElement).value),
+        //     // map((e: KeyboardEvent) => (e.target as HTMLInputElement).value),
+        //     // filter(text => text.length > 2),
+        //     debounceTime(600),
+        //     distinctUntilChanged()
+        //     // switchMap(() => ajax('/api/endpoint'))
+        //   );
+        // }
+
+        // edit(profile: IProfile | null) {
+        //   ProfileLocalService.profile = (profile) ? profile : new Profile();
+    }
+
+    ngOnDestroy() {
+        console.log("ProfileComponent destruído!");
+    }
 }
