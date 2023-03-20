@@ -1,0 +1,226 @@
+<div class="card">
+
+    <div class="card-header">
+        <div class="row">
+            <div class="col-6">
+                <sd-page-title [input]="{ title: 'Incluir novo avaliador' }"></sd-page-title>
+            </div>
+            <div class="col-6">
+                <button class=" btn btn-primary btn-sm float-right" routerLink="../incluir">
+                    <i class="fas fa-plus" aria-hidden="true">&nbsp;</i>
+                    <span>Adicionar avaliador</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-body">
+
+        <form class="needs-validation">
+            <div class="row">
+
+                <fieldset class="row">
+
+                    <div class="col-md-5 col-lg-4">
+                        <label>CPF:<span>*</span></label>
+                        <input required type="text" name="nome_razao" class="form-control" placeholder="Insira o CPF"
+                            autocomplete="_">
+                        <div class="invalid-feedback">
+                            Campo obrigatório.
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-8">
+                        <label>Nome completo:<span>*</span></label>
+                        <input required type="text" name="nome_razao" class="form-control"
+                            placeholder="Insira o nome completo" autocomplete="_">
+                        <div class="invalid-feedback">
+                            Campo obrigatório.
+                        </div>
+                    </div>
+
+                </fieldset>
+
+                <fieldset class="row">
+
+                    <div class="col-md-6 col-lg-8">
+                        <label>Nome social:</label>
+                        <input type="text" name="nomeSocial" autocomplete="_" class="form-control"
+                            placeholder="Insira o nome social">
+                    </div>
+
+                    <div class="col-md-3">
+                        <label>Sexo:</label>
+                        <select class="form-control dropdown" name="sexo">
+                            <option value="">Selecione o sexo</option>
+                            <option [ngValue]="'0'">Não informado</option>
+                            <option [ngValue]="'1'">Feminino</option>
+                            <option [ngValue]="'2'">Masculino</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Campo obrigatório.
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <label>Estado civil:<span>*</span></label>
+                        <select required class="form-control" name="estadoCivil">
+                            <option value="" disabled>Selecione o estado civil</option>
+                            <!-- <option [ngValue]="item.codEstadoCivil.toString()" *ngFor="let item of estadoCivilList">
+                        {{ item.txtEstadoCivil }}
+                    </option> -->
+                            <option value="" disabled>Selecione o estado civil</option>
+                            <option [ngValue]="'0'">Não informado</option>
+                            <option [ngValue]="'1'">Solteiro</option>
+                            <option [ngValue]="'2'">Casado</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Campo obrigatório.
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <label>Data de nascimento:<span>*</span></label>
+                        <!-- <input required type="date" [max]="dateNow()" name="dataNasc" [(ngModel)]="inputDate.dtNascimento"
+                    autocomplete="_" class="form-control"> -->
+                        <input required type="date" autocomplete="_" class="form-control">
+                        <div class="invalid-feedback">
+                            Campo obrigatório vazio ou inválido.
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label>Nacionalidade:<span>*</span></label>
+                        <select required class="form-control" name="nacionalidade">
+                            <option value="" disabled>Selecione a nacionalidade</option>
+                            <option>Não informado</option>
+                            <option>Brasil</option>
+                            <option>Portugal</option>
+                            <option>Outro</option>
+                            <!-- <option [ngValue]="item.codPais.toString()" *ngFor="let item of paisList">
+                        {{ item.txtPais }}
+                    </option> -->
+                        </select>
+                        <div class="invalid-feedback">
+                            Campo obrigatório.
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <label>UF de nascimento:<span>*</span></label>
+                        <select required id="ufNascimento" class="form-control" name="ufNascimento">
+                            <option value="" disabled>Selecione o estado</option>
+                            <option>Tocantins</option>
+                            <option>Goiás</option>
+                            <!-- <option [ngValue]="item.codEstado.toString()" *ngFor="let item of ufList">{{ item.txtEstado }}
+                    </option> -->
+                        </select>
+                        <div class="invalid-feedback">
+                            Campo obrigatório.
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label>Naturalidade:<span>*</span></label>
+                        <input required type="text" name="naturalidade" class="form-control"
+                            placeholder="Insira o nome da cidade onde nasceu">
+                        <div class="invalid-feedback">
+                            Campo obrigatório.
+                        </div>
+                    </div>
+
+                    <div class="clearfix"><br></div>
+
+                    <fieldset class="row form-group border p-3">
+                        <legend class="ik-legend float-none w-auto text">Filiação</legend>
+
+                        <div class="col-md-6">
+                            <label>Nome da mãe:<span>*</span></label>
+                            <input required type="text" name="nomeMae" autocomplete="_" class="form-control"
+                                placeholder="Insira o nome da mãe completo">
+                            <div class="invalid-feedback">
+                                Campo obrigatório.
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label>Nome do pai:</label>
+                            <input type="text" name="nomePai" autocomplete="_" class="form-control"
+                                placeholder="Insira o nome do pai completo">
+                        </div>
+
+                    </fieldset>
+
+                    <div class="col-md-2">
+                        <label>
+                            PCD?:
+                            <span>*</span>
+                            &nbsp;
+                            <i class="ik-info-size far fa-question-circle text-info" aria-hidden="true"
+                                mat-raised-button matTooltip="Portador de Necessidades Especiais"
+                                aria-label="Button that displays a tooltip when focused or hovered over"></i>
+                        </label>
+                        <select required class="form-control" name="pcd">
+                            <!-- <select required class="form-control" name="pne" [(ngModel)]="inputSelect.codPne"> -->
+                            <!-- <option [ngValue]="'0'">Não</option>
+                    <option [ngValue]="'1'">Sim</option> -->
+                        </select>
+                        <div class="invalid-feedback">
+                            Campo obrigatório.
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <label>Naturalizado?:<span>*</span></label>
+                        <select required class="form-control" name="naturalizado">
+                            <option>Sim</option>
+                            <option>Não</option>
+                            <!-- <option [ngValue]="'0'">Não</option>
+                    <option [ngValue]="'1'">Sim</option> -->
+                        </select>
+                        <div class="invalid-feedback">
+                            Campo obrigatório.
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label>Data de chegada no Brasil:<span>*</span></label>
+                        <!-- <input required type="date" [max]="dateNow()" name="dataChegadaBrasil"
+                    [(ngModel)]="inputDate.dtChegadaBrasil" class="form-control"> -->
+                        <input required type="date" name="dataChegadaBrasil" class="form-control">
+                        <div class="invalid-feedback">
+                            Campo obrigatório vazio ou inválido.
+                        </div>
+                    </div>
+
+                </fieldset>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <hr>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 text-center">
+
+                    <button type="button" class="btn btn-sm btn-secondary">
+                        <i class="fas fa-arrow-left" aria-hidden="true"></i>
+                        &nbsp;
+                        <span>Voltar</span>
+                    </button>
+
+                    &nbsp;
+
+                    <button type="submit" class="btn btn-sm btn-primary">
+                        <span>Próximo</span>
+                        &nbsp;
+                        <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                    </button>
+
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
