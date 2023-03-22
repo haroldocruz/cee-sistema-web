@@ -16,13 +16,13 @@ import { StampComponent } from '../shared/directives/stamp/stamp.component';
 import { RibbonComponent } from '../shared/directives/ribbon/ribbon.component';
 import { UploadComponent } from '../shared/directives/upload/upload.component';
 import { PageTitleComponent } from '../shared/directives/page-title/page-title.component';
+import { GoBackDirective } from '../shared/directives/go-back.directive';
+import { UninformedPipe } from '../shared/pipes/uninformed.pipe';
 
 
 
 @NgModule({
     declarations: [
-        SortByPipe,
-
         EvidenceFormComponent,
         IsLoadingComponent,
         PageInConstructionComponent,
@@ -33,6 +33,11 @@ import { PageTitleComponent } from '../shared/directives/page-title/page-title.c
         SelectInstitutionComponent,
         StampComponent,
         UploadComponent,
+
+        GoBackDirective,
+
+        SortByPipe,
+        UninformedPipe
     ],
     imports: [
         CommonModule,
@@ -41,8 +46,6 @@ import { PageTitleComponent } from '../shared/directives/page-title/page-title.c
         NgxMaskModule
     ],
     exports: [
-        SortByPipe,
-
         EvidenceFormComponent,
         IsLoadingComponent,
         PageInConstructionComponent,
@@ -52,7 +55,12 @@ import { PageTitleComponent } from '../shared/directives/page-title/page-title.c
         SelectDrejeComponent,
         SelectInstitutionComponent,
         StampComponent,
-        UploadComponent
+        UploadComponent,
+
+        GoBackDirective,
+
+        SortByPipe,
+        UninformedPipe
     ]
 })
 export class UtilModule { }
