@@ -2,7 +2,9 @@
 
     <div class="card-header">
         <div class="row">
-            <sd-page-title [input]="{ title: 'Lista de avaliadores' }"></sd-page-title>
+            <div class="col-6">
+                <sd-page-title [input]="{ title: 'Lista de avaliadores' }"></sd-page-title>
+            </div>
             <div class="col-6">
                 <button class=" btn btn-primary btn-sm float-right" routerLink="../incluir">
                     <i class="fas fa-plus" aria-hidden="true">&nbsp;</i>
@@ -13,34 +15,38 @@
     </div>
 
     <div class="card-body">
+        <div class="row">
+            <div class="col-12">
 
-        <div class="info-box btn btn-default text-left" routerLink="../detalhar" [queryParams]="{ processId: item._id }"
-            *ngFor="let item of toViewProcessList">
-            <!-- <div class="info-box btn btn-default text-left" routerLink="view" [queryParams]="{ processId: item._id }"
+                <div class="info-box btn btn-default text-left" (click)="openModal()"
+                    *ngFor="let item of toViewProcessList">
+                    <!-- <div class="info-box btn btn-default text-left" routerLink="view" [queryParams]="{ processId: item._id }"
             *ngFor="let item of toViewProcessList | sortBy:'asc':'name' | filter:[{ field: 'institutionType', value: processLocalService.filter}] | filter: [{ field: 'name', value: processLocalService.search}]"> -->
 
-            <div class="info-box-content" *ngIf="item else noDoc">
-                <span class="info-box-text">
-                    <small class="text-info">
-                        <b>Situação:</b> {{ item.situation || 'Não informado' }}
-                    </small>
-                    <small class="text-info">
-                        <b> | Data da integração:</b> {{ item.integrationDate || '--/--/----' }}
-                    </small>
-                    <small class="text-info">
-                        | Integrado {{ item.lifeTime || '-' }}
-                    </small>
-                </span>
-                <span class="info-box-text">
-                    {{ item.evaluatorName }}
-                </span>
-                <span class="info-box-text small" *ngIf="item.formationName">
-                    <b>Formação:</b> {{ item.formationName}}
-                </span>
-            </div>
-            <!-- /.info-box-content -->
-        </div>
+                    <div class="info-box-content" *ngIf="item else noDoc">
+                        <span class="info-box-text">
+                            <small class="text-info">
+                                <b>Situação:</b> {{ item.situation || 'Não informado' }}
+                            </small>
+                            <small class="text-info">
+                                <b> | Data da integração:</b> {{ item.integrationDate || '--/--/----' }}
+                            </small>
+                            <small class="text-info">
+                                | Integrado {{ item.lifeTime || '-' }}
+                            </small>
+                        </span>
+                        <span class="info-box-text">
+                            {{ item.evaluatorName }}
+                        </span>
+                        <span class="info-box-text small" *ngIf="item.formationName">
+                            <b>Formação:</b> {{ item.formationName}}
+                        </span>
+                    </div>
+                    <!-- /.info-box-content -->
+                </div>
 
+            </div>
+        </div>
     </div>
 </div>
 

@@ -8,6 +8,8 @@ import { AvaliadorDetalharComponent } from './avaliador-detalhar/avaliador-detal
 import { AvaliadorIncluirComponent } from './avaliador-incluir/avaliador-incluir.component';
 import { FormsModule } from '@angular/forms';
 import { UtilModule } from 'src/app/util/util.module';
+import { NgxMaskModule } from 'ngx-mask';
+import { AvaliadorDetalharDialogComponent } from './avaliador-detalhar-dialog/avaliador-detalhar-dialog.component';
 
 
 @NgModule({
@@ -15,12 +17,15 @@ import { UtilModule } from 'src/app/util/util.module';
         AvaliadorListarComponent,
         AvaliadorComponent,
         AvaliadorDetalharComponent,
-        AvaliadorIncluirComponent
+        AvaliadorIncluirComponent,
+        AvaliadorDetalharDialogComponent
     ],
     imports: [
         CommonModule,
         FormsModule,
         AvaliadorRoutingModule,
+
+        NgxMaskModule,
 
         UtilModule
     ]

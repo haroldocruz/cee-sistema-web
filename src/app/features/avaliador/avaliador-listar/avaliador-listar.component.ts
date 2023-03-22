@@ -1,10 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
 import moment from 'moment';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { IAct } from 'src/app/interfaces/Act';
 import { IProcess } from 'src/app/interfaces/Process';
 import { IRegional } from 'src/app/interfaces/Regional';
 import { EventEmitterService } from 'src/app/shared/services/event-emitter.service';
 import { ProcessLocalService } from '../../process/process.local.service';
+import { AvaliadorDetalharDialogComponent } from '../avaliador-detalhar-dialog/avaliador-detalhar-dialog.component';
 
 @Component({
     selector: 'app-avaliador-listar',
@@ -12,6 +14,13 @@ import { ProcessLocalService } from '../../process/process.local.service';
     styleUrls: ['./avaliador-listar.component.less']
 })
 export class AvaliadorListarComponent implements OnInit {
+
+    constructor(
+        private bsModalService: BsModalService,
+        public processLocalService: ProcessLocalService
+    ) { }
+
+    bsModalRef: BsModalRef;
 
     @Input() public processList: IProcess[];
 
@@ -21,9 +30,6 @@ export class AvaliadorListarComponent implements OnInit {
     public filterAct: IAct;
     public filterRegional: IRegional;
 
-    constructor(
-        public processLocalService: ProcessLocalService
-    ) { }
 
     ngOnInit(): void {
         this.index();
@@ -51,6 +57,16 @@ export class AvaliadorListarComponent implements OnInit {
         //   this.toView();
         // });
         this.mockToView();
+    }
+
+    openModal() {
+        const initialState = {};
+        this.bsModalRef = this.bsModalService.show(AvaliadorDetalharDialogComponent, {
+            id: 1,
+            class: 'modal-lg',
+            initialState,
+        });
+        // this.bsModalRef.content.closeBtnName = 'Close';
     }
 
     toView() {

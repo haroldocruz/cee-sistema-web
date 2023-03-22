@@ -1,1 +1,80 @@
-<p>avaliador-detalhar works!</p>
+<div class="card">
+
+    <div class="card-header">
+        <div class="row">
+            <div class="col-6">
+                <sd-page-title [input]="{ title: 'Informações sobre o avaliador' }"></sd-page-title>
+            </div>
+            <div class="col-6">
+
+            </div>
+        </div>
+    </div>
+
+    <div class="card-body">
+        <blockquote class="quote-info mt-0">
+            <h5> {{ tpl.nome | uppercase |uninformed }} </h5>
+            <p> {{ tpl.detalhe | uninformed }} </p>
+        </blockquote>
+        <div class="row">
+            <div class="col-12">
+                <strong>{{ 'Instituição/Órgão vinculado:' | uppercase }}</strong>
+            </div>
+            <ul>
+                <li>Intituição/Órgão: <span>{{ tpl.empresa?.orgao }}</span></li>
+                <li>Setor/Unidade: <span>{{ tpl.empresa?.setor }}</span></li>
+            </ul>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <strong>{{ 'Relacionamento com o CEE/TO:' | uppercase }}</strong>
+            </div>
+            <ul>
+                <li><span>{{ tpl.relacionamentoList | json }}</span></li>
+            </ul>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <strong>{{ 'Arquivos para download:' | uppercase }}</strong>
+            </div>
+            <ul class="list-group" *ngFor="let item of tpl.arquivoList">
+                <a href="#" class="list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-between align-items-center">
+                        <div>
+                            <div class="d-flex w-100 justify-content-between">
+                                <h5 class="mb-1">{{ item.nome }}</h5>
+                                <small>{{''}}</small>
+                            </div>
+                            <p class="mb-1">{{ item.descricao }}</p>
+                            <small>{{''}}</small>
+                        </div>
+                        <i class="fa fa-download fa-2x float-right" aria-hidden="true"></i>
+                    </div>
+                </a>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card-footer">
+
+        <div class="row">
+            <div class="col-12 text-center">
+
+                <button d-goBack type="button" class="btn btn-sm btn-secondary">
+                    <i class="fas fa-arrow-left" aria-hidden="true"></i>
+                    &nbsp;
+                    <span>Voltar</span>
+                </button>
+
+                &nbsp;
+
+                <button type="submit" class="btn btn-sm btn-primary">
+                    <span>Próximo</span>
+                    &nbsp;
+                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                </button>
+
+            </div>
+        </div>
+    </div>
+</div>

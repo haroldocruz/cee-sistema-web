@@ -1,0 +1,98 @@
+<div class="card-body">
+    <div class="col-md-12">
+        <div class="card card-widget widget-user">
+            <div class="widget-user-header bg-info">
+                <h3 class="widget-user-username">
+                    {{ user.name }}
+                </h3>
+                <h5 class="widget-user-desc">{{ user.socialName }}</h5>
+            </div>
+            <div class="widget-user-image">
+                <i class="fas fa-user-circle fa-6x" *ngIf="!user?.image?.path"></i>
+                <img *ngIf="user?.image?.path" [src]="'http://localhost:3000/uploads/'+ (user?.image?.path)"
+                    class="img-circle elevation-2 sd-pointer sd-image" alt="User Image">
+            </div>
+            <div class="card-footer">
+                <div class="row">
+                    <div class="col-sm-4 border-right">
+                        <div class="description-block">
+                            <h5 class="description-header">{{ util.phoneMasked(user.contact?.phoneList[0]?.number)
+                                }}
+                            </h5>
+                            <span class="description-text">Telefone</span>
+                        </div>
+                        <!-- /.description-block -->
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-sm-4 border-right">
+                        <div class="description-block">
+                            <h5 class="description-header">{{ user.contact?.emailList[0]?.address }}</h5>
+                            <span class="description-text">E-Mail</span>
+                        </div>
+                        <!-- /.description-block -->
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-sm-4">
+                        <div class="description-block">
+                            <h5 class="description-header">{{ user.contact?.addressList[0]?.zipcode | mask:
+                                '00.000-000'
+                                }}</h5>
+                            <span class="description-text">CEP</span>
+                        </div>
+                        <!-- /.description-block -->
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+            </div>
+        </div>
+
+        <div class="tab-pane active" id="settings">
+            <form class="form-horizontal">
+                <div class="form-group row">
+                    <label for="inputName" class="col col-form-label">Nome completo:</label>
+                    <div class="col-sm-9">
+                        {{ user.name }}
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputEmail" class="col col-form-label">Emails:</label>
+                    <div class="col-sm-9">
+                        {{ util.emailListToString(user.contact.emailList, ' | ') }}
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col col-form-label">Telefones:</label>
+                    <div class="col-sm-9 centered">
+                        {{ util.phoneListToString(user.contact.phoneList, ' | ') }}
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputExperience" class="col col-form-label">Descrição:</label>
+                    <div class="col-sm-9">
+                        {{ user.description }}
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="" class="col col-form-label">Perfis:</label>
+                    <div class="col-sm-9">
+                        <div class="row">
+                            <div class="col-auto" *ngFor="let item of user.dataAccess?.bindList">
+                                <button class="btn btn-info btn-xs">{{ item.profileName }}</button>
+                                &nbsp;
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="d-flex justify-content-center">
+            <button class="btn btn-primary btn-sm" routerLink="../detalhar" [queryParams]="{  }">
+                <i class="fas fa-info" aria-hidden="true">&nbsp;</i>
+                <span>Saiba mais sobre este avaliador</span>
+            </button>
+        </div>
+
+    </div>
+</div>
