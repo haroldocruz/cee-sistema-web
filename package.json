@@ -1,6 +1,6 @@
 {
     "name": "web",
-    "version": "0.0.86-SNAPSHOT",
+    "version": "0.0.90-SNAPSHOT",
     "scripts": {
         "ng": "ng",
         "start": "ng serve",
